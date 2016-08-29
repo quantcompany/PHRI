@@ -82,8 +82,8 @@ celerybeat-schedule
 venv/
 ENV/
 
-# Spyder project settings
-.spyderproject
+# Pycharm
+.idea/
 
-# Rope project settings
-.ropeproject
+# SQL-Lite
+*.sqlite3
