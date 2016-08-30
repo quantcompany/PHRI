@@ -57,7 +57,7 @@ ROOT_URLCONF = 'PHRI.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,6 +124,12 @@ STATIC_URL = '/static/'
 
 # Costum User
 AUTH_USER_MODEL = 'users.User'
+
+# Static files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+
 
 try:
     from local_settings import *
