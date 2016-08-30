@@ -1,2 +1,2 @@
 # PHRI
-PHRI Application - University of McMaster
+PHRI Application - McMaster University
