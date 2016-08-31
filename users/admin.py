@@ -7,7 +7,7 @@ class UserAdmin(EmailUserAdmin):
     """
     You can customize the interface of your model here.
     """
-#    fields = ['user_name', 'first_name', 'last_name', 'institution', 'researcher']
+
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Profile', {'fields': ('user_name', 'first_name', 'last_name', 'institution', 'researcher')}),

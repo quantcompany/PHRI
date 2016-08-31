@@ -1,4 +1,7 @@
+import json
+
 from django.db import models
+
 from custom_user.models import AbstractEmailUser
 
 
@@ -18,3 +21,13 @@ class User(AbstractEmailUser):
     def get_full_name(self):
         return self.last_name + ", " + self.first_name
 
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'email': self.email,
+            'user_name': self.user_name,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'institution': self.institution,
+            'researcher': self.researcher
+        }
