@@ -1,12 +1,65 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-    </head>
+{% extends 'base_theme.html' %}
 
-    <body>
-        <h1>PHRI</h1>
-        {% block content %}
-        {% endblock %}
-    </body>
-</html>
+{% block body %}
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+
+    <!-- begin #page-container -->
+    <div id="page-container" class="page-container fade page-without-sidebar page-header-fixed page-with-top-menu">
+        <!-- begin #header -->
+        {% include 'sections/header.html' %}
+        <!-- end #header -->
+        
+        <!-- begin #top-menu -->
+        {% include 'sections/top_menu.html' %}
+        <!-- end #top-menu -->
+        
+        <!-- begin #content -->
+        <div id="content" class="content">
+            <!-- begin breadcrumb -->
+            <ol class="breadcrumb pull-right">
+                {% block breadcrumb_items %}
+                    <li><a href="javascript:;">Home</a></li>
+                    <li><a href="javascript:;">Page Options</a></li>
+                    <li class="active">Page with Top Menu</li>
+                {% endblock %}
+            </ol>
+            <!-- end breadcrumb -->
+            <!-- begin page-header -->
+            <h1 class="page-header">
+                {% block page_header %}
+                Page with Top Menu <small>header small text goes here...</small>
+                {% endblock %}
+            </h1>
+            <!-- end page-header -->
+            
+            {% block content %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Panel Title here</h4>
+                        </div>
+                        <div class="panel-body">
+                            Panel Content Here
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+        <!-- end #content -->
+        
+        <!-- begin scroll to top btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+        <!-- end scroll to top btn -->
+    </div>
+    <!-- end page container -->
+{% endblock %}

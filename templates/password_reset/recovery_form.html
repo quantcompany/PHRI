@@ -1,0 +1,37 @@
+{% extends 'password_reset/base.html' %}
+
+{% block content %}
+    <div class="login bg-black animated fadeInDown">
+        <!-- begin brand -->
+        <div class="login-header">
+            <div class="brand">
+                <span class="logo"></span>Password Recovery
+                <small>Enter your email address</small>
+            </div>
+            <div class="icon">
+                <i class="fa fa-sign-in"></i>
+            </div>
+        </div>
+        <!-- end brand -->
+        <div class="login-content">
+            <form action="{{ url }}" method="POST" class="margin-bottom-0">
+                {% csrf_token %}
+                <div class="form-group m-b-20">
+                {% if form.errors.username_or_email|length > 0 %}
+                    <input type="text" name="username_or_email" class="form-control input-lg parsley-error" placeholder="Email Address" value="{{ form.username_or_email.value|default:"" }}"/>
+                {% else %}
+                    <input type="text" name="username_or_email" class="form-control input-lg" placeholder="Email Address" value="{{ form.username_or_email.value|default:"" }}"/>
+                {% endif %}
+
+                </div>
+                
+                <div class="login-buttons">
+                    <button type="submit" class="btn btn-success btn-block btn-lg">Recover my password</button>
+                </div>
+            </form>
+        </div>
+        <div id="signin-form-errors" class="row text-center parsley-errors-list" style="font-size:32px">
+            {{ form.errors.username_or_email.0 }}
+        </div>
+    </div>
+{% endblock %}

@@ -15,6 +15,13 @@ class User(AbstractEmailUser):
     institution = models.CharField(max_length=100, blank=True)
     researcher = models.BooleanField(default=False)
 
+    def guess_user_name(self):
+        if not self.user_name:
+            if self.first_name or self.last_name:
+                self.user_name = '{0} {0}'.format(self.first_name, self.last_name).strip()
+            else:
+                self.user_name = self.email.split('@')[0]
+
     def get_short_name(self):
         return self.user_name
 

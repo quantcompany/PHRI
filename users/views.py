@@ -1,11 +1,10 @@
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 
-from custom_user.forms import EmailUserCreationForm
-
 from .models import User 
+from .forms import RegistrationForm
 
 
 def landing(request, *args, **kwargs):
@@ -26,11 +25,31 @@ def login_view(request):
         return JsonResponse({'error': 'Invalid email and/or password'}, status=401)
 
 
+def logout_view(request):
+    logout(request)
+    return redirect('landing')
+
+
 @require_http_methods(['POST'])
 def register(request):
-    form = EmailUserCreationForm(request.POST)
+    form = RegistrationForm(request.POST)
+
     if form.is_valid():
-        new_user = form.save()
+        new_user = form.save(commit=False)
+        new_user.first_name = form.cleaned_data['first_name']
+        new_user.last_name = form.cleaned_data['last_name']
+        new_user.institution = form.cleaned_data['institution']
+
+        new_user.guess_user_name()
+        new_user.save()
+
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password1']
+        
+        new_user = authenticate(username=email, password=password)
+
+        login(request, new_user)
+        
         return JsonResponse({}, status=200)
     else:
         return JsonResponse(form.errors, status=400)

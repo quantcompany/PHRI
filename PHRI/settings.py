@@ -37,7 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # 3rd party apps
     'custom_user',
+    'password_reset',
+    
+    # Local apps
     'users',
     'data_entry',
 ]
@@ -130,6 +135,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 
+# Where to redirect when an anonymous user tries to access a login_required page
+# We redirect to the root url because our landing page is also our login page
+LOGIN_URL = '/'
+
+# Print emails to terminal instead of trying to actually send them:
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 try:
     from local_settings import *

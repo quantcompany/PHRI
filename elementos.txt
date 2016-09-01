@@ -1,0 +1,7 @@
+# Elementos para los Formularios
+
+Para las preguntas si/no: Switch
+Para fechas: calendario
+Para textos y campos numericos: Input sencillo
+Para campos de seleccion unica: Drop down
+Para campos de seleccion multiple: Multiple drop down 

@@ -20,7 +20,9 @@ from django.contrib import admin
 from users.views import landing
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
     url(r'^$', landing, name='landing'),
+    url(r'^', include('data_entry.urls', namespace='data_entry')),
+    url(r'^admin/', admin.site.urls),
     url(r'^users/', include('users.urls', namespace='users')),
+    url(r'^users/password/', include('password_reset.urls')),
 ]
