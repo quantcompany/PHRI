@@ -13,6 +13,10 @@ class User(AbstractEmailUser):
     first_name = models.CharField(max_length=40, blank=True)
     last_name = models.CharField(max_length=40, blank=True)
     institution = models.CharField(max_length=100, blank=True)
+    specialty = models.CharField(max_length=100, blank=True)
+    practice_type = models.CharField(max_length=100, blank=True)
+    education_level = models.CharField(max_length=100, blank=True)
+    country = models.CharField(max_length=100, blank=True) # Add country list
     researcher = models.BooleanField(default=False)
 
     def guess_user_name(self):
@@ -36,5 +40,9 @@ class User(AbstractEmailUser):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'institution': self.institution,
-            'researcher': self.researcher
+            'researcher': self.researcher,
+            'specialty': self.specialty,
+            'practice_type': self.practice_type,
+            'education_level': self.education_level,
+            'country': self.country
         }
