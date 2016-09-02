@@ -6749,3 +6749,16 @@ body .bootstrap-datetimepicker-widget table td {
 .nvtooltip table thead strong {
     text-decoration: underline !important;
 }
+
+
+/* CUSTOM */
+
+.my-panel-heading {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 15px;
+    font-size: 24px;
+    font-weight: 100;
+    color:white;
+    cursor: default;
+}

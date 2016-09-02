@@ -28,6 +28,9 @@
         <!-- ================== BEGIN BASE JS ================== -->
         <script src="{% static 'plugins/pace/pace.min.js' %}"></script>
         <!-- ================== END BASE JS ================== -->
+
+        {% block head_css %}
+        {% endblock %}
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
@@ -50,7 +53,7 @@
         <!-- ================== END BASE JS ================== -->
         
         <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-        <script src="{% static 'js/apps.min.js' %}"></script>
+        <script src="{% static 'js/apps.js' %}"></script>
         <!-- ================== END PAGE LEVEL JS ================== -->
         
         <script>

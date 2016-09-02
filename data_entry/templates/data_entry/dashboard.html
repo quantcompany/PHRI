@@ -1,5 +1,252 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head_css %}
+    <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+{% endblock %}
 
 {% block page_title %}Dashboard{% endblock %}
 
 {% block page_header %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="my-panel-heading bg-red">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Personal Information
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <i class="fa fa-home"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body panel-form">
+                    <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-16" for="fullname">Identification *</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-16" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">First name</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Middle name</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Last name</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Date of birth *</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input type="text" class="form-control f-s-14" id="date_of_birth" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Gender *</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="my-panel-heading bg-orange">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Procedure Details
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <i class="fa fa-home"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body panel-form">
+                    <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Date of procedure *</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Indication *</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Vessels PCI *</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Stent *</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Balloons *</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="my-panel-heading bg-green">
+                    <div class="row">
+                        <div class="col-xs-6">Atrial Fibrilation</div>
+                        <div class="col-xs-6 text-right">
+                            <i class="fa fa-home"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body panel-form">
+                    <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Type</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Previous anti-coagulation</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Warfarin intolerance</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">INR instability</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">NOAC allergy or intollerance</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input type="text" class="form-control f-s-14" id="date_of_birth" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="my-panel-heading bg-blue">
+                    <div class="row">
+                        <div class="col-xs-6">Blood Work</div>
+                        <div class="col-xs-6 text-right">
+                            <i class="fa fa-home"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body panel-form">
+                    <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2 f-s-14" for="fullname">HB</label>
+                            
+                            <div class="col-md-2 col-sm-2">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+
+                            <div class="col-md-2 col-sm-2">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+
+                            <label class="control-label col-md-2 col-sm-2 f-s-14" for="fullname">PLTS</label>
+                            
+                            <div class="col-md-2 col-sm-2">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+
+                            <div class="col-md-2 col-sm-2">
+                                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="my-panel-heading bg-purple">
+                    <div class="row">
+                        <div class="col-xs-6">Medical History</div>
+                        <div class="col-xs-6 text-right">
+                            <i class="fa fa-home"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <p>Aqui van los campos</p>
+                    <p>Espacion</p>
+                    <h2>Vertical</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block tail_js %}
+    <script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+    <script>
+        $('#date_of_birth').datepicker({
+            todayHighlight: true,
+            autoclose: true
+        });
+    </script>
+{% endblock %}

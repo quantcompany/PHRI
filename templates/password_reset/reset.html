@@ -1,0 +1,49 @@
+{% extends "password_reset/base.html" %}
+
+{% block content %}
+    <div class="login bg-black animated fadeInDown">
+        <!-- begin brand -->
+        <div class="login-header">
+            <div class="brand">
+                <span class="logo"></span>Password Recovery
+                <small>{% if invalid %}Invalid link{% else %}Choose new password{% endif %}</small>
+            </div>
+            <div class="icon">
+                <i class="fa fa-sign-in"></i>
+            </div>
+        </div>
+        <!-- end brand -->
+        <div class="login-content">
+            <form action="{{ url }}" method="POST" class="margin-bottom-0">
+                {% csrf_token %}
+
+                <div class="form-group m-b-20">
+                {% if form.errors.password1|length > 0 %}
+                    <input type="password" name="password1" class="form-control input-lg parsley-error" placeholder="{{ form.password1.label }}" value="{{ form.password1.value|default:'' }}"/>
+                {% else %}
+                    <input type="password" name="password1" class="form-control input-lg" placeholder="{{ form.password1.label }}" value="{{ form.password1.value|default:'' }}"/>
+                {% endif %}
+                    <div class="row text-center parsley-errors-list m-b-20" style="font-size:32px">
+                        {{ form.errors.password1.0 }}
+                    </div>
+                </div>
+
+
+                <div class="form-group m-b20">
+                {% if form.errors.password2|length > 0 %}
+                    <input type="password" name="password2" class="form-control input-lg parsley-error" placeholder="{{ form.password2.label }}" value="{{ form.password2.value|default:'' }}"/>
+                {% else %}
+                    <input type="password" name="password2" class="form-control input-lg" placeholder="{{ form.password2.label }}" value="{{ form.password2.value|default:'' }}"/>
+                {% endif %}
+                    <div class="row text-center parsley-errors-list m-b-20" style="font-size:32px">
+                        {{ form.errors.password2.0 }}
+                    </div>
+                </div>
+                
+                <div class="login-buttons">
+                    <button type="submit" class="btn btn-success btn-block btn-lg">Recover my password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

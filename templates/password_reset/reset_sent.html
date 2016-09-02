@@ -1,0 +1,24 @@
+{% extends "password_reset/base.html" %}
+
+{% block content %}
+    <div class="login bg-black animated fadeInDown">
+        <!-- begin brand -->
+        <div class="login-header">
+            <div class="brand">
+                <span class="logo"></span>Password Recovery
+                <small>Email sent</small>
+            </div>
+            <div class="icon">
+                <i class="fa fa-sign-in"></i>
+            </div>
+        </div>
+        <!-- end brand -->
+        <div class="login-content">
+            <p>An email was sent to <strong>{{ email }}</strong>. Use the link in it to set a new password.</p>
+            <a href="/" class="btn btn-success btn-block btn-lg">Go back home</a>            
+        </div>
+        <div id="signin-form-errors" class="row text-center parsley-errors-list" style="font-size:32px">
+            {{ form.errors.username_or_email.0 }}
+        </div>
+    </div>
+{% endblock %}
