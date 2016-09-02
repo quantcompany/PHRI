@@ -17,7 +17,7 @@ class Patient(models.Model):
     indication = models.ForeignKey('data_entry.Indication')
     vessels_pci = models.ManyToManyField('data_entry.VesselsPCI')
     stent = models.ForeignKey('data_entry.Stent')
-    ballons = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(15)])
+    ballons = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(9)])
     # Atrial Fibrillation
     type_af = models.ForeignKey('data_entry.TypeAF')
     prev_anti_coagulation = models.ForeignKey('data_entry.AntiCoagulation', null=True, blank=True)
@@ -56,7 +56,7 @@ class Patient(models.Model):
     upcoming_non_cardiatic_surgery = models.ForeignKey('data_entry.NonCardiaticSurgery', null=True, blank=True)
 
     def get_age(self):
-        return round((timezone.now().date() - self.date_of_birth).days / 365, 0)
+        return int((timezone.now().date() - self.date_of_birth).days / 365.0)
 
 
 class Indication(models.Model):
