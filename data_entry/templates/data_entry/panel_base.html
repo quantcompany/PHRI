@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+    <div class="my-panel-heading bg-blue">
+        <div class="row">
+            <div class="col-xs-6">
+                {% block panel_heading %}Personal Information{% endblock %}
+            </div>
+            <div class="col-xs-6 text-right">
+                <i class="{% block fa_icon %}fa-question-circle{% endblock %}"></i>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body panel-form">
+        {% block panel_body %}{% endblock %}
+    </div>
+</div>

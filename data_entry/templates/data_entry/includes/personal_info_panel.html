@@ -1,0 +1,56 @@
+{% extends 'data_entry/panel_base.html' %}
+
+{% block panel_heading %}Personal Information{% endblock %}
+            
+{% block fa_icon %}fa fa-home{% endblock %}
+
+{% block panel_body %}
+    <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="identification">Identification *</label>
+            <div class="col-md-6 col-sm-6">
+                <input id="identification" type="text" name="identification" class="form-control f-s-14 id-mask" placeholder="___-___-___" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">First name</label>
+            <div class="col-md-6 col-sm-6">
+                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Middle name</label>
+            <div class="col-md-6 col-sm-6">
+                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Last name</label>
+            <div class="col-md-6 col-sm-6">
+                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Date of birth *</label>
+            <div class="col-md-6 col-sm-6">
+                <input type="text" class="form-control f-s-14 datepicker"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="gender">Gender *</label>
+            <div class="col-md-6 col-sm-6">
+                <select id="gender" name="gender" class="form-control f-s-14 default-select2">
+                    <option value="">---------</option>
+                    {% for choice in choices.GENDER_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </form>
+{% endblock %}
