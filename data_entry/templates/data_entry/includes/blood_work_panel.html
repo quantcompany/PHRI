@@ -5,7 +5,7 @@
 {% block fa_icon %}fa fa-home{% endblock %}
 
 {% block panel_body %}
-    <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
+    <div class="form-horizontal form-bordered">
         <div class="form-group">
             <label class="control-label col-md-2 col-sm-2 f-s-14" for="hb">HB</label>
             <div class="col-md-4 col-sm-4">
@@ -21,12 +21,12 @@
                 </div>
             </div>
 
-            <label class="control-label col-md-2 col-sm-2 f-s-14" for="hb">PLTS</label>
+            <label class="control-label col-md-2 col-sm-2 f-s-14" for="plts">PLTS</label>
             <div class="col-md-4 col-sm-4">
                 <div class="input-group">
                     <input id="plts" name="plts" type="number" step="any" class="form-control f-s-14" />
                     <span class="input-group-addon" style="padding:0px;width:40%;">
-                        <select name="hb_um" style="padding:0px;background-color:transparent;border:none;height:100%;width:100%">
+                        <select name="plts_um" style="padding:0px;background-color:transparent;border:none;height:100%;width:100%">
                             {% for choice in choices.PLTS_UM_CHOICES %}
                             <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                             {% endfor %}
@@ -163,5 +163,5 @@
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 {% endblock %}

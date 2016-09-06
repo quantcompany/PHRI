@@ -4,6 +4,9 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Patient(models.Model):
+    # Here we use string for the value of the choice
+    # because having values like 'mL' or 'kg' will help
+    # clarify the if statements later on
     GENDER_CHOICES = (('M', 'Male'), ('F', 'Female'))
     HB_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
     PLTS_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
@@ -15,6 +18,19 @@ class Patient(models.Model):
     ALP_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
     BILIRUBIN_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
     TROPONIN_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
+
+    HTN_CHOICES = (
+        (0, 'No'),
+        (1, 'Yes, Controlled HTN on meds. '),
+        (2, 'Yes, Uncontrolled HTN on meds SBP > 160 mmHg'),
+    )
+
+    ALCOHOL_ABUSE_CHOICES = (
+        (0, 'No'),
+        (1, 'Yes, < 8 drinks a week'),
+        (2, 'Yes, >= 8 drinks a week'),
+    )
+
     # Personal Information
     identification = models.CharField(max_length=50, unique=True)
     first_name = models.CharField(max_length=40, blank=True)
@@ -57,7 +73,7 @@ class Patient(models.Model):
     troponin_um = models.CharField(default='um1', max_length=20, choices=TROPONIN_UM_CHOICES)
     #Medical History
     chf = models.BooleanField(default=False)
-    htn = models.ForeignKey('data_entry.HTN', null=True, blank=True)
+    htn = models.IntegerField(default=0, choices=HTN_CHOICES)
     diabetes_mellitus = models.BooleanField(default=False)
     stroke = models.BooleanField(default=False)
     tia = models.BooleanField(default=False)
@@ -67,7 +83,7 @@ class Patient(models.Model):
     renal_transplant = models.BooleanField(default=False)
     liver_dysfunction = models.BooleanField(default=False)
     hx_of_bleeding = models.ForeignKey('data_entry.HXofBleeding', null=True, blank=True)
-    alcohol_abuse = models.ForeignKey('data_entry.AlcoholAbuse', null=True, blank=True)
+    alcohol_abuse = models.IntegerField(default=0, choices=ALCOHOL_ABUSE_CHOICES)
     drug_abuse = models.BooleanField(default=False)
     chronic_nsaids_rx = models.BooleanField(default=False)
     excessive_fall_risk = models.BooleanField(default=False)
@@ -117,13 +133,6 @@ class AntiCoagulation(models.Model):
         return self.value
 
 
-class HTN(models.Model):
-    value = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.value
-
-
 class VascularDisease(models.Model):
     value = models.CharField(max_length=60, unique=True)
 
@@ -132,13 +141,6 @@ class VascularDisease(models.Model):
 
 
 class HXofBleeding(models.Model):
-    value = models.CharField(max_length=60, unique=True)
-
-    def __str__(self):
-        return self.value
-
-
-class AlcoholAbuse(models.Model):
     value = models.CharField(max_length=60, unique=True)
 
     def __str__(self):

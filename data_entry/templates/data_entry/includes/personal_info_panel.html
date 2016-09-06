@@ -5,7 +5,7 @@
 {% block fa_icon %}fa fa-home{% endblock %}
 
 {% block panel_body %}
-    <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
+    <div class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="identification">Identification *</label>
             <div class="col-md-6 col-sm-6">
@@ -14,30 +14,30 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">First name</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="first_name">First name</label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                <input id="first_name" type="text" name="first_name" class="form-control f-s-14" data-parsley-required="true" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Middle name</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="middle_name">Middle name</label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                <input id="middle_name" type="text" name="middle_name" class="form-control f-s-14" data-parsley-required="true" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Last name</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="last_name">Last name</label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control f-s-14" type="text" id="fullname" name="fullname" data-parsley-required="true" />
+                <input id="last_name" type="text" name="last_name" class="form-control f-s-14" data-parsley-required="true" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="fullname">Date of birth *</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="date_of_birth">Date of birth *</label>
             <div class="col-md-6 col-sm-6">
-                <input type="text" class="form-control f-s-14 datepicker"/>
+                <input id="date_of_birth" type="text" name="date_of_birth" class="form-control f-s-14 datepicker" />
             </div>
         </div>
 
@@ -52,5 +52,5 @@
                 </select>
             </div>
         </div>
-    </form>
+    </div>
 {% endblock %}

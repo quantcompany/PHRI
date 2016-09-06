@@ -5,7 +5,7 @@
 {% block fa_icon %}fa fa-home{% endblock %}
 
 {% block panel_body %}
-    <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
+    <div class="form-horizontal form-bordered">
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="date_of_procedure">Date of procedure *</label>
             <div class="col-md-6 col-sm-6">
@@ -18,7 +18,7 @@
             <div class="col-md-6 col-sm-6">
                 <select id="indication" name="indication" class="form-control f-s-14 default-select2">
                     <option value="">---------</option>
-                    {% for indication in indications %}
+                    {% for indication in values.indication %}
                     <option value="{{ indication.id }}">{{ indication.value }}</option>
                     {% endfor %}
                 </select>
@@ -29,7 +29,7 @@
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="vessels_pci">Vessels PCI *</label>
             <div class="col-md-6 col-sm-6">
                 <select id="vessels_pci" name="vessels_pci" class="form-control f-s-14 multiple-select2" multiple="multiple">
-                    {% for vessel in vessels_pci %}
+                    {% for vessel in values.vessels_pci %}
                     <option value="{{ vessel.id }}">{{ vessel.value }}</option>
                     {% endfor %}
                 </select>
@@ -41,7 +41,7 @@
             <div class="col-md-6 col-sm-6">
                 <select id="stent" name="stent" class="form-control f-s-14 default-select2">
                     <option value="">---------</option>
-                    {% for stent in stents %}
+                    {% for stent in values.stent %}
                     <option value="{{ stent.id }}">{{ stent.value }}</option>
                     {% endfor %}
                 </select>
@@ -54,5 +54,5 @@
                 <input id="balloons" type="number" name="balloons" class="form-control f-s-14" data-parsley-required="true" />
             </div>
         </div>
-    </form>
+    </div>
 {% endblock %}

@@ -5,13 +5,13 @@
 {% block fa_icon %}fa fa-home{% endblock %}
 
 {% block panel_body %}
-    <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
+    <div class="form-horizontal form-bordered">
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="type_af">Type</label>
             <div class="col-md-6 col-sm-6">
-                <select id="indication" name="indication" class="form-control f-s-14 default-select2">
+                <select id="type_af" name="type_af" class="form-control f-s-14 default-select2">
                     <option value="">---------</option>
-                    {% for type_af in types_af %}
+                    {% for type_af in values.type_af %}
                     <option value="{{ type_af.id }}">{{ type_af.value }}</option>
                     {% endfor %}
                 </select>
@@ -25,7 +25,7 @@
             <div class="col-md-6 col-sm-6">
                 <select id="prev_anti_coagulation" name="prev_anti_coagulation" class="form-control f-s-14 default-select2">
                     <option value="">---------</option>
-                    {% for ac in anti_coagulations %}
+                    {% for ac in values.anti_coagulation %}
                     <option value="{{ ac.id }}">{{ ac.value }}</option>
                     {% endfor %}
                 </select>
@@ -37,7 +37,7 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="warfarin_intolerance">Warfarin intolerance</label>
             <div class="col-md-6 col-sm-6">
-                <input id="warfarin_intolerance" type="checkbox" name="warfarin_intolerance" data-on-text="Yes" data-off-text="No" data-size="normal" data-handle-width="50" data-label-width="10" />
+                <input id="warfarin_intolerance" type="checkbox" name="warfarin_intolerance" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-size="normal" data-handle-width="50" data-label-width="10" />
             </div>
         </div>
 
@@ -46,7 +46,7 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="inr_instabilitiy">INR instability</label>
             <div class="col-md-6 col-sm-6">
-                <input id="inr_instabilitiy" type="checkbox" name="inr_instabilitiy" data-on-text="Yes" data-off-text="No" data-size="normal" data-handle-width="50" data-label-width="10" />
+                <input id="inr_instabilitiy" type="checkbox" name="inr_instabilitiy" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-size="normal" data-handle-width="50" data-label-width="10" />
             </div>
         </div>
 
@@ -55,8 +55,8 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="noac_allergy_or_intolerance">NOAC llergy or intollerance</label>
             <div class="col-md-6 col-sm-6">
-                <input id="noac_allergy_or_intolerance" type="checkbox" name="noac_allergy_or_intolerance" data-on-text="Yes" data-off-text="No" data-size="normal" data-handle-width="50" data-label-width="10" />
+                <input id="noac_allergy_or_intolerance" type="checkbox" name="noac_allergy_or_intolerance" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-size="normal" data-handle-width="50" data-label-width="10" />
             </div>
         </div>
-    </form>
+    </div>
 {% endblock %}

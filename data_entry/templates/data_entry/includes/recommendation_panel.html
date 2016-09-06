@@ -1,0 +1,42 @@
+{% extends 'data_entry/panel_base.html' %}
+
+{% block panel_heading %}Recommendation{% endblock %}
+
+{% block fa_icon %}fa fa-home{% endblock %}
+
+{% block panel_body %}
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-4 col-sm-4">
+            </div>
+
+            <div class="col-md-4 col-sm-4">
+                <br/>
+                
+                <div class="row">
+                    <label class="control-label col-md-6 col-sm-6 f-s-14" for="diabetes_mellitus">Is the recommended therapy being followed?</label>
+                    <div class="col-md-6 col-sm-6">
+                        <input id="followed_recommendation" type="checkbox" name="followed_recommendation" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" checked/>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <textarea id="reason_not_followed" name="reason_not_followed" class="form-control f-s-14" placeholder="Please specify a reason" rows="5" style="display:none;"></textarea>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12"><button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button></div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4">
+            </div>
+        </div>
+    </div>
+{% endblock %}

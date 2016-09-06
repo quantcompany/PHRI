@@ -14,35 +14,44 @@
 {% block page_header %}Dashboard{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-6">
-            {% include 'data_entry/includes/personal_info_panel.html' %}
+    <form id="patient_form" action="{% url 'data_entry:patients:patients' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                {% include 'data_entry/includes/personal_info_panel.html' %}
+            </div>
+
+            <div class="col-md-6">
+                {% include 'data_entry/includes/procedure_details_panel.html' %}
+            </div>
         </div>
 
-        <div class="col-md-6">
-            {% include 'data_entry/includes/procedure_details_panel.html' %}
-        </div>
-    </div>
+        <div class="row">
+            <div class="col-md-6">
+                {% include 'data_entry/includes/atrial_fibrilation_panel.html' %}
+            </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            {% include 'data_entry/includes/atrial_fibrilation_panel.html' %}
+            <div class="col-md-6">
+                {% include 'data_entry/includes/blood_work_panel.html' %}
+            </div>
         </div>
 
-        <div class="col-md-6">
-            {% include 'data_entry/includes/blood_work_panel.html' %}
+        <div class="row">
+            <div class="col-md-6">
+                {% include 'data_entry/includes/medical_history_1_panel.html' %}
+            </div>
+            
+            <div class="col-md-6">
+                {% include 'data_entry/includes/medical_history_2_panel.html' %}
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            {% include 'data_entry/includes/medical_history_1_panel.html' %}
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'data_entry/includes/recommendation_panel.html' %}
+            </div>
         </div>
-        
-        <div class="col-md-6">
-            {% include 'data_entry/includes/medical_history_2_panel.html' %}
-        </div>
-    </div>
+    </form>
 {% endblock %}
 
 
@@ -54,9 +63,17 @@
     <script src="{% static 'plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"></script>
 
     <script>
-        $('.datepicker').datepicker({
+        $('#date_of_birth').datepicker({
             todayHighlight: true,
-            autoclose: true
+            autoclose: true,
+            startView: 2,
+            defaultViewDate: {year: '1970', month: 1, day: 1} // this is not working?!?!
+        });
+
+        $('#date_of_procedure').datepicker({
+            todayHighlight: true,
+            autoclose: true,
+            startView: 1,
         });
 
         $(".default-select2").select2({
@@ -69,20 +86,52 @@
 
         $("#identification").mask("999-999-999");
 
-
-        $('[data-render=switchery]').each(function() {
-            var themeColor = '#348fe2'; // blue
-
-            var option = {};
-                option.color = themeColor;
-                option.secondaryColor = ($(this).attr('data-secondary-color')) ? $(this).attr('data-secondary-color') : '#dfdfdf';
-                option.className = ($(this).attr('data-classname')) ? $(this).attr('data-classname') : 'switchery';
-                option.disabled = ($(this).attr('data-disabled')) ? true : false;
-                option.disabledOpacity = ($(this).attr('data-disabled-opacity')) ? parseFloat($(this).attr('data-disabled-opacity')) : 0.5;
-                option.speed = ($(this).attr('data-speed')) ? $(this).attr('data-speed') : '0.5s';
-            var switchery = new Switchery(this, option);
+        $(".bootstrap-switch").bootstrapSwitch();
+        
+        $("#followed_recommendation").bootstrapSwitch({
+            onSwitchChange: function(event, state){
+                var ta = $('#reason_not_followed');
+                if (state === true){
+                    ta.stop().slideUp(100);
+                }else{
+                    ta.stop().slideDown(100);
+                }
+            }
         });
 
-        $("input[type='checkbox']").bootstrapSwitch();
+        $('#patient_form').submit(function(event){
+            event.preventDefault();
+
+            var form = $(this)[0];
+
+            var fd = new FormData(form);
+
+            Pace.track(function(){
+                // $('#signup-form-errors').removeClass('filled').html('');
+                var request = $.ajax({
+                  url: form.getAttribute('action'),
+                  type: 'POST',
+                  data: fd,
+                  processData: false,  // tell jQuery not to process the data
+                  contentType: false   // tell jQuery not to set contentType
+                });
+
+                request.done(function(data, textStatus, jqXHR) {
+                    console.log('Success');
+                    console.log(data);
+                    alert('Patient saved')
+                    // window.location.replace("{% url 'data_entry:dashboard' %}");
+                });
+                 
+                request.fail(function(jqXHR, textStatus, errorThrown) {
+                    console.log('Fail');
+                    console.log(jqXHR);
+                    alert('Validation errors!')
+                    
+                    // var errorMessage = jqXHR.responseJSON.error; 
+                    // $('#signup-form-errors').addClass('filled').html(errorMessage)
+                });
+            });
+        });
     </script>
 {% endblock %}
