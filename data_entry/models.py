@@ -94,8 +94,32 @@ class Patient(models.Model):
     followed_recommendation = models.BooleanField(default=True)
     reason_not_followed = models.TextField(blank=True)
 
-    def get_age(self):
+    def age(self):
         return int((timezone.now().date() - self.date_of_birth).days / 365.0)
+
+    def chads2_score(self):
+        # boolean values are converted to ints (1s or 0s)
+        chf_value = int(self.chf)
+        # htn is an integer field with 3 possible choices (0, 1 and 2)
+        # for chads2, 1 or 2 get converted to True, and then to 1
+        # 0 gets converted to False, and then to 0
+        htn_value = int(bool(self.htn)) 
+        age_value = int(self.age() > 75)
+        diabetes_value = int(self.diabetes_mellitus)
+        stroke_tia_value = int(self.stroke) or int(self.tia)
+        return chf_value + htn_value + age_value + diabetes_value + stroke_tia_value
+
+    def hasbled_score(self):
+        # htn is an integer field with 3 possible choices (0, 1 and 2)
+        # for hasbled, choice 2 should have a value of 1
+        # choices 0 and 1 should have a value of 0
+        htn_value = int(bool(self.htn == 2))
+        liver_dysfunction_value = int(self.liver_dysfunction)
+        stroke_value = int(self.stroke)
+        inr_value = int(self.inr_instability)
+        age_value = int(self.age() > 65)
+        alcohol_abuse_value = int(bool(self.alcohol_abuse == 2))
+        return  htn_value + liver_dysfunction_value + stroke_value + inr_value + age_value + alcohol_abuse_value
 
 
 class Indication(models.Model):

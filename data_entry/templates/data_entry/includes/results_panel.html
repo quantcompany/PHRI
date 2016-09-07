@@ -1,31 +1,54 @@
 {% extends 'data_entry/panel_base.html' %}
 
-{% block panel_heading %}Therapy Recommendation{% endblock %}
+{% block panel_heading %}Scores{% endblock %}
 
 {% block fa_icon %}fa fa-calculator{% endblock %}
 
 {% block panel_body %}
     <div class="panel-body">
-        <div class="note note-info">
-            <h4>CHADS2 Score</h4>
-            <p>
-                CHADS2 assigns one point each for congestive heart failure (C), high blood pressure (H), age 75 or older (A),
-                and diabetes (D), and two points for a previous stroke (S2) or transient ischemic attack, called a mini-stroke.
-                The CHADS2 scoring system, shown in Table 1 below, determines stroke risk.
-            </p>
+        <div class="row" style="">
+            <div class="col-xs-12" style="">
+                <div class="note note-info">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0px 20px 0px 20px;text-align:justify;">
+                                
+                                    <h3>CHADS2 Score</h3>
+                                    <p class="f-s-14">
+                                        CHADS2 assigns one point each for congestive heart failure (C), high blood pressure (H), age 75 or older (A),
+                                        and diabetes (D), and two points for a previous stroke (S2) or transient ischemic attack, called a mini-stroke.
+                                        The CHADS2 scoring system, shown in Table 1 below, determines stroke risk.
+                                    </p>
+                                </td>
+
+                                <td id="chads2_score" class="f-w-700" style="padding:0px 20px 0px 20px;font-size:100px">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-xs-12" style="">
+                <div class="note note-info">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0px 20px 0px 20px;text-align:justify;">
+                                
+                                    <h3>HAS-BLED Score</h3>
+                                    <p class="f-s-14">
+                                        The HAS-BLED ssesses the 1-year risk for major bleeding (intracranial, hospitalization, hemoglobin decrease >2 g/L, and/or transfusion) associated with oral anticoagulation.
+                                        Patients with a high risk of bleeding (HAS-BLED score ≥ 3) should undergo regular clinical review following the initiation of oral anticoagulation.
+                                    </p>
+                                </td>
+
+                                <td id="hasbled_score" class="f-w-700" style="padding:0px 20px 0px 20px;font-size:100px">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="note note-info">
-            <h4>HAS-BLED Score</h4>
-            <p>
-                The HAS-BLED ssesses the 1-year risk for major bleeding (intracranial, hospitalization, hemoglobin decrease >2 g/L, and/or transfusion) associated with oral anticoagulation.
-                Patients with a high risk of bleeding (HAS-BLED score ≥ 3) should undergo regular clinical review following the initiation of oral anticoagulation.
-            </p>
-        </div>
-        <div class="note note-success">
-			<h3>Recommended Therapy</h3>
-			<p>
-                Here we can give details on the recommended therapy.
-            </p>
-			</div>
     </div>
 {% endblock %}

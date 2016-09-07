@@ -47,7 +47,7 @@
 
         </div>
 
-                <div class="row">
+        <div class="row">
             <div class="col-md-6">
                 {% include 'data_entry/includes/results_panel.html' %}
             </div>
@@ -72,7 +72,10 @@
     <script src="{% static 'plugins/masked-input/masked-input.min.js' %}"></script>
     <script src="{% static 'plugins/switchery/switchery.min.js' %}"></script>
     <script src="{% static 'plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"></script>
-
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="{% static 'js/scores.js' %}"></script>
+    <script src="{% static 'js/plot.js' %}"></script>
     <script>
         $('#date_of_birth').datepicker({
             todayHighlight: true,
