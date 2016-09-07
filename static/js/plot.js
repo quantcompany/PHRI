@@ -17,18 +17,33 @@ function drawChart(){
             xAxis: {
                 title: {
                     enabled: true,
-                    text: '<b>LOW</b><span style="margin:10px;">CHADS2</span><b>HIGH</b>',
+                    text: 'HAS-BLED',
                     style: {
                         fontWeight: 'normal',
                         fontSize: 25,
                     }
-                },
+                  },
+                labels: {style: {fontSize: 15}},
                 plotLines: [{
                     color: '#FF0000', // Red
                     dashStyle: 'LongDash',
                     width: 2,
                     value: 3.5
                 }],
+                plotBands: [
+                { // Low
+                    color: 'rgba(220, 20, 60, 0)',
+                    from: 0,
+                    to: 3.5,
+                    label: {text: 'LOW', y: -2.5, verticalAlign:'bottom', style: {fontSize: 25}}
+                 },
+                 { // high
+                    color: 'rgba(220, 20, 60, 0.07)',
+                    from: 3.5,
+                    to: 9,
+                    label: {text: 'HIGH', y: -2.5, verticalAlign:'bottom', style: {fontSize: 25}}
+                    }
+                 ],
                 tickPositions: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
                 startOnTick: true,
                 endOnTick: true,
@@ -39,14 +54,32 @@ function drawChart(){
             },
             yAxis: {
                 title: {
-                    text: 'HASBLED'
+                    text: 'CHADS2',
+                    style: {
+                        fontWeight: 'normal',
+                        fontSize: 25,
+                    }
                 },
+                labels: {style: {fontSize: 15}},
                 plotLines: [{
                     color: '#FF0000', // Red
                     dashStyle: 'LongDash',
                     width: 2,
                     value: 2.5
                 }],
+                plotBands: [
+                { // Low
+                    color: 'rgba(220, 20, 60, 0)',
+                    from: 0,
+                    to: 2.5,
+                    label: {text: 'LOW', rotation:-90, textAlign: 'center', style: {fontSize: 25}}
+                 },
+                 { // high
+                    color: 'rgba(220, 20, 60, 0.07)',
+                    from: 2.5,
+                    to: 6,
+                    label: {text: 'HIGH', rotation:-90, textAlign: 'center', style: {fontSize: 25}}
+                 }],
                 tickPositions: [0, 1, 2, 3, 4, 5, 6],
             },
             legend: {enabled: false},
@@ -76,7 +109,7 @@ function drawChart(){
             series: [{
                 name: 'Result',
                 color: 'rgba(220, 20, 60, .75)',
-                data: [[scores.chads2, scores.hasbled]]
+                data: [[scores.hasbled, scores.chads2]]
 
             }]
         });
