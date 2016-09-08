@@ -12,7 +12,24 @@
         <!-- end #header -->
         
         <!-- begin #top-menu -->
-        {% include 'sections/top_menu.html' %}
+        <div id="top-menu" class="top-menu">
+            <!-- begin top-menu nav -->
+            <ul class="nav">
+                <li class="{% block menu1 %}{% endblock %}">
+                    <a href="{% url 'data_entry:dashboard' %}">
+                        <i class="fa fa-pencil-square-o"></i>
+                        <span>Patient Form</span>
+                    </a>
+                </li>
+                <li class="{% block menu2 %}{% endblock %}">
+                    <a href="{% url 'data_entry:reports' %}">
+                        <i class="fa fa-database"></i> 
+                        <span>Database</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- end top-menu nav -->
+        </div>
         <!-- end #top-menu -->
         
         <!-- begin #content -->
@@ -26,6 +43,7 @@
                 {% endblock %}
             </ol>
             <!-- end breadcrumb -->
+
             <!-- begin page-header -->
             <h1 class="page-header">
                 {% block page_header %}

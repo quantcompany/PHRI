@@ -37,7 +37,12 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="date_of_birth">Date of birth *</label>
             <div class="col-md-6 col-sm-6">
-                <input id="date_of_birth" type="text" name="date_of_birth" class="form-control f-s-14 datepicker" />
+                <div class="input-group" id="">
+                    <input id="date_of_birth" type="text" name="date_of_birth" class="form-control f-s-14 id-mask" placeholder="mm/dd/yyyy" />
+                    <span class="input-group-addon">
+                        <span id="calculated_age"></span>
+                    </span>
+                </div>
             </div>
         </div>
 

@@ -3,6 +3,18 @@ var scores = {
     hasbled: 0
 };
 
+var therapy = {
+    lowChads2: {
+        lowHasbled : 'You have low chads2 and low hasbled scores!',
+        highHasbled: 'You have low chads2 but high hasbled scores.'
+    },
+
+    highChads2: {
+        lowHasbled: 'You have high chads2 but low hasbled scores.',
+        highHasbled: 'You have high chads2 AND high hasbled scores!'
+    }
+}
+
 function calculateAge(birthDate){
     var birthYear = birthDate.getFullYear();
     var birthMonth = birthDate.getMonth();
@@ -24,6 +36,13 @@ function calculateAge(birthDate){
     }
 
     return age;
+}
+
+function updateEveryting(){
+    updateChads2Score();
+    updateHasbledScore();
+    updateRecommendedTherapy();
+    updateChart(); // this function is in plot.js
 }
 
 function updateChads2Score(){
@@ -59,8 +78,6 @@ function updateChads2Score(){
     scores.chads2 = chfValue + htnValue + ageValue + diabetesValue + strokeTiaValue;
 
     $('#chads2_score').html(scores.chads2);
-
-    drawChart();
 }
 
 function updateHasbledScore(){
@@ -102,45 +119,39 @@ function updateHasbledScore(){
     scores.hasbled = htnValue + liverDysfunctionValue + strokeValue + inrValue + ageValue + alcoholAbuseValue;
 
     $('#hasbled_score').html(scores.hasbled);
-
-    drawChart();
 }
 
+function updateRecommendedTherapy(){
+    // chads2: low <= 2 < high
+    // hasbled: low <= 3 < high
+    var text = '';
+
+    if (scores.chads2 <= 2){
+        if (scores.hasbled <= 3){
+            text = therapy.lowChads2.lowHasbled;
+        }else{
+            text = therapy.lowChads2.highHasbled;
+        }
+    }else{
+        if (scores.hasbled <= 3){
+            text = therapy.highChads2.lowHasbled;
+        }else{
+            text = therapy.highChads2.highHasbled;
+        }
+    }
+
+    $('#therapy_text').html(text);
+}   
 
 
-// Register change listener to update the scores
+// Register change listeners to all fields involved in the formula,
+// so that the scores, plot, and recommended therapy get updated as the
+// form is filled out
 
-// CHADS2 = Hx of CHF + Hx of HTN + Age>75 + Diabetes + or(Stroke + TIA)
-// HASBLED = HTN + Liver Dysfuntion + Stroke + Labile INR + Age>65 + Alcohol > 8 drinks/week
-
-// common fields are HTN, STROKE and AGE
-// when any of these change, we must update both chads2 and hasbled scores
-$('#stroke').on('switchChange.bootstrapSwitch', function(event, state){
-    updateChads2Score();
-    updateHasbledScore();
+$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instabilitiy').on('switchChange.bootstrapSwitch', function(event, state){
+    updateEveryting();
 });
 
-$('#htn, #date_of_birth').on('change', function(event, state){
-    updateChads2Score();
-    updateHasbledScore();
-});
-
-
-
-// fields specific to chads2 are CHF, TIA and diabetes. 
-// when either of these change, ONLY CHADS2 MUST BE UPDATED
-$('#chf, #diabetes_mellitus, #tia').on('switchChange.bootstrapSwitch', function(event, state) {
-    updateChads2Score();
-});
-
-
-
-// fields specific to hasbled are liver dysfunction, INR and alcohol abuse
-// when these change, ONLY UPDATE HASBLED SCORE
-$('#liver_dysfunction, #inr_instabilitiy').on('switchChange.bootstrapSwitch', function(event, state) {
-    updateHasbledScore();
-});
-
-$('#alcohol_abuse').on('change', function(event, state){
-    updateHasbledScore();
+$('#htn, #date_of_birth, #alcohol_abuse').on('change', function(event, state){
+    updateEveryting();
 });

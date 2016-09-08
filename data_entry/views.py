@@ -42,6 +42,11 @@ def dashboard(request):
 
 
 @login_required
+def reports(request):
+    return render(request, 'reports/reports.html')
+
+
+@login_required
 def patients(request):
     if request.method == 'GET':
         return JsonResponse({'patients': [1,2,3]})

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Local apps
     'users',
     'data_entry',
+    'reports'
 ]
 
 MIDDLEWARE = [

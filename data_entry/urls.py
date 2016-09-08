@@ -28,5 +28,6 @@ patients = [
 
 urlpatterns = [
     url(r'^dashboard$', views.dashboard, name='dashboard'),
+    url(r'^reports$', views.reports, name='reports'),
     url(r'^patients/', include(patients, namespace='patients'))
 ]

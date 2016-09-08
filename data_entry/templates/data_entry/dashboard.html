@@ -7,11 +7,14 @@
     <link href="{% static 'plugins/select2/css/select2.css' %}" rel="stylesheet" />
     <link href="{% static 'plugins/switchery/switchery.min.css' %}" rel="stylesheet" />
     <link href="{% static 'plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet">
+    <link href="{% static 'plugins/gritter/css/jquery.gritter.css' %}" rel="stylesheet" />  
 {% endblock %}
 
-{% block page_title %}Dashboard{% endblock %}
+{% block page_title %}Patient Form{% endblock %}
 
-{% block page_header %}Dashboard{% endblock %}
+{% block menu1 %}active{% endblock %}
+
+{% block page_header %}Enter the patient's personal and medical info{% endblock %}
 
 {% block content %}
     <form id="patient_form" action="{% url 'data_entry:patients:patients' %}">
@@ -49,7 +52,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                {% include 'data_entry/includes/results_panel.html' %}
+                {% include 'data_entry/includes/scores_panel.html' %}
             </div>
 
             <div class="col-md-6">
@@ -58,10 +61,15 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
                 {% include 'data_entry/includes/recommendation_panel.html' %}
             </div>
+            <div class="col-md-3">
+            </div>
         </div>
+
     </form>
 {% endblock %}
 
@@ -72,16 +80,24 @@
     <script src="{% static 'plugins/masked-input/masked-input.min.js' %}"></script>
     <script src="{% static 'plugins/switchery/switchery.min.js' %}"></script>
     <script src="{% static 'plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"></script>
+    <script src="{% static 'plugins/gritter/js/jquery.gritter.min.js' %}"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="{% static 'js/scores.js' %}"></script>
     <script src="{% static 'js/plot.js' %}"></script>
     <script>
-        $('#date_of_birth').datepicker({
-            todayHighlight: true,
-            autoclose: true,
-            startView: 2,
-            defaultViewDate: {year: '1970', month: 1, day: 1} // this is not working?!?!
+        $("#identification").mask("999-999-999");
+        
+        $("#date_of_birth").mask("99/99/9999", {
+            completed: function(){
+                var dob = Date.parse(this.val());
+                if (isNaN(dob)){
+                    $('#calculated_age').html('Invalid Date');
+                } else {
+                    dob = new Date(dob);
+                    $('#calculated_age').html('Age: ' + calculateAge(dob));
+                }
+            }
         });
 
         $('#date_of_procedure').datepicker({
@@ -98,7 +114,6 @@
 
         $(".multiple-select2").select2({ placeholder: "---------" });
 
-        $("#identification").mask("999-999-999");
 
         $(".bootstrap-switch").bootstrapSwitch();
         
@@ -140,7 +155,13 @@
                 request.fail(function(jqXHR, textStatus, errorThrown) {
                     console.log('Fail');
                     console.log(jqXHR);
-                    alert('Validation errors!')
+                    $.gritter.add({
+                        title: 'Validation Error',
+                        text: 'Please fix the errors on the marked fields',
+                        time: 5000,
+                        position: 'top-left'
+                    });
+                    return false;
                     
                     // var errorMessage = jqXHR.responseJSON.error; 
                     // $('#signup-form-errors').addClass('filled').html(errorMessage)
