@@ -6,7 +6,7 @@
 
 {% block panel_body %}
     <div class="panel-body">
-        <div class="row">
+        <div class="row p-10">
             <div class="note note-success col-md-12">
                 <h3>Recommended Therapy</h3>
                 <p id="therapy_text" class="f-s-14">
@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row p-10">
             <div class="col-md-2 col-sm-2"></div>
             <label class="control-label col-md-5 col-sm-5 f-s-14" for="followed_recommendation">Is the recommended therapy being followed?</label>
             <div class="col-md-3 col-sm-3 text-right">
@@ -24,24 +24,17 @@
             <div class="col-md-2 col-sm-2"></div>
         </div>
 
-        <div class="row m-b-20">
+        <div class="row m-b-20 p-10 form-group">
             <div class="col-md-2 col-sm-2"></div>
             <div class="col-md-8 col-sm-8">
                 <textarea id="reason_not_followed" name="reason_not_followed" class="form-control f-s-14" placeholder="Please specify a reason" rows="5" style="display:none;"></textarea>
+                <label form="reason_not_followed"><span></span></label>
             </div>
+
             <div class="col-md-2 col-sm-2"></div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12 text-center"
-                <div class="btn-group btn-group-justified" role="group">
-                    <a class="btn btn-primary btn-icon btn-circle btn-lg"><i class="fa fa-print"></i></a>
-                    <a class="btn btn-primary btn-icon btn-circle btn-lg"><i class="fa fa-envelope"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
+        <div class="row p-10">
             <div class="col-md-12 col-sm-12"><button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button></div>
         </div>
     </div>

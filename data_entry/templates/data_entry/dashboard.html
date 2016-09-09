@@ -7,7 +7,7 @@
     <link href="{% static 'plugins/select2/css/select2.css' %}" rel="stylesheet" />
     <link href="{% static 'plugins/switchery/switchery.min.css' %}" rel="stylesheet" />
     <link href="{% static 'plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet">
-    <link href="{% static 'plugins/gritter/css/jquery.gritter.css' %}" rel="stylesheet" />  
+    <link href="{% static 'plugins/gritter/css/jquery.gritter.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block page_title %}Patient Form{% endblock %}
@@ -17,7 +17,7 @@
 {% block page_header %}Enter the patient's personal and medical info{% endblock %}
 
 {% block content %}
-    <form id="patient_form" action="{% url 'data_entry:patients:patients' %}">
+    <form id="patient_form" name="patient_form" action="{% url 'data_entry:patients:patients' %}">
         {% csrf_token %}
         <div class="row">
             <div class="col-md-6">
@@ -70,6 +70,23 @@
             </div>
         </div>
 
+        <!-- #modal-dialog -->
+        <div class="modal fade" id="submit-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Patient Saved</h4>
+                    </div>
+                    <div class="modal-body">
+                        This patient's results have been saved
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 {% endblock %}
 
@@ -81,24 +98,24 @@
     <script src="{% static 'plugins/switchery/switchery.min.js' %}"></script>
     <script src="{% static 'plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"></script>
     <script src="{% static 'plugins/gritter/js/jquery.gritter.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/dist/jquery.validate.min.js' %}"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="{% static 'js/scores.js' %}"></script>
-    <script src="{% static 'js/plot.js' %}"></script>
+    <script src="{% static 'data_entry/js/scores.js' %}"></script>
+    <script src="{% static 'data_entry/js/plot.js' %}"></script>
+    <script src="{% static 'data_entry/js/patient-form-validation.js' %}"></script>
     <script>
         $("#identification").mask("999-999-999");
         
-        $("#date_of_birth").mask("99/99/9999", {
-            completed: function(){
-                var dob = Date.parse(this.val());
-                if (isNaN(dob)){
-                    $('#calculated_age').html('Invalid Date');
-                } else {
-                    dob = new Date(dob);
-                    $('#calculated_age').html('Age: ' + calculateAge(dob));
-                }
+        $("#date_of_birth").on('change', function(){
+            var dob = Date.parse($(this).val());
+            if (isNaN(dob)){
+                $('#calculated_age').html('');
+            } else {
+                dob = new Date(dob);
+                $('#calculated_age').html('Age: ' + calculateAge(dob));
             }
-        });
+        }).mask("99/99/9999");
 
         $('#date_of_procedure').datepicker({
             todayHighlight: true,
@@ -107,7 +124,7 @@
         });
 
         $(".default-select2").select2({
-            minimumResultsForSearch: Infinity,
+            minimumResultsForSearch: 1,
             theme: "default",
             placeholder: '---------'
         });
@@ -128,30 +145,30 @@
             }
         });
 
-        $('#patient_form').submit(function(event){
+        function submitPatient(){
             event.preventDefault();
-
-            var form = $(this)[0];
-
+            
+            var form = $('#patient_form')[0];
+            
             var fd = new FormData(form);
-
+            
             Pace.track(function(){
-                // $('#signup-form-errors').removeClass('filled').html('');
+              // $('#signup-form-errors').removeClass('filled').html('');
                 var request = $.ajax({
-                  url: form.getAttribute('action'),
-                  type: 'POST',
-                  data: fd,
-                  processData: false,  // tell jQuery not to process the data
-                  contentType: false   // tell jQuery not to set contentType
+                    url: form.getAttribute('action'),
+                    type: 'POST',
+                    data: fd,
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false   // tell jQuery not to set contentType
                 });
 
                 request.done(function(data, textStatus, jqXHR) {
                     console.log('Success');
                     console.log(data);
-                    alert('Patient saved')
+                    $('#submit-modal').modal('show');   
                     // window.location.replace("{% url 'data_entry:dashboard' %}");
                 });
-                 
+               
                 request.fail(function(jqXHR, textStatus, errorThrown) {
                     console.log('Fail');
                     console.log(jqXHR);
@@ -162,11 +179,10 @@
                         position: 'top-left'
                     });
                     return false;
-                    
                     // var errorMessage = jqXHR.responseJSON.error; 
                     // $('#signup-form-errors').addClass('filled').html(errorMessage)
                 });
             });
-        });
+        }
     </script>
 {% endblock %}

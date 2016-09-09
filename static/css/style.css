@@ -6762,3 +6762,7 @@ body .bootstrap-datetimepicker-widget table td {
     color:white;
     cursor: default;
 }
+
+.error {
+    color:red;
+}

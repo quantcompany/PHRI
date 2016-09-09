@@ -32,7 +32,7 @@ class Patient(models.Model):
     )
 
     # Personal Information
-    identification = models.CharField(max_length=50, unique=True)
+    identification = models.CharField(max_length=50)
     first_name = models.CharField(max_length=40, blank=True)
     middle_name = models.CharField(max_length=40, blank=True)
     last_name = models.CharField(max_length=40, blank=True)
