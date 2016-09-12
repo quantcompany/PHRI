@@ -24,8 +24,8 @@
             <div class="col-md-6 col-sm-6">
                 <select id="vascular_disease" name="vascular_disease" class="form-control f-s-14 default-select2">
                     <option value="">---------</option>
-                    {% for vascular_disease in values.vascular_disease %}
-                    <option value="{{ vascular_disease.id }}">{{ vascular_disease.value }}</option>
+                    {% for choice in choices.VASCULAR_DISEASE_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
                 </select>
             </div>

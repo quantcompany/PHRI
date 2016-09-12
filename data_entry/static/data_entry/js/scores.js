@@ -1,5 +1,6 @@
 var scores = {
     chads2: 0,
+    cha2: 0,
     hasbled: 0
 };
 
@@ -40,14 +41,16 @@ function calculateAge(birthDate){
 
 function updateEveryting(){
     updateChads2Score();
+    updateCha2Score();
     updateHasbledScore();
     updateRecommendedTherapy();
     updateChart(); // this function is in plot.js
 }
 
 function updateChads2Score(){
-    // CHADS2 = Hx of CHF + Hx of HTN + Age>75 + Diabetes + or(Stroke + TIA)
-    
+    // CHADS2 = CHF + HTN + (Age >= 75) + Diabetes + Stroke + TIA
+    // MAX possible score: 6
+
     // calculate chf value
     var chfValue = $('#chf').bootstrapSwitch('state') ? 1:0;
     
@@ -64,20 +67,77 @@ function updateChads2Score(){
         var ageValue = 0;
     }else{
         var birthDate = new Date(birth_timestamp);
-        var ageValue = calculateAge(birthDate) > 75 ? 1:0;
+        var ageValue = calculateAge(birthDate) >= 75 ? 1:0;
     }
 
     // calculate diabetes
     var diabetesValue = $('#diabetes_mellitus').bootstrapSwitch('state') ? 1:0;
 
-    // calculate stroke/TIA
+    // calculate stroke
     var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
+    
+    // calculate TIA
     var tiaValue = $('#tia').bootstrapSwitch('state') ? 1:0;
-    var strokeTiaValue = strokeValue || tiaValue;
 
-    scores.chads2 = chfValue + htnValue + ageValue + diabetesValue + strokeTiaValue;
+    // calculate final chads2 score
+    scores.chads2 = chfValue + htnValue + ageValue + diabetesValue + strokeValue + tiaValue;
 
     $('#chads2_score').html(scores.chads2);
+}
+
+function updateCha2Score(){
+    // CHA2-DS2-VASc = CHF + HTN + (Age value) + Diabetes + Stroke + TIA + Vascular Disease + Gender
+    // MAX possible score: 6
+
+    // calculate chf value
+    var chfValue = $('#chf').bootstrapSwitch('state') ? 1:0;
+    
+    // calculate htn value
+    // htn has 3 possible choices (0, 1 and 2)
+    // if the choice is 0, the value should be 0
+    // if the choice is 1 or 2, the value should be 1
+    var htnValue = parseInt($('#htn').val()) ? 1:0;
+    
+    // calculate ageValue
+    var birth_timestamp = Date.parse($('#date_of_birth').val());
+
+    if (isNaN(birth_timestamp)){
+        var ageValue = 0;
+    }else{
+        var birthDate = new Date(birth_timestamp);
+        var age = calculateAge(birthDate);
+
+        if (age < 65){
+            var ageValue = 0;
+        }else if (age >= 65 && age < 75){
+            var ageValue = 1;
+        }else if (age >= 75){
+            var ageValue = 2;
+        }
+    }
+
+    // calculate diabetes
+    var diabetesValue = $('#diabetes_mellitus').bootstrapSwitch('state') ? 1:0;
+
+    // calculate stroke
+    var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
+    
+    // calculate TIA
+    var tiaValue = $('#tia').bootstrapSwitch('state') ? 1:0;
+
+    // calculate vascular disease
+    // vascular disease has 4 possible choices (0, 1, 2 and 3)
+    // if the choice is 0, the value should be 0
+    // if the choice is 1, 2 or 3, the value should be 1
+    var vascularDiseaseValue = parseInt($('#vascular_disease').val()) ? 1:0;
+
+    // calculate gender
+    var genderValue = $('#gender').val() == 'F' ? 1:0;
+
+    // calculate final cha2 score
+    scores.cha2 = chfValue + htnValue + ageValue + diabetesValue + strokeValue + tiaValue + vascularDiseaseValue + genderValue;
+
+    $('#cha2_score').html(scores.cha2);
 }
 
 function updateHasbledScore(){
@@ -152,6 +212,6 @@ $('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instabiliti
     updateEveryting();
 });
 
-$('#htn, #date_of_birth, #alcohol_abuse').on('change', function(event, state){
+$('#htn, #date_of_birth, #alcohol_abuse, #gender, #vascular_disease').on('change', function(event, state){
     updateEveryting();
 });

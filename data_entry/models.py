@@ -2,35 +2,10 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+from .choices import *
+
 
 class Patient(models.Model):
-    # Here we use string for the value of the choice
-    # because having values like 'mL' or 'kg' will help
-    # clarify the if statements later on
-    GENDER_CHOICES = (('M', 'Male'), ('F', 'Female'))
-    HB_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-    PLTS_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-    INR_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-    CREAT_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-    EGFR_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-    AST_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-    ALT_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-    ALP_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-    BILIRUBIN_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-    TROPONIN_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-
-    HTN_CHOICES = (
-        (0, 'No'),
-        (1, 'Yes, Controlled HTN on meds. '),
-        (2, 'Yes, Uncontrolled HTN on meds SBP > 160 mmHg'),
-    )
-
-    ALCOHOL_ABUSE_CHOICES = (
-        (0, 'No'),
-        (1, 'Yes, < 8 drinks a week'),
-        (2, 'Yes, >= 8 drinks a week'),
-    )
-
     # Personal Information
     identification = models.CharField(max_length=50)
     first_name = models.CharField(max_length=40, blank=True)
@@ -42,10 +17,10 @@ class Patient(models.Model):
     date_of_procedure = models.DateField()
     indication = models.ForeignKey('data_entry.Indication')
     vessels_pci = models.ManyToManyField('data_entry.VesselsPCI')
-    stent = models.ForeignKey('data_entry.Stent')
+    stent = models.IntegerField(default=0, choices=STENT_CHOICES)
     balloons = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(9)])
     # Atrial Fibrillation
-    type_af = models.ForeignKey('data_entry.TypeAF')
+    af_type = models.IntegerField(default=0, choices=AF_TYPE_CHOICES)
     prev_anti_coagulation = models.ForeignKey('data_entry.AntiCoagulation', null=True, blank=True)
     warfarin_intolerance = models.BooleanField(default=False)
     inr_instability = models.BooleanField(default=False)
@@ -77,7 +52,7 @@ class Patient(models.Model):
     diabetes_mellitus = models.BooleanField(default=False)
     stroke = models.BooleanField(default=False)
     tia = models.BooleanField(default=False)
-    vascular_disease = models.ForeignKey('data_entry.VascularDisease', null=True, blank=True)
+    vascular_disease = models.IntegerField(default=0, choices=VASCULAR_DISEASE_CHOICES)
     renal_dysfunction = models.BooleanField(default=False)
     ckd_on_dialysis = models.BooleanField(default=False)
     renal_transplant = models.BooleanField(default=False)
@@ -136,28 +111,7 @@ class VesselsPCI(models.Model):
         return self.value
 
 
-class Stent(models.Model):
-    value = models.CharField(max_length=60, unique=True)
-
-    def __str__(self):
-        return self.value
-
-
-class TypeAF(models.Model):
-    value = models.CharField(max_length=60, unique=True)
-
-    def __str__(self):
-        return self.value
-
-
 class AntiCoagulation(models.Model):
-    value = models.CharField(max_length=60, unique=True)
-
-    def __str__(self):
-        return self.value
-
-
-class VascularDisease(models.Model):
     value = models.CharField(max_length=60, unique=True)
 
     def __str__(self):

@@ -40,9 +40,8 @@
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="stent">Stent *<br/><span></span></label>
             <div class="col-md-6 col-sm-6" >
                 <select id="stent" name="stent" class="form-control f-s-14 default-select2">
-                    <option value="">---------</option>
-                    {% for stent in values.stent %}
-                    <option value="{{ stent.id }}">{{ stent.value }}</option>
+                    {% for choice in choices.STENT_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
                 </select>
             </div>
