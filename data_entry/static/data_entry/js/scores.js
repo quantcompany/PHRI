@@ -82,7 +82,12 @@ function updateChads2Score(){
     // calculate final chads2 score
     scores.chads2 = chfValue + htnValue + ageValue + diabetesValue + 2*(strokeValue || tiaValue);
 
-    $('#chads2_score').html(scores.chads2);
+    var score = scores.chads2;
+    var risk = risks.stroke.chads2Score(score);
+
+    $('#chads2_score').html(score);
+    $('#chads2_rp').html(risk.percentage + '%');
+    $('#chads2_ci').html(risk.ci.lower + ' - ' + risk.ci.upper);
 }
 
 function updateCha2Score(){
