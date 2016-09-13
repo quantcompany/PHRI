@@ -16,7 +16,7 @@ PLTS_UM_CHOICES = (
 )
 
 CREAT_UM_CHOICES = (
-    ('micromol/L', 'micromol/L'),
+    ('μmol/L', 'μmol/L'),
     ('mg/dL', 'mg/dL'),
 )
 
@@ -37,7 +37,7 @@ GGT_UM_CHOICES = (
 )
 
 BILIRUBIN_UM_CHOICES = (
-    ('micromol/L', 'micromol/L'),
+    ('μmol/L', 'μmol/L'),
     ('mg/dL', 'mg/dL'),
 )
 
@@ -79,7 +79,7 @@ VASCULAR_DISEASE_CHOICES = (
 )
 
 AF_TYPE_CHOICES = (
-    (0, 'No Atrial Fibrilation'),
+    (0, 'No Atrial Fibrillation'),
     (1, 'Paroxysmal'),
     (2, 'Persistent'),
     (3, 'Permanent'),

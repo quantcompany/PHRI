@@ -83,30 +83,35 @@ class Patient(models.Model):
         stroke_tia_value = 2*(int(self.stroke) or int(self.tia))
         return chf_value + htn_value + age_value + diabetes_value + stroke_tia_value
 
-    @property
     def cha2ds2_vas_score(self):
         chf_value = int(self.chf)
         # htn is an integer field with 3 possible choices (0, 1 and 2)
         # 1 or 2 gets converted to 1; 0 gets converted to False, and then to 0
         htn_value = int(bool(self.htn))
-        age_in_6574 = int((self.age() >= 65) and (self.age() < 75)) # Age 65-74
-        age_greater_than_75 = int(self.age() >= 75)
-        vascular_disease = int(self.vascular_disease != 'No')
+        age_in_6574_value = int(self.age() >= 65) # Age 65-74, logically: Age>=65
+        age_greater_than_75_value = int(self.age() >= 75)
         diabetes_value = int(self.diabetes_mellitus)
-        stroke_tia_value = 2*(int(self.stroke) or int(self.tia))
-        return chf_value + htn_value + age_value + diabetes_value + stroke_tia_value
+        stroke_tia_value = 2 * (int(self.stroke) or int(self.tia))
+        vascular_disease_value = int(self.vascular_disease != 0)
+        female_value = int(self.gender == 'F')
+        return chf_value + htn_value + age_in_6574_value + age_greater_than_75_value + \
+               diabetes_value + stroke_tia_value + vascular_disease_value + female_value
 
     def hasbled_score(self):
         # htn is an integer field with 3 possible choices (0, 1 and 2)
         # for hasbled, choice 2 should have a value of 1
         # choices 0 and 1 should have a value of 0
         htn_value = int(bool(self.htn == 2))
+        renal_dysfunction_value = int(self.renal_dysfunction)
         liver_dysfunction_value = int(self.liver_dysfunction)
         stroke_value = int(self.stroke)
+        bleeding_value = int(self.hx_of_bleeding != 0)
         inr_value = int(self.inr_instability)
-        age_value = int(self.age() > 65)
+        age_value = int(self.age() >= 65)
+        drugs_value = int(self.drug_abuse)
         alcohol_abuse_value = int(bool(self.alcohol_abuse == 2))
-        return htn_value + liver_dysfunction_value + stroke_value + inr_value + age_value + alcohol_abuse_value
+        return htn_value + renal_dysfunction_value + liver_dysfunction_value + stroke_value + \
+               bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value
 
 
 class VesselsPCI(models.Model):
