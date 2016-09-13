@@ -4,16 +4,17 @@
 # If the choices include a NO or NONE option, then we use integers
 # and treat the NO/NONE/NULL choice as zero. Otherwise, we use strings.
 
-HB_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-PLTS_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-INR_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2')) #No unit measures
-CREAT_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-EGFR_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-AST_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-ALT_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-ALP_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-BILIRUBIN_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-TROPONIN_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
+HB_UM_CHOICES = (('g/L', 'g/L'), ('g/dL', 'g/dL'))
+PLTS_UM_CHOICES = (('10^9xL', '10^9xL'), ('mm3', 'mm3'), ('mL', 'mL'))
+INR_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2')) #No units of measurements
+CREAT_UM_CHOICES = (('micromol/L', 'micromol/L'), ('mg/dL', 'mg/dL'))
+EGFR_UM_CHOICES = (('mL/min/1.73m2', 'mL/min/1.73m2'))
+AST_UM_CHOICES = (('U/L', 'U/L'))
+ALT_UM_CHOICES = (('U/L', 'U/L'))
+GGT_UM_CHOICES = (('U/L', 'U/L'))
+ALP_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2')) # MOST BE DELETED
+BILIRUBIN_UM_CHOICES = (('micromol/L', 'micromol/L'), ('mg/dL', 'mg/dL'))
+TROPONIN_UM_CHOICES = (('ng/mL', 'ng/mL'))
 
 GENDER_CHOICES = (('M', 'Male'), ('F', 'Female'))
 
