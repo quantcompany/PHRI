@@ -11,6 +11,29 @@ var riskTables = {
         {percentage: 8.5, ci: {lower: 6.3, upper: 11.1}},
         {percentage: 12.5, ci: {lower: 8.2, upper: 17.5}},
         {percentage: 18.2, ci: {lower: 10.5, upper: 27.4}}
+    ],
+    cha2: [
+        {percentage: 0.0},
+        {percentage: 1.3},
+        {percentage: 2.2},
+        {percentage: 3.2},
+        {percentage: 4.0},
+        {percentage: 6.7},
+        {percentage: 9.6},
+        {percentage: 12.5},
+        {percentage: 15.2}
+    ],
+     hasbled: [
+        {percentage: 1.13},
+        {percentage: 1.02},
+        {percentage: 1.88},
+        {percentage: 3.74},
+        {percentage: 8.70},
+        {percentage: 12.5},
+        {percentage: 12.5},
+        {percentage: 12.5},
+        {percentage: 12.5},
+        {percentage: 12.5}
     ]
 };
 
@@ -29,10 +52,10 @@ var riskTables = {
 var risks = {
     stroke : {
         chads2Score: function(score){return riskTables.chads2[score]},
-        cha2Score: function(score){return null},
+        cha2Score: function(score){return riskTables.cha2[score]}
     },
 
     bleeding: {
-        hasbledScore: function(score){return null}
+        hasbledScore: function(score){return riskTables.hasbled[score]}
     }
 }
