@@ -39,20 +39,6 @@
         
 
         <div class="form-group">                
-            <label class="control-label col-md-2 col-sm-2 f-s-14" for="inr">INR</label>
-            <div class="col-md-4 col-sm-4">
-                <div class="input-group">
-                    <input id="inr" name="inr" type="number" step="any" class="form-control f-s-14" />
-                    <span class="input-group-addon" style="padding:0px;width:40%;">
-                        <select name="inr_um" style="padding:0px;background-color:transparent;border:none;height:100%;width:100%">
-                            {% for choice in choices.INR_UM_CHOICES %}
-                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                            {% endfor %}
-                        </select>
-                    </span>
-                </div>
-            </div>
-
             <label class="control-label col-md-2 col-sm-2 f-s-14" for="creat">CREAT</label>
             <div class="col-md-4 col-sm-4">
                 <div class="input-group">
@@ -66,11 +52,7 @@
                     </span>
                 </div>
             </div>
-        </div>
 
-        
-
-        <div class="form-group">    
             <label class="control-label col-md-2 col-sm-2 f-s-14" for="egfr">EGFR</label>
             <div class="col-md-4 col-sm-4">
                 <div class="input-group">
@@ -84,7 +66,11 @@
                     </span>
                 </div>
             </div>
+        </div>
 
+        
+
+        <div class="form-group">    
             <label class="control-label col-md-2 col-sm-2 f-s-14" for="ast">AST</label>
             <div class="col-md-4 col-sm-4">
                 <div class="input-group">
@@ -98,11 +84,7 @@
                     </span>
                 </div>
             </div>
-        </div>
 
-        
-
-        <div class="form-group">    
             <label class="control-label col-md-2 col-sm-2 f-s-14" for="alt">ALT</label>
             <div class="col-md-4 col-sm-4">
                 <div class="input-group">
@@ -116,25 +98,25 @@
                     </span>
                 </div>
             </div>
+        </div>
 
-            <label class="control-label col-md-2 col-sm-2 f-s-14" for="alp">ALP</label>
+        
+
+        <div class="form-group">    
+            <label class="control-label col-md-2 col-sm-2 f-s-14" for="ggt">GGT</label>
             <div class="col-md-4 col-sm-4">
                 <div class="input-group">
-                    <input id="alp" name="alp" type="number" step="any" class="form-control f-s-14" />
+                    <input id="ggt" name="ggt" type="number" step="any" class="form-control f-s-14" />
                     <span class="input-group-addon" style="padding:0px;width:40%;">
-                        <select name="alp_um" style="padding:0px;background-color:transparent;border:none;height:100%;width:100%">
-                            {% for choice in choices.ALP_UM_CHOICES %}
+                        <select name="ggt_um" style="padding:0px;background-color:transparent;border:none;height:100%;width:100%">
+                            {% for choice in choices.GGT_UM_CHOICES %}
                             <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                             {% endfor %}
                         </select>
                     </span>
                 </div>
             </div>
-        </div>
 
-        
-
-        <div class="form-group">    
             <label class="control-label col-md-2 col-sm-2 f-s-14" for="bilirubin">BILIRUBIN</label>
             <div class="col-md-4 col-sm-4">
                 <div class="input-group">
@@ -148,7 +130,11 @@
                     </span>
                 </div>
             </div>
+        </div>
 
+        
+
+        <div class="form-group">    
             <label class="control-label col-md-2 col-sm-2 f-s-14" for="troponin">TROPONIN</label>
             <div class="col-md-4 col-sm-4">
                 <div class="input-group">
@@ -162,6 +148,14 @@
                     </span>
                 </div>
             </div>
+        
+            <label class="control-label col-md-2 col-sm-2 f-s-14" for="inr">INR</label>
+            <div class="col-md-4 col-sm-4">
+                <input id="inr" name="inr" type="number" step="any" class="form-control f-s-14" />
+            </div>
         </div>
+
+
+
     </div>
 {% endblock %}

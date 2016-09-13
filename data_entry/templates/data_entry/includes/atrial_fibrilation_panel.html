@@ -10,7 +10,6 @@
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="type_af">Type *<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
                 <select id="type_af" name="type_af" class="form-control f-s-14 default-select2">
-                    <option value="">---------</option>
                     {% for choice in choices.AF_TYPE_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
@@ -24,9 +23,8 @@
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="prev_anti_coagulation">Previous anti-coagulation</label>
             <div class="col-md-6 col-sm-6">
                 <select id="prev_anti_coagulation" name="prev_anti_coagulation" class="form-control f-s-14 default-select2">
-                    <option value="">---------</option>
-                    {% for ac in values.anti_coagulation %}
-                    <option value="{{ ac.id }}">{{ ac.value }}</option>
+                    {% for choice in choices.ANTI_COAGULATION_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
                 </select>
             </div>

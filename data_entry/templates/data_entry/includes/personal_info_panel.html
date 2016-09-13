@@ -50,7 +50,6 @@
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="gender">Gender *<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
                 <select id="gender" name="gender" class="form-control f-s-14 default-select2">
-                    <option value="">---------</option>
                     {% for choice in choices.GENDER_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}

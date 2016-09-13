@@ -10,7 +10,6 @@
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="htn">HTN *<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
                 <select id="htn" name="htn" class="form-control f-s-14 default-select2">
-                    <option value="">---------</option>
                     {% for choice in choices.HTN_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
@@ -23,7 +22,6 @@
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="vascular_disease">Vascular disease</label>
             <div class="col-md-6 col-sm-6">
                 <select id="vascular_disease" name="vascular_disease" class="form-control f-s-14 default-select2">
-                    <option value="">---------</option>
                     {% for choice in choices.VASCULAR_DISEASE_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
@@ -36,9 +34,8 @@
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="hx_of_bleeding">HX of bleeding</label>
             <div class="col-md-6 col-sm-6">
                 <select id="hx_of_bleeding" name="hx_of_bleeding" class="form-control f-s-14 default-select2">
-                    <option value="">---------</option>
-                    {% for hx_of_bleeding in values.hx_of_bleeding %}
-                    <option value="{{ hx_of_bleeding.id }}">{{ hx_of_bleeding.value }}</option>
+                    {% for choice in choices.BLEEDING_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -49,7 +46,6 @@
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="alcohol_abuse">Alcohol abuse *<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
                 <select id="alcohol_abuse" name="alcohol_abuse" class="form-control f-s-14 default-select2">
-                    <option value="">---------</option>
                     {% for choice in choices.ALCOHOL_ABUSE_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
@@ -62,22 +58,8 @@
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="hx_of_malignancy">HX of malignancy</label>
             <div class="col-md-6 col-sm-6">
                 <select id="hx_of_malignancy" name="hx_of_malignancy" class="form-control f-s-14 default-select2">
-                    <option value="">---------</option>
-                    {% for hx_of_malignancy in values.hx_of_malignancy %}
-                    <option value="{{ hx_of_malignancy.id }}">{{ hx_of_malignancy.value }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="asa_allergy">ASA allergy</label>
-            <div class="col-md-6 col-sm-6">
-                <select id="asa_allergy" name="asa_allergy" class="form-control f-s-14 default-select2">
-                    <option value="">---------</option>
-                    {% for asa_allergy in values.asa_allergy %}
-                    <option value="{{ asa_allergy.id }}">{{ asa_allergy.value }}</option>
+                    {% for choice in choices.MALIGNANCY_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -88,9 +70,8 @@
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="upcoming_non_cardiatic_surgery">Upcoming non-cardiatic surgery</label>
             <div class="col-md-6 col-sm-6">
                 <select id="upcoming_non_cardiatic_surgery" name="upcoming_non_cardiatic_surgery" class="form-control f-s-14 default-select2">
-                    <option value="">---------</option>
-                    {% for upcoming_non_cardiatic_surgery in values.upcoming_non_cardiatic_surgery %}
-                    <option value="{{ upcoming_non_cardiatic_surgery.id }}">{{ upcoming_non_cardiatic_surgery.value }}</option>
+                    {% for choice in choices.NON_CARDIATIC_SURGERY_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
                 </select>
             </div>
