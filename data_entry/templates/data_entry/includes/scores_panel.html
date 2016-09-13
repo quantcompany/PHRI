@@ -8,19 +8,21 @@
     <div class="panel-body">
         <div class="row" style="">
             <div class="note note-info col-xs-12" style="">
-                <table>
+                <table style="width:100%">
+                    <tfoot>
+                        <tr>
+                            <th class="text-center">CHADS<sub>2</sub> Score</th>
+                            <th class="text-center">Stroke Risk</th>
+                            <th class="text-center">Confidence Interval</th>
+                        </tr>
+                    </tfoot>
                     <tbody>
                         <tr>
-                            <td style="padding:0px 20px 0px 20px;text-align:justify;">
-                                <h3>CHADS<sub>2</sub> Score</h3>
-                                <p class="f-s-14">
-                                    CHADS<sub>2</sub> assigns one point each for congestive heart failure (C), high blood pressure (H), age 75 or older (A),
-                                    and diabetes (D), and two points for a previous stroke (S2) or transient ischemic attack, called a mini-stroke.
-                                    The CHADS2 scoring system determines stroke risk.
-                                </p>
-                            </td>
+                            <td id="chads2_score" class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:100px">--</td>
+
+                            <td id="chads2_rp" class="f-w-400 text-center" style="padding:0px 20px 0px 20px;font-size:60px">--</td>
                             
-                            <td id="chads2_score" class="f-w-700" style="padding:0px 20px 0px 20px;font-size:100px">0</td>
+                            <td id="chads2_ci" class="f-w-400 text-center" style="padding:0px 20px 0px 20px;font-size:60px">--</td>
                         </tr>
                     </tbody>
                 </table>
