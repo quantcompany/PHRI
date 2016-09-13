@@ -26,10 +26,10 @@ def dashboard(request):
             'VASCULAR_DISEASE_CHOICES': VASCULAR_DISEASE_CHOICES,
             'STENT_CHOICES': STENT_CHOICES,
             'AF_TYPE_CHOICES': AF_TYPE_CHOICES,
+            'INDICATION_CHOICES': INDICATION_CHOICES,
         },
 
         'values': {
-            'indication': Indication.objects.all(),
             'vessels_pci': VesselsPCI.objects.all(),
             'anti_coagulation': AntiCoagulation.objects.all(),
             'hx_of_bleeding': HXofBleeding.objects.all(),

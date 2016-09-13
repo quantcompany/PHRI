@@ -11,8 +11,8 @@
             <div class="col-md-6 col-sm-6">
                 <select id="type_af" name="type_af" class="form-control f-s-14 default-select2">
                     <option value="">---------</option>
-                    {% for type_af in values.type_af %}
-                    <option value="{{ type_af.id }}">{{ type_af.value }}</option>
+                    {% for choice in choices.AF_TYPE_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
                 </select>
             </div>

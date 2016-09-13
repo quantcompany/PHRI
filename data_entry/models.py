@@ -15,7 +15,7 @@ class Patient(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     # Procedure Details
     date_of_procedure = models.DateField()
-    indication = models.ForeignKey('data_entry.Indication')
+    indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
     vessels_pci = models.ManyToManyField('data_entry.VesselsPCI')
     stent = models.IntegerField(default=0, choices=STENT_CHOICES)
     balloons = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(9)])
@@ -47,9 +47,9 @@ class Patient(models.Model):
     troponin = models.FloatField(null=True, blank=True)
     troponin_um = models.CharField(default='um1', max_length=20, choices=TROPONIN_UM_CHOICES)
     #Medical History
-    chf = models.BooleanField(default=False)
-    htn = models.IntegerField(default=0, choices=HTN_CHOICES)
-    diabetes_mellitus = models.BooleanField(default=False)
+    chf = models.BooleanField(default=False) # CHADS2
+    htn = models.IntegerField(default=0, choices=HTN_CHOICES) # CHADS2
+    diabetes_mellitus = models.BooleanField(default=False) # CHADS2
     stroke = models.BooleanField(default=False)
     tia = models.BooleanField(default=False)
     vascular_disease = models.IntegerField(default=0, choices=VASCULAR_DISEASE_CHOICES)
@@ -81,7 +81,20 @@ class Patient(models.Model):
         htn_value = int(bool(self.htn)) 
         age_value = int(self.age() > 75)
         diabetes_value = int(self.diabetes_mellitus)
-        stroke_tia_value = int(self.stroke) or int(self.tia)
+        stroke_tia_value = 2*(int(self.stroke) or int(self.tia))
+        return chf_value + htn_value + age_value + diabetes_value + stroke_tia_value
+
+    @property
+    def cha2ds2_vas_score(self):
+        chf_value = int(self.chf)
+        # htn is an integer field with 3 possible choices (0, 1 and 2)
+        # 1 or 2 gets converted to 1; 0 gets converted to False, and then to 0
+        htn_value = int(bool(self.htn))
+        age_in_6574 = int((self.age() >= 65) and (self.age() < 75)) # Age 65-74
+        age_greater_than_75 = int(self.age() >= 75)
+        vascular_disease = int(self.vascular_disease != 'No')
+        diabetes_value = int(self.diabetes_mellitus)
+        stroke_tia_value = 2*(int(self.stroke) or int(self.tia))
         return chf_value + htn_value + age_value + diabetes_value + stroke_tia_value
 
     def hasbled_score(self):
@@ -94,14 +107,7 @@ class Patient(models.Model):
         inr_value = int(self.inr_instability)
         age_value = int(self.age() > 65)
         alcohol_abuse_value = int(bool(self.alcohol_abuse == 2))
-        return  htn_value + liver_dysfunction_value + stroke_value + inr_value + age_value + alcohol_abuse_value
-
-
-class Indication(models.Model):
-    value = models.CharField(max_length=60, unique=True)
-
-    def __str__(self):
-        return self.value
+        return htn_value + liver_dysfunction_value + stroke_value + inr_value + age_value + alcohol_abuse_value
 
 
 class VesselsPCI(models.Model):

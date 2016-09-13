@@ -13,7 +13,6 @@ class PatientAdmin(admin.ModelAdmin):
         'hasbled_score'
         )
 admin.site.register(Patient, PatientAdmin)
-admin.site.register(Indication)
 admin.site.register(VesselsPCI)
 admin.site.register(AntiCoagulation)
 admin.site.register(HXofBleeding)

@@ -18,8 +18,8 @@
             <div class="col-md-6 col-sm-6">
                 <select id="indication" name="indication" class="form-control f-s-14 default-select2" >
                     <option value="">---------</option>
-                    {% for indication in values.indication %}
-                    <option value="{{ indication.id }}">{{ indication.value }}</option>
+                    {% for choice in choices.INDICATION_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
                 </select>
             </div>

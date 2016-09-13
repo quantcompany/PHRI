@@ -6,7 +6,7 @@
 
 HB_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
 PLTS_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
-INR_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
+INR_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2')) #No unit measures
 CREAT_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
 EGFR_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
 AST_UM_CHOICES = (('um1', 'um1'), ('um2', 'um2'))
@@ -47,6 +47,13 @@ VASCULAR_DISEASE_CHOICES = (
 AF_TYPE_CHOICES = (
     (0, 'No Atrial Fibrilation'),
     (1, 'Paroxysmal'),
-    (1, 'Persistent'),
-    (1, 'Permanent'),
+    (2, 'Persistent'),
+    (3, 'Permanent'),
+)
+
+INDICATION_CHOICES = (
+    ('STEMI', 'STEMI'),
+    ('NSTEMI', 'NSTEMI'),
+    ('UA', 'UA'),
+    ('SCAD', 'SCAD'),
 )
