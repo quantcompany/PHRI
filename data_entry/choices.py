@@ -19,7 +19,7 @@ GENDER_CHOICES = (('M', 'Male'), ('F', 'Female'))
 
 HTN_CHOICES = (
     (0, 'No'),
-    (1, 'Yes, Controlled HTN on meds. '),
+    (1, 'Yes, Controlled HTN on meds'),
     (2, 'Yes, Uncontrolled HTN on meds SBP > 160 mmHg'),
 )
 
@@ -56,4 +56,30 @@ INDICATION_CHOICES = (
     ('NSTEMI', 'NSTEMI'),
     ('UA', 'UA'),
     ('SCAD', 'SCAD'),
+)
+
+ANTI_COAGULATION_CHOICES = (
+    (0, 'No'),
+    (1, 'Warfarin'),
+    (2, 'Ribaroxaban'),
+    (3, 'Dabigatran'),
+    (4, 'Apixiban'),
+)
+
+BLEEDING_CHOICES = (
+    (0, 'No'),
+    (1, 'GI'),
+    (2, 'ICH'),
+)
+
+MALIGNANCY_CHOICES = (
+    (0, 'No'),
+    (1, 'Yes, prior'),
+    (2, 'Yes, currently under treatment'),
+)
+
+NON_CARDIATIC_SURGERY_CHOICES = (
+    (0, 'No'),
+    (1, 'Yes, < 6 months'),
+    (2, 'Yes, >= 6 months'),
 )

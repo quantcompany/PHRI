@@ -12,10 +12,6 @@ class PatientAdmin(admin.ModelAdmin):
         'chads2_score',
         'hasbled_score'
         )
+
 admin.site.register(Patient, PatientAdmin)
 admin.site.register(VesselsPCI)
-admin.site.register(AntiCoagulation)
-admin.site.register(HXofBleeding)
-admin.site.register(HXofMalignancy)
-admin.site.register(ASAAllergy)
-admin.site.register(NonCardiaticSurgery)

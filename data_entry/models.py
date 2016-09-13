@@ -21,7 +21,7 @@ class Patient(models.Model):
     balloons = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(9)])
     # Atrial Fibrillation
     af_type = models.IntegerField(default=0, choices=AF_TYPE_CHOICES)
-    prev_anti_coagulation = models.ForeignKey('data_entry.AntiCoagulation', null=True, blank=True)
+    prev_anti_coagulation = models.IntegerField(default=0, choices=ANTI_COAGULATION_CHOICES)
     warfarin_intolerance = models.BooleanField(default=False)
     inr_instability = models.BooleanField(default=False)
     noac_allergy_or_intolerance = models.BooleanField(default=False)
@@ -57,14 +57,14 @@ class Patient(models.Model):
     ckd_on_dialysis = models.BooleanField(default=False)
     renal_transplant = models.BooleanField(default=False)
     liver_dysfunction = models.BooleanField(default=False)
-    hx_of_bleeding = models.ForeignKey('data_entry.HXofBleeding', null=True, blank=True)
+    hx_of_bleeding = models.IntegerField(default=0, choices=BLEEDING_CHOICES)
     alcohol_abuse = models.IntegerField(default=0, choices=ALCOHOL_ABUSE_CHOICES)
     drug_abuse = models.BooleanField(default=False)
     chronic_nsaids_rx = models.BooleanField(default=False)
     excessive_fall_risk = models.BooleanField(default=False)
-    hx_of_malignancy = models.ForeignKey('data_entry.HXofMalignancy', null=True, blank=True)
-    asa_allergy = models.ForeignKey('data_entry.ASAAllergy', null=True, blank=True)
-    upcoming_non_cardiatic_surgery = models.ForeignKey('data_entry.NonCardiaticSurgery', null=True, blank=True)
+    hx_of_malignancy = models.IntegerField(default=0, choices=MALIGNANCY_CHOICES)
+    asa_allergy = models.BooleanField(default=False)
+    upcoming_non_cardiatic_surgery = models.IntegerField(default=0, choices=NON_CARDIATIC_SURGERY_CHOICES)
     # Recommendation
     followed_recommendation = models.BooleanField(default=True)
     reason_not_followed = models.TextField(blank=True)
@@ -111,41 +111,6 @@ class Patient(models.Model):
 
 
 class VesselsPCI(models.Model):
-    value = models.CharField(max_length=60, unique=True)
-
-    def __str__(self):
-        return self.value
-
-
-class AntiCoagulation(models.Model):
-    value = models.CharField(max_length=60, unique=True)
-
-    def __str__(self):
-        return self.value
-
-
-class HXofBleeding(models.Model):
-    value = models.CharField(max_length=60, unique=True)
-
-    def __str__(self):
-        return self.value
-
-
-class HXofMalignancy(models.Model):
-    value = models.CharField(max_length=60, unique=True)
-
-    def __str__(self):
-        return self.value
-
-
-class ASAAllergy(models.Model):
-    value = models.CharField(max_length=60, unique=True)
-
-    def __str__(self):
-        return self.value
-
-
-class NonCardiaticSurgery(models.Model):
     value = models.CharField(max_length=60, unique=True)
 
     def __str__(self):
