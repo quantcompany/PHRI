@@ -113,6 +113,14 @@ class Patient(models.Model):
         return htn_value + renal_dysfunction_value + liver_dysfunction_value + stroke_value + \
                bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value
 
+    def OAC(self):
+        if not self.warfarin_intolerance:
+            return 'Continue Warfarin'
+        else:
+            return 'Reduced dose NOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd'
+
+    def recommended_therapy(self):
+        pass
 
 class VesselsPCI(models.Model):
     value = models.CharField(max_length=60, unique=True)

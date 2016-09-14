@@ -92,6 +92,10 @@
 
 
 {% block tail_js %}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
     <script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
     <script src="{% static 'plugins/select2/js/select2.min.js' %}"></script>
     <script src="{% static 'plugins/masked-input/masked-input.min.js' %}"></script>
@@ -99,12 +103,13 @@
     <script src="{% static 'plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"></script>
     <script src="{% static 'plugins/gritter/js/jquery.gritter.min.js' %}"></script>
     <script src="{% static 'plugins/jquery-validation/js/jquery.validate.min.js' %}"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="{% static 'data_entry/js/scores.js' %}"></script>
     <script src="{% static 'data_entry/js/risks.js' %}"></script>
-    <script src="{% static 'data_entry/js/plot.js' %}"></script>
+    <script src="{% static 'data_entry/js/therapy.js' %}"></script>
     <script src="{% static 'data_entry/js/patient-form-validation.js' %}"></script>
+    <script src="{% static 'data_entry/js/plot.js' %}"></script>
+    <script src="{% static 'data_entry/js/gauges.js' %}"></script>
+
     <script>
         $("#identification").mask("999-999-999");
         

@@ -8,62 +8,75 @@
     <div class="panel-body">
         <div class="row" style="">
             <div class="note note-info col-xs-12" style="">
+                <h3>CHADS<sub>2</sub></h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
                 <table style="width:100%">
-                    <tfoot>
-                        <tr>
-                            <th class="text-center">CHADS<sub>2</sub> Score</th>
-                            <th class="text-center">Stroke Risk</th>
-                            <th class="text-center">Confidence Interval</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         <tr>
-                            <td id="chads2_score" class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:100px">--</td>
-
-                            <td id="chads2_rp" class="f-w-400 text-center" style="padding:0px 20px 0px 20px;font-size:60px">--</td>
-                            
-                            <td id="chads2_ci" class="f-w-400 text-center" style="padding:0px 20px 0px 20px;font-size:60px">--</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="note note-info col-xs-12" style="">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0px 20px 0px 20px;text-align:justify;">
-                            
-                                <h3>CHA<sub>2</sub>DS<sub>2</sub>-VASc Score</h3>
-                                <p class="f-s-14">
-                                     The CHA<sub>2</sub>DS<sub>2</sub>-VASc score is a refinement of CHADS<sub>2</sub> score and extends the latter by including additional common stroke risk factors such as age 65-74, female gender and vascular disease. In the CHA<sub>2</sub>DS<sub>2</sub>-VASc score, 'age 75 and above' also has extra weight, with 2 points.
-                                </p>
+                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:100px">
+                                <div id="chads2-score-gauge" style="width: 300px; height: 200px; float: left"></div>
                             </td>
 
-                            <td id="cha2_score" class="f-w-700" style="padding:0px 20px 0px 20px;font-size:100px">0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="note note-info col-xs-12" style="">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0px 20px 0px 20px;text-align:justify;">
-                            
-                                <h3>HAS-BLED Score</h3>
-                                <p class="f-s-14">
-                                    The HAS-BLED ssesses the 1-year risk for major bleeding (intracranial, hospitalization, hemoglobin decrease >2 g/L, and/or transfusion) associated with oral anticoagulation.
-                                    Patients with a high risk of bleeding (HAS-BLED score ≥ 3) should undergo regular clinical review following the initiation of oral anticoagulation.
-                                </p>
+                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:60px">
+                                <div id="chads2-percentage-gauge" style="width: 300px; height: 200px; float: left"></div>
                             </td>
-
-                            <td id="hasbled_score" class="f-w-700" style="padding:0px 20px 0px 20px;font-size:100px">0</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <div class="row" style="">
+            <div class="note note-info col-xs-12" style="">
+                <h3>CHA<sub>2</sub>-DS<sub>2</sub>-VASc</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12" style="">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:100px">
+                                <div id="cha2-score-gauge" style="width: 300px; height: 200px; float: left"></div>
+                            </td>
+
+                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:60px">
+                                <div id="cha2-percentage-gauge" style="width: 300px; height: 200px; float: left"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row" style="">
+            <div class="note note-info col-xs-12" style="">
+                <h3>HAS-BLED</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12" style="">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:100px">
+                                <div id="hasbled-score-gauge" style="width: 300px; height: 200px; float: left"></div>
+                            </td>
+
+                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:60px">
+                                <div id="hasbled-percentage-gauge" style="width: 300px; height: 200px; float: left"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 {% endblock %}

@@ -4,18 +4,6 @@ var scores = {
     hasbled: 0
 };
 
-var therapy = {
-    lowChads2: {
-        lowHasbled : 'You have low chads2 and low hasbled scores!',
-        highHasbled: 'You have low chads2 but high hasbled scores.'
-    },
-
-    highChads2: {
-        lowHasbled: 'You have high chads2 but low hasbled scores.',
-        highHasbled: 'You have high chads2 AND high hasbled scores!'
-    }
-}
-
 function calculateAge(birthDate){
     var birthYear = birthDate.getFullYear();
     var birthMonth = birthDate.getMonth();
@@ -39,12 +27,19 @@ function calculateAge(birthDate){
     return age;
 }
 
-function updateEveryting(){
+function updateEverything(){
     updateChads2Score();
     updateCha2Score();
     updateHasbledScore();
-    updateRecommendedTherapy();
-    updateChart(); // this function is in plot.js
+    
+    // these three are in guages.js
+    updateChads2Gauges();
+    updateCha2Gauges();
+    updateHasbledGauges();
+
+    updateChart(); // this one is in plot.js
+    
+    updateRecommendedTherapy(); // this is in therapy.js
 }
 
 function updateChads2Score(){
@@ -82,12 +77,12 @@ function updateChads2Score(){
     // calculate final chads2 score
     scores.chads2 = chfValue + htnValue + ageValue + diabetesValue + 2*(strokeValue || tiaValue);
 
-    var score = scores.chads2;
-    var risk = risks.stroke.chads2Score(score);
+    // var score = scores.chads2;
+    // var risk = risks.stroke.chads2Score(score);
 
-    $('#chads2_score').html(score);
-    $('#chads2_rp').html(risk.percentage + '%');
-    $('#chads2_ci').html(risk.ci.lower + ' - ' + risk.ci.upper);
+    // $('#chads2_score').html(score);
+    // $('#chads2_rp').html(risk.percentage + '%');
+    // $('#chads2_ci').html(risk.ci.lower + ' - ' + risk.ci.upper);
 }
 
 function updateCha2Score(){
@@ -197,37 +192,14 @@ function updateHasbledScore(){
     $('#hasbled_score').html(scores.hasbled);
 }
 
-function updateRecommendedTherapy(){
-    // chads2: low <= 2 < high
-    // hasbled: low <= 3 < high
-    var text = '';
-
-    if (scores.chads2 <= 2){
-        if (scores.hasbled <= 3){
-            text = therapy.lowChads2.lowHasbled;
-        }else{
-            text = therapy.lowChads2.highHasbled;
-        }
-    }else{
-        if (scores.hasbled <= 3){
-            text = therapy.highChads2.lowHasbled;
-        }else{
-            text = therapy.highChads2.highHasbled;
-        }
-    }
-
-    $('#therapy_text').html(text);
-}   
-
-
 // Register change listeners to all fields involved in the formula,
 // so that the scores, plot, and recommended therapy get updated as the
 // form is filled out
 
-$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instabilitiy').on('switchChange.bootstrapSwitch', function(event, state){
-    updateEveryting();
+$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instabilitiy, #warfarin_intolerance').on('switchChange.bootstrapSwitch', function(event, state){
+    updateEverything();
 });
 
-$('#htn, #date_of_birth, #alcohol_abuse, #gender, #vascular_disease').on('change', function(event, state){
-    updateEveryting();
+$('#htn, #date_of_birth, #alcohol_abuse, #gender, #vascular_disease, #stent').on('change', function(event, state){
+    updateEverything();
 });
