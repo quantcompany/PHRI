@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
@@ -64,3 +64,10 @@ def patient_index(request):
 @login_required
 def patient_details(request, patient_id):
     return JsonResponse({'id': 1, 'name': 'xyz'})
+
+
+@login_required
+def patient_details_print(request, patient_id):
+    patient = get_object_or_404(Patient, id=patient_id)
+    context = {'patient': patient}
+    return render(request, 'data_entry/patients/print.html', context)

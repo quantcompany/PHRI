@@ -21,6 +21,7 @@ from . import views
 patients = [
    url(r'^$', views.patient_index, name='index'),
    url(r'^(?P<patient_id>\d+)/$', views.patient_details, name='details'),
+   url(r'^(?P<patient_id>\d+)/print$', views.patient_details_print, name='print'),
 ]
 # reverse('data_entry:patients:index')
 # reverse('data_entry:patients:detail')
@@ -29,5 +30,5 @@ patients = [
 urlpatterns = [
     url(r'^form$', views.form, name='form'),
     url(r'^reports$', views.reports, name='reports'),
-    url(r'^patients/', include(patients, namespace='patients'))
+    url(r'^patients/', include(patients, namespace='patients')),
 ]

@@ -68,6 +68,14 @@ class Patient(models.Model):
     followed_recommendation = models.BooleanField(default=True)
     reason_not_followed = models.TextField(blank=True)
 
+    def full_name(self):
+        parts1 = [self.first_name, self.middle_name, self.last_name]
+        parts2 = [p for p in parts1 if len(p.strip()) > 0]
+        if len(parts2) > 0:
+            return ' '.join(parts2)
+        else:
+            return 'anonymous'
+
     def age(self):
         return int((timezone.now().date() - self.date_of_birth).days / 365.0)
 

@@ -227,6 +227,67 @@ $('#hasbled-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
 }));
 
 
+$('#test-gauge').highcharts({
+    title: {
+        text: ''
+    },
+    
+    chart: {
+        renderTo: 'container',
+        type: 'bar',
+        plotBorderWidth: 2,
+        plotBackgroundColor: '#D6D6EB',
+        plotBorderColor: '#D8D8D8',
+        plotShadow: true,
+        spacingBottom: 43,
+        width: 350,
+        height: 120 
+    },
+
+    xAxis: {
+        categories: [ 'US' ],
+        tickLength: 0
+    },
+
+    yAxis: {
+        title: {
+            text: null
+        },
+        labels: {
+            y: 20
+        },
+        min: 0,
+        max: 100,
+        tickInterval: 20,
+        minorTickInterval: 10,
+        tickWidth: 1,
+        tickLength: 8,
+        minorTickLength: 5,
+        minorTickWidth: 1,
+        minorGridLineWidth: 0
+    },
+
+    series: [{
+       borderColor: '#7070B8',
+       borderRadius: 3,
+       borderWidth: 1,
+       color: {
+           linearGradient: 
+               { x1: 0, y1: 0, x2: 1, y2: 0 },
+           stops: [
+                    [ 0, '#D6D6EB' ],
+                    [ 0.3, '#5C5CAD' ],
+                    [ 0.45, '#5C5C9C' ],
+                    [ 0.55, '#5C5C9C' ],
+                    [ 0.7, '#5C5CAD' ],
+                    [ 1, '#D6D6EB'] ]
+       },
+       pointWidth: 50, 
+       data: [ 48.9 ]
+    }]
+});
+
+
 function updateChads2Gauges(){
     $('#chads2-score-gauge').highcharts().series[0].points[0].update(scores.chads2);
     $('#chads2-percentage-gauge').highcharts().series[0].points[0].update(risks.stroke.chads2Score(scores.chads2).percentage);
