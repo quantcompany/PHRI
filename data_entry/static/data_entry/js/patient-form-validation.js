@@ -52,7 +52,7 @@ $(function() {
         min: 0,
         max: 9
       },
-      type_af: "required",
+      af_type: "required",
       htn: "required",
       alcohol_abuse: "required",
       reason_not_followed: {

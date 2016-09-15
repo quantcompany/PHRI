@@ -16,13 +16,13 @@
             <!-- begin top-menu nav -->
             <ul class="nav">
                 <li class="{% block menu1 %}{% endblock %}">
-                    <a href="{% url 'data_entry:dashboard' %}">
+                    <a href="{% url 'data_entry:form' %}">
                         <i class="fa fa-pencil-square-o"></i>
                         <span>Patient Form</span>
                     </a>
                 </li>
                 <li class="{% block menu2 %}{% endblock %}">
-                    <a href="{% url 'data_entry:reports' %}">
+                    <a href="{% url 'data_entry:patients:index' %}">
                         <i class="fa fa-database"></i> 
                         <span>My Patients</span>
                     </a>

@@ -6,13 +6,14 @@ var gaugeOptions = {
     chart: {
         type: 'solidgauge',
         backgroundColor: 'transparent',
+        spacing: [5, 5, 5, 5]
     },
 
     title: null,
 
     pane: {
         center: ['50%', '85%'],
-        size: '140%',
+        size: '160%',
         startAngle: -90,
         endAngle: 90,
         background: {
@@ -31,10 +32,10 @@ var gaugeOptions = {
     yAxis: {
         lineWidth: 3,
         title: {
-            y: -70
+            y: 60
         },
         labels: {
-            y: 16
+            y: -1
         }
     },
 
@@ -76,7 +77,7 @@ $('#chads2-score-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         name: 'Score',
         data: [scores.chads2],
         dataLabels: {
-            format: '<div style="text-align:center"><span style="font-size:35px;color:' +
+            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/></div>'
         }
     }]
@@ -89,8 +90,8 @@ $('#chads2-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         min: 1.9,
         max: 18.2,
         title: {text: 'Risk'},
-        // tickInterval: 1,
-        // minorTickInterval: null,
+        tickInterval: 2,
+        minorTickInterval: null,
         stops: [
             [0.2, '#55BF3B'], // green
             [0.4, '#DDDF0D'], // yellow
@@ -103,7 +104,7 @@ $('#chads2-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         data: [risks.stroke.chads2Score(scores.chads2).percentage],
         dataLabels: {
             formatter: function(){
-                return '<div style="text-align:center"><span style="font-size:25px;color:' + 
+                return '<div style="text-align:center"><span style="font-size:15px;color:' + 
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">' + this.y + ' %</span><br/>' +
                 '<span style="font-size:12px;color:black">' + risks.stroke.chads2Score(scores.chads2).ci + '</span></div>'
             }
@@ -135,7 +136,7 @@ $('#cha2-score-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         name: 'Score',
         data: [scores.cha2],
         dataLabels: {
-            format: '<div style="text-align:center"><span style="font-size:35px;color:' +
+            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/></div>'
         }
     }]
@@ -148,8 +149,8 @@ $('#cha2-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         min: 0,
         max: 15.2,
         title: {text: 'Risk'},
-        // tickInterval: 1,
-        // minorTickInterval: null,
+        tickInterval: 2,
+        minorTickInterval: null,
         stops: [
             [0, '#55BF3B'], // green
             [0.5, '#DDDF0D'], // yellow
@@ -192,7 +193,7 @@ $('#hasbled-score-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         name: 'Score',
         data: [scores.hasbled],
         dataLabels: {
-            format: '<div style="text-align:center"><span style="font-size:35px;color:' +
+            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/></div>'
         }
     }]
@@ -205,8 +206,8 @@ $('#hasbled-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         min: 1.13,
         max: 12.5,
         title: {text: 'Risk'},
-        // tickInterval: 1,
-        // minorTickInterval: null,
+        tickInterval: 2,
+        minorTickInterval: null,
         stops: [
             [0, '#55BF3B'], // green
             [0.5, '#DDDF0D'], // yellow

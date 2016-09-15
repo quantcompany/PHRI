@@ -17,7 +17,7 @@
 {% block page_header %}Enter the patient's personal and medical info{% endblock %}
 
 {% block content %}
-    <form id="patient_form" name="patient_form" action="{% url 'data_entry:patients:patients' %}">
+    <form id="patient_form" name="patient_form" action="{% url 'data_entry:patients:index' %}">
         {% csrf_token %}
         <div class="row">
             <div class="col-md-6">
@@ -51,24 +51,21 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 {% include 'data_entry/includes/scores_panel.html' %}
             </div>
+        </div>
 
+        <div>
             <div class="col-md-6">
                 {% include 'data_entry/includes/plot_panel.html' %}
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-3">
-            </div>
             <div class="col-md-6">
                 {% include 'data_entry/includes/recommendation_panel.html' %}
             </div>
-            <div class="col-md-3">
-            </div>
         </div>
+
 
         <!-- #modal-dialog -->
         <div class="modal fade" id="submit-modal">
@@ -172,7 +169,7 @@
                     console.log('Success');
                     console.log(data);
                     $('#submit-modal').modal('show');   
-                    // window.location.replace("{% url 'data_entry:dashboard' %}");
+                    // window.location.replace("{% url 'data_entry:form' %}");
                 });
                
                 request.fail(function(jqXHR, textStatus, errorThrown) {

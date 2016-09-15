@@ -7,7 +7,7 @@ from .choices import *
 from .forms import PatientForm
 
 @login_required
-def dashboard(request):
+def form(request):
     context = {
         'choices': {
             'HB_UM_CHOICES': HB_UM_CHOICES, 
@@ -37,7 +37,7 @@ def dashboard(request):
         }
     }
 
-    return render(request, 'data_entry/dashboard.html', context)
+    return render(request, 'data_entry/form.html', context)
 
 
 @login_required
@@ -46,9 +46,12 @@ def reports(request):
 
 
 @login_required
-def patients(request):
+def patient_index(request):
     if request.method == 'GET':
-        return JsonResponse({'patients': [1,2,3]})
+        if request.is_ajax():
+            return JsonResponse({})
+        else:
+            return render(request, 'data_entry/patients/index.html')
     elif request.method == 'POST':
         form = PatientForm(request.POST)
         if form.is_valid():

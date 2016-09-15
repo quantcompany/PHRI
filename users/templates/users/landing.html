@@ -186,7 +186,7 @@
                     });
 
                     request.done(function(data, textStatus, jqXHR) {
-                      window.location.replace("{% url 'data_entry:dashboard' %}");
+                      window.location.replace("{% url 'data_entry:form' %}");
                     });
                      
                     request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -214,7 +214,7 @@
                     });
 
                     request.done(function(data, textStatus, jqXHR) {
-                        window.location.replace("{% url 'data_entry:dashboard' %}");
+                        window.location.replace("{% url 'data_entry:form' %}");
                     });
                      
                     request.fail(function(jqXHR, textStatus, errorThrown) {

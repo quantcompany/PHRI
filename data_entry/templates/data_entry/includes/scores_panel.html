@@ -5,78 +5,30 @@
 {% block fa_icon %}fa fa-calculator{% endblock %}
 
 {% block panel_body %}
-    <div class="panel-body">
-        <div class="row" style="">
-            <div class="note note-info col-xs-12" style="">
-                <h3>CHADS<sub>2</sub></h3>
-            </div>
+
+    <div class="row">
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div id="chads2-score-gauge" class="center-block" style="width:200px;height:120px;"></div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-12">
-                <table style="width:100%">
-                    <tbody>
-                        <tr>
-                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:100px">
-                                <div id="chads2-score-gauge" style="width: 300px; height: 200px; float: left"></div>
-                            </td>
-
-                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:60px">
-                                <div id="chads2-percentage-gauge" style="width: 300px; height: 200px; float: left"></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div id="chads2-percentage-gauge" class="center-block" style="width:200px;height:120px;"></div>
         </div>
 
-        <div class="row" style="">
-            <div class="note note-info col-xs-12" style="">
-                <h3>CHA<sub>2</sub>-DS<sub>2</sub>-VASc</h3>
-            </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div id="cha2-score-gauge" class="center-block" style="width:200px;height:120px;"></div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-12" style="">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:100px">
-                                <div id="cha2-score-gauge" style="width: 300px; height: 200px; float: left"></div>
-                            </td>
-
-                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:60px">
-                                <div id="cha2-percentage-gauge" style="width: 300px; height: 200px; float: left"></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div id="cha2-percentage-gauge" class="center-block" style="width:200px;height:120px;"></div>
         </div>
 
-        <div class="row" style="">
-            <div class="note note-info col-xs-12" style="">
-                <h3>HAS-BLED</h3>
-            </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div id="hasbled-score-gauge" class="center-block" style="width:200px;height:120px;"></div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-12" style="">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:100px">
-                                <div id="hasbled-score-gauge" style="width: 300px; height: 200px; float: left"></div>
-                            </td>
-
-                            <td class="f-w-700 text-center" style="padding:0px 20px 0px 20px;font-size:60px">
-                                <div id="hasbled-percentage-gauge" style="width: 300px; height: 200px; float: left"></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <div id="hasbled-percentage-gauge" class="center-block" style="width:200px;height:120px;"></div>
         </div>
-
     </div>
 {% endblock %}

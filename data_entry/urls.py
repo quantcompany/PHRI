@@ -19,15 +19,15 @@ from . import views
 
 
 patients = [
-   url(r'^$', views.patients, name='patients'),
-   url(r'^(?P<patient_id>\d+)/$', views.patient_details, name='patient_details'),
+   url(r'^$', views.patient_index, name='index'),
+   url(r'^(?P<patient_id>\d+)/$', views.patient_details, name='details'),
 ]
-# reverse('data_entry:patients:patients') # should output
-# reverse('data_entry:patients:patient_details') # should output
+# reverse('data_entry:patients:index')
+# reverse('data_entry:patients:detail')
 
 
 urlpatterns = [
-    url(r'^dashboard$', views.dashboard, name='dashboard'),
+    url(r'^form$', views.form, name='form'),
     url(r'^reports$', views.reports, name='reports'),
     url(r'^patients/', include(patients, namespace='patients'))
 ]
