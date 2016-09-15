@@ -79,6 +79,9 @@ class Patient(models.Model):
     def age(self):
         return int((timezone.now().date() - self.date_of_birth).days / 365.0)
 
+    def vessels_pci_display(self):
+        return ', '.join(self.vessels_pci.all().values_list('value', flat=True))
+
     def chads2_score(self):
         # boolean values are converted to ints (1s or 0s)
         chf_value = int(self.chf)

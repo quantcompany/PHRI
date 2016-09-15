@@ -4,20 +4,301 @@
 <head>
     <title>Patient</title>
     <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
-    
+    <style>
+        hr {
+            margin-top:2px;
+            margin-bottom: 2px;
+        }
+
+        footer {
+            page-break-after: always;
+        }
+
+        table td, th{
+            padding:0px !important;
+            border-top: none !important;
+        }
+    </style>
 </head>
 <body style="padding-left:20px;padding-right:20px">
-    <h1 class="text-center" style="font-weight:700;">TRIPPLE THERAPY REPORT</h1>
+    <h2 class="text-center" style="font-weight:700;">TRIPPLE THERAPY REPORT</h2>
 
-    <h2>Personal Information</h2>
-    <hr/>
-    <table class="table borderless" style="border:none;">
+    <h3>Personal Information</h3>
+    <hr />
+    <table class="table" style="width:100%;border:none;">
+        <thead>
+            <tr>
+                <td style="width:32%"></td>
+                <td style="width:12%"></td>
+                <td style="width:12%"></td>
+                <td style="width:32%"></td>
+                <td style="width:12%"></td>
+            </tr>
+        </thead>
+
         <tbody>
             <tr>
                 <th>Identification Number</th>
-                <td class="text-left">010-919-848</td>
+                <td>{{ patient.identification }}</td>
+                <td></td>
                 <th>Name</th>
-                <td class="text-left">Armando Alvarado Jose</td>
+                <td>{{ patient.full_name }}</td>
+            </tr>
+
+            <tr>
+                <th>Gender</th>
+                <td>{{ patient.get_gender_display }}</td>
+                <td></td>
+                <th>Date Of Birth</th>
+                <td>{{ patient.date_of_birth|date:"m/d/Y" }}</td>
+            </tr>
+
+            <tr>
+                <th>Age</th>
+                <td>{{ patient.age }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Procedure Details</h3>
+    <hr/>
+    <table class="table" style="width:100%;border:none;">
+        <thead>
+            <tr>
+                <td style="width:32%"></td>
+                <td style="width:12%"></td>
+                <td style="width:12%"></td>
+                <td style="width:32%"></td>
+                <td style="width:12%"></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>Date</th>
+                <td>{{ patient.date_of_procedure|date:"m/d/Y" }}</td>
+                <td></td>
+                <th>Indication</th>
+                <td>{{ patient.indication }}</td>
+            </tr>
+
+            <tr>
+                <th>Vessels PCI</th>
+                <td>{{ patient.vessels_pci_display }}</td>
+                <td></td>
+                <th>Stent</th>
+                <td>{{ patient.get_stent_display }}</td>
+            </tr>
+
+            <tr>
+                <th>Balloons</th>
+                <td>{{ patient.balloons }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Atrial Fibrilation</h3>
+    <hr/>
+    <table class="table" style="width:100%;border:none;">
+        <thead>
+            <tr>
+                <td style="width:32%"></td>
+                <td style="width:12%"></td>
+                <td style="width:12%"></td>
+                <td style="width:32%"></td>
+                <td style="width:12%"></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>Indication</th>
+                <td>{{ patient.get_indication_display }}</td>
+                <td></td>
+                <th>Previous Anti-Coagulation</th>
+                <td>{{ patient.get_prev_anti_coagulation_display }}</td>
+            </tr>
+
+            <tr>
+                <th>Warfarin Intolerance</th>
+                <td>{{ patient.warfarin_intolerance|yesno|capfirst }}</td>
+                <td></td>
+                <th>INR Instability</th>
+                <td>{{ patient.inr_instability|yesno|capfirst }}</td>
+            </tr>
+
+            <tr>
+                <th>NOAC Allergy Or Intollerance</th>
+                <td>{{ patient.noac_allergy_or_intolerance|yesno|capfirst }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Blood Work</h3>
+    <hr/>
+    <table class="table" style="width:100%;border:none;">
+        <thead>
+            <tr>
+                <td style="width:11%"></td>
+                <td style="width:15%"></td>
+                
+                <td style="width:11%"></td>
+                
+                <td style="width:11%"></td>
+                <td style="width:15%"></td>
+                
+                <td style="width:11%"></td>
+
+                <td style="width:11%"></td>
+                <td style="width:15%"></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>HB</th>
+                <td>{{ patient.hb }} {{ patient.get_hb_um_display }}</td>
+
+                <td></td>
+
+                <th>PLTS</th>
+                <td>{{ patient.plts }} {{ patient.get_plts_um_display }}</td>
+
+                <td></td>
+
+                <th>CREAT</th>
+                <td>{{ patient.creat }} {{ patient.get_creat_um_display }}</td>
+            </tr>
+
+            <tr>
+                <th>EGFR</th>
+                <td>{{ patient.egfr }} {{ patient.get_egfr_um_display }}</td>
+
+                <td></td>
+
+                <th>AST</th>
+                <td>{{ patient.ast }} {{ patient.get_ast_um_display }}</td>
+
+                <td></td>
+                
+                <th>ALT</th>
+                <td>{{ patient.alt }} {{ patient.get_alt_um_display }}</td>
+            </tr>
+
+            <tr>
+                <th>GGT</th>
+                <td>{{ patient.ggt }} {{ patient.get_ggt_um_display }}</td>
+
+                <td></td>
+
+                <th>Bilirubin</th>
+                <td>{{ patient.bilirubin }} {{ patient.get_bilirubin_um_display }}</td>
+
+                <td></td>
+                
+                <th>Troponin</th>
+                <td>{{ patient.troponin }} {{ patient.get_troponin_um_display }}</td>
+            </tr>
+
+            <tr>
+                <th>INR</th>
+                <td>{{ patient.inr }}</td>
+
+                <td></td>
+
+                <th></th>
+                <td></td>
+
+                <td></td>
+                
+                <th></th>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Medical History</h3>
+    <hr/>
+    <table class="table" style="width:100%;border:none;">
+        <thead>
+            <tr>
+                <td style="width:30%"></td>
+                <td style="width:20%"></td>
+                <td style="width:30%"></td>
+                <td style="width:20%"></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>HTN</th>
+                <td>{{ patient.get_htn_display }}</td>
+
+                <th>Vascular Disease</th>
+                <td>{{ patient.get_vascular_disease_display }}</td>
+            </tr>
+
+            <tr>
+                <th>Hx Of Bleeding</th>
+                <td>{{ patient.get_hx_of_bleeding_display }}</td>
+
+                <th>Alcohol Abuse</th>
+                <td>{{ patient.get_alcohol_abuse_display }}</td>
+            </tr>
+
+            <tr>
+                <th>Hx Of Malignancy</th>
+                <td>{{ patient.get_hx_of_malignancy_display }}</td>
+                
+                <th>Upcoming Non-Cardiatic Surgery</th>
+                <td>{{ patient.get_upcoming_non_cardiatic_surgery_display }}</td>
+            </tr>
+
+            <tr>
+                <th>CHF</th>
+                <td>{{ patient.chf|yesno|capfirst }}</td>
+
+                <th>Diabetes Mellitus</th>
+                <td>{{ patient.diabetes_mellitus|yesno|capfirst }}</td>
+
+            </tr>
+
+            <tr>
+                <th>Stroke</th>
+                <td>{{ patient.stroke|yesno|capfirst }}</td>
+                
+                <th>TIA</th>
+                <td>{{ patient.tia|yesno|capfirst }}</td>
+            </tr>
+
+            <tr>
+                <th>Renal Dysfunction</th>
+                <td>{{ patient.renal_dysfunction|yesno|capfirst }}</td>
+                
+                <th>Drug Abuse</th>
+                <td>{{ patient.drug_abuse|yesno|capfirst }}</td>
+            </tr>
+
+            <tr>
+                <th>Chronic NSAIDS RX</th>
+                <td>{{ patient.chronic_nsaids_rx|yesno|capfirst }}</td>
+
+                <th>Excessive Fall Risk</th>
+                <td>{{ patient.excessive_fall_risk|yesno|capfirst }}</td>
+            </tr>
+
+            <tr>
+                <th>ASA Allergy</th>
+                <td>{{ patient.asa_allergy|yesno|capfirst }}</td>
             </tr>
         </tbody>
     </table>

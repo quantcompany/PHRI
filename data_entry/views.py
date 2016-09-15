@@ -55,8 +55,8 @@ def patient_index(request):
     elif request.method == 'POST':
         form = PatientForm(request.POST)
         if form.is_valid():
-            form.save()
-            return JsonResponse({'status': 'saved'})
+            new_patient = form.save()
+            return JsonResponse({'print_link': '/patients/{0}/print'.format(new_patient.id)})
         else:
             return JsonResponse(form.errors, status=400)
 
