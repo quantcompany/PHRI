@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+from . import risks
 from .choices import *
 
 
@@ -67,6 +68,7 @@ class Patient(models.Model):
     # Recommendation
     followed_recommendation = models.BooleanField(default=True)
     reason_not_followed = models.TextField(blank=True)
+    user = models.ForeignKey('users.User', related_name='patients')
 
     def full_name(self):
         parts1 = [self.first_name, self.middle_name, self.last_name]
@@ -94,7 +96,10 @@ class Patient(models.Model):
         stroke_tia_value = 2*(int(self.stroke) or int(self.tia))
         return chf_value + htn_value + age_value + diabetes_value + stroke_tia_value
 
-    def cha2ds2_vas_score(self):
+    def chads2_risk(self):
+        return risks.chads2[self.chads2_score()]
+
+    def cha2_score(self):
         chf_value = int(self.chf)
         # htn is an integer field with 3 possible choices (0, 1 and 2)
         # 1 or 2 gets converted to 1; 0 gets converted to False, and then to 0
@@ -107,6 +112,9 @@ class Patient(models.Model):
         female_value = int(self.gender == 'F')
         return chf_value + htn_value + age_in_6574_value + age_greater_than_75_value + \
                diabetes_value + stroke_tia_value + vascular_disease_value + female_value
+
+    def cha2_risk(self):
+        return risks.cha2[self.cha2_score()]
 
     def hasbled_score(self):
         # htn is an integer field with 3 possible choices (0, 1 and 2)
@@ -124,14 +132,69 @@ class Patient(models.Model):
         return htn_value + renal_dysfunction_value + liver_dysfunction_value + stroke_value + \
                bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value
 
-    def OAC(self):
-        if not self.warfarin_intolerance:
-            return 'Continue Warfarin'
-        else:
-            return 'Reduced dose NOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd'
+    def hasbled_risk(self):
+        return risks.hasbled[self.hasbled_score()]
 
     def recommended_therapy(self):
-        pass
+        chads2 = self.chads2_score()
+        cha2 = self.cha2_score()
+        hasbled = self.hasbled_score()
+        
+        therapy = ''
+
+        if chads2 <= 2:
+            if hasbled <= 3:
+                if self.stent == 0: # No Stent
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 1: # BMS
+                    therapy = 'OAC + one AP.'
+                if self.stent == 2: # BVS
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 3: # DEB
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 4: # DES
+                    therapy = 'OAC + one AP.'
+            else:
+                if self.stent == 0: # No Stent
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 1: # BMS
+                    therapy = 'OAC + one AP.'
+                if self.stent == 2: # BVS
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 3: # DEB
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 4: # DES
+                    therapy = 'OAC + one AP.'
+        else:
+            if hasbled <= 3:
+                if self.stent == 0: # No Stent
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 1: # BMS
+                    therapy = 'Triple Rx for 1 mo, then OAC + one AP.'
+                if self.stent == 2: # BVS
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 3: # DEB
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 4: # DES
+                    therapy = 'Triple Rx for 6 mo, then OAC + one AP.'
+            else:
+                if self.stent == 0: # No Stent
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 1: # BMS
+                    therapy = 'Triple Rx for 1 mo, then OAC + one AP.'
+                if self.stent == 2: # BVS
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 3: # DEB
+                    therapy = 'Therapy has not yet been fully defined.'
+                if self.stent == 4: # DES
+                    therapy = 'Triple Rx for 3-6 mo, then OAC + one AP.'
+
+        if not self.warfarin_intolerance:
+            therapy += ' Continue Warfarin.'
+        else:
+            therapy += ' Reduced dose NOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd.'
+
+        return therapy
 
 class VesselsPCI(models.Model):
     value = models.CharField(max_length=60, unique=True)

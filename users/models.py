@@ -26,6 +26,8 @@ class User(AbstractEmailUser):
             else:
                 self.user_name = self.email.split('@')[0]
 
+        return self.user_name
+
     def get_short_name(self):
         return self.user_name
 

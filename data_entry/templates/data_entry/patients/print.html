@@ -10,23 +10,33 @@
             margin-bottom: 2px;
         }
 
-        footer {
-            page-break-after: always;
+        table th{
+            white-space: nowrap;
         }
 
         table td, th{
             padding:0px !important;
             border-top: none !important;
         }
+
+        @media print{
+            body {
+                padding: 5px 10px!important;
+            }
+
+            blockquote {
+                border: none;
+            }
+        }
     </style>
 </head>
-<body style="padding-left:20px;padding-right:20px">
-    <h2 class="text-center" style="font-weight:700;">TRIPPLE THERAPY REPORT</h2>
+<body style="padding:20px 300px;">
+    <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Patient Data</h2>
 
     <h3>Personal Information</h3>
     <hr />
     <table class="table" style="width:100%;border:none;">
-        <thead>
+        <thead
             <tr>
                 <td style="width:32%"></td>
                 <td style="width:12%"></td>
@@ -180,11 +190,6 @@
             </tr>
 
             <tr>
-                <th>EGFR</th>
-                <td>{{ patient.egfr }} {{ patient.get_egfr_um_display }}</td>
-
-                <td></td>
-
                 <th>AST</th>
                 <td>{{ patient.ast }} {{ patient.get_ast_um_display }}</td>
 
@@ -192,14 +197,14 @@
                 
                 <th>ALT</th>
                 <td>{{ patient.alt }} {{ patient.get_alt_um_display }}</td>
+                
+                <td></td>
+
+                <th>GGT</th>
+                <td>{{ patient.ggt }} {{ patient.get_ggt_um_display }}</td>
             </tr>
 
             <tr>
-                <th>GGT</th>
-                <td>{{ patient.ggt }} {{ patient.get_ggt_um_display }}</td>
-
-                <td></td>
-
                 <th>Bilirubin</th>
                 <td>{{ patient.bilirubin }} {{ patient.get_bilirubin_um_display }}</td>
 
@@ -207,21 +212,16 @@
                 
                 <th>Troponin</th>
                 <td>{{ patient.troponin }} {{ patient.get_troponin_um_display }}</td>
+                
+                <td></td>
+
+                <th>INR</th>
+                <td>{{ patient.inr }}</td>
             </tr>
 
             <tr>
-                <th>INR</th>
-                <td>{{ patient.inr }}</td>
-
-                <td></td>
-
-                <th></th>
-                <td></td>
-
-                <td></td>
-                
-                <th></th>
-                <td></td>
+                <th>EGFR</th>
+                <td colspan="7">{{ patient.egfr }} {{ patient.get_egfr_um_display }}</td>
             </tr>
         </tbody>
     </table>
@@ -231,10 +231,11 @@
     <table class="table" style="width:100%;border:none;">
         <thead>
             <tr>
-                <td style="width:30%"></td>
-                <td style="width:20%"></td>
-                <td style="width:30%"></td>
-                <td style="width:20%"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
         </thead>
 
@@ -242,6 +243,8 @@
             <tr>
                 <th>HTN</th>
                 <td>{{ patient.get_htn_display }}</td>
+                
+                <td></td>
 
                 <th>Vascular Disease</th>
                 <td>{{ patient.get_vascular_disease_display }}</td>
@@ -250,6 +253,8 @@
             <tr>
                 <th>Hx Of Bleeding</th>
                 <td>{{ patient.get_hx_of_bleeding_display }}</td>
+                
+                <td></td>
 
                 <th>Alcohol Abuse</th>
                 <td>{{ patient.get_alcohol_abuse_display }}</td>
@@ -259,6 +264,8 @@
                 <th>Hx Of Malignancy</th>
                 <td>{{ patient.get_hx_of_malignancy_display }}</td>
                 
+                <td></td>
+
                 <th>Upcoming Non-Cardiatic Surgery</th>
                 <td>{{ patient.get_upcoming_non_cardiatic_surgery_display }}</td>
             </tr>
@@ -266,6 +273,8 @@
             <tr>
                 <th>CHF</th>
                 <td>{{ patient.chf|yesno|capfirst }}</td>
+                
+                <td></td>
 
                 <th>Diabetes Mellitus</th>
                 <td>{{ patient.diabetes_mellitus|yesno|capfirst }}</td>
@@ -276,6 +285,8 @@
                 <th>Stroke</th>
                 <td>{{ patient.stroke|yesno|capfirst }}</td>
                 
+                <td></td>
+
                 <th>TIA</th>
                 <td>{{ patient.tia|yesno|capfirst }}</td>
             </tr>
@@ -284,6 +295,8 @@
                 <th>Renal Dysfunction</th>
                 <td>{{ patient.renal_dysfunction|yesno|capfirst }}</td>
                 
+                <td></td>
+
                 <th>Drug Abuse</th>
                 <td>{{ patient.drug_abuse|yesno|capfirst }}</td>
             </tr>
@@ -291,6 +304,8 @@
             <tr>
                 <th>Chronic NSAIDS RX</th>
                 <td>{{ patient.chronic_nsaids_rx|yesno|capfirst }}</td>
+                
+                <td></td>
 
                 <th>Excessive Fall Risk</th>
                 <td>{{ patient.excessive_fall_risk|yesno|capfirst }}</td>
@@ -302,5 +317,102 @@
             </tr>
         </tbody>
     </table>
+
+    <!-- *************************** PAGE BREAK ****************************** -->
+    <div style="page-break-after: always;"></div>
+
+    <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Results</h2>
+
+    <h3>Scores and Risks</h3>
+    <hr />
+
+    <h4>CHADS<sub>2</sub></h4>
+    <table class="table" style="width:100%;border:none;">
+        <thead>
+            <tr>
+                <td style="width:20%;">
+                <td style="width:80%;">
+            </td>
+        </tr>
+        <tbody>
+            <tr>
+                <th>Score</th>
+                <td class="text-left">{{ patient.chads2_score }}</td>
+            </tr>
+
+            <tr>
+                <th>Associated Risk:</th>
+                <td class="text-left">{{ patient.chads2_risk.percentage }}% <small> ({{ patient.chads2_risk.ci }} C.I.)</small></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br/>
+
+    <h4>CHA<sub>2</sub>DS<sub>2</sub>-VASc</h4>
+    <table class="table" style="width:100%;border:none;">
+        <thead>
+            <tr>
+                <td style="width:20%;">
+                <td style="width:80%;">
+            </td>
+        </tr>
+        <tbody>
+            <tr>
+                <th>Score</th>
+                <td class="text-left">{{ patient.cha2_score }}</td>
+            </tr>
+
+            <tr>
+                <th>Associated Risk:</th>
+                <td class="text-left">{{ patient.cha2_risk.percentage }}%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br/>
+
+    <h4>HAS-BLED</h4>
+    <table class="table" style="width:100%;border:none;">
+        <thead>
+            <tr>
+                <td style="width:20%;">
+                <td style="width:80%;">
+            </td>
+        </tr>
+        <tbody>
+            <tr>
+                <th>Score</th>
+                <td class="text-left">{{ patient.hasbled_score }}</td>
+            </tr>
+
+            <tr>
+                <th>Associated Risk:</th>
+                <td class="text-left">{{ patient.hasbled_risk.percentage }}%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br/>
+
+    <h3>Recommended Therapy</h3>
+    <hr />
+    <p style="font-size:18px;">{{ patient.recommended_therapy }}<p>
+
+    {% if patient.followed_recommendation %}
+        <p style="font-size:14px;">The therapy recommendation is being followed.<p>
+    {% else %}
+        <p style="font-size:14px;">The therapy recommendation is <strong>not</strong> being followed.<p>
+
+        <blockquote>
+            <p><i>"{{ patient.reason_not_followed }}"</i></p>
+            <footer>{{ patient.user.guess_user_name }}</footer>
+        </blockquote>
+    {% endif %}
+
+
+    <p class="f-w-700">Report generated on {% now "m/d/Y" %} by {{ user.guess_user_name }}</p>
+
+    <center style="font-weight:bolder">www.tripletherapy.net</center>
 </body>
 </html>

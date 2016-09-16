@@ -27,9 +27,9 @@ function getWarfarinIntolerance(){
 
 function OAC(){
     if (getWarfarinIntolerance() == 0){
-        return 'continue Warfarin';
+        return 'Continue Warfarin';
     }else {
-        return '*Reduced dose NOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd';
+        return 'Reduced dose NOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd';
     }
 }
 
@@ -42,16 +42,16 @@ function updateRecommendedTherapy(){
         if (scores.hasbled <= 3){
             switch(getStent()){
                 case 0: // No Stent
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 1: // BMS
                     text.push('OAC + one AP');
                     break;                    
                 case 2: // BVS
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 3: // DEB
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 4: // DES
                     text.push('OAC + one AP');
@@ -60,16 +60,16 @@ function updateRecommendedTherapy(){
         }else{
             switch(getStent()){
                 case 0: // No Stent
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 1: // BMS
                     text.push('OAC + one AP');
                     break;    
                 case 2: // BVS
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 3: // DEB
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 4: // DES
                     text.push('OAC + one AP');
@@ -80,16 +80,16 @@ function updateRecommendedTherapy(){
         if (scores.hasbled <= 3){
             switch(getStent()){
                 case 0: // No Stent
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 1: // BMS
                     text.push('Triple Rx for 1 mo, then OAC + one AP');
                     break;
                 case 2: // BVS
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 3: // DEB
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 4: // DES
                     text.push('Triple Rx for 6 mo, then OAC + one AP');
@@ -98,16 +98,16 @@ function updateRecommendedTherapy(){
         }else{
             switch(getStent()){
                 case 0: // No Stent
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 1: // BMS
                     text.push('Triple Rx for 1 mo, then OAC + one AP');
                     break;
                 case 2: // BVS
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 3: // DEB
-                    text.push('Undefined');
+                    text.push('Therapy has not yet been fully defined');
                     break;
                 case 4: // DES
                     text.push('Triple Rx for 3-6 mo, then OAC + one AP');

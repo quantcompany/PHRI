@@ -68,11 +68,9 @@ $('#chads2-score-gauge').highcharts(Highcharts.merge(gaugeOptions, {
             [1, '#FF4D4D']
         ]
     },
-
     credits: {
         enabled: false
     },
-
     series: [{
         name: 'Score',
         data: [scores.chads2],
@@ -98,6 +96,9 @@ $('#chads2-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
             [0.5, '#ff9999'], // red
             [1, '#FF4D4D']
         ]
+    },
+    credits: {
+        enabled: false
     },
     series: [{
         name: 'Percentage',
@@ -127,11 +128,9 @@ $('#cha2-score-gauge').highcharts(Highcharts.merge(gaugeOptions, {
             [1, '#FF4D4D'] // red
         ]
     },
-
     credits: {
         enabled: false
     },
-
     series: [{
         name: 'Score',
         data: [scores.cha2],
@@ -156,6 +155,9 @@ $('#cha2-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
             [0.5, '#DDDF0D'], // yellow
             [1, '#FF4D4D'] // red
         ]
+    },
+    credits: {
+        enabled: false
     },
     series: [{
         name: 'Percentage',
@@ -213,6 +215,9 @@ $('#hasbled-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
             [0.5, '#DDDF0D'], // yellow
             [1, '#FF4D4D'] // red
         ]
+    },
+    credits: {
+        enabled: false
     },
     series: [{
         name: 'Percentage',
