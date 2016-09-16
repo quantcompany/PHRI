@@ -176,52 +176,52 @@
         <tbody>
             <tr>
                 <th>HB</th>
-                <td>{{ patient.hb }} {{ patient.get_hb_um_display }}</td>
+                <td>{{ patient.hb|default:"N/A" }} {{ patient.get_hb_um_display }}</td>
 
                 <td></td>
 
                 <th>PLTS</th>
-                <td>{{ patient.plts }} {{ patient.get_plts_um_display }}</td>
+                <td>{{ patient.plts|default:"N/A" }} {{ patient.get_plts_um_display }}</td>
 
                 <td></td>
 
                 <th>CREAT</th>
-                <td>{{ patient.creat }} {{ patient.get_creat_um_display }}</td>
+                <td>{{ patient.creat|default:"N/A" }} {{ patient.get_creat_um_display }}</td>
             </tr>
 
             <tr>
                 <th>AST</th>
-                <td>{{ patient.ast }} {{ patient.get_ast_um_display }}</td>
+                <td>{{ patient.ast|default:"N/A" }} {{ patient.get_ast_um_display }}</td>
 
                 <td></td>
                 
                 <th>ALT</th>
-                <td>{{ patient.alt }} {{ patient.get_alt_um_display }}</td>
+                <td>{{ patient.alt|default:"N/A" }} {{ patient.get_alt_um_display }}</td>
                 
                 <td></td>
 
                 <th>GGT</th>
-                <td>{{ patient.ggt }} {{ patient.get_ggt_um_display }}</td>
+                <td>{{ patient.ggt|default:"N/A" }} {{ patient.get_ggt_um_display }}</td>
             </tr>
 
             <tr>
                 <th>Bilirubin</th>
-                <td>{{ patient.bilirubin }} {{ patient.get_bilirubin_um_display }}</td>
+                <td>{{ patient.bilirubin|default:"N/A" }} {{ patient.get_bilirubin_um_display }}</td>
 
                 <td></td>
                 
                 <th>Troponin</th>
-                <td>{{ patient.troponin }} {{ patient.get_troponin_um_display }}</td>
+                <td>{{ patient.troponin|default:"N/A" }} {{ patient.get_troponin_um_display }}</td>
                 
                 <td></td>
 
                 <th>INR</th>
-                <td>{{ patient.inr }}</td>
+                <td>{{ patient.inr|default:"N/A" }}</td>
             </tr>
 
             <tr>
                 <th>EGFR</th>
-                <td colspan="7">{{ patient.egfr }} {{ patient.get_egfr_um_display }}</td>
+                <td colspan="7">{{ patient.egfr|default:"N/A" }} {{ patient.get_egfr_um_display }}</td>
             </tr>
         </tbody>
     </table>
@@ -318,6 +318,7 @@
         </tbody>
     </table>
 
+    <center style="font-weight:bolder">www.tripletherapy.net</center>
     <!-- *************************** PAGE BREAK ****************************** -->
     <div style="page-break-after: always;"></div>
 
@@ -342,7 +343,7 @@
 
             <tr>
                 <th>Associated Risk:</th>
-                <td class="text-left">{{ patient.chads2_risk.percentage }}% <small> ({{ patient.chads2_risk.ci }} C.I.)</small></td>
+                <td class="text-left">{{ patient.chads2_risk.percentage }}% <small> ({{ patient.chads2_risk.ci }}) 95% C.I.</small></td>
             </tr>
         </tbody>
     </table>
@@ -406,12 +407,12 @@
 
         <blockquote>
             <p><i>"{{ patient.reason_not_followed }}"</i></p>
-            <footer>{{ patient.user.guess_user_name }}</footer>
+            <footer>{{ patient.user.guess_user_name }} ({{ user.email }})</footer>
         </blockquote>
     {% endif %}
 
 
-    <p class="f-w-700">Report generated on {% now "m/d/Y" %} by {{ user.guess_user_name }}</p>
+    <p class="f-w-700">Report generated on {% now "m/d/Y" %} by {{ user.guess_user_name }} ({{ user.email }})</p>
 
     <center style="font-weight:bolder">www.tripletherapy.net</center>
 </body>
