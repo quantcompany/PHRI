@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'phri',
         'USER': 'phri_user',
         'PASSWORD': 'DB_phri_16092016',
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
