@@ -130,15 +130,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+# Static files
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
+
 
 # Costum User
 AUTH_USER_MODEL = 'users.User'
 
-# Static files
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
 
 # Where to redirect when an anonymous user tries to access a login_required page
 # We redirect to the root url because our landing page is also our login page
