@@ -1,0 +1,14 @@
+{% extends 'data_entry/panel_base.html' %}
+{% load staticfiles %}
+
+{% block panel_heading %}Plot{% endblock %}
+
+{% block fa_icon %}fa fa-area-chart{% endblock %}
+
+{% block panel_body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="chads2_hasbled_plot_container" style="min-width: 310px; height: 400px; max-width: 800px; margin: 0 auto"></div>
+        </div>
+    </div>
+{% endblock %}

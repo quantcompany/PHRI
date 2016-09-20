@@ -5732,11 +5732,11 @@ body.flat-black {
     -moz-transition: opacity 1s;
     -o-transition: opacity 1s;
     transition: opacity 1s;
-    z-index: 1020;
+    z-index: 10;
 }
 .pace-progress {
     position: fixed;
-    top: 54px;
+    top: 40px;
     left: 0;
     right: 0;
     text-align: center;
@@ -5761,7 +5761,7 @@ body.flat-black {
     display: block;
     position: fixed;
     z-index: 2000;
-    top: 65px;
+    top: 45px;
     right: 8px;
     width: 14px;
     height: 14px;
@@ -6510,7 +6510,7 @@ body .bootstrap-datetimepicker-widget table td {
 /* 15.2 Top Menu Element */
 
 .page-with-top-menu {
-    padding-top: 94px;
+    padding-top: 40px;
 }
 .page-with-top-menu .sidebar {
     padding-top: 94px;
@@ -6519,7 +6519,7 @@ body .bootstrap-datetimepicker-widget table td {
     background: #2d353c;
     height: 40px;
     position: fixed;
-    top: 54px;
+    top: 0px;
     left: 0;
     right: 0;
     z-index: 1015;
@@ -6765,4 +6765,9 @@ body .bootstrap-datetimepicker-widget table td {
 
 .error {
     color:red;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
 }

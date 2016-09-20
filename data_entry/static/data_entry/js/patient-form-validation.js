@@ -37,12 +37,12 @@ $(function() {
       identification: "required",
       date_of_birth: {
         required: true,
-        date: true
+        dateITA: true
       },
       gender: "required",
       date_of_procedure: {
         required: true,
-        date: true
+        dateITA: true
       },
       indication: "required",
       vessels_pci: "required",

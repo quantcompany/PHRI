@@ -58,10 +58,16 @@
 
         <div class="row">
             <div class="col-md-6">
-                {% include 'data_entry/includes/plot_panel.html' %}
+                {% include 'data_entry/includes/chads2_hasbled_plot_panel.html' %}
             </div>
 
             <div class="col-md-6">
+                {% include 'data_entry/includes/cha2ds2vasc_hasbled_plot_panel.html' %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
                 {% include 'data_entry/includes/recommendation_panel.html' %}
             </div>
         </div>
@@ -122,17 +128,18 @@
     <script src="{% static 'plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"></script>
     <script src="{% static 'plugins/gritter/js/jquery.gritter.min.js' %}"></script>
     <script src="{% static 'plugins/jquery-validation/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/js/additional-methods.min.js' %}"></script>
     <script src="{% static 'data_entry/js/scores.js' %}"></script>
     <script src="{% static 'data_entry/js/risks.js' %}"></script>
     <script src="{% static 'data_entry/js/therapy.js' %}"></script>
     <script src="{% static 'data_entry/js/patient-form-validation.js' %}"></script>
-    <script src="{% static 'data_entry/js/plot.js' %}"></script>
+    <script src="{% static 'data_entry/js/plots.js' %}"></script>
     <script src="{% static 'data_entry/js/gauges.js' %}"></script>
 
     <script>
         $("#identification").mask("999-999-999");
         
-        $("#date_of_birth").on('change', function(){
+        $("#date_of_birth").on('keyup', function(){
             var dob = Date.parse($(this).val());
             if (isNaN(dob)){
                 $('#calculated_age').html('');
@@ -143,6 +150,7 @@
         }).mask("99/99/9999");
 
         $('#date_of_procedure').datepicker({
+            format: 'dd/mm/yyyy',
             todayHighlight: true,
             autoclose: true,
             startView: 1,

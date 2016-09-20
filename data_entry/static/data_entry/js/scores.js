@@ -37,7 +37,7 @@ function updateEverything(){
     updateCha2Gauges();
     updateHasbledGauges();
 
-    updateChart(); // this one is in plot.js
+    updatePlots(); // this one is in plot.js
     
     updateRecommendedTherapy(); // this is in therapy.js
 }

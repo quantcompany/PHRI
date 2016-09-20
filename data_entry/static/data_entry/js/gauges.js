@@ -62,10 +62,10 @@ $('#chads2-score-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         tickInterval: 1,
         minorTickInterval: null,
         stops: [
-            [0.2, '#55BF3B'], // green
-            [0.4, '#DDDF0D'], // yellow
-            [0.5, '#ff9999'], // red
-            [1, '#FF4D4D']
+            [0, '#55BF3B'], // green
+            [0.33, '#DDDF0D'], // yellow 2/6
+            [0.5, '#FF8080'], // red 3/6
+            // [1, '#FF4D4D']
         ]
     },
     credits: {
@@ -91,10 +91,10 @@ $('#chads2-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         tickInterval: 2,
         minorTickInterval: null,
         stops: [
-            [0.2, '#55BF3B'], // green
-            [0.4, '#DDDF0D'], // yellow
-            [0.5, '#ff9999'], // red
-            [1, '#FF4D4D']
+            [0, '#55BF3B'], // green
+            [0.13, '#DDDF0D'], // yellow 
+            [0.23, '#FF8080'], // red
+            // [1, '#FF4D4D']
         ]
     },
     credits: {
@@ -182,8 +182,8 @@ $('#hasbled-score-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         minorTickInterval: null,
         stops: [
             [0, '#55BF3B'], // green
-            [0.5, '#DDDF0D'], // yellow
-            [1, '#FF4D4D'] // red
+            [0.22, '#DDDF0D'], // yellow
+            [0.44, '#FF8080'] // red
         ]
     },
 
@@ -212,8 +212,8 @@ $('#hasbled-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         minorTickInterval: null,
         stops: [
             [0, '#55BF3B'], // green
-            [0.5, '#DDDF0D'], // yellow
-            [1, '#FF4D4D'] // red
+            [0.06, '#DDDF0D'], // yellow
+            [0.35, '#FF8080'] // red
         ]
     },
     credits: {

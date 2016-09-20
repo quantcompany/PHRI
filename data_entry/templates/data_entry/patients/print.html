@@ -60,7 +60,7 @@
                 <td>{{ patient.get_gender_display }}</td>
                 <td></td>
                 <th>Date Of Birth</th>
-                <td>{{ patient.date_of_birth|date:"m/d/Y" }}</td>
+                <td>{{ patient.date_of_birth|date:"d/m/Y" }}</td>
             </tr>
 
             <tr>
@@ -89,7 +89,7 @@
         <tbody>
             <tr>
                 <th>Date</th>
-                <td>{{ patient.date_of_procedure|date:"m/d/Y" }}</td>
+                <td>{{ patient.date_of_procedure|date:"d/m/Y" }}</td>
                 <td></td>
                 <th>Indication</th>
                 <td>{{ patient.indication }}</td>
@@ -412,7 +412,7 @@
     {% endif %}
 
 
-    <p class="f-w-700">Report generated on {% now "m/d/Y" %} by {{ user.guess_user_name }} ({{ user.email }})</p>
+    <p class="f-w-700">Report generated on {% now "d/m/Y" %} by {{ user.guess_user_name }} ({{ user.email }})</p>
 
     <center style="font-weight:bolder">www.tripletherapy.net</center>
 </body>
