@@ -45,7 +45,7 @@ function updateRecommendedTherapy(){
                     text.push('Therapy has not yet been fully defined');
                     break;
                 case 1: // BMS
-                    text.push('OAC + one AP');
+                    text.push('Oral anticoagulation plus one antiplatelet');
                     break;                    
                 case 2: // BVS
                     text.push('Therapy has not yet been fully defined');
@@ -54,7 +54,7 @@ function updateRecommendedTherapy(){
                     text.push('Therapy has not yet been fully defined');
                     break;
                 case 4: // DES
-                    text.push('OAC + one AP');
+                    text.push('Oral anticoagulation plus one antiplatelet');
                     break;
             }
         }else{
@@ -63,7 +63,7 @@ function updateRecommendedTherapy(){
                     text.push('Therapy has not yet been fully defined');
                     break;
                 case 1: // BMS
-                    text.push('OAC + one AP');
+                    text.push('Oral anticoagulation plus one antiplatelet');
                     break;    
                 case 2: // BVS
                     text.push('Therapy has not yet been fully defined');
@@ -72,7 +72,7 @@ function updateRecommendedTherapy(){
                     text.push('Therapy has not yet been fully defined');
                     break;
                 case 4: // DES
-                    text.push('OAC + one AP');
+                    text.push('Oral anticoagulation plus one antiplatelet');
                     break;
             }
         }
@@ -83,7 +83,7 @@ function updateRecommendedTherapy(){
                     text.push('Therapy has not yet been fully defined');
                     break;
                 case 1: // BMS
-                    text.push('Triple Rx for 1 mo, then OAC + one AP');
+                    text.push('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet');
                     break;
                 case 2: // BVS
                     text.push('Therapy has not yet been fully defined');
@@ -92,7 +92,7 @@ function updateRecommendedTherapy(){
                     text.push('Therapy has not yet been fully defined');
                     break;
                 case 4: // DES
-                    text.push('Triple Rx for 6 mo, then OAC + one AP');
+                    text.push('Triple Rx for 6 months, then oral anticoagulation plus one antiplatelet');
                     break;
             }
         }else{
@@ -101,7 +101,7 @@ function updateRecommendedTherapy(){
                     text.push('Therapy has not yet been fully defined');
                     break;
                 case 1: // BMS
-                    text.push('Triple Rx for 1 mo, then OAC + one AP');
+                    text.push('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet');
                     break;
                 case 2: // BVS
                     text.push('Therapy has not yet been fully defined');
@@ -110,13 +110,14 @@ function updateRecommendedTherapy(){
                     text.push('Therapy has not yet been fully defined');
                     break;
                 case 4: // DES
-                    text.push('Triple Rx for 3-6 mo, then OAC + one AP');
+                    text.push('Triple Rx for 3-6 months, then oral anticoagulation plus one antiplatelet');
                     break;
             }
         }
     }
 
     text.push(OAC());
-    console.log(text);
-    $('#therapy_text').html(text.join('<br/>'));
+    
+    $('#therapy_text_1').html(text[0]);
+    $('#therapy_text_2').html(text[1]);
 }   

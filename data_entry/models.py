@@ -91,7 +91,7 @@ class Patient(models.Model):
         # for chads2, 1 or 2 get converted to True, and then to 1
         # 0 gets converted to False, and then to 0
         htn_value = int(bool(self.htn)) 
-        age_value = int(self.age() > 75)
+        age_value = int(self.age() >= 75)
         diabetes_value = int(self.diabetes_mellitus)
         stroke_tia_value = 2*(int(self.stroke) or int(self.tia))
         return chf_value + htn_value + age_value + diabetes_value + stroke_tia_value
