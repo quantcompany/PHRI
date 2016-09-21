@@ -65,7 +65,7 @@ $('#chads2-score-gauge').highcharts(Highcharts.merge(gaugeOptions, {
             [0, '#55BF3B'], // green
             [0.33, '#DDDF0D'], // yellow 2/6
             [0.5, '#FF8080'], // red 3/6
-            // [1, '#FF4D4D']
+            [1, '#FF0000']
         ]
     },
     credits: {
@@ -94,7 +94,7 @@ $('#chads2-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
             [0, '#55BF3B'], // green
             [0.13, '#DDDF0D'], // yellow 
             [0.23, '#FF8080'], // red
-            // [1, '#FF4D4D']
+            [1, '#ff0000']
         ]
     },
     credits: {
@@ -124,8 +124,9 @@ $('#cha2-score-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         minorTickInterval: null,
         stops: [
             [0, '#55BF3B'], // green
-            [0.5, '#DDDF0D'], // yellow
-            [1, '#FF4D4D'] // red
+            [0.45, '#DDDF0D'], // yellow
+            [0.55, '#FF8080'], // pink
+            [1, '#FF0000'] // red
         ]
     },
     credits: {
@@ -152,8 +153,9 @@ $('#cha2-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         minorTickInterval: null,
         stops: [
             [0, '#55BF3B'], // green
-            [0.5, '#DDDF0D'], // yellow
-            [1, '#FF4D4D'] // red
+            [0.25, '#DDDF0D'], // yellow
+            [0.45, '#FF8080'], // pink
+            [1, '#FF0000'] // red
         ]
     },
     credits: {
@@ -182,8 +184,9 @@ $('#hasbled-score-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         minorTickInterval: null,
         stops: [
             [0, '#55BF3B'], // green
-            [0.22, '#DDDF0D'], // yellow
-            [0.44, '#FF8080'] // red
+            [0.35, '#DDDF0D'], // yellow
+            [0.44, '#FF8080'], // pink
+            [1.0, '#FF0000'] // red
         ]
     },
 
@@ -212,8 +215,9 @@ $('#hasbled-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         minorTickInterval: null,
         stops: [
             [0, '#55BF3B'], // green
-            [0.06, '#DDDF0D'], // yellow
-            [0.35, '#FF8080'] // red
+            [0.22, '#DDDF0D'], // yellow
+            [0.35, '#FF8080'], // pink
+            [1, '#FF0000'] // red
         ]
     },
     credits: {
