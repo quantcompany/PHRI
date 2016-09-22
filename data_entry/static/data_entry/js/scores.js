@@ -186,6 +186,16 @@ function updateHasbledScore(){
     var alcoholAbuseChoice = parseInt($('#alcohol_abuse').val()) || 0; // in case the selection is empty
     var alcoholAbuseValue = alcoholAbuseChoice == 2 ? 1:0;
 
+    console.log('htnValue: ' + htnValue);
+    console.log('renalDysfunctionValue: ' + renalDysfunctionValue);
+    console.log('liverDysfunctionValue: ' + liverDysfunctionValue);
+    console.log('strokeValue: ' + strokeValue);
+    console.log('bleedingValue: ' + bleedingValue);
+    console.log('inrValue: ' + inrValue);
+    console.log('ageValue: ' + ageValue);
+    console.log('drugAbuseValue: ' + drugAbuseValue);
+    console.log('alcoholAbuseValue: ' + alcoholAbuseValue);
+
     scores.hasbled = htnValue + renalDysfunctionValue + liverDysfunctionValue + strokeValue +
     bleedingValue + inrValue + ageValue + drugAbuseValue + alcoholAbuseValue;
 
