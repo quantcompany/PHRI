@@ -41,8 +41,13 @@ def form(request):
 
 
 @login_required
-def reports(request):
-    return render(request, 'reports/reports.html')
+def database(request):
+    return render(request, 'reports/database.html')
+
+
+@login_required
+def references(request):
+    return render(request, 'data_entry/references.html')
 
 
 @login_required

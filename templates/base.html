@@ -26,9 +26,15 @@
                     </a>
                 </li>
                 <li class="{% block menu3 %}{% endblock %}">
-                    <a href="{% url 'data_entry:reports' %}">
+                    <a href="{% url 'data_entry:database' %}">
                         <i class="fa fa-database"></i> 
                         <span>Database</span>
+                    </a>
+                </li>
+                <li class="{% block menu4 %}{% endblock %}">
+                    <a href="{% url 'data_entry:references' %}">
+                        <i class="fa fa-book"></i> 
+                        <span>References</span>
                     </a>
                 </li>
                 <li class="has-sub pull-right">
@@ -42,12 +48,6 @@
                         <li class="divider"></li>
                         <li><a href="#">Log Out</a></li>
                     </ul>
-                </li>
-                <li class="{% block menu4 %}{% endblock %}">
-                    <a href="{% url 'data_entry:reports' %}">
-                        <i class="fa fa-book"></i> 
-                        <span>References</span>
-                    </a>
                 </li>
             </ul>
             <!-- end top-menu nav -->

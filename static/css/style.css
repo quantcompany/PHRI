@@ -6170,7 +6170,7 @@ body.flat-black {
 .login.login-with-news-feed .news-caption,
 .register.register-with-news-feed .news-caption {
     background: rgba(255,255,255,0.15);
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.9);
     color: #999;
     position: absolute;
     bottom: 0;
@@ -6770,4 +6770,20 @@ body .bootstrap-datetimepicker-widget table td {
 .vertical-align {
     display: flex;
     align-items: center;
+}
+
+.login.login-with-news-feed .news-caption-top,
+.register.register-with-news-feed .news-caption-top {
+    background: rgba(255,255,255,1);
+    /*background: rgba(0, 0, 0, 0.7);*/
+    color: #999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 40px;
+    font-size: 14px;
+    z-index: 20;
+    font-weight: 300;
+    min-width: 680px;
 }

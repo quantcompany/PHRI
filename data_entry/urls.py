@@ -31,6 +31,7 @@ patients = [
 urlpatterns = [
     url(r'^form$', views.form, name='form'),
     url(r'^form/test$', views.form_test, name='form_test'),
-    url(r'^reports$', views.reports, name='reports'),
+    url(r'^database$', views.database, name='database'),
+    url(r'^references$', views.references, name='references'),
     url(r'^patients/', include(patients, namespace='patients')),
 ]
