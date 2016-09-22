@@ -163,8 +163,8 @@ function updateHasbledScore(){
     var bleedingChoice = parseInt($('#hx_of_bleeding').val());
     var bleedingValue = bleedingChoice ? 1:0;
 
-    // calculate inr instabilitiy (liable INR)
-    var inrValue = $('#inr_instabilitiy').bootstrapSwitch('state') ? 1:0;
+    // calculate inr instability (liable INR)
+    var inrValue = $('#inr_instability').bootstrapSwitch('state') ? 1:0;
 
     // calculate ageValue
     var birth_timestamp = Date.parse($('#date_of_birth').val());
@@ -196,7 +196,7 @@ function updateHasbledScore(){
 // so that the scores, plot, and recommended therapy get updated as the
 // form is filled out
 
-$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instabilitiy, #warfarin_intolerance, #renal_dysfunction, #drug_abuse').on('switchChange.bootstrapSwitch', function(event, state){
+$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #renal_dysfunction, #drug_abuse').on('switchChange.bootstrapSwitch', function(event, state){
     updateEverything();
 });
 
