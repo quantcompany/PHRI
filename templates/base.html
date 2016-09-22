@@ -43,6 +43,12 @@
                         <li><a href="#">Log Out</a></li>
                     </ul>
                 </li>
+                <li class="{% block menu4 %}{% endblock %}">
+                    <a href="{% url 'data_entry:reports' %}">
+                        <i class="fa fa-book"></i> 
+                        <span>References</span>
+                    </a>
+                </li>
             </ul>
             <!-- end top-menu nav -->
         </div>
