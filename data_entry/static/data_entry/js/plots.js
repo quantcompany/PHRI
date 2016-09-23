@@ -4,8 +4,11 @@ var chads2_hasbled_plot = new Highcharts.Chart({
         type: 'scatter',
         zoomType: 'xy'
     },
+    credits: {
+        enabled: false
+    },
     title: {
-        text: 'CHADS2 vs. HASBLED'
+        text: 'CHADS2 vs. HAS-BLED'
     },
     tooltip: {
         enabled: false
@@ -16,7 +19,7 @@ var chads2_hasbled_plot = new Highcharts.Chart({
     xAxis: {
         title: {
             enabled: true,
-            text: 'HAS-BLED',
+            text: 'HAS-BLED Score',
             style: {
                 fontWeight: 'normal',
                 fontSize: 25,
@@ -53,7 +56,7 @@ var chads2_hasbled_plot = new Highcharts.Chart({
     },
     yAxis: {
         title: {
-            text: 'CHADS2',
+            text: 'CHADS2 Score',
             style: {
                 fontWeight: 'normal',
                 fontSize: 25,
@@ -120,8 +123,11 @@ var cha2ds2vasc_hasbled_plot = new Highcharts.Chart({
         type: 'scatter',
         zoomType: 'xy'
     },
+    credits: {
+        enabled: false
+    },
     title: {
-        text: 'CHA2DS2-VASc vs. HASBLED'
+        text: 'CHA2DS2-VASc vs. HAS-BLED'
     },
     tooltip: {
         enabled: false
@@ -132,7 +138,7 @@ var cha2ds2vasc_hasbled_plot = new Highcharts.Chart({
     xAxis: {
         title: {
             enabled: true,
-            text: 'HAS-BLED',
+            text: 'HAS-BLED Score',
             style: {
                 fontWeight: 'normal',
                 fontSize: 25,
@@ -169,7 +175,7 @@ var cha2ds2vasc_hasbled_plot = new Highcharts.Chart({
     },
     yAxis: {
         title: {
-            text: 'CHA2DS2-VASc',
+            text: 'CHA2DS2-VASc Score',
             style: {
                 fontWeight: 'normal',
                 fontSize: 25,

@@ -87,7 +87,7 @@ $('#chads2-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
     yAxis: {
         min: 1.9,
         max: 18.2,
-        title: {text: 'Risk'},
+        title: {text: 'Stroke Risk'},
         tickInterval: 2,
         minorTickInterval: null,
         stops: [
@@ -148,7 +148,7 @@ $('#cha2-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
     yAxis: {
         min: 0,
         max: 15.2,
-        title: {text: 'Risk'},
+        title: {text: 'Stroke Risk'},
         tickInterval: 2,
         minorTickInterval: null,
         stops: [
@@ -210,7 +210,7 @@ $('#hasbled-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
     yAxis: {
         min: 1.13,
         max: 12.5,
-        title: {text: 'Risk'},
+        title: {text: 'Bleeding Risk'},
         tickInterval: 2,
         minorTickInterval: null,
         stops: [
