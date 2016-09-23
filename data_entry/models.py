@@ -17,7 +17,7 @@ class Patient(models.Model):
     # Procedure Details
     date_of_procedure = models.DateField(blank=True, null=True)
     indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
-    vessels_pci = models.ManyToManyField('data_entry.VesselsPCI')
+    vessels_pci = models.ManyToManyField('data_entry.VesselsPCI', blank=True)
     bms_stent = models.BooleanField(default=False)
     des_stent = models.BooleanField(default=False)
     # stent = models.IntegerField(default=0, choices=STENT_CHOICES)
@@ -70,7 +70,12 @@ class Patient(models.Model):
     # Recommendation
     followed_recommendation = models.BooleanField(default=True)
     reason_not_followed = models.TextField(blank=True)
+    # Meta Info
     user = models.ForeignKey('users.User', related_name='patients')
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created',)
 
     def full_name(self):
         parts1 = [self.first_name, self.middle_name, self.last_name]
@@ -86,6 +91,16 @@ class Patient(models.Model):
     def vessels_pci_display(self):
         return ', '.join(self.vessels_pci.all().values_list('value', flat=True))
 
+    def stents_display(self):
+        if self.bms_stent and self.des_stent:
+            return 'BMS, DES'
+        elif self.bms_stent:
+            return 'BMS'
+        elif self.des_stent:
+            return 'DES'
+        else:
+            return 'None'
+
     def chads2_score(self):
         # boolean values are converted to ints (1s or 0s)
         chf_value = int(self.chf)
@@ -97,6 +112,12 @@ class Patient(models.Model):
         diabetes_value = int(self.diabetes_mellitus)
         stroke_tia_value = 2*(int(self.stroke) or int(self.tia))
         return chf_value + htn_value + age_value + diabetes_value + stroke_tia_value
+
+    def chads2_score_interpretation(self):
+        if self.chads2_score() <= 2:
+            return 'LOW'
+        else:
+            return 'HIGH'
 
     def chads2_risk(self):
         return risks.chads2[self.chads2_score()]
@@ -134,6 +155,12 @@ class Patient(models.Model):
         return htn_value + renal_dysfunction_value + liver_dysfunction_value + stroke_value + \
                bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value
 
+    def hasbled_score_interpretation(self):
+        if self.chads2_score() <= 3:
+            return 'LOW'
+        else:
+            return 'HIGH'
+
     def hasbled_risk(self):
         return risks.hasbled[self.hasbled_score()]
 
@@ -142,59 +169,26 @@ class Patient(models.Model):
         cha2 = self.cha2_score()
         hasbled = self.hasbled_score()
         
-        therapy = ''
+        therapy = []
 
         if chads2 <= 2:
-            if hasbled <= 3:
-                if self.stent == 0: # No Stent
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 1: # BMS
-                    therapy = 'OAC + one AP.'
-                if self.stent == 2: # BVS
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 3: # DEB
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 4: # DES
-                    therapy = 'OAC + one AP.'
-            else:
-                if self.stent == 0: # No Stent
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 1: # BMS
-                    therapy = 'OAC + one AP.'
-                if self.stent == 2: # BVS
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 3: # DEB
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 4: # DES
-                    therapy = 'OAC + one AP.'
+            therapy.append('Only dual antiplatelet or oral anticoagulation plus one antiplatelet')        
         else:
             if hasbled <= 3:
-                if self.stent == 0: # No Stent
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 1: # BMS
-                    therapy = 'Triple Rx for 1 mo, then OAC + one AP.'
-                if self.stent == 2: # BVS
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 3: # DEB
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 4: # DES
-                    therapy = 'Triple Rx for 6 mo, then OAC + one AP.'
+                if self.des_stent:
+                    therapy.append('Triple Rx for 6 months, then oral anticoagulation plus one antiplatelet.')
+                else:
+                    therapy.append('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet.')
             else:
-                if self.stent == 0: # No Stent
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 1: # BMS
-                    therapy = 'Triple Rx for 1 mo, then OAC + one AP.'
-                if self.stent == 2: # BVS
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 3: # DEB
-                    therapy = 'Therapy has not yet been fully defined.'
-                if self.stent == 4: # DES
-                    therapy = 'Triple Rx for 3-6 mo, then OAC + one AP.'
+                if self.des_stent:
+                    therapy.append('Triple Rx for 3-6 months, then oral anticoagulation plus one antiplatelet.')
+                else:
+                    therapy.append('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet.')
 
         if not self.warfarin_intolerance:
-            therapy += ' Continue Warfarin.'
+            therapy.append('Continue Warfarin.')
         else:
-            therapy += ' Reduced dose NOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd.'
+            therapy.append('Reduced dose NOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd.')
 
         return therapy
 

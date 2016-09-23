@@ -11,85 +11,43 @@
 
 {% block menu2 %}active{% endblock %}
 
-{% block page_header %}My Patients{% endblock %}
-
 {% block content %}
-    <!-- begin row -->
-    <div class="row">
-        <!-- begin col-6 -->
-        <div class="col-md-12">
-            <!-- begin panel -->
-            <div class="panel panel-inverse" data-sortable-id="table-basic-4">
-                <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                    </div>
-                    <h4 class="panel-title">Patients</h4>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>I.D.</th>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Age</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>132-124-653</td>
-                                <td>Nicky Almera</td>
-                                <td>Female</td>
-                                <td>65</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-envelope"></i><br/></button>
-                                    <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-print"></i><br/></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>264-342-654</td>
-                                <td>Edmund Wong</td>
-                                <td>Male</td>
-                                <td>58</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-envelope"></i><br/></button>
-                                    <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-print"></i><br/></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>976-342-143</td>
-                                <td>Harvinder Singh</td>
-                                <td>Male</td>
-                                <td>66</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-envelope"></i><br/></button>
-                                    <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-print"></i><br/></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>534-787-321</td>
-                                <td>Terry Khoo</td>
-                                <td>Male</td>
-                                <td>71</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-envelope"></i><br/></button>
-                                    <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-print"></i><br/></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div class="panel panel-default">
+        <div class="my-panel-heading bg-blue">
+            <div class="row">
+                <div class="col-xs-12">Patients</div>
             </div>
-            <!-- end panel -->
         </div>
-        <!-- end col-6 -->
+        <div class="panel-body">
+            <table id="data-table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>I.D.</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                        <tr>
+                            <td>{{ patient.identification }}</td>
+                            <td>{{ patient.full_name }}</td>
+                            <td>{{ patient.get_gender_display }}</td>
+                            <td>{{ patient.age }}</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary">Email Medical Report<br/></button>
+                                <a type="button" class="btn btn-sm btn-primary" href="{% url 'data_entry:patients:print_medical' patient.id %}" target="_blank">Print Medical Report<br/></a>
+                                <button type="button" class="btn btn-sm btn-primary">Email Patient Report<br/></button>
+                                <a type="button" class="btn btn-sm btn-primary" href="{% url 'data_entry:patients:print_patient' patient.id %}" target="_blank">Print Patient Report<br/></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-    <!-- end row -->
 {% endblock %}
 
 {% block tail_js %}
@@ -104,12 +62,12 @@
             if ($('#data-table').length !== 0) {
                 $('#data-table').DataTable({
                     responsive: true,
-                    processing: true,
-                    serverSide: true,
-                    ajax: '/patients/',
-                    select: {
-                        style: 'single'
-                    }
+                    // processing: true,
+                    // serverSide: true,
+                    // ajax: '/patients/',
+                    // select: {
+                    //     style: 'single'
+                    // }
                 });
             }
         };

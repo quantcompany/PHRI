@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient</title>
+    <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <style>
+        .big {
+            font-size:25px!important;
+            font-weight:700!important;
+        }
+
+        hr {
+            margin-top:2px;
+            margin-bottom: 2px;
+        }
+
+        table th{
+            white-space: nowrap;
+        }
+
+        table td, th{
+            padding:0px !important;
+            border-top: none !important;
+        }
+
+        @media print{
+            body {
+                padding: 5px 10px!important;
+            }
+
+            blockquote {
+                border: none;
+            }
+
+            .no-print, .no-print *{
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body style="padding:20px 300px;">
+    <button type="button" class="btn btn-primary btn-lg no-print" style="position: fixed; top: 0px; left: 0px;font-size:50px;" onclick="window.print();">Print</button>
+    <h2 class="text-center" style="font-weight:500;">Patient Report</h2>
+
+    <hr/>
+
+    <table class="table" style="width:100%;border:none;">
+        <thead
+            <tr>
+                <td style="width:30%"></td>
+                <td></td>
+             </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>Full name: </th>
+                <td>{{ patient.full_name }}</td>
+            </tr>
+
+            <tr>
+                <th>Your recommended therapy: </th>
+                <td>{{ patient.recommended_therapy.0 }}</td>
+            </tr>
+
+            <tr>
+                <th>In addition, you should: </th>
+                <td>{{ patient.recommended_therapy.1 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr/>
+
+    <p>You have a condition known as Atrial Fibrillation (also called AFib or AF) it is basically an irregular heartbeat (arrhythmia). When this happens, blood does not flow properly through the heart and the rest of the body. That can lead to several health complications, most notably people with this condition have increased risks of strokes and major bleeding episodes. The following information explain the risks you have given your conditions.</p>
+
+    <center style="font-weight:bolder">http://tripletherapy.net</center>
+
+    <!-- *************************** PAGE BREAK ****************************** -->
+    <div style="page-break-after: always;"></div>
+
+    <h3>Stroke Risk</h3>
+    <hr/>
+
+    <p>People with Atrial Fibrillation may be at increased risk of blood clots. Blood clots can block blood vessels and that can lead to <b>strokes</b> which can happen if a blood vessel in the brain is blocked by a clot. Thus, you have a condition that increases the risk of having a stroke. The <b>CHADS<sub>2</sub></b> score is a tool that physicians use to determine the risk of stroke, the higher the CHADS<sub>2</sub> score, the greater the risk of stroke. The CHADS<sub>2</sub> score can go from 0 to 6. Scores of 0, 1 or 2 are considered low and scores equal or greater than 3 are considered high.
+
+    <p class="lead">Your <b>CHADS<sub>2</sub></b> score is <span class="big">{{ patient.chads2_score|floatformat }}</span>, which is considered <span class="big">{{ patient.chads2_score_interpretation }}</span>.</p>
+
+    <p class="lead">For a CHADS<sub>2</sub> score like yours, over the course of 1 year, the associated <b>stroke risk</b> is <span class="big">{{ patient.chads2_risk.percentage|floatformat }}</span>%.</p>
+
+    <h4><b>What does a stroke risk of {{ patient.chads2_risk.percentage|floatformat }}% mean?</b></h4>
+
+    <p>It means that if there are 1,000 people with your same medical condition, over the course of 1 year on average: {{ chads2_relative.sad|floatformat }} of those people (sad red faces) will suffer a stroke, and {{ chads2_relative.happy|floatformat }} will not suffer a stroke (smiley green faces)</p>
+
+    {% for row in chads2_relative.rows %}
+        <div>
+            {% for face in row %}
+                {% if face == 'H' %}
+                    <img src="{% static 'data_entry/img/happy.png' %}">
+                {% else %}
+                    <img src="{% static 'data_entry/img/sad.png' %}">
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <center style="font-weight:bolder">http://tripletherapy.net</center>
+    <!-- *************************** PAGE BREAK ****************************** -->
+    <div style="page-break-after: always;"></div>
+
+    <h3>Bleeding Risk</h3>
+    <hr/>
+
+    <p>Here is some explanation of what a bleeding episode is and why the patient has a higher risk of having one. The <b>HAS-BLED</b> scores is a tool developed to assess 1-year risk of major bleeding in patients with Atrial Fibrillation. The higher the HAS-BLED score, the greater the risk of bleeding. The HAS-BLED score can go from 0 to 9. Scores of 0, 1, 2 or 3 are considered low and scores equal or greater than 4 are considered high.</p>
+
+    <p class="lead">Your <b>HAS-BLED</sub></b> score is <span class="big">{{ patient.hasbled_score|floatformat }}</span>, which is considered <span class="big">{{ patient.hasbled_score_interpretation }}</span>.</p>
+
+    <p class="lead">For a HAS-BLED score like yours, over the course of 1 year, the associated <b>bleeding risk</b> is <span class="big">{{ patient.hasbled_risk.percentage|floatformat }}</span>%.</p>
+
+    <h4><b>What does a bleeding risk of {{ patient.hasbled_risk.percentage|floatformat }}% mean?</b></h4>
+
+    <p>It means that if there are 1,000 people with your same medical condition, over the course of 1 year on average: {{ hasbled_relative.sad|floatformat }} of those people (sad red faces) will suffer a major bleeding episode, and {{ chads2_relative.happy|floatformat }} will not suffer a bleeding episode (smiley green faces)</p>
+
+    {% for row in hasbled_relative.rows %}
+        <div>
+            {% for face in row %}
+                {% if face == 'H' %}
+                    <img src="{% static 'data_entry/img/happy.png' %}">
+                {% else %}
+                    <img src="{% static 'data_entry/img/sad.png' %}">
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+
+    <center style="font-weight:bolder">http://tripletherapy.net</center>
+</body>
+</html>

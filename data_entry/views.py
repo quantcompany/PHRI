@@ -66,7 +66,8 @@ def patient_index(request):
         if request.is_ajax():
             return JsonResponse({})
         else:
-            return render(request, 'data_entry/patients/index.html')
+            context = {'patients': Patient.objects.filter(user=request.user).order_by('-created')}
+            return render(request, 'data_entry/patients/index.html', context)
     elif request.method == 'POST':
         form = PatientForm(request.POST)
         if form.is_valid():
@@ -74,7 +75,7 @@ def patient_index(request):
             new_patient.user = request.user
             new_patient.save()
             form.save_m2m()
-            return JsonResponse({'print_link': '/patients/{0}/print'.format(new_patient.id)})
+            return JsonResponse({'print_link': '/patients/{0}/printm'.format(new_patient.id)})
         else:
             return JsonResponse(form.errors, status=400)
 
@@ -85,10 +86,40 @@ def patient_details(request, patient_id):
 
 
 @login_required
-def patient_details_print(request, patient_id):
+def print_medical_report(request, patient_id):
     patient = get_object_or_404(Patient, id=patient_id)
     context = {'patient': patient}
-    return render(request, 'data_entry/patients/print.html', context)
+    return render(request, 'data_entry/patients/printm.html', context)
+
+
+def chunks(l, n):
+    n = max(1, n)
+    return (l[i:i+n] for i in range(0, len(l), n))
+
+@login_required
+def print_patient_report(request, patient_id):
+    patient = get_object_or_404(Patient, id=patient_id)
+    chads2_relative = {
+        'sad': round(patient.chads2_risk()['percentage'] * 10),
+        'happy': round(1000 - (patient.chads2_risk()['percentage'] * 10))
+    }
+    faces = ('H' * chads2_relative['happy']) + ('S' * chads2_relative['sad'])
+    chads2_relative['rows'] = chunks(faces, 40)
+
+
+    hasbled_relative = {
+        'sad': round(patient.hasbled_risk()['percentage'] * 10),
+        'happy': round(1000 - (patient.hasbled_risk()['percentage'] * 10))
+    }
+    faces = ('H' * hasbled_relative['happy']) + ('S' * hasbled_relative['sad'])
+    hasbled_relative['rows'] = chunks(faces, 40)
+    context = {
+        'patient': patient,
+        'chads2_relative': chads2_relative,
+        'hasbled_relative': hasbled_relative,        
+    }
+
+    return render(request, 'data_entry/patients/printp.html', context)
 
 
 @login_required

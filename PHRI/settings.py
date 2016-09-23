@@ -153,6 +153,7 @@ LOGIN_URL = '/'
 # Print emails to terminal instead of trying to actually send them:
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+DATE_INPUT_FORMATS = ('%d/%m/%Y',)
 
 try:
     from local_settings import *

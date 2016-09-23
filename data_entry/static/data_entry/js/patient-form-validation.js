@@ -46,7 +46,7 @@ var validator = $("form[name='patient_form']").validate({
       dateITA: true
     },
     indication: "required",
-    vessels_pci: "required",
+    // vessels_pci: "required",
     stent: "required",
     balloons: {
       required: true,

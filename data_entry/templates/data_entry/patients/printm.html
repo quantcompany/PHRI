@@ -27,10 +27,15 @@
             blockquote {
                 border: none;
             }
+
+            .no-print, .no-print *{
+                display: none !important;
+            }
         }
     </style>
 </head>
 <body style="padding:20px 300px;">
+    <button type="button" class="btn btn-primary btn-lg no-print" style="position: fixed; top: 0px; left: 0px;font-size:50px;" onclick="window.print();">Print</button>
     <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Patient Data</h2>
 
     <h3>Personal Information</h3>
@@ -99,8 +104,8 @@
                 <th>Vessels PCI</th>
                 <td>{{ patient.vessels_pci_display }}</td>
                 <td></td>
-                <th>Stent</th>
-                <td>{{ patient.get_stent_display }}</td>
+                <th>Stents</th>
+                <td>{{ patient.stents_display }}</td>
             </tr>
 
             <tr>
@@ -398,7 +403,7 @@
 
     <h3>Recommended Therapy</h3>
     <hr />
-    <p style="font-size:18px;">{{ patient.recommended_therapy }}<p>
+    <p style="font-size:18px;">{{ patient.recommended_therapy.0 }} {{ patient.recommended_therapy.1 }}<p>
 
     {% if patient.followed_recommendation %}
         <p style="font-size:14px;">The therapy recommendation is being followed.<p>

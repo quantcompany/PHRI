@@ -46,29 +46,7 @@ function updateRecommendedTherapy(){
     var stent = getStent();
 
     if (scores.chads2 <= 2){
-        if (scores.hasbled <= 3){
-            switch(stent){
-                case 'bms':
-                    text.push('Oral anticoagulation plus one antiplatelet');
-                    break;                    
-                case 'des':
-                    text.push('Oral anticoagulation plus one antiplatelet');
-                    break;
-                case null:
-                    text.push('');
-            }
-        }else{
-            switch(stent){
-                case 'bms':
-                    text.push('Oral anticoagulation plus one antiplatelet');
-                    break;    
-                case 'des':
-                    text.push('Oral anticoagulation plus one antiplatelet');
-                    break;
-                case null:
-                    text.push('');
-            }
-        }
+        text.push('Only dual antiplatelet or oral anticoagulation plus one antiplatelet');
     }else{
         if (scores.hasbled <= 3){
             switch(stent){

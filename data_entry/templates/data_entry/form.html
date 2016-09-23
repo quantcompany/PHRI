@@ -86,7 +86,7 @@
                             <div class="col-md-6 center-block">
                                 <button id="email_results_button" type="button" class="btn btn-block btn-lg btn-primary">
                                     <i class="fa fa-envelope fa-3x"></i><br/>
-                                    <span class="f-s-20 f-w-300">Email these results</span>
+                                    <span class="f-s-20 f-w-300">Email report</span>
                                 </button>
 
                                 
@@ -102,7 +102,7 @@
                             <div class="col-md-6">
                                 <a href="#" id="print_results_button" target="_blank" type="button" class="btn btn-block btn-lg btn-primary">
                                     <i class="fa fa-print fa-3x"></i><br/>
-                                    <span class="f-s-20 f-w-300">Print these results<span>
+                                    <span class="f-s-20 f-w-300">Print report<span>
                                 </a>
                             </div>
                         </div>
@@ -140,7 +140,11 @@
         $("#identification").mask("999-999-999");
         
         $("#date_of_birth").on('keyup', function(){
-            var dob = Date.parse($(this).val());
+            var parts = $(this).val().split('/');
+            var formatted = parts[1] + '/' + parts[0] + '/' + parts[2];
+
+            var dob = Date.parse(formatted);
+
             if (isNaN(dob)){
                 $('#calculated_age').html('');
             } else {
@@ -238,5 +242,4 @@
         });
     </script>
 
-    <script src="{% static 'data_entry/js/sample_data.js' %}"></script>
 {% endblock %}
