@@ -184,7 +184,15 @@
             var form = $('#patient_form')[0];
             
             var fd = new FormData(form);
-            
+
+            if ($('#bms_stent').is(':checked')){
+                fd.append('bms_stent', 'on');
+            }
+
+            if ($('#des_stent').is(':checked')){
+                fd.append('des_stent', 'on');
+            }
+
             Pace.track(function(){
               $('#signup-form-errors').removeClass('filled').html('');
                 var request = $.ajax({

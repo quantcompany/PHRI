@@ -18,7 +18,13 @@ function getStent(){
     //     (3, 'DEB'),
     //     (4, 'DES'),
     // )
-    return parseInt($('#stent').val(), 10);
+    if ($('#des_stent').is(':checked')){
+        return 'des';
+    }else if ($('#bms_stent').is(':checked')){
+        return 'bms';
+    }else{
+        return null;
+    }
 }
 
 function getWarfarinIntolerance(){
@@ -37,81 +43,54 @@ function updateRecommendedTherapy(){
     // chads2: low <= 2 < high
     // hasbled: low <= 3 < high
     var text = [];
+    var stent = getStent();
 
     if (scores.chads2 <= 2){
         if (scores.hasbled <= 3){
-            switch(getStent()){
-                case 0: // No Stent
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 1: // BMS
+            switch(stent){
+                case 'bms':
                     text.push('Oral anticoagulation plus one antiplatelet');
                     break;                    
-                case 2: // BVS
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 3: // DEB
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 4: // DES
+                case 'des':
                     text.push('Oral anticoagulation plus one antiplatelet');
                     break;
+                case null:
+                    text.push('');
             }
         }else{
-            switch(getStent()){
-                case 0: // No Stent
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 1: // BMS
+            switch(stent){
+                case 'bms':
                     text.push('Oral anticoagulation plus one antiplatelet');
                     break;    
-                case 2: // BVS
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 3: // DEB
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 4: // DES
+                case 'des':
                     text.push('Oral anticoagulation plus one antiplatelet');
                     break;
+                case null:
+                    text.push('');
             }
         }
     }else{
         if (scores.hasbled <= 3){
-            switch(getStent()){
-                case 0: // No Stent
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 1: // BMS
+            switch(stent){
+                case 'bms':
                     text.push('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet');
                     break;
-                case 2: // BVS
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 3: // DEB
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 4: // DES
+                case 'des':
                     text.push('Triple Rx for 6 months, then oral anticoagulation plus one antiplatelet');
                     break;
+                case null:
+                    text.push('');
             }
         }else{
-            switch(getStent()){
-                case 0: // No Stent
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 1: // BMS
+            switch(stent){
+                case 'bms':
                     text.push('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet');
                     break;
-                case 2: // BVS
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 3: // DEB
-                    text.push('Therapy has not yet been fully defined');
-                    break;
-                case 4: // DES
+                case 'des':
                     text.push('Triple Rx for 3-6 months, then oral anticoagulation plus one antiplatelet');
                     break;
+                case null:
+                    text.push('');
             }
         }
     }

@@ -79,7 +79,6 @@ VASCULAR_DISEASE_CHOICES = (
 )
 
 AF_TYPE_CHOICES = (
-    (0, 'No Atrial Fibrillation'),
     (1, 'Paroxysmal'),
     (2, 'Persistent'),
     (3, 'Permanent'),

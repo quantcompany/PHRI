@@ -26,30 +26,35 @@
 
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="vessels_pci">Vessels PCI *<br/><span></span></label>
-            <div class="col-md-6 col-sm-6">
-                <select id="vessels_pci" name="vessels_pci" class="form-control f-s-14 multiple-select2" multiple="multiple" >
-                    {% for vessel in values.vessels_pci %}
-                    <option value="{{ vessel.id }}">{{ vessel.value }}</option>
-                    {% endfor %}
-                </select>
+            <div class="col-md-6 col-sm-6 f-s-14">
+                {% for pair in vessels_pairs %}
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <input id="vessel{{ pair.0.id }}" type="checkbox" name="vessels_pci" value="{{ pair.0.id }}" style="cursor:pointer;"/> <label for="vessel{{ pair.0.id }}" style="cursor:pointer;">{{ pair.0.value }}</label>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                            {% if pair.1 %}
+                            <input id="vessel{{ pair.1.id }}" type="checkbox" name="vessels_pci" value="{{ pair.1.id }}" style="cursor:pointer;"/> <label for="vessel{{ pair.1.id }}" style="cursor:pointer;">{{ pair.1.value }}</label>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="stent">Stent *<br/><span></span></label>
-            <div class="col-md-6 col-sm-6" >
-                <select id="stent" name="stent" class="form-control f-s-14 default-select2">
-                    {% for choice in choices.STENT_CHOICES %}
-                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
+            <div class="col-md-6 col-sm-6 f-s-14" >
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <input id="bms_stent" type="checkbox" name="stent" value="bms_stent" style="cursor:pointer;"/> <label for="bms_stent" style="cursor:pointer;">Bare-Metal Stent</label>
+                    </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="balloons">Balloons *<br/><span></span></label>
-            <div class="col-md-6 col-sm-6">
-                <input id="balloons" type="number" name="balloons" class="form-control f-s-14"  />
+                    <div class="col-md-6 col-sm-6">
+                        <input id="des_stent" type="checkbox" name="stent" value="des_stent" style="cursor:pointer;"/> <label for="des_stent" style="cursor:pointer;">Drug-Eluting Stent</label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

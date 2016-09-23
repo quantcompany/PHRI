@@ -42,7 +42,7 @@ var validator = $("form[name='patient_form']").validate({
     },
     gender: "required",
     date_of_procedure: {
-      required: true,
+      required: false,
       dateITA: true
     },
     indication: "required",

@@ -210,6 +210,6 @@ $('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability
     updateEverything();
 });
 
-$('#htn, #date_of_birth, #alcohol_abuse, #gender, #vascular_disease, #stent, #hx_of_bleeding').on('change', function(event, state){
+$('#htn, #date_of_birth, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #hx_of_bleeding').on('change', function(event, state){
     updateEverything();
 });

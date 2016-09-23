@@ -1,3 +1,6 @@
+import math
+import itertools
+
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -8,6 +11,10 @@ from .forms import PatientForm
 
 @login_required
 def form(request):
+    vessels_cutoff = math.ceil(VesselsPCI.objects.count() / 2)
+    v1 = VesselsPCI.objects.all()[:vessels_cutoff]
+    v2 = VesselsPCI.objects.all()[vessels_cutoff:]
+
     context = {
         'choices': {
             'HB_UM_CHOICES': HB_UM_CHOICES, 
@@ -32,9 +39,7 @@ def form(request):
             'NON_CARDIATIC_SURGERY_CHOICES': NON_CARDIATIC_SURGERY_CHOICES, 
         },
 
-        'values': {
-            'vessels_pci': VesselsPCI.objects.all(),
-        }
+        'vessels_pairs': itertools.zip_longest(v1, v2)
     }
 
     return render(request, 'data_entry/form.html', context)
@@ -63,6 +68,7 @@ def patient_index(request):
             new_patient = form.save(commit=False)
             new_patient.user = request.user
             new_patient.save()
+            form.save_m2m()
             return JsonResponse({'print_link': '/patients/{0}/print'.format(new_patient.id)})
         else:
             return JsonResponse(form.errors, status=400)

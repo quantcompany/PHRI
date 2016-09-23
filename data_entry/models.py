@@ -15,11 +15,13 @@ class Patient(models.Model):
     date_of_birth = models.DateField()
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     # Procedure Details
-    date_of_procedure = models.DateField()
+    date_of_procedure = models.DateField(blank=True, null=True)
     indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
     vessels_pci = models.ManyToManyField('data_entry.VesselsPCI')
-    stent = models.IntegerField(default=0, choices=STENT_CHOICES)
-    balloons = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(9)])
+    bms_stent = models.BooleanField(default=False)
+    des_stent = models.BooleanField(default=False)
+    # stent = models.IntegerField(default=0, choices=STENT_CHOICES)
+    # balloons = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(9)])
     # Atrial Fibrillation
     af_type = models.IntegerField(default=0, choices=AF_TYPE_CHOICES)
     prev_anti_coagulation = models.IntegerField(default=0, choices=ANTI_COAGULATION_CHOICES)
