@@ -46,8 +46,13 @@ def database(request):
 
 
 @login_required
-def references(request):
-    return render(request, 'data_entry/references.html')
+def recommendations(request):
+    return render(request, 'data_entry/recommendations.html')
+
+
+@login_required
+def guidelines(request):
+    return render(request, 'data_entry/guidelines.html')
 
 
 @login_required
