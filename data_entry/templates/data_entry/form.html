@@ -83,7 +83,7 @@
                     </div>
                     <div class="modal-body f-s-14">
                         <div class="row">
-                            <div class="col-md-6 center-block">
+                            <div class="col-md-4 center-block">
                                 <button id="email_results_button" type="button" class="btn btn-block btn-lg btn-primary">
                                     <i class="fa fa-envelope fa-3x"></i><br/>
                                     <span class="f-s-20 f-w-300">Email report</span>
@@ -95,14 +95,20 @@
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-primary">Send</button>
                                     </div>
-                                </div>
-                                
+                                </div>                                
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <a href="#" id="print_results_button" target="_blank" type="button" class="btn btn-block btn-lg btn-primary">
                                     <i class="fa fa-print fa-3x"></i><br/>
                                     <span class="f-s-20 f-w-300">Print report<span>
+                                </a>
+                            </div>
+
+                            <div class="col-md-4">
+                                <a href="{% url 'data_entry:patients:index' %}" type="button" class="btn btn-block btn-lg btn-primary">
+                                    <i class="fa fa-users fa-3x"></i><br/>
+                                    <span class="f-s-20 f-w-300">Go to my patients<span>
                                 </a>
                             </div>
                         </div>
@@ -182,6 +188,35 @@
             }
         });
 
+        function clearFields(){
+            $('#identification').val('');
+
+            $('#first_name').val('');
+
+            $('#middle_name').val('');
+
+            $('#last_name').val('');
+
+            $('#date_of_birth').val('');
+
+            $('#date_of_procedure').val('');
+
+            $('[name="vessels_pci"]').prop('checked', false);
+
+            $('[name="stent"]').prop('checked', false);
+
+            $('#prev_anti_coagulation').val('0').trigger('change');
+
+            $('input[type="number"]').val('');
+
+            $('input[class="bootstrap-switch"]').bootstrapSwitch('state', false);
+
+            $('#followed_recommendation').bootstrapSwitch('state', true);
+
+            $('#reason_not_followed').val('');
+
+        }
+
         function submitPatient(){
             event.preventDefault();
             
@@ -211,7 +246,8 @@
                     console.log('Success');
                     console.log(data);
                     $('#print_results_button').attr('href', data.print_link);
-                    $('#submit-modal').modal('show');   
+                    $('#submit-modal').modal('show');
+                    clearFields();
                     // window.location.replace("{% url 'data_entry:form' %}");
                 });
                
