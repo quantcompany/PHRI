@@ -15,6 +15,7 @@ cha2 = [
     {'percentage': 3.2},
     {'percentage': 4.0},
     {'percentage': 6.7},
+    {'percentage': 9.8},
     {'percentage': 9.6},
     {'percentage': 12.5},
     {'percentage': 15.2}

@@ -1,0 +1,302 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_css %}
+    <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/select2/css/select2.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/switchery/switchery.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet">
+    <link href="{% static 'plugins/gritter/css/jquery.gritter.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block page_title %}Patient Form{% endblock %}
+
+{% block menu1 %}active{% endblock %}
+
+{% block page_header %}Enter the patient's personal and medical info{% endblock %}
+
+{% block content %}
+    <h1 class="f-w-700" style="color:red;">THIS IS A TEST FORM. NO DATA WILL BE SAVED.</h1>
+    <form id="patient_form" name="patient_form" action="{% url 'data_entry:patients:index_test' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                {% include 'data_entry/includes/personal_info_panel.html' %}
+            </div>
+
+            <div class="col-md-6">
+                {% include 'data_entry/includes/procedure_details_panel.html' %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% include 'data_entry/includes/atrial_fibrilation_panel.html' %}
+            </div>
+
+            <div class="col-md-6">
+                {% include 'data_entry/includes/blood_work_panel.html' %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% include 'data_entry/includes/medical_history_1_panel.html' %}
+            </div>
+
+            <div class="col-md-6">
+                {% include 'data_entry/includes/medical_history_2_panel.html' %}
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'data_entry/includes/scores_panel.html' %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% include 'data_entry/includes/chads2_hasbled_plot_panel.html' %}
+            </div>
+
+            <div class="col-md-6">
+                {% include 'data_entry/includes/cha2ds2vasc_hasbled_plot_panel.html' %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'data_entry/includes/recommendation_panel.html' %}
+            </div>
+        </div>
+
+
+        <!-- #modal-dialog -->
+        <div class="modal fade" id="submit-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Patient Saved (not really)</h4>
+                    </div>
+                    <div class="modal-body f-s-14">
+                        <div class="row">
+                            <div class="col-md-6 center-block">
+                                <h4>Client-side Calculations</h4>
+                                <table style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Score</td>
+                                            <td>Risk</td>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="client_calculations">
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h4>Server-side Calculations</h4>
+                                <table style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Score</td>
+                                            <td>Risk</td>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="server_calculations">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block tail_js %}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+    <script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'plugins/select2/js/select2.min.js' %}"></script>
+    <script src="{% static 'plugins/masked-input/masked-input.min.js' %}"></script>
+    <script src="{% static 'plugins/switchery/switchery.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"></script>
+    <script src="{% static 'plugins/gritter/js/jquery.gritter.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/js/additional-methods.min.js' %}"></script>
+    <script src="{% static 'data_entry/js/scores.js' %}"></script>
+    <script src="{% static 'data_entry/js/risks.js' %}"></script>
+    <script src="{% static 'data_entry/js/therapy.js' %}"></script>
+    <script src="{% static 'data_entry/js/patient-form-validation.js' %}"></script>
+    <script src="{% static 'data_entry/js/plots.js' %}"></script>
+    <script src="{% static 'data_entry/js/gauges.js' %}"></script>
+
+    <script>
+        $("#identification").mask("999-999-999");
+        
+        $("#date_of_birth").on('keyup', function(){
+            var dob = Date.parse($(this).val());
+            if (isNaN(dob)){
+                $('#calculated_age').html('');
+            } else {
+                dob = new Date(dob);
+                $('#calculated_age').html('Age: ' + calculateAge(dob));
+            }
+        }).mask("99/99/9999");
+
+        $('#date_of_procedure').datepicker({
+            format: 'dd/mm/yyyy',
+            todayHighlight: true,
+            autoclose: true,
+            startView: 1,
+        });
+
+        $(".default-select2").select2({
+            minimumResultsForSearch: 1,
+            theme: "default",
+            placeholder: '---------'
+        });
+
+        $(".multiple-select2").select2({ placeholder: "---------" });
+
+
+        $(".bootstrap-switch").bootstrapSwitch();
+        
+        $("#followed_recommendation").bootstrapSwitch({
+            onSwitchChange: function(event, state){
+                var ta = $('#reason_not_followed');
+                if (state === true){
+                    ta.stop().slideUp(100);
+                }else{
+                    ta.stop().slideDown(100);
+                }
+            }
+        });
+
+        function submitPatient(){
+            event.preventDefault();
+            
+            var form = $('#patient_form')[0];
+            
+            var fd = new FormData(form);
+            
+            Pace.track(function(){
+              $('#signup-form-errors').removeClass('filled').html('');
+                var request = $.ajax({
+                    url: form.getAttribute('action'),
+                    type: 'POST',
+                    data: fd,
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false   // tell jQuery not to set contentType
+                });
+
+                request.done(function(data, textStatus, jqXHR) {
+                    console.log('Success');
+                    console.log(data);
+
+                    $('#client_calculations').html([
+                        '<tr>',
+                        '<td>CHADS2</td>',
+                        '<td>' + scores.chads2 + '</td>',
+                        '<td>' + risks.stroke.chads2Score(scores.chads2).percentage + '</td>',
+                        '</tr>',
+                        '',
+                        '<tr>',
+                        '<td>CHA2-DS2-VASc</td>',
+                        '<td>' + scores.cha2 + '</td>',
+                        '<td>' + risks.stroke.cha2Score(scores.cha2).percentage + '</td>',
+                        '</tr>',
+                        '',
+                        '<tr>',
+                        '<td>HASBLED</td>',
+                        '<td>' + scores.hasbled + '</td>',
+                        '<td>' + risks.bleeding.hasbledScore(scores.hasbled).percentage + '</td>',
+                        '</tr>'
+                    ].join(''));
+
+                    $('#server_calculations').html([
+                        '<tr>',
+                        '<td>CHADS2</td>',
+                        '<td>' + data.chads2.score + '</td>',
+                        '<td>' + data.chads2.risk.percentage + '</td>',
+                        '</tr>',
+                        '',
+                        '<tr>',
+                        '<td>CHA2-DS2-VASc</td>',
+                        '<td>' + data.cha2.score + '</td>',
+                        '<td>' + data.cha2.risk.percentage + '</td>',
+                        '</tr>',
+                        '',
+                        '<tr>',
+                        '<td>HASBLED</td>',
+                        '<td>' + data.hasbled.score + '</td>',
+                        '<td>' + data.hasbled.risk.percentage + '</td>',
+                        '</tr>'
+                    ].join(''));
+
+                    $('#client_calculations').find('tr').each(function(i, elem){
+                        var c_row = $(elem);
+                        var c_score = c_row.children('td')[1].innerHTML;
+                        var c_percentage = c_row.children('td')[2].innerHTML;
+
+                        var s_row = $($('#server_calculations').find('tr')[i]);
+                        console.log(s_row);
+                        var s_score = s_row.children('td')[1].innerHTML;
+                        var s_percentage = s_row.children('td')[2].innerHTML;
+
+                        if (c_score != s_score || c_percentage != s_percentage){
+                            c_row.css('background-color', 'lightpink');
+                            s_row.css('background-color', 'lightpink');
+                        }else{
+                            c_row.css('background-color', 'lightgreen');
+                            s_row.css('background-color', 'lightgreen');
+                        }
+                    });
+                    $('#submit-modal').modal('show');
+                    // window.location.replace("{% url 'data_entry:form' %}");
+                });
+               
+                request.fail(function(jqXHR, textStatus, errorThrown) {
+                    console.log('Fail');
+                    console.log(jqXHR);
+                    $.gritter.add({
+                        title: 'Validation Error',
+                        text: 'Please fix the errors on the marked fields',
+                        time: 5000,
+                        position: 'top-left'
+                    });
+                    return false;
+                    // var errorMessage = jqXHR.responseJSON.error; 
+                    // $('#signup-form-errors').addClass('filled').html(errorMessage)
+                });
+            });
+        }
+
+        $('#email_results_button').on('click', function(){
+            var email_results_input = $('#email_results_input');
+
+            if (email_results_input.is(':visible')){
+                email_results_input.fadeOut(100);
+            }else{
+                email_results_input.fadeIn(100);
+            }
+        });
+    </script>
+
+    <script src="{% static 'data_entry/js/sample_data.js' %}"></script>
+{% endblock %}
