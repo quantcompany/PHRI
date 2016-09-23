@@ -156,7 +156,7 @@ class Patient(models.Model):
                bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value
 
     def hasbled_score_interpretation(self):
-        if self.chads2_score() <= 3:
+        if self.hasbled_score() <= 3:
             return 'LOW'
         else:
             return 'HIGH'

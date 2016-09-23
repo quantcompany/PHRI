@@ -100,19 +100,19 @@ def chunks(l, n):
 def print_patient_report(request, patient_id):
     patient = get_object_or_404(Patient, id=patient_id)
     chads2_relative = {
-        'sad': round(patient.chads2_risk()['percentage'] * 10),
-        'happy': round(1000 - (patient.chads2_risk()['percentage'] * 10))
+        'sad': round(patient.chads2_risk()['percentage']),
+        'happy': 100 - round(patient.chads2_risk()['percentage'])
     }
-    faces = ('H' * chads2_relative['happy']) + ('S' * chads2_relative['sad'])
-    chads2_relative['rows'] = chunks(faces, 40)
+    faces = ('S' * chads2_relative['sad']) + ('H' * chads2_relative['happy']) 
+    chads2_relative['rows'] = chunks(faces, 10)
 
 
     hasbled_relative = {
-        'sad': round(patient.hasbled_risk()['percentage'] * 10),
-        'happy': round(1000 - (patient.hasbled_risk()['percentage'] * 10))
+        'sad': round(patient.hasbled_risk()['percentage']),
+        'happy': 100 - round(patient.hasbled_risk()['percentage'])
     }
-    faces = ('H' * hasbled_relative['happy']) + ('S' * hasbled_relative['sad'])
-    hasbled_relative['rows'] = chunks(faces, 40)
+    faces = ('S' * hasbled_relative['sad']) + ('H' * hasbled_relative['happy']) 
+    hasbled_relative['rows'] = chunks(faces, 10)
     context = {
         'patient': patient,
         'chads2_relative': chads2_relative,
