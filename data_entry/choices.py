@@ -101,8 +101,8 @@ ANTI_COAGULATION_CHOICES = (
 
 BLEEDING_CHOICES = (
     (0, 'No'),
-    (1, 'GI'),
-    (2, 'ICH'),
+    (1, 'Gastrointestinal'),
+    (2, 'Intracerebral hemorrhage'),
 )
 
 MALIGNANCY_CHOICES = (

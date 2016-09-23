@@ -105,9 +105,9 @@ $('#chads2-percentage-gauge').highcharts(Highcharts.merge(gaugeOptions, {
         data: [risks.stroke.chads2Score(scores.chads2).percentage],
         dataLabels: {
             formatter: function(){
-                return '<div style="text-align:center"><span style="font-size:15px;color:' + 
-                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">' + this.y + ' %</span><br/>' +
-                '<span style="font-size:12px;color:black">' + risks.stroke.chads2Score(scores.chads2).ci + '</span></div>'
+                return '<div style="text-align:center"><span style="font-size:25px;color:' +
+                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">' + this.y + ' %</span><br/>' // +
+           //     '<span style="font-size:12px;color:black">' + risks.stroke.chads2Score(scores.chads2).ci + '</span></div>'
             }
         }
     }]

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_css %}
+    <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker3.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/select2/css/select2.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/switchery/switchery.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}Recommendations{% endblock %}
+
+{% block menu5 %}active{% endblock %}
+
+{% block content %}
+
+    <div class="panel panel-default">
+        <div class="my-panel-heading bg-blue">
+            <div class="row">
+                <div class="col-xs-12">
+                    American College of Cardiology Foundation / American Heart Association (ACCF/AHA)
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="my-panel-heading bg-blue">
+            <div class="row">
+                <div class="col-xs-12">
+                    Canadian Cardiovascular Society (CCS)
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="my-panel-heading bg-blue">
+            <div class="row">
+                <div class="col-xs-12">
+                    European Society of Cardiology (ESC)
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+
+        </div>
+    </div>
+
+{% endblock %}
