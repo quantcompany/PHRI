@@ -7,61 +7,80 @@
     <!-- end #page-loader -->
 
     <!-- begin #page-container -->
-    <div id="page-container" class="page-container fade page-without-sidebar page-header-fixed page-with-top-menu">
-        
-        <!-- begin #top-menu -->
-        <div id="top-menu" class="top-menu f-s-16">
-            <!-- begin top-menu nav -->
-            <ul class="nav">
-                <li class="{% block menu1 %}{% endblock %}">
-                    <a href="{% url 'data_entry:form' %}">
-                        <i class="fa fa-pencil-square-o"></i>
-                        <span>Patient Form</span>
-                    </a>
-                </li>
-                <li class="{% block menu2 %}{% endblock %}">
-                    <a href="{% url 'data_entry:patients:index' %}">
-                        <i class="fa fa-users"></i> 
-                        <span>My Patients</span>
-                    </a>
-                </li>
-                <li class="{% block menu3 %}{% endblock %}">
-                    <a href="{% url 'data_entry:database' %}">
-                        <i class="fa fa-database"></i> 
-                        <span>Database</span>
-                    </a>
-                </li>
-                <li class="{% block menu4 %}{% endblock %}">
-                    <a href="{% url 'data_entry:guidelines' %}">
-                        <i class="fa fa-book"></i> 
-                        <span>Guidelines</span>
-                    </a>
-                </li>
-                <li class="{% block menu5 %}{% endblock %}">
-                    <a href="{% url 'data_entry:recommendations' %}">
-                        <i class="fa fa-book"></i>
-                        <span>Recommendations</span>
-                    </a>
-                </li>
-                <li class="has-sub pull-right">
-                    <a href="javascript:;">
-                        <b class="caret pull-right"></b>
-                        <i class="fa fa-user"></i>
-                        <span>{{ user.user_name|default:"Anonymous" }}</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a href="#">Edit Profile</a></li>
-                        <li class="divider"></li>
-                        <li><a href="{% url 'users:logout' %}">Log Out</a></li>
+    <div id="page-container" class="fade page-without-sidebar page-header-fixed in">
+
+        <div id="header" class="header navbar navbar-default navbar-fixed-top">
+            <!-- begin container-fluid -->
+            <div class="container-fluid f-s-14" style="padding-left:0px">
+                <!-- begin mobile sidebar expand / collapse button -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- end mobile sidebar expand / collapse button -->
+                
+                <!-- begin navbar-collapse -->
+                <div class="collapse navbar-collapse pull-left" id="top-navbar">
+                    <ul class="nav navbar-nav">
+                        <li class="{% block menu1 %}{% endblock %}">
+                            <a href="{% url 'data_entry:form' %}">
+                                <i class="fa fa-pencil-square-o"></i>
+                                <span>Patient Form</span>
+                            </a>
+                        </li>
+                        <li class="{% block menu2 %}{% endblock %}">
+                            <a href="{% url 'data_entry:patients:index' %}">
+                                <i class="fa fa-users"></i> 
+                                <span>My Patients</span>
+                            </a>
+                        </li>
+                        <li class="{% block menu3 %}{% endblock %}">
+                            <a href="{% url 'data_entry:database' %}">
+                                <i class="fa fa-database"></i> 
+                                <span>Database</span>
+                            </a>
+                        </li>
+                        <li class="{% block menu4 %}{% endblock %}">
+                            <a href="{% url 'data_entry:guidelines' %}">
+                                <i class="fa fa-book"></i> 
+                                <span>Guidelines</span>
+                            </a>
+                        </li>
+                        <li class="{% block menu5 %}{% endblock %}">
+                            <a href="{% url 'data_entry:recommendations' %}">
+                                <i class="fa fa-book"></i>
+                                <span>Recommendations</span>
+                            </a>
+                        </li>
                     </ul>
-                </li>
-            </ul>
-            <!-- end top-menu nav -->
+                </div>
+                <!-- end navbar-collapse -->
+                
+                <!-- begin header navigation right -->
+                <ul class="nav navbar-nav navbar-right f-s-16">
+                    <li class="dropdown navbar-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-user"></i>
+                            <span class="">{{ user.user_name|default:"Anonymouse" }}</span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInLeft">
+                            <li><a href="#">Edit Profile</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'users:logout' %}">Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- end header navigation right -->
+            </div>
+            <!-- end container-fluid -->
         </div>
-        <!-- end #top-menu -->
+
         
         <!-- begin #logos -->
-        <div id="logos" class="row bg-white vertical-align">
+        <div id="logos" class="logos row bg-white vertical-align">
             <div class="col-xs-12 col-sm-4 text-center">
                 <img src="{% static 'img/logos/logo_phri.png' %}"/>
             </div>

@@ -5736,7 +5736,7 @@ body.flat-black {
 }
 .pace-progress {
     position: fixed;
-    top: 40px;
+    top: 53px;
     left: 0;
     right: 0;
     text-align: center;
@@ -5761,7 +5761,7 @@ body.flat-black {
     display: block;
     position: fixed;
     z-index: 2000;
-    top: 45px;
+    top: 60px;
     right: 8px;
     width: 14px;
     height: 14px;
@@ -6553,7 +6553,7 @@ body .bootstrap-datetimepicker-widget table td {
 .top-menu .nav > li.active > a .label.label-theme,
 .top-menu .nav > li.active > a .badge {
     background: url(../img/transparent/black-0.4.png);
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.9);
 }
 .top-menu .nav > li > a i {
     float: left;
@@ -6786,4 +6786,9 @@ body .bootstrap-datetimepicker-widget table td {
     z-index: 20;
     font-weight: 300;
     min-width: 680px;
+}
+
+.logos {
+    width: 100%;
+    margin: 0px;
 }

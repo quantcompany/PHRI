@@ -4,6 +4,13 @@
 <head>
     <title>Patient</title>
     <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/jquery-tag-it/css/jquery.tagit.css' %}" rel="stylesheet" />
+    <script src="{% static 'plugins/jquery/jquery-1.9.1.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-ui/ui/minified/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-tag-it/js/tag-it.min.js' %}"></script>
+
     <style>
         .big {
             font-size:25px!important;
@@ -40,7 +47,29 @@
     </style>
 </head>
 <body style="padding:20px 300px;">
-    <button type="button" class="btn btn-primary btn-lg no-print" style="position: fixed; top: 0px; left: 0px;font-size:50px;" onclick="window.print();">Print</button>
+    <div class="btn-group no-print" role="group" aria-label="...">
+      <button type="button" class="btn btn-default" onclick="window.print();">Print</button>
+
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Email
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" style="padding:5px">
+          <li>
+          
+            <div id="email_results_input" class="input-group m-t-20" style="width:500px">
+                <input id="address" type="email" class="form-control" placeholder="Email Address">
+                <div class="input-group-btn">
+                    <button id="send" type="button" class="btn btn-default">Send</button>
+                </div>
+            </div>   
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
     <h2 class="text-center" style="font-weight:500;">Patient Report</h2>
 
     <hr/>
@@ -136,5 +165,21 @@
 
 
     <center style="font-weight:bolder">http://tripletherapy.net</center>
+
+    <script>
+        $('.tagit').tagit();
+
+        $('#send').on('click', function(e){
+            e.stopPropagation();
+            var addressInput = $('#address');
+            var address = addressInput.val().trim();
+
+            if (address.length == 0){
+                addressInput.parent().addClass('has-error');
+            }else{
+                addressInput.parent().removeClass('has-error');
+            }
+        });
+    </script>
 </body>
 </html>
