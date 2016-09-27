@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^logout$', views.logout_view, name='logout'),
     url(r'^register$', views.register, name='register'),
     url(r'^me$', views.me, name='me'),
+    url(r'^(?P<user_id>\d+)$', views.profile, name='profile'),
     url(r'^exists$', views.exists, name='exists')
 ]

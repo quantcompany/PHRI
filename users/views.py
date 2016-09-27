@@ -5,7 +5,7 @@ from django.views.decorators.http import require_http_methods
 
 from .models import User 
 from .forms import RegistrationForm
-
+from .choices import COUNTRY_CHOICES
 
 def landing(request, *args, **kwargs):
     return render(request, 'users/landing.html')
@@ -41,7 +41,7 @@ def register(request):
         new_user.institution = form.cleaned_data['institution']
 
         new_user.guess_user_name()
-        new_user.save()
+        new_user.save() # redundant. guess_user_name() already saves. but...
 
         email = form.cleaned_data['email']
         password = form.cleaned_data['password1']
@@ -56,7 +56,13 @@ def register(request):
 
 
 def me(request):
-    return JsonResponse(request.user.as_dict())
+    context = {'countries': COUNTRY_CHOICES}
+    return render(request, 'users/my_profile.html', context)
+
+
+def profile(request, user_id):
+    context = {'countries': COUNTRY_CHOICES}
+    return render(request, 'users/profile.html', context)
 
 
 def exists(request):

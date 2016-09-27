@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head_css %}
+        <link href="{% static 'plugins/select2/css/select2.css' %}" rel="stylesheet" />
+        <link href="{% static 'plugins/flag-icon/css/flag-icon.min.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block page_title %}User Profile{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="my-panel-heading bg-blue">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            My Profile
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <form class="form-horizontal f-s-14" method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                            <legend>Account Info</legend>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Email Address</label>
+                                        <div class="col-md-6">
+                                            <input type="email" class="form-control f-s-14" id="email" value="{{ user.email }}" disabled/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Username</label>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control f-s-14" id="user_name" value="{{ user.user_name }}" />
+                                        </div>
+                                    </div>                                    
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">First Name</label>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control f-s-14" id="first_name" value="{{ user.first_name }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Last Name</label>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control f-s-14" id="last_name" value="{{ user.last_name }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Password</label>
+                                        <div class="col-md-6">
+                                            <button type="button" class="btn btn-sm btn-block btn-warning">Change</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Education Level</label>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control f-s-14" id="education_level" value="{{ user.education_level }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Institution</label>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control f-s-14" id="institution" value="{{ user.institution }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Practice Type</label>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control f-s-14" id="practice_type" value="{{ user.practice_type }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Specialty</label>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control f-s-14" id="specialty" value="{{ user.specialty }}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Country</label>
+                                        <div class="col-md-6">
+                                            <select id="country" class="default-select2" style="width:100%">
+                                                {% for code, name in countries %}
+                                                    <option value="{{ code }}"><i class="flag-icon flag-icon-hn" /> {{ name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row m-t-20">
+                                <div class="col-md-4 col-md-offset-4">
+                                    <button type="submit" class="btn btn-block btn-primary m-r-5">Save</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="my-panel-heading bg-blue">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            Stats
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <table class="table table-bordered table-hover table-condensed f-s-14">
+                        <tbody>
+                            <tr>
+                                <th>Researcher</th>
+                                <td>{{ user.researcher|yesno|capfirst }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Patients</th>
+                                <td><a href="{% url 'data_entry:patients:index' %}">{{ user.patients.count }}</a></td>
+                            </tr>
+
+                            <tr>
+                                <th>Date Joined</th>
+                                <td>{{ user.date_joined|date:"r" }}<br/>({{ user.date_joined|naturaltime }})</td>
+                            </tr>
+
+                            <tr>
+                                <th>Last Login</th>
+                                <td>{{ user.last_login|date:"r" }}<br/>({{ user.last_login|naturaltime }})</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block tail_js %}
+    <script src="{% static 'plugins/select2/js/select2.min.js' %}"></script>
+    <script>
+        function formatOption (state) {
+            if (!state.id) { return state.text; }
+            var $state = $('<span><i class="flag-icon flag-icon-' + state.element.value.toLowerCase() + '"/> ' + state.text + '</span>');
+            return $state;
+        }
+
+        function formatSelection(data, container) {
+            return $('<span><i class="flag-icon flag-icon-' + data.id.toLowerCase() + '"/> ' + data.text + '</span>');
+        }
+
+        $(".default-select2").select2({
+            minimumResultsForSearch: 1,
+            theme: "default",
+            placeholder: '---------',
+            templateResult: formatOption,
+            templateSelection: formatSelection
+        });
+    </script>
+{% endblock %}

@@ -143,7 +143,7 @@
     <script src="{% static 'data_entry/js/gauges.js' %}"></script>
 
     <script>
-        $("#identification").mask("999-999-999");
+        // $("#identification").mask("999-999-999");
         
         $("#date_of_birth").on('keyup', function(){
             var parts = $(this).val().split('/');
@@ -157,7 +157,7 @@
                 dob = new Date(dob);
                 $('#calculated_age').html('Age: ' + calculateAge(dob));
             }
-        }).mask("99/99/9999");
+        }); //.mask("99/99/9999");
 
         $('#date_of_procedure').datepicker({
             format: 'dd/mm/yyyy',

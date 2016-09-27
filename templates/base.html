@@ -66,8 +66,8 @@
                             <i class="fa fa-user"></i>
                             <span class="">{{ user.user_name|default:"Anonymouse" }}</span> <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu animated fadeInLeft">
-                            <li><a href="#">Edit Profile</a></li>
+                        <ul class="dropdown-menu animated fadeInLeft f-s-14">
+                            <li><a href="{% url 'users:me' %}">Edit Profile</a></li>
                             <li class="divider"></li>
                             <li><a href="{% url 'users:logout' %}">Log Out</a></li>
                         </ul>

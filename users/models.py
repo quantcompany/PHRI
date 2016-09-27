@@ -4,6 +4,8 @@ from django.db import models
 
 from custom_user.models import AbstractEmailUser
 
+from .choices import COUNTRY_CHOICES
+
 
 class User(AbstractEmailUser):
     """
@@ -16,7 +18,7 @@ class User(AbstractEmailUser):
     specialty = models.CharField(max_length=100, blank=True)
     practice_type = models.CharField(max_length=100, blank=True)
     education_level = models.CharField(max_length=100, blank=True)
-    country = models.CharField(max_length=100, blank=True) # Add country list
+    country = models.CharField(max_length=100, blank=True, choices=COUNTRY_CHOICES) # Add country list
     researcher = models.BooleanField(default=False)
 
     def guess_user_name(self):
@@ -26,6 +28,7 @@ class User(AbstractEmailUser):
             else:
                 self.user_name = self.email.split('@')[0]
 
+            self.save()
         return self.user_name
 
     def get_short_name(self):
