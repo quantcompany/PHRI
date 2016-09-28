@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 
 from .models import User 
-from .forms import RegistrationForm
+from .forms import RegistrationForm, ProfileForm
 from .choices import COUNTRY_CHOICES
+
 
 def landing(request, *args, **kwargs):
     return render(request, 'users/landing.html')
@@ -55,11 +57,30 @@ def register(request):
         return JsonResponse(form.errors, status=400)
 
 
+@require_http_methods(['GET', 'POST'])
+@login_required
 def me(request):
-    context = {'countries': COUNTRY_CHOICES}
-    return render(request, 'users/my_profile.html', context)
+    if request.method == 'GET':
+        context = {'countries': COUNTRY_CHOICES}
+        return render(request, 'users/my_profile.html', context)
+    elif request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
 
+            if form.cleaned_data.get('change_password') == True:
+                new_password = form.cleaned_data.get('new_password2')
+                request.user.set_password(new_password)
+                request.user.save()
+                login(request, request.user)
+                resp = JsonResponse({}, status=303) # refresh
+                return resp
+            else:
+                return JsonResponse({}, status=200) # ok
+        else:
+            return JsonResponse(form.errors, status=400) # validation errors
 
+@login_required
 def profile(request, user_id):
     context = {'countries': COUNTRY_CHOICES}
     return render(request, 'users/profile.html', context)

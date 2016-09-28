@@ -14,8 +14,6 @@
 
 {% block menu1 %}active{% endblock %}
 
-{% block page_header %}Enter the patient's personal and medical info{% endblock %}
-
 {% block content %}
     <form id="patient_form" name="patient_form" action="{% url 'data_entry:patients:index' %}">
         {% csrf_token %}

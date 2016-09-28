@@ -5,6 +5,7 @@
 {% block head_css %}
         <link href="{% static 'plugins/select2/css/select2.css' %}" rel="stylesheet" />
         <link href="{% static 'plugins/flag-icon/css/flag-icon.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'plugins/password-indicator/css/password-indicator.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block page_title %}User Profile{% endblock %}
@@ -21,11 +22,12 @@
                     </div>
                 </div>
 
-                <div class="panel-body">
-                    <form class="form-horizontal f-s-14" method="POST">
-                        {% csrf_token %}
+                <form id="profile-form" class="form-horizontal f-s-14" name="profile-form" method="POST">
+                    {% csrf_token %}
+                    <div class="panel-body">
                         <fieldset>
                             <legend>Account Info</legend>
+                            
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -36,30 +38,64 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">Username</label>
+                                        <label for="user_name" class="col-md-4 control-label">Username<br/><span></span></label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control f-s-14" id="user_name" value="{{ user.user_name }}" />
+                                            <input type="text" class="form-control f-s-14" id="user_name" name="user_name" value="{{ user.user_name }}" />
                                         </div>
                                     </div>                                    
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">First Name</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control f-s-14" id="first_name" value="{{ user.first_name }}"/>
+                                            <input type="text" class="form-control f-s-14" id="first_name" name="first_name" value="{{ user.first_name }}"/>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Last Name</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control f-s-14" id="last_name" value="{{ user.last_name }}"/>
+                                            <input type="text" class="form-control f-s-14" id="last_name" name="last_name" value="{{ user.last_name }}"/>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">Password</label>
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-sm btn-block btn-warning">Change</button>
+                                        <div class="col-md-6 col-md-offset-4">
+                                            <button id="password_change" type="button" class="btn btn-sm btn-block btn-warning">Change Password</button>
+                                        </div>
+                                    </div>
+
+                                    <div id="password_form" style="display:none;">
+                                        <div class="form-group">
+                                            <label for="old_password" class="col-md-4 control-label">Old Password<br/><span></span></label>
+                                            <div class="col-md-6">
+                                                <input type="password" class="form-control f-s-14" id="old_password" name="old_password"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="new_password1" class="col-md-4 control-label">New Password<br/><span></span></label>
+                                            <div class="col-md-6">
+                                                <input type="password" class="form-control f-s-14" id="new_password1" name="new_password1"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-md-offset-4">
+                                                <div id="password-strength" class="is0 m-t-5"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="new_password2" class="col-md-4 control-label">New Password(again)<br/><span></span></label>
+                                            <div class="col-md-6">
+                                                <input type="password" class="form-control f-s-14" id="new_password2" name="new_password2"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-md-offset-4">
+                                                <button id="password_cancel" type="button" class="btn btn-sm btn-block btn-warning">Cancel</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -68,53 +104,56 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Education Level</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control f-s-14" id="education_level" value="{{ user.education_level }}" />
+                                            <input type="text" class="form-control f-s-14" id="education_level" name="education_level" value="{{ user.education_level }}" />
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Institution</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control f-s-14" id="institution" value="{{ user.institution }}" />
+                                            <input type="text" class="form-control f-s-14" id="institution" name="institution" value="{{ user.institution }}" />
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Practice Type</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control f-s-14" id="practice_type" value="{{ user.practice_type }}"/>
+                                            <input type="text" class="form-control f-s-14" id="practice_type" name="practice_type" value="{{ user.practice_type }}"/>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Specialty</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control f-s-14" id="specialty" value="{{ user.specialty }}"/>
+                                            <input type="text" class="form-control f-s-14" id="specialty" name="specialty" value="{{ user.specialty }}"/>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Country</label>
                                         <div class="col-md-6">
-                                            <select id="country" class="default-select2" style="width:100%">
+                                            <select id="country" name="country" class="default-select2" style="width:100%">
                                                 {% for code, name in countries %}
+                                                    {% if code == user.country %}
+                                                    <option value="{{ code }}" selected="selected"><i class="flag-icon flag-icon-hn" /> {{ name }}</option>
+                                                    {% else %}
                                                     <option value="{{ code }}"><i class="flag-icon flag-icon-hn" /> {{ name }}</option>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </select>
-                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row m-t-20">
                                 <div class="col-md-4 col-md-offset-4">
                                     <button type="submit" class="btn btn-block btn-primary m-r-5">Save</button>
                                 </div>
                             </div>
                         </fieldset>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -161,6 +200,10 @@
 
 {% block tail_js %}
     <script src="{% static 'plugins/select2/js/select2.min.js' %}"></script>
+    <script src="{% static 'plugins/password-indicator/js/password-indicator.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/js/additional-methods.min.js' %}"></script>
+    <script src="{% static 'users/js/profile-form-validation.js' %}"></script>
     <script>
         function formatOption (state) {
             if (!state.id) { return state.text; }
@@ -179,5 +222,63 @@
             templateResult: formatOption,
             templateSelection: formatSelection
         });
+
+        $('#new_password1').passwordStrength({targetDiv: '#password-strength'});
+
+        $('#password_change').on('click', function(e){
+            var button = $(e.target);
+            button.parent().parent().hide();
+            $('#password_form').show();
+        });
+
+        $('#password_cancel').on('click', function(e){
+            $('#password_form').hide();
+            $('#password_change').parent().parent().show();
+            $('#old_password').val('').trigger('keyup');
+            $('#new_password1').val('').trigger('keyup');
+            $('#new_password2').val('').trigger('keyup');
+        });
+
+        function submit(){            
+            var form = $('#profile-form')[0];
+            
+            var fd = new FormData(form);
+
+            if ($('#password_form').is(':visible')){
+                fd.set('change_password', 'on');
+            }
+
+            Pace.track(function(){
+                var request = $.ajax({
+                    url: form.getAttribute('action'),
+                    type: 'POST',
+                    data: fd,
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false   // tell jQuery not to set contentType
+                });
+
+                request.done(function(data, textStatus, jqXHR) {
+                    console.log('Success');
+                    console.log(jqXHR);
+                    if (jqXHR.status == 200){
+                        window.location.reload()
+                    }
+                });
+               
+                request.fail(function(jqXHR, textStatus, errorThrown) {
+                    console.log('Fail');
+                    console.log(jqXHR);
+                    if (jqXHR.status == 303){
+                        window.location.reload();
+                    }else if (jqXHR.status == 400){
+                        var data = JSON.parse(jqXHR.responseText);
+
+                        if (data['__all__']){
+                            validator.showErrors({'old_password': data['__all__']})
+                        }
+                    }
+                });
+            });
+        }
     </script>
 {% endblock %}
