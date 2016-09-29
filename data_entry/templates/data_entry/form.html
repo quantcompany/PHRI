@@ -7,7 +7,6 @@
     <link href="{% static 'plugins/select2/css/select2.css' %}" rel="stylesheet" />
     <link href="{% static 'plugins/switchery/switchery.min.css' %}" rel="stylesheet" />
     <link href="{% static 'plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet">
-    <link href="{% static 'plugins/gritter/css/jquery.gritter.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block page_title %}Patient Form{% endblock %}
@@ -130,7 +129,6 @@
     <script src="{% static 'plugins/masked-input/masked-input.min.js' %}"></script>
     <script src="{% static 'plugins/switchery/switchery.min.js' %}"></script>
     <script src="{% static 'plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"></script>
-    <script src="{% static 'plugins/gritter/js/jquery.gritter.min.js' %}"></script>
     <script src="{% static 'plugins/jquery-validation/js/jquery.validate.min.js' %}"></script>
     <script src="{% static 'plugins/jquery-validation/js/additional-methods.min.js' %}"></script>
     <script src="{% static 'data_entry/js/scores.js' %}"></script>
@@ -258,6 +256,18 @@
                         time: 5000,
                         position: 'top-left'
                     });
+
+                    if (jqXHR.status == 400){
+                        var data = JSON.parse(jqXHR.responseText);
+                        var errors = {};
+
+                        for (p in data){
+                            errors[p] = data[p][0]; // only first error
+                        }
+
+                        patientFormValidator.showErrors(errors);
+                    }
+
                     return false;
                     // var errorMessage = jqXHR.responseJSON.error; 
                     // $('#signup-form-errors').addClass('filled').html(errorMessage)

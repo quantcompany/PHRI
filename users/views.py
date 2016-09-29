@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -73,9 +74,11 @@ def me(request):
                 request.user.set_password(new_password)
                 request.user.save()
                 login(request, request.user)
+                messages.success(request, 'Profile details updated.')
                 resp = JsonResponse({}, status=303) # refresh
                 return resp
             else:
+                messages.success(request, 'Profile details updated.')
                 return JsonResponse({}, status=200) # ok
         else:
             return JsonResponse(form.errors, status=400) # validation errors

@@ -1,0 +1,31 @@
+{% extends 'base_theme.html' %}
+
+{% block page_title %}Not Found{% endblock %}
+
+{% block body_class %}pace-top{% endblock %}
+
+{% block body %}
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+    
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade">
+        {% block content %}
+        <!-- begin error -->
+        <div class="error">
+            <div class="error-code m-b-10">500 <i class="fa fa-warning"></i></div>
+            <div class="error-content">
+                <div class="error-message">Whoops...</div>
+                <div class="error-desc m-b-20">
+                    Sorry about that, something went terribly wrong! <br />
+                </div>
+                <div>
+                    <a href="index.html" class="btn btn-success">Go Back to Home Page</a>
+                </div>
+            </div>
+        </div>
+        <!-- end error -->
+        {% endblock %}
+    </div>
+{% endblock %}

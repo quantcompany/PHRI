@@ -6,36 +6,43 @@
 
 {% block panel_body %}
     <div class="row">
-        <div class="col-md-4 text-center" style="font-size:30px">CHADS<sub>2</sub></div>
+        <div class="col-md-4 text-center">
+            <span style="font-size:30px">CHADS<sub>2</sub></span>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="chads2-score-gauge" class="center-block" style="width:200px;height:120px;"></div>
+                </div>
 
-        <div class="col-md-4 text-center" style="font-size:30px;border-left:4px solid #348fe2;border-right:4px solid #348fe2;">CHA<sub>2</sub>DS<sub>2</sub>-VASc</div>
-
-        <div class="col-md-4 text-center" style="font-size:30px">HAS-BLED</div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div id="chads2-score-gauge" class="center-block" style="width:200px;height:120px;"></div>
+                <div class="col-sm-6">
+                    <div id="chads2-percentage-gauge" class="center-block" style="width:200px;height:120px;"></div>
+                </div>
+            </div>
         </div>
 
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div id="chads2-percentage-gauge" class="center-block" style="width:200px;height:120px;"></div>
+        <div class="col-md-4 text-center">
+            <span style="font-size:30px">CHA<sub>2</sub>DS<sub>2</sub>-VASc</span>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="cha2-score-gauge" class="center-block" style="width:200px;height:120px;"></div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div id="cha2-percentage-gauge" class="center-block" style="width:200px;height:120px;"></div>
+                </div>
+            </div>
         </div>
 
-        <div class="col-md-2 col-sm-4 col-xs-6" style="border-left:4px solid #348fe2;">
-            <div id="cha2-score-gauge" class="center-block" style="width:200px;height:120px;"></div>
-        </div>
+        <div class="col-md-4 text-center">
+            <span style="font-size:30px">HAS-BLED</span>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="hasbled-score-gauge" class="center-block" style="width:200px;height:120px;"></div>
+                </div>
 
-        <div class="col-md-2 col-sm-4 col-xs-6" style="border-right:4px solid #348fe2;">
-            <div id="cha2-percentage-gauge" class="center-block" style="width:200px;height:120px;"></div>
+                <div class="col-sm-6">
+                    <div id="hasbled-percentage-gauge" class="center-block" style="width:200px;height:120px;"></div>
+                </div>
+            </div>
         </div>
-
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div id="hasbled-score-gauge" class="center-block" style="width:200px;height:120px;"></div>
-        </div>
-
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <div id="hasbled-percentage-gauge" class="center-block" style="width:200px;height:120px;"></div>
-        </div>        
     </div>
 {% endblock %}

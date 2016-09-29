@@ -2854,7 +2854,7 @@ a.text-white:focus {
     border-radius: 2px;
 }
 .gritter-title {
-    font-size: 12px !important;
+    font-size: 16px !important;
     line-height: 16px !important;
     padding-bottom: 2px !important;
     font-weight: 400 !important;
@@ -2868,7 +2868,7 @@ a.text-white:focus {
 .gritter-item {
     font-family: 'Open Sans' !important;
     color: #aaa !important;
-    font-size: 10px !important;
+    font-size: 14px !important;
     padding: 2px 15px 5px !important;
 }
 .gritter-light .gritter-item, 

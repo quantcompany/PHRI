@@ -1,6 +1,6 @@
 // Initialize form validation on the registration form.
 // It has the name attribute "registration"
-var validator = $("form[name='patient_form']").validate({
+var patientFormValidator = $("form[name='patient_form']").validate({
   errorElement: "small",
   errorPlacement: function(error, element){
     error.appendTo(element.parents('.form-group').find('label').find('span'));
