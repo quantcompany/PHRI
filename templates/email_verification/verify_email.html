@@ -1,5 +1,6 @@
-<h3>{% load i18n %}{% blocktrans %}Dear {{ verification.user.email }},{% endblocktrans %}</h3>
+{% load i18n %}
 
+<h3>{% blocktrans %}Dear{% endblocktrans %} {{ verification.user.email }},</h3>
 
 <p>{% blocktrans%}Please click on the following link to activate your account:{% endblocktrans %}</p>
 
