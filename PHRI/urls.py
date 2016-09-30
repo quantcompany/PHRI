@@ -22,7 +22,29 @@ from users.views import landing
 urlpatterns = [
     url(r'^$', landing, name='landing'),
     url(r'^', include('data_entry.urls', namespace='data_entry')),
+    url(r'^database/', include('database.urls', namespace='database')),
     url(r'^admin/', admin.site.urls),
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^users/password/', include('password_reset.urls')),
+]
+
+
+
+### FOR TESTING ONLY ###
+from django.http import Http404
+from django.core.exceptions import PermissionDenied
+
+def error_403(request):
+    raise PermissionDenied
+
+def error_404(request):
+    raise Http404
+
+def error_500(request):
+    raise Exception('Error!!')
+
+urlpatterns += [
+    url(r'^403$', error_403),
+    url(r'^404$', error_404),
+    url(r'^500$', error_500),
 ]

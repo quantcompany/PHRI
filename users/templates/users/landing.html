@@ -221,7 +221,7 @@
                     });
 
                     request.done(function(data, textStatus, jqXHR) {
-                      window.location.replace("{% url 'data_entry:form' %}");
+                      window.location.replace("{% url 'users:verification_sent' %}");
                     });
                      
                     request.fail(function(jqXHR, textStatus, errorThrown) {

@@ -13,21 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-# from django.conf.urls import url, include
+from django.conf.urls import url, include
 
-# from . import views
-
-
-# patients = [
-#    url(r'^$', views.patients, name='patients'),
-#    url(r'^(?P<patient_id>\d+)/$', views.patient_details, name='patient_details'),
-# ]
-# # reverse('data_entry:patients:patients') # should output
-# # reverse('data_entry:patients:patient_details') # should output
+from . import views
 
 
-# urlpatterns = [
-#     url(r'^dashboard$', views.dashboard, name='dashboard'),
-#     url(r'^reports$', views.reports, name='reports'),
-#     url(r'^patients/', include(patients, namespace='patients'))
-# ]
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+    url(r'^dump$', views.dump, name='dump'),
+]

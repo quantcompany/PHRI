@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_css %}
+{% endblock %}
+
+{% block page_title %}Database{% endblock %}
+
+{% block menu3 %}active{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="my-panel-heading bg-blue">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            Dump
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="{% url 'database:dump' %}" class="btn btn-primary btn-block" style="font-size:70px"><i class="fa fa-table" aria-hidden="true"></i></a>
+                        </div>
+
+                        <div class="col-md-8">
+                            <p class="lead">Download all patient records in one file (CSV format)</p>
+                            <p class="muted">This file includes patient data from every registered user. Estimated filesize: <strong>{{ csv_size_estimate|filesizeformat  }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

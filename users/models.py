@@ -7,6 +7,12 @@ from custom_user.models import AbstractEmailUser
 from .choices import COUNTRY_CHOICES
 
 
+class EmailVerification(models.Model):
+    user = models.ForeignKey('users.User', related_name='verifications')
+    code = models.CharField(max_length=40, unique=True)
+    done = models.BooleanField(default=False)
+
+
 class User(AbstractEmailUser):
     """
     User for the application

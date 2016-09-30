@@ -1,0 +1,35 @@
+from threading import Thread
+
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+
+
+def send_mail_wrapper(*args, **kwargs):
+    try:
+        send_mail(**kwargs)
+    except Exception as ex:
+        print('Error sending email:')
+        print(ex)
+
+
+def send(subject, message, recipients, html):
+    kwargs = {
+        'subject': subject, 
+        'message': message,
+        'from_email': None,
+        'recipient_list': recipients,
+        'fail_silently': True,
+        'html_message': html
+    }
+
+    t = Thread(target=send_mail_wrapper, kwargs=kwargs)
+    t.daemon = True
+    t.start()
+
+
+def send_verification_email(verification, site):
+    subject = 'Verification Email'
+    message = ''
+    html = render_to_string('email_verification/verify_email.html', {'verification': verification, 'site': site})
+    recipients = [verification.user.email]
+    send(subject, message, recipients, html)

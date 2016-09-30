@@ -1,11 +1,16 @@
+import uuid
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from django.contrib.sites.shortcuts import get_current_site
 
-from .models import User 
+from emails import send_verification_email
+
+from .models import User, EmailVerification
 from .forms import RegistrationForm, ProfileForm
 from .choices import COUNTRY_CHOICES
 
@@ -42,17 +47,24 @@ def register(request):
         new_user.first_name = form.cleaned_data['first_name']
         new_user.last_name = form.cleaned_data['last_name']
         new_user.institution = form.cleaned_data['institution']
+        new_user.is_active = False # will not be active until email address is verified
 
         new_user.guess_user_name()
         new_user.save() # redundant. guess_user_name() already saves. but...
 
+        code = str(uuid.uuid4())
+        while EmailVerification.objects.filter(code=code).exists():
+            code = str(uuid.uuid4())
+
+        verification = new_user.verifications.create(code=code)
+        send_verification_email(verification, site=get_current_site(request))
+
         email = form.cleaned_data['email']
         password = form.cleaned_data['password1']
         
-        new_user = authenticate(username=email, password=password)
-
-        login(request, new_user)
-        
+        # will not be active until email address is verified        
+        # new_user = authenticate(username=email, password=password)
+        # login(request, new_user)
         return JsonResponse({}, status=200)
     else:
         return JsonResponse(form.errors, status=400)
@@ -95,3 +107,17 @@ def exists(request):
         return JsonResponse({})
     else:
         return JsonResponse({}, status=404)
+
+
+def verify(request, code):
+    try:
+        verification = EmailVerification.objects.get(code=code)
+        user = verification.user
+        user.is_active = True
+        user.save()
+        return render(request, 'email_verification/verified.html')
+    except EmailVerification.DoesNotExist:
+        return render(request, 'email_verification/error.html')
+
+def verification_sent(request):
+    return render(request, 'email_verification/sent.html')

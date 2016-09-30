@@ -192,6 +192,10 @@ class Patient(models.Model):
 
         return therapy
 
+    def csv(self):
+        return '{0}, {1}, {2}\n'.format(self.identification, self.full_name(), self.gender)
+
+
 class VesselsPCI(models.Model):
     value = models.CharField(max_length=60, unique=True)
 

@@ -1,0 +1,6 @@
+<h3>{% load i18n %}{% blocktrans %}Dear {{ verification.user.email }},{% endblocktrans %}</h3>
+
+
+<p>{% blocktrans%}Please click on the following link to activate your account:{% endblocktrans %}</p>
+
+<p>http{% if secure %}s{% endif %}://{{ site.domain }}{% url 'users:verify' verification.code %}</p>

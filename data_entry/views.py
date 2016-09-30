@@ -27,8 +27,7 @@ def form(request):
             'BILIRUBIN_UM_CHOICES': BILIRUBIN_UM_CHOICES, 
             'TROPONIN_UM_CHOICES': TROPONIN_UM_CHOICES, 
             'GENDER_CHOICES': GENDER_CHOICES, 
-            'HTN_CHOICES': HTN_CHOICES, 
-            'STENT_CHOICES': STENT_CHOICES, 
+            'HTN_CHOICES': HTN_CHOICES,
             'ALCOHOL_ABUSE_CHOICES': ALCOHOL_ABUSE_CHOICES, 
             'VASCULAR_DISEASE_CHOICES': VASCULAR_DISEASE_CHOICES, 
             'AF_TYPE_CHOICES': AF_TYPE_CHOICES, 
@@ -43,11 +42,6 @@ def form(request):
     }
 
     return render(request, 'data_entry/form.html', context)
-
-
-@login_required
-def database(request):
-    return render(request, 'reports/database.html')
 
 
 @login_required
@@ -136,8 +130,7 @@ def form_test(request):
             'BILIRUBIN_UM_CHOICES': BILIRUBIN_UM_CHOICES, 
             'TROPONIN_UM_CHOICES': TROPONIN_UM_CHOICES, 
             'GENDER_CHOICES': GENDER_CHOICES, 
-            'HTN_CHOICES': HTN_CHOICES, 
-            'STENT_CHOICES': STENT_CHOICES, 
+            'HTN_CHOICES': HTN_CHOICES,
             'ALCOHOL_ABUSE_CHOICES': ALCOHOL_ABUSE_CHOICES, 
             'VASCULAR_DISEASE_CHOICES': VASCULAR_DISEASE_CHOICES, 
             'AF_TYPE_CHOICES': AF_TYPE_CHOICES, 

@@ -57,14 +57,6 @@ HTN_CHOICES = (
     (2, 'Yes, Uncontrolled HTN on meds SBP > 160 mmHg'),
 )
 
-STENT_CHOICES = (
-    (0, 'No Stent'),
-    (1, 'BMS'),
-    (2, 'BVS'),
-    (3, 'DEB'),
-    (4, 'DES'),
-)
-
 ALCOHOL_ABUSE_CHOICES = (
     (0, 'No'),
     (1, 'Yes, < 8 drinks a week'),
