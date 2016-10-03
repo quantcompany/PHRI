@@ -1,3 +1,7 @@
+import io
+import csv
+from datetime import date, datetime
+
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -192,8 +196,84 @@ class Patient(models.Model):
 
         return therapy
 
+    def field_csv(self, value, type):
+        empty = not bool(value)
+
+        if type is str:
+            return value or 'N/A'
+        elif type is int:
+            return str(value) if not empty else 'N/A'
+        elif type is float:
+            return '{0:.2f}'.format(value) if not empty else 'N/A'
+        elif type is bool:
+            return 'Yes' if value else 'No'
+        elif type is date:
+            return value.strftime('%m/%d/%Y') if not empty else 'N/A'
+        elif type is datetime:
+            return value.strftime('%m/%d/%Y %H:%M:%S') if not empty else 'N/A'
+
     def csv(self):
-        return '{0}, {1}, {2}\n'.format(self.identification, self.full_name(), self.gender)
+        buf = io.StringIO()
+        writer = csv.writer(buf)
+        writer.writerow([
+            self.field_csv(self.identification, str),
+            self.field_csv(self.first_name, str),
+            self.field_csv(self.middle_name, str),
+            self.field_csv(self.last_name, str),
+            self.field_csv(self.date_of_birth, date),
+            self.field_csv(self.get_gender_display(), str),
+            self.field_csv(self.date_of_procedure, date),
+            self.field_csv(self.indication, str),
+            self.field_csv(self.vessels_pci_display(), str),
+            self.field_csv(self.bms_stent, bool),
+            self.field_csv(self.des_stent, bool),
+            self.field_csv(self.get_af_type_display(), str),
+            self.field_csv(self.get_prev_anti_coagulation_display(), str),
+            self.field_csv(self.warfarin_intolerance, bool),
+            self.field_csv(self.inr_instability, bool),
+            self.field_csv(self.noac_allergy_or_intolerance, bool),
+            self.field_csv(self.hb, float),
+            self.field_csv(self.hb_um, str),
+            self.field_csv(self.plts, float),
+            self.field_csv(self.plts_um, str),
+            self.field_csv(self.inr, float),
+            self.field_csv(self.creat, float),
+            self.field_csv(self.creat_um, str),
+            self.field_csv(self.egfr, float),
+            self.field_csv(self.egfr_um, str),
+            self.field_csv(self.ast, float),
+            self.field_csv(self.ast_um, str),
+            self.field_csv(self.alt, float),
+            self.field_csv(self.alt_um, str),
+            self.field_csv(self.ggt, float),
+            self.field_csv(self.ggt_um, str),
+            self.field_csv(self.bilirubin, float),
+            self.field_csv(self.bilirubin_um, str),
+            self.field_csv(self.troponin, float),
+            self.field_csv(self.troponin_um, str),
+            self.field_csv(self.chf, bool),
+            self.field_csv(self.get_htn_display(), str),
+            self.field_csv(self.diabetes_mellitus, bool),
+            self.field_csv(self.stroke, bool),
+            self.field_csv(self.tia, bool),
+            self.field_csv(self.get_vascular_disease_display(), str),
+            self.field_csv(self.renal_dysfunction, bool),
+            self.field_csv(self.ckd_on_dialysis, bool),
+            self.field_csv(self.renal_transplant, bool),
+            self.field_csv(self.liver_dysfunction, bool),
+            self.field_csv(self.get_hx_of_bleeding_display(), str),
+            self.field_csv(self.get_alcohol_abuse_display(), str),
+            self.field_csv(self.drug_abuse, bool),
+            self.field_csv(self.chronic_nsaids_rx, bool),
+            self.field_csv(self.excessive_fall_risk, bool),
+            self.field_csv(self.get_hx_of_malignancy_display(), str),
+            self.field_csv(self.asa_allergy, bool),
+            self.field_csv(self.get_upcoming_non_cardiatic_surgery_display(), str),
+            self.field_csv(self.followed_recommendation, bool),
+            self.field_csv(self.user.user_name, str),
+            self.field_csv(self.created, datetime)
+        ])
+        return buf.getvalue()
 
 
 class VesselsPCI(models.Model):

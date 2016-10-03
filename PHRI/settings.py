@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'PHRI.urls'
@@ -170,6 +171,10 @@ EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_HOST_USER = 'info@tripletherapy.net'
 EMAIL_HOST_PASSWORD = 'quant_zx_963'
 DEFAULT_FROM_EMAIL = 'info@tripletherapy.net'
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 try:
     from local_settings import *

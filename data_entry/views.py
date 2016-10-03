@@ -4,10 +4,16 @@ import itertools
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.sites.shortcuts import get_current_site
+from django.views.decorators.csrf import csrf_exempt
+
+import utils
+from emails import send_report_email
 
 from .models import *
 from .choices import *
-from .forms import PatientForm
+from .forms import PatientForm, EmailForm
+
 
 @login_required
 def form(request):
@@ -69,7 +75,7 @@ def patient_index(request):
             new_patient.user = request.user
             new_patient.save()
             form.save_m2m()
-            return JsonResponse({'print_link': '/patients/{0}/printm'.format(new_patient.id)})
+            return JsonResponse({'link': '/patients/{0}/reports/medical'.format(new_patient.id)})
         else:
             return JsonResponse(form.errors, status=400)
 
@@ -79,26 +85,21 @@ def patient_details(request, patient_id):
     return JsonResponse({'id': 1, 'name': 'xyz'})
 
 
-@login_required
-def print_medical_report(request, patient_id):
+
+def medical_report(request, patient_id):
     patient = get_object_or_404(Patient, id=patient_id)
     context = {'patient': patient}
-    return render(request, 'data_entry/patients/printm.html', context)
+    return render(request, 'data_entry/patients/reports/medical.html', context)
 
 
-def chunks(l, n):
-    n = max(1, n)
-    return (l[i:i+n] for i in range(0, len(l), n))
-
-@login_required
-def print_patient_report(request, patient_id):
+def patient_report(request, patient_id):
     patient = get_object_or_404(Patient, id=patient_id)
     chads2_relative = {
         'sad': round(patient.chads2_risk()['percentage']),
         'happy': 100 - round(patient.chads2_risk()['percentage'])
     }
     faces = ('S' * chads2_relative['sad']) + ('H' * chads2_relative['happy']) 
-    chads2_relative['rows'] = chunks(faces, 10)
+    chads2_relative['rows'] = utils.chunks(faces, 10)
 
 
     hasbled_relative = {
@@ -106,14 +107,56 @@ def print_patient_report(request, patient_id):
         'happy': 100 - round(patient.hasbled_risk()['percentage'])
     }
     faces = ('S' * hasbled_relative['sad']) + ('H' * hasbled_relative['happy']) 
-    hasbled_relative['rows'] = chunks(faces, 10)
+    hasbled_relative['rows'] = utils.chunks(faces, 10)
     context = {
         'patient': patient,
         'chads2_relative': chads2_relative,
         'hasbled_relative': hasbled_relative,        
     }
 
-    return render(request, 'data_entry/patients/printp.html', context)
+    return render(request, 'data_entry/patients/reports/patient.html', context)
+
+
+@csrf_exempt
+def email_medical_report(request, patient_id):
+    patient = get_object_or_404(Patient, id=patient_id)
+    report_type = 'medical'
+    site = get_current_site(request)
+    
+    form = EmailForm(request.POST)
+
+    if form.is_valid():
+        address = form.cleaned_data['address']
+        try:
+            send_report_email(patient, report_type, address, site)
+        except Exception as ex:
+            print('Error sending report:')
+            print(ex)
+            pass
+        return JsonResponse({})
+    else:
+        return JsonResponse({}, status=400)
+
+
+@csrf_exempt
+def email_patient_report(request, patient_id):
+    patient = get_object_or_404(Patient, id=patient_id)
+    report_type = 'patient'
+    site = get_current_site(request)
+
+    form = EmailForm(request.POST)
+
+    if form.is_valid():
+        address = form.cleaned_data['address']
+        try:
+            send_report_email(patient, report_type, address, site)
+        except Exception as ex:
+            print('Error sending report:')
+            print(ex)
+            pass
+        return JsonResponse({})
+    else:
+        return JsonResponse({}, status=400)
 
 
 @login_required

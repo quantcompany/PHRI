@@ -10,3 +10,7 @@ class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         exclude = ('user',)
+
+
+class EmailForm(forms.Form):
+    address = forms.EmailField()

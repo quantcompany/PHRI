@@ -48,20 +48,18 @@
 </head>
 <body style="padding:20px 300px;">
     <div class="btn-group no-print" role="group" aria-label="...">
-      <button type="button" class="btn btn-default" onclick="window.print();">Print</button>
-
+      <button type="button" class="btn btn-default btn-lg" onclick="window.print();">Print</button>
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Email
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" style="padding:5px">
           <li>
-          
             <div id="email_results_input" class="input-group m-t-20" style="width:500px">
                 <input id="address" type="email" class="form-control" placeholder="Email Address">
                 <div class="input-group-btn">
-                    <button id="send" type="button" class="btn btn-default">Send</button>
+                    <button id="send" type="button" class="btn btn-default btn-primary" data-loading-text="Sending...">Send</button>
                 </div>
             </div>   
           </li>
@@ -169,16 +167,49 @@
     <script>
         $('.tagit').tagit();
 
+        $('#address').on('keyup', function(e){
+            $(this).parent().removeClass('has-error');
+            $(this).parent().removeClass('has-success');
+        });
+
         $('#send').on('click', function(e){
             e.stopPropagation();
+            var sendButton = $(this);
+
             var addressInput = $('#address');
             var address = addressInput.val().trim();
 
             if (address.length == 0){
                 addressInput.parent().addClass('has-error');
+                return;
             }else{
                 addressInput.parent().removeClass('has-error');
             }
+
+            sendButton.button('loading');
+            addressInput.parent().removeClass('has-error');
+            addressInput.parent().removeClass('has-success');
+
+            var request = $.ajax({
+                url: 'email',
+                type: 'POST',
+                data: {address: address},
+            });
+
+            request.done(function(data, textStatus, jqXHR) {
+                console.log('Success');
+                console.log(data);
+                sendButton.button('reset');
+                addressInput.parent().addClass('has-success');
+            });
+           
+            request.fail(function(jqXHR, textStatus, errorThrown) {
+                console.log('Fail');
+                console.log(jqXHR);
+                sendButton.button('reset');
+                addressInput.parent().addClass('has-error');
+            });
+
         });
     </script>
 </body>

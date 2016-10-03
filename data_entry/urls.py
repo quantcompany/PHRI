@@ -22,8 +22,10 @@ patients = [
    url(r'^$', views.patient_index, name='index'),
    url(r'^test$', views.patient_index_test, name='index_test'),
    url(r'^(?P<patient_id>\d+)/$', views.patient_details, name='details'),
-   url(r'^(?P<patient_id>\d+)/printm$', views.print_medical_report, name='print_medical'),
-   url(r'^(?P<patient_id>\d+)/printp$', views.print_patient_report, name='print_patient'),
+   url(r'^(?P<patient_id>\d+)/reports/medical/$', views.medical_report, name='medical_report'),
+   url(r'^(?P<patient_id>\d+)/reports/medical/email$', views.email_medical_report, name='email_medical_report'),
+   url(r'^(?P<patient_id>\d+)/reports/patient/$', views.patient_report, name='patient_report'),
+   url(r'^(?P<patient_id>\d+)/reports/patient/email$', views.email_patient_report, name='email_patient_report'),
 ]
 # reverse('data_entry:patients:index')
 # reverse('data_entry:patients:detail')
