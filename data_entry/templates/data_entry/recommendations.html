@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block head_css %}
+    <link href="{% static 'plugins/isotope/isotope.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/lightbox/css/lightbox.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block page_title %}Recommendations{% endblock %}
@@ -9,7 +11,6 @@
 {% block menu5 %}active{% endblock %}
 
 {% block content %}
-    <h1>Under Construction!</h1>
     <div class="panel panel-default">
         <div class="my-panel-heading bg-blue">
             <div class="row">
@@ -19,7 +20,25 @@
             </div>
         </div>
         <div class="panel-body">
+            <div id="gallery" class="gallery">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="image gallery-group-1" style="margin:10px;">
+                            <div class="image-inner">
+                                <a href="{% static 'data_entry/References/Recommendations/ACCF_AHA/2013ACCF_AHA_STEMI.png' %}" data-lightbox="gallery-group-1">
+                                    <img src="{% static 'data_entry/References/Recommendations/ACCF_AHA/2013ACCF_AHA_STEMI.png' %}" alt="" />
+                                </a>
+                                <p class="image-caption">2013ACCF_AHA_STEMI.png</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <ul>
+              <h5><li><a href="{% static 'data_entry/References/Recommendations/ACCF_AHA/2014_ACCF_AHA_NSTEMI.pdf'%}" target="_blank">Combined Oral Anticoagulant Therapy and Antiplatelet Therapy in Patients With NSTE-ACS</a></li></h5>
+              <h5><li><a href="{% static 'data_entry/References/Recommendations/ACCF_AHA/2016_ACC_AHA_DAPT.pdf'%}" target="_blank">Summary and Synthesis of Guideline, Expert Consensus Documents, and Comprehensive Review Article Recommendations on the Management of Patients Treated With Tripple Therapy</a></li></h5>
+            </ul>
         </div>
     </div>
 
@@ -32,7 +51,42 @@
             </div>
         </div>
         <div class="panel-body">
+            <div id="gallery" class="gallery">
+                <div class="row">
+                    <div class="col-md-4" style="padding:0px 100px">
+                        <div class="image gallery-group-2" style="margin:10px;">
+                            <div class="image-inner">
+                                <a href="{% static 'data_entry/References/Recommendations/CCS/2016_CCS_AF+SCAD.png' %}" data-lightbox="gallery-group-1">
+                                    <img src="{% static 'data_entry/References/Recommendations/CCS/2016_CCS_AF+SCAD.png' %}" alt="" />
+                                </a>
+                                <p class="image-caption">2016_CCS_AF+SCAD.png</p>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-md-4" style="padding:0px 100px">
+                        <div class="image gallery-group-2" style="margin:10px;">
+                            <div class="image-inner">
+                                <a href="{% static 'data_entry/References/Recommendations/CCS/2016_CCS_AF+Elective_PCI.png' %}" data-lightbox="gallery-group-1">
+                                    <img src="{% static 'data_entry/References/Recommendations/CCS/2016_CCS_AF+Elective_PCI.png' %}" alt="" />
+                                </a>
+                                <p class="image-caption">2016_CCS_AF+Elective_PCI.png</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" style="padding:0px 100px">
+                        <div class="image gallery-group-2" style="margin:10px;">
+                            <div class="image-inner">
+                                <a href="{% static 'data_entry/References/Recommendations/CCS/2016_CCS_AF+NSTEMI_STEMI.png' %}" data-lightbox="gallery-group-1">
+                                    <img src="{% static 'data_entry/References/Recommendations/CCS/2016_CCS_AF+NSTEMI_STEMI.png' %}" alt="" />
+                                </a>
+                                <p class="image-caption">2016_CCS_AF+NSTEMI_STEMI.png</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -45,8 +99,54 @@
             </div>
         </div>
         <div class="panel-body">
+            <div id="gallery" class="gallery">
+                <div class="row">
+                    <div class="col-md-4" style="padding:0px 100px">
+                        <div class="image gallery-group-2" style="margin:10px;">
+                            <div class="image-inner">
+                                <a href="{% static 'data_entry/References/Recommendations/ESC/2014_ESC_AF+ACS.png' %}" data-lightbox="gallery-group-1">
+                                    <img src="{% static 'data_entry/References/Recommendations/ESC/2014_ESC_AF+ACS.png' %}" alt="" />
+                                </a>
+                                <p class="image-caption">2014_ESC_AF+ACS.png</p>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-md-4" style="padding:0px 100px">
+                        <div class="image gallery-group-2" style="margin:10px;">
+                            <div class="image-inner">
+                                <a href="{% static 'data_entry/References/Recommendations/ESC/2014_ESC_Myocardial_Revascularization.png' %}" data-lightbox="gallery-group-1">
+                                    <img src="{% static 'data_entry/References/Recommendations/ESC/2014_ESC_Myocardial_Revascularization.png' %}" alt="" />
+                                </a>
+                                <p class="image-caption">2014_ESC_Myocardial_Revascularization.png</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" style="padding:0px 100px">
+                        <div class="image gallery-group-2" style="margin:10px;">
+                            <div class="image-inner">
+                                <a href="{% static 'data_entry/References/Recommendations/ESC/2015_ESC_NSTEMI.png' %}" data-lightbox="gallery-group-1">
+                                    <img src="{% static 'data_entry/References/Recommendations/ESC/2015_ESC_NSTEMI.png' %}" alt="" />
+                                </a>
+                                <p class="image-caption">2015_ESC_NSTEMI.png</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul>
+              <h5><li><a href="{% static 'data_entry/References/Recommendations/ESC/2015 ESC NSTEMI.pdf'%}" target="_blank">NTSE-ACS patients with non-valvular atrial fibrillation</a></li></h5>
+              <h5><li><a href="{% static 'data_entry/References/Recommendations/ESC/2016 ESC AF + PCI.pdf'%}" target="_blank">Recommendations for combination therapy with oral anticoagulants and antiplatelets</a></li></h5>
+            </ul>
         </div>
     </div>
 
+{% endblock %}
+
+{% block tail_js %}
+    <script src="{% static 'plugins/isotope/jquery.isotope.min.js' %}"></script>
+    <script src="{% static 'plugins/lightbox/js/lightbox-2.6.min.js' %}"></script>
+    <script src="{% static 'data_entry/js/gallery.js' %}"></script>
 {% endblock %}

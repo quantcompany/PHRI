@@ -2,4 +2,4 @@
 
 <p>{% blocktrans%}Please click on the following link to view the report:{% endblocktrans %}</p>
 
-<p>http{% if secure %}s{% endif %}://{{ site.domain }}{% url 'data_entry:patients:patient_report' patient.id %}</p>
+<p>http{% if secure %}s{% endif %}://{{ site.domain }}{% url 'data_entry:patients:patient_report' patient.key %}</p>

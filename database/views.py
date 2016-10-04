@@ -7,6 +7,8 @@ from django.core.exceptions import PermissionDenied
 
 from data_entry.utils import patients_csv, patients_csv_size_estimate # returns a generator
 
+from data_entry.models import Patient 
+
 
 @login_required
 def index(request):
@@ -24,15 +26,9 @@ def dump(request):
     return resp
 
 
-# @login_required
-# def filter(request):
-#     df = pandas.DataFrame()
-#     df
-
-    # if not request.user.researcher:
-    #     raise PermissionDenied
-    # filename = 'patient_dump_{0}.csv'.format(timezone.now().strftime('%Y%m%d'))
-
-    # resp = StreamingHttpResponse(patient_generator(), content_type='text/csv')
-    # resp['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
-    # return resp
+@login_required
+def filter(request):
+    df = Patient.objects.all().to_dataframe()
+    ...
+    ...
+    return HttpResponse(df.to_html())

@@ -38,11 +38,11 @@ def send_verification_email(verification, site):
     return send(subject, message, recipients, html)
 
 
-def send_report_email(patient, report_type, address, site):
+def send_report_email(patient, report_type, addresses, site):
     assert report_type in ['medical', 'patient'], 'Invalid report type'
 
     subject = 'Trippletherapy {0} Report'.format(report_type.capitalize())
     message = ''
     html = render_to_string('report_emails/{0}.html'.format(report_type), {'site': site, 'patient': patient})
-    recipients = [address]
+    recipients = addresses
     return send(subject, message, recipients, html)

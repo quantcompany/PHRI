@@ -4030,7 +4030,7 @@ body .fc button:active {
     margin: 0 5px 5px 0;
 }
 .gallery .image {
-    width: 25%;
+    width: 100%;
     display: block;
     margin-right: -10px;
     overflow: hidden;

@@ -2,7 +2,7 @@ import math
 import itertools
 
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.views.decorators.csrf import csrf_exempt
@@ -86,14 +86,22 @@ def patient_details(request, patient_id):
 
 
 
-def medical_report(request, patient_id):
-    patient = get_object_or_404(Patient, id=patient_id)
+def medical_report(request, patient_key):
+    try:
+        patient = Patient.objects.get(key=patient_key)
+    except:
+        raise Http404
+
     context = {'patient': patient}
     return render(request, 'data_entry/patients/reports/medical.html', context)
 
 
-def patient_report(request, patient_id):
-    patient = get_object_or_404(Patient, id=patient_id)
+def patient_report(request, patient_key):
+    try:
+        patient = Patient.objects.get(key=patient_key)
+    except:
+        raise Http404
+
     chads2_relative = {
         'sad': round(patient.chads2_risk()['percentage']),
         'happy': 100 - round(patient.chads2_risk()['percentage'])
@@ -118,44 +126,44 @@ def patient_report(request, patient_id):
 
 
 @csrf_exempt
-def email_medical_report(request, patient_id):
-    patient = get_object_or_404(Patient, id=patient_id)
+def email_medical_report(request, patient_key):
+    try:
+        patient = Patient.objects.get(key=patient_key)
+    except:
+        raise Http404
+
     report_type = 'medical'
     site = get_current_site(request)
-    
-    form = EmailForm(request.POST)
 
-    if form.is_valid():
-        address = form.cleaned_data['address']
-        try:
-            send_report_email(patient, report_type, address, site)
-        except Exception as ex:
-            print('Error sending report:')
-            print(ex)
-            pass
+    addresses = request.POST.getlist('addresses[]')
+
+    try:
+        send_report_email(patient, report_type, addresses, site)
         return JsonResponse({})
-    else:
+    except Exception as ex:
+        print('Error sending report:')
+        print(ex)
         return JsonResponse({}, status=400)
 
 
 @csrf_exempt
-def email_patient_report(request, patient_id):
-    patient = get_object_or_404(Patient, id=patient_id)
+def email_patient_report(request, patient_key):
+    try:
+        patient = Patient.objects.get(key=patient_key)
+    except:
+        raise Http404
+
     report_type = 'patient'
     site = get_current_site(request)
 
-    form = EmailForm(request.POST)
+    addresses = request.POST.getlist('addresses[]')
 
-    if form.is_valid():
-        address = form.cleaned_data['address']
-        try:
-            send_report_email(patient, report_type, address, site)
-        except Exception as ex:
-            print('Error sending report:')
-            print(ex)
-            pass
+    try:
+        send_report_email(patient, report_type, addresses, site)
         return JsonResponse({})
-    else:
+    except Exception as ex:
+        print('Error sending report:')
+        print(ex)
         return JsonResponse({}, status=400)
 
 

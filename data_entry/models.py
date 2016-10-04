@@ -1,16 +1,21 @@
 import io
 import csv
+import uuid
 from datetime import date, datetime
 
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+from django_pandas.managers import DataFrameManager
+
 from . import risks
 from .choices import *
 
 
 class Patient(models.Model):
+    # random key
+    key = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     # Personal Information
     identification = models.CharField(max_length=50)
     first_name = models.CharField(max_length=40, blank=True)
@@ -77,6 +82,8 @@ class Patient(models.Model):
     # Meta Info
     user = models.ForeignKey('users.User', related_name='patients')
     created = models.DateTimeField(auto_now_add=True)
+
+    objects= DataFrameManager()
 
     class Meta:
         ordering = ('-created',)

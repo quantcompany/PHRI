@@ -1,492 +1,502 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Medical Report</title>
-    <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'plugins/jquery-tag-it/css/jquery.tagit.css' %}" rel="stylesheet" />
-    <script src="{% static 'plugins/jquery/jquery-1.9.1.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-ui/ui/minified/jquery-ui.min.js' %}"></script>
-    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-tag-it/js/tag-it.min.js' %}"></script>
+    <head>
+        <title>Medical Report</title>
+        <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'plugins/jquery-ui/themes/base/minified/jquery-ui.min.css' %}" rel="stylesheet" />
+        <link href="{% static '/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css' %}" rel="stylesheet" />
+        <link href="{% static 'plugins/jquery-tag-it/css/jquery.tagit.css' %}" rel="stylesheet" />
+        <script src="{% static 'plugins/jquery/jquery-1.9.1.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-ui/ui/minified/jquery-ui.min.js' %}"></script>
+        <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js' %}"></script>
+        <script src="{% static 'plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js' %}"></script>
+        <script src="{% static 'plugins/jquery-tag-it/js/tag-it.min.js' %}"></script>
 
-    <style>
-        hr {
-            margin-top:2px;
-            margin-bottom: 2px;
-        }
-
-        table th{
-            white-space: nowrap;
-        }
-
-        table td, th{
-            padding:0px !important;
-            border-top: none !important;
-        }
-
-        @media print{
-            body {
-                padding: 5px 10px!important;
+        <style>
+            hr {
+                margin-top:2px;
+                margin-bottom: 2px;
             }
 
-            blockquote {
-                border: none;
+            table th{
+                white-space: nowrap;
             }
 
-            .no-print, .no-print *{
-                display: none !important;
-            }
-        }
-    </style>
-</head>
-<body style="padding:20px 300px;">
-    <div class="btn-group no-print" role="group" aria-label="...">
-      <button type="button" class="btn btn-default btn-lg" onclick="window.print();">Print</button>
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Email
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" style="padding:5px">
-          <li>
-            <div id="email_results_input" class="input-group m-t-20" style="width:500px">
-                <input id="address" type="email" class="form-control" placeholder="Email Address">
-                <div class="input-group-btn">
-                    <button id="send" type="button" class="btn btn-default btn-primary" data-loading-text="Sending...">Send</button>
-                </div>
-            </div>   
-          </li>
-        </ul>
-      </div>
-    </div>
-
-
-    <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Patient Data</h2>
-
-    <h3>Personal Information</h3>
-    <hr />
-    <table class="table" style="width:100%;border:none;">
-        <thead
-            <tr>
-                <td style="width:32%"></td>
-                <td style="width:12%"></td>
-                <td style="width:12%"></td>
-                <td style="width:14%"></td>
-                <td style="width:30%"></td>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <th>Identification Number</th>
-                <td>{{ patient.identification }}</td>
-                <td></td>
-                <th>Name</th>
-                <td>{{ patient.full_name }}</td>
-            </tr>
-
-            <tr>
-                <th>Gender</th>
-                <td>{{ patient.get_gender_display }}</td>
-                <td></td>
-                <th>Date Of Birth</th>
-                <td>{{ patient.date_of_birth|date:"d/m/Y" }}</td>
-            </tr>
-
-            <tr>
-                <th>Age</th>
-                <td>{{ patient.age }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3>Procedure Details</h3>
-    <hr/>
-    <table class="table" style="width:100%;border:none;">
-        <thead>
-            <tr>
-                <td style="width:32%"></td>
-                <td style="width:12%"></td>
-                <td style="width:12%"></td>
-                <td style="width:32%"></td>
-                <td style="width:12%"></td>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <th>Date</th>
-                <td>{{ patient.date_of_procedure|date:"d/m/Y" }}</td>
-                <td></td>
-                <th>Indication</th>
-                <td>{{ patient.indication }}</td>
-            </tr>
-
-            <tr>
-                <th>Vessels PCI</th>
-                <td>{{ patient.vessels_pci_display }}</td>
-                <td></td>
-                <th>Stents</th>
-                <td>{{ patient.stents_display }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3>Atrial Fibrilation</h3>
-    <hr/>
-    <table class="table" style="width:100%;border:none;">
-        <thead>
-            <tr>
-                <td style="width:32%"></td>
-                <td style="width:12%"></td>
-                <td style="width:12%"></td>
-                <td style="width:32%"></td>
-                <td style="width:12%"></td>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <th>Indication</th>
-                <td>{{ patient.get_indication_display }}</td>
-                <td></td>
-                <th>Previous Anti-Coagulation</th>
-                <td>{{ patient.get_prev_anti_coagulation_display }}</td>
-            </tr>
-
-            <tr>
-                <th>Warfarin Intolerance</th>
-                <td>{{ patient.warfarin_intolerance|yesno|capfirst }}</td>
-                <td></td>
-                <th>INR Instability</th>
-                <td>{{ patient.inr_instability|yesno|capfirst }}</td>
-            </tr>
-
-            <tr>
-                <th>NOAC Allergy Or Intollerance</th>
-                <td>{{ patient.noac_allergy_or_intolerance|yesno|capfirst }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3>Blood Work</h3>
-    <hr/>
-    <table class="table" style="width:100%;border:none;">
-        <thead>
-            <tr>
-                <td style="width:11%"></td>
-                <td style="width:15%"></td>
-                
-                <td style="width:11%"></td>
-                
-                <td style="width:11%"></td>
-                <td style="width:15%"></td>
-                
-                <td style="width:11%"></td>
-
-                <td style="width:11%"></td>
-                <td style="width:15%"></td>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <th>HB</th>
-                <td>{{ patient.hb|default:"N/A" }} {{ patient.get_hb_um_display }}</td>
-
-                <td></td>
-
-                <th>PLTS</th>
-                <td>{{ patient.plts|default:"N/A" }} {{ patient.get_plts_um_display }}</td>
-
-                <td></td>
-
-                <th>CREAT</th>
-                <td>{{ patient.creat|default:"N/A" }} {{ patient.get_creat_um_display }}</td>
-            </tr>
-
-            <tr>
-                <th>AST</th>
-                <td>{{ patient.ast|default:"N/A" }} {{ patient.get_ast_um_display }}</td>
-
-                <td></td>
-                
-                <th>ALT</th>
-                <td>{{ patient.alt|default:"N/A" }} {{ patient.get_alt_um_display }}</td>
-                
-                <td></td>
-
-                <th>GGT</th>
-                <td>{{ patient.ggt|default:"N/A" }} {{ patient.get_ggt_um_display }}</td>
-            </tr>
-
-            <tr>
-                <th>Bilirubin</th>
-                <td>{{ patient.bilirubin|default:"N/A" }} {{ patient.get_bilirubin_um_display }}</td>
-
-                <td></td>
-                
-                <th>Troponin</th>
-                <td>{{ patient.troponin|default:"N/A" }} {{ patient.get_troponin_um_display }}</td>
-                
-                <td></td>
-
-                <th>INR</th>
-                <td>{{ patient.inr|default:"N/A" }}</td>
-            </tr>
-
-            <tr>
-                <th>EGFR</th>
-                <td colspan="7">{{ patient.egfr|default:"N/A" }} {{ patient.get_egfr_um_display }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3>Medical History</h3>
-    <hr/>
-    <table class="table" style="width:100%;border:none;">
-        <thead>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <th>HTN</th>
-                <td>{{ patient.get_htn_display }}</td>
-                
-                <td></td>
-
-                <th>Vascular Disease</th>
-                <td>{{ patient.get_vascular_disease_display }}</td>
-            </tr>
-
-            <tr>
-                <th>Hx Of Bleeding</th>
-                <td>{{ patient.get_hx_of_bleeding_display }}</td>
-                
-                <td></td>
-
-                <th>Alcohol Abuse</th>
-                <td>{{ patient.get_alcohol_abuse_display }}</td>
-            </tr>
-
-            <tr>
-                <th>Hx Of Malignancy</th>
-                <td>{{ patient.get_hx_of_malignancy_display }}</td>
-                
-                <td></td>
-
-                <th>Upcoming Non-Cardiatic Surgery</th>
-                <td>{{ patient.get_upcoming_non_cardiatic_surgery_display }}</td>
-            </tr>
-
-            <tr>
-                <th>CHF</th>
-                <td>{{ patient.chf|yesno|capfirst }}</td>
-                
-                <td></td>
-
-                <th>Diabetes Mellitus</th>
-                <td>{{ patient.diabetes_mellitus|yesno|capfirst }}</td>
-
-            </tr>
-
-            <tr>
-                <th>Stroke</th>
-                <td>{{ patient.stroke|yesno|capfirst }}</td>
-                
-                <td></td>
-
-                <th>TIA</th>
-                <td>{{ patient.tia|yesno|capfirst }}</td>
-            </tr>
-
-            <tr>
-                <th>Renal Dysfunction</th>
-                <td>{{ patient.renal_dysfunction|yesno|capfirst }}</td>
-                
-                <td></td>
-
-                <th>Drug Abuse</th>
-                <td>{{ patient.drug_abuse|yesno|capfirst }}</td>
-            </tr>
-
-            <tr>
-                <th>Chronic NSAIDS RX</th>
-                <td>{{ patient.chronic_nsaids_rx|yesno|capfirst }}</td>
-                
-                <td></td>
-
-                <th>Excessive Fall Risk</th>
-                <td>{{ patient.excessive_fall_risk|yesno|capfirst }}</td>
-            </tr>
-
-            <tr>
-                <th>ASA Allergy</th>
-                <td>{{ patient.asa_allergy|yesno|capfirst }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <center style="font-weight:bolder">www.tripletherapy.net</center>
-    <!-- *************************** PAGE BREAK ****************************** -->
-    <div style="page-break-after: always;"></div>
-
-    <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Results</h2>
-
-    <h3>Scores and Risks</h3>
-    <hr />
-
-    <h4>CHADS<sub>2</sub></h4>
-    <table class="table" style="width:100%;border:none;">
-        <thead>
-            <tr>
-                <td style="width:20%;">
-                <td style="width:80%;">
-            </td>
-        </tr>
-        <tbody>
-            <tr>
-                <th>Score</th>
-                <td class="text-left">{{ patient.chads2_score }}</td>
-            </tr>
-
-            <tr>
-                <th>Associated Risk</th>
-                <td class="text-left">{{ patient.chads2_risk.percentage }}% <small> ({{ patient.chads2_risk.ci }}) 95% C.I.</small></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <br/>
-
-    <h4>CHA<sub>2</sub>DS<sub>2</sub>-VASc</h4>
-    <table class="table" style="width:100%;border:none;">
-        <thead>
-            <tr>
-                <td style="width:20%;">
-                <td style="width:80%;">
-            </td>
-        </tr>
-        <tbody>
-            <tr>
-                <th>Score</th>
-                <td class="text-left">{{ patient.cha2_score }}</td>
-            </tr>
-
-            <tr>
-                <th>Associated Risk</th>
-                <td class="text-left">{{ patient.cha2_risk.percentage }}%</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <br/>
-
-    <h4>HAS-BLED</h4>
-    <table class="table" style="width:100%;border:none;">
-        <thead>
-            <tr>
-                <td style="width:20%;">
-                <td style="width:80%;">
-            </td>
-        </tr>
-        <tbody>
-            <tr>
-                <th>Score</th>
-                <td class="text-left">{{ patient.hasbled_score }}</td>
-            </tr>
-
-            <tr>
-                <th>Associated Risk</th>
-                <td class="text-left">{{ patient.hasbled_risk.percentage }}%</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <br/>
-
-    <h3>Recommended Therapy</h3>
-    <hr />
-    <p style="font-size:18px;">{{ patient.recommended_therapy.0 }} {{ patient.recommended_therapy.1 }}<p>
-
-    {% if patient.followed_recommendation %}
-        <p style="font-size:14px;">The therapy recommendation is being followed.<p>
-    {% else %}
-        <p style="font-size:14px;">The therapy recommendation is <strong>not</strong> being followed.<p>
-
-        <blockquote>
-            <p><i>"{{ patient.reason_not_followed }}"</i></p>
-            <footer>{{ patient.user.guess_user_name }} ({{ user.email }})</footer>
-        </blockquote>
-    {% endif %}
-
-
-    <p class="f-w-700">Report generated on {% now "d/m/Y" %} by {{ user.guess_user_name }} ({{ user.email }})</p>
-
-    <center style="font-weight:bolder">www.tripletherapy.net</center>
-
-    <script>
-        $('.tagit').tagit();
-
-        $('#address').on('keyup', function(e){
-            $(this).parent().removeClass('has-error');
-            $(this).parent().removeClass('has-success');
-        });
-
-        $('#send').on('click', function(e){
-            e.stopPropagation();
-            var sendButton = $(this);
-
-            var addressInput = $('#address');
-            var address = addressInput.val().trim();
-
-            if (address.length == 0){
-                addressInput.parent().addClass('has-error');
-                return;
-            }else{
-                addressInput.parent().removeClass('has-error');
+            table td, th{
+                padding:0px !important;
+                border-top: none !important;
             }
 
-            sendButton.button('loading');
-            addressInput.parent().removeClass('has-error');
-            addressInput.parent().removeClass('has-success');
+            @media print{
+                body {
+                    padding: 5px 10px!important;
+                }
 
-            var request = $.ajax({
-                url: 'email',
-                type: 'POST',
-                data: {address: address},
+                blockquote {
+                    border: none;
+                }
+
+                .no-print, .no-print *{
+                    display: none !important;
+                }
+            }
+        </style>
+    </head>
+    <body style="padding:20px 300px;">
+        <div class="btn-group no-print" role="group" aria-label="...">
+          <button type="button" class="btn btn-default btn-lg" onclick="window.print();">Print</button>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Email
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" style="padding:5px">
+              <li>
+                <div id="email_results_input" class="input-group m-t-20" style="width:500px">
+                    <!-- <input id="address" type="email" class="form-control" placeholder="Email Address"> -->
+                    <ul id="jquery-tagIt-default">
+                    </ul>
+
+                    <div class="input-group-btn">
+                        <button id="send" type="button" class="btn btn-default btn-primary" data-loading-text="Sending...">Send</button>
+                    </div>
+                </div>   
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+        <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Patient Data</h2>
+
+        <h3>Personal Information</h3>
+        <hr />
+        <table class="table" style="width:100%;border:none;">
+            <thead
+                <tr>
+                    <td style="width:32%"></td>
+                    <td style="width:12%"></td>
+                    <td style="width:12%"></td>
+                    <td style="width:14%"></td>
+                    <td style="width:30%"></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>Identification Number</th>
+                    <td>{{ patient.identification }}</td>
+                    <td></td>
+                    <th>Name</th>
+                    <td>{{ patient.full_name }}</td>
+                </tr>
+
+                <tr>
+                    <th>Gender</th>
+                    <td>{{ patient.get_gender_display }}</td>
+                    <td></td>
+                    <th>Date Of Birth</th>
+                    <td>{{ patient.date_of_birth|date:"d/m/Y" }}</td>
+                </tr>
+
+                <tr>
+                    <th>Age</th>
+                    <td>{{ patient.age }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Procedure Details</h3>
+        <hr/>
+        <table class="table" style="width:100%;border:none;">
+            <thead>
+                <tr>
+                    <td style="width:32%"></td>
+                    <td style="width:12%"></td>
+                    <td style="width:12%"></td>
+                    <td style="width:32%"></td>
+                    <td style="width:12%"></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>Date</th>
+                    <td>{{ patient.date_of_procedure|date:"d/m/Y" }}</td>
+                    <td></td>
+                    <th>Indication</th>
+                    <td>{{ patient.indication }}</td>
+                </tr>
+
+                <tr>
+                    <th>Vessels PCI</th>
+                    <td>{{ patient.vessels_pci_display }}</td>
+                    <td></td>
+                    <th>Stents</th>
+                    <td>{{ patient.stents_display }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Atrial Fibrilation</h3>
+        <hr/>
+        <table class="table" style="width:100%;border:none;">
+            <thead>
+                <tr>
+                    <td style="width:32%"></td>
+                    <td style="width:12%"></td>
+                    <td style="width:12%"></td>
+                    <td style="width:32%"></td>
+                    <td style="width:12%"></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>Indication</th>
+                    <td>{{ patient.get_indication_display }}</td>
+                    <td></td>
+                    <th>Previous Anti-Coagulation</th>
+                    <td>{{ patient.get_prev_anti_coagulation_display }}</td>
+                </tr>
+
+                <tr>
+                    <th>Warfarin Intolerance</th>
+                    <td>{{ patient.warfarin_intolerance|yesno|capfirst }}</td>
+                    <td></td>
+                    <th>INR Instability</th>
+                    <td>{{ patient.inr_instability|yesno|capfirst }}</td>
+                </tr>
+
+                <tr>
+                    <th>NOAC Allergy Or Intollerance</th>
+                    <td>{{ patient.noac_allergy_or_intolerance|yesno|capfirst }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Blood Work</h3>
+        <hr/>
+        <table class="table" style="width:100%;border:none;">
+            <thead>
+                <tr>
+                    <td style="width:11%"></td>
+                    <td style="width:15%"></td>
+                    
+                    <td style="width:11%"></td>
+                    
+                    <td style="width:11%"></td>
+                    <td style="width:15%"></td>
+                    
+                    <td style="width:11%"></td>
+
+                    <td style="width:11%"></td>
+                    <td style="width:15%"></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>HB</th>
+                    <td>{{ patient.hb|default:"N/A" }} {{ patient.get_hb_um_display }}</td>
+
+                    <td></td>
+
+                    <th>PLTS</th>
+                    <td>{{ patient.plts|default:"N/A" }} {{ patient.get_plts_um_display }}</td>
+
+                    <td></td>
+
+                    <th>CREAT</th>
+                    <td>{{ patient.creat|default:"N/A" }} {{ patient.get_creat_um_display }}</td>
+                </tr>
+
+                <tr>
+                    <th>AST</th>
+                    <td>{{ patient.ast|default:"N/A" }} {{ patient.get_ast_um_display }}</td>
+
+                    <td></td>
+                    
+                    <th>ALT</th>
+                    <td>{{ patient.alt|default:"N/A" }} {{ patient.get_alt_um_display }}</td>
+                    
+                    <td></td>
+
+                    <th>GGT</th>
+                    <td>{{ patient.ggt|default:"N/A" }} {{ patient.get_ggt_um_display }}</td>
+                </tr>
+
+                <tr>
+                    <th>Bilirubin</th>
+                    <td>{{ patient.bilirubin|default:"N/A" }} {{ patient.get_bilirubin_um_display }}</td>
+
+                    <td></td>
+                    
+                    <th>Troponin</th>
+                    <td>{{ patient.troponin|default:"N/A" }} {{ patient.get_troponin_um_display }}</td>
+                    
+                    <td></td>
+
+                    <th>INR</th>
+                    <td>{{ patient.inr|default:"N/A" }}</td>
+                </tr>
+
+                <tr>
+                    <th>EGFR</th>
+                    <td colspan="7">{{ patient.egfr|default:"N/A" }} {{ patient.get_egfr_um_display }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Medical History</h3>
+        <hr/>
+        <table class="table" style="width:100%;border:none;">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>HTN</th>
+                    <td>{{ patient.get_htn_display }}</td>
+                    
+                    <td></td>
+
+                    <th>Vascular Disease</th>
+                    <td>{{ patient.get_vascular_disease_display }}</td>
+                </tr>
+
+                <tr>
+                    <th>Hx Of Bleeding</th>
+                    <td>{{ patient.get_hx_of_bleeding_display }}</td>
+                    
+                    <td></td>
+
+                    <th>Alcohol Abuse</th>
+                    <td>{{ patient.get_alcohol_abuse_display }}</td>
+                </tr>
+
+                <tr>
+                    <th>Hx Of Malignancy</th>
+                    <td>{{ patient.get_hx_of_malignancy_display }}</td>
+                    
+                    <td></td>
+
+                    <th>Upcoming Non-Cardiatic Surgery</th>
+                    <td>{{ patient.get_upcoming_non_cardiatic_surgery_display }}</td>
+                </tr>
+
+                <tr>
+                    <th>CHF</th>
+                    <td>{{ patient.chf|yesno|capfirst }}</td>
+                    
+                    <td></td>
+
+                    <th>Diabetes Mellitus</th>
+                    <td>{{ patient.diabetes_mellitus|yesno|capfirst }}</td>
+
+                </tr>
+
+                <tr>
+                    <th>Stroke</th>
+                    <td>{{ patient.stroke|yesno|capfirst }}</td>
+                    
+                    <td></td>
+
+                    <th>TIA</th>
+                    <td>{{ patient.tia|yesno|capfirst }}</td>
+                </tr>
+
+                <tr>
+                    <th>Renal Dysfunction</th>
+                    <td>{{ patient.renal_dysfunction|yesno|capfirst }}</td>
+                    
+                    <td></td>
+
+                    <th>Drug Abuse</th>
+                    <td>{{ patient.drug_abuse|yesno|capfirst }}</td>
+                </tr>
+
+                <tr>
+                    <th>Chronic NSAIDS RX</th>
+                    <td>{{ patient.chronic_nsaids_rx|yesno|capfirst }}</td>
+                    
+                    <td></td>
+
+                    <th>Excessive Fall Risk</th>
+                    <td>{{ patient.excessive_fall_risk|yesno|capfirst }}</td>
+                </tr>
+
+                <tr>
+                    <th>ASA Allergy</th>
+                    <td>{{ patient.asa_allergy|yesno|capfirst }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <center style="font-weight:bolder">www.tripletherapy.net</center>
+        <!-- *************************** PAGE BREAK ****************************** -->
+        <div style="page-break-after: always;"></div>
+
+        <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Results</h2>
+
+        <h3>Scores and Risks</h3>
+        <hr />
+
+        <h4>CHADS<sub>2</sub></h4>
+        <table class="table" style="width:100%;border:none;">
+            <thead>
+                <tr>
+                    <td style="width:20%;">
+                    <td style="width:80%;">
+                </td>
+            </tr>
+            <tbody>
+                <tr>
+                    <th>Score</th>
+                    <td class="text-left">{{ patient.chads2_score }}</td>
+                </tr>
+
+                <tr>
+                    <th>Associated Risk</th>
+                    <td class="text-left">{{ patient.chads2_risk.percentage }}% <small> ({{ patient.chads2_risk.ci }}) 95% C.I.</small></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br/>
+
+        <h4>CHA<sub>2</sub>DS<sub>2</sub>-VASc</h4>
+        <table class="table" style="width:100%;border:none;">
+            <thead>
+                <tr>
+                    <td style="width:20%;">
+                    <td style="width:80%;">
+                </td>
+            </tr>
+            <tbody>
+                <tr>
+                    <th>Score</th>
+                    <td class="text-left">{{ patient.cha2_score }}</td>
+                </tr>
+
+                <tr>
+                    <th>Associated Risk</th>
+                    <td class="text-left">{{ patient.cha2_risk.percentage }}%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br/>
+
+        <h4>HAS-BLED</h4>
+        <table class="table" style="width:100%;border:none;">
+            <thead>
+                <tr>
+                    <td style="width:20%;">
+                    <td style="width:80%;">
+                </td>
+            </tr>
+            <tbody>
+                <tr>
+                    <th>Score</th>
+                    <td class="text-left">{{ patient.hasbled_score }}</td>
+                </tr>
+
+                <tr>
+                    <th>Associated Risk</th>
+                    <td class="text-left">{{ patient.hasbled_risk.percentage }}%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br/>
+
+        <h3>Recommended Therapy</h3>
+        <hr />
+        <p style="font-size:18px;">{{ patient.recommended_therapy.0 }} {{ patient.recommended_therapy.1 }}<p>
+
+        {% if patient.followed_recommendation %}
+            <p style="font-size:14px;">The therapy recommendation is being followed.<p>
+        {% else %}
+            <p style="font-size:14px;">The therapy recommendation is <strong>not</strong> being followed.<p>
+
+            <blockquote>
+                <p><i>"{{ patient.reason_not_followed }}"</i></p>
+                <footer>{{ patient.user.guess_user_name }} ({{ user.email }})</footer>
+            </blockquote>
+        {% endif %}
+
+
+        <p class="f-w-700">Report generated on {% now "d/m/Y" %} by {{ user.guess_user_name }} ({{ user.email }})</p>
+
+        <center style="font-weight:bolder">www.tripletherapy.net</center>
+
+        <script>
+            $('#jquery-tagIt-default').tagit();
+
+            $('#address').on('keyup', function(e){
+                $(this).parent().removeClass('has-error');
+                $(this).parent().removeClass('has-success');
             });
 
-            request.done(function(data, textStatus, jqXHR) {
-                console.log('Success');
-                console.log(data);
-                sendButton.button('reset');
-                addressInput.parent().addClass('has-success');
-            });
-           
-            request.fail(function(jqXHR, textStatus, errorThrown) {
-                console.log('Fail');
-                console.log(jqXHR);
-                sendButton.button('reset');
-                addressInput.parent().addClass('has-error');
-            });
+            // stop the dropdown from closing when you click on it
+            $('.dropdown-menu').on('click', function(e){e.stopPropagation();});
 
-        });
-    </script>
-</body>
+            $('#send').on('click', function(e){
+                e.stopPropagation();
+                var sendButton = $(this);
+
+                var tagitInput = $('#jquery-tagIt-default');
+                var addresses = tagitInput.tagit("assignedTags");
+
+                if (addresses.length == 0){
+                    tagitInput.parent().addClass('has-error');
+                    return;
+                }else{
+                    tagitInput.parent().removeClass('has-error');
+                }
+
+                sendButton.button('loading');
+                tagitInput.parent().removeClass('has-error');
+                tagitInput.parent().removeClass('has-success');
+
+                var request = $.ajax({
+                    url: 'email',
+                    type: 'POST',
+                    data: {'addresses': addresses},
+                });
+
+                request.done(function(data, textStatus, jqXHR) {
+                    console.log('Success');
+                    console.log(data);
+                    sendButton.button('reset');
+                    tagitInput.parent().addClass('has-success');
+                });
+               
+                request.fail(function(jqXHR, textStatus, errorThrown) {
+                    console.log('Fail');
+                    console.log(jqXHR);
+                    sendButton.button('reset');
+                    tagitInput.parent().addClass('has-error');
+                });
+
+            });
+        </script>
+    </body>
 </html>

@@ -1,216 +1,228 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Patient Report</title>
-    <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'plugins/jquery-tag-it/css/jquery.tagit.css' %}" rel="stylesheet" />
-    <script src="{% static 'plugins/jquery/jquery-1.9.1.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-ui/ui/minified/jquery-ui.min.js' %}"></script>
-    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'plugins/jquery-tag-it/js/tag-it.min.js' %}"></script>
+    <head>
+        <title>Patient Report</title>
+        <!-- <link href="{% static 'css/style.css' %}" rel="stylesheet" /> -->
+        <!-- <link href="{% static 'css/theme/blue.css' %}" rel="stylesheet" id="theme" /> -->
+        <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'plugins/jquery-ui/themes/base/minified/jquery-ui.min.css' %}" rel="stylesheet" />
+        <link href="{% static '/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css' %}" rel="stylesheet" />
+        <link href="{% static 'plugins/jquery-tag-it/css/jquery.tagit.css' %}" rel="stylesheet" />
+        <script src="{% static 'plugins/jquery/jquery-1.9.1.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-ui/ui/minified/jquery-ui.min.js' %}"></script>
+        <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js' %}"></script>
+        <script src="{% static 'plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js' %}"></script>
+        <script src="{% static 'plugins/jquery-tag-it/js/tag-it.min.js' %}"></script>
 
-    <style>
-        .big {
-            font-size:25px!important;
-            font-weight:700!important;
-        }
-
-        hr {
-            margin-top:2px;
-            margin-bottom: 2px;
-        }
-
-        table th{
-            white-space: nowrap;
-        }
-
-        table td, th{
-            padding:0px !important;
-            border-top: none !important;
-        }
-
-        @media print{
-            body {
-                padding: 5px 10px!important;
+        <style>
+            .big {
+                font-size:25px!important;
+                font-weight:700!important;
             }
 
-            blockquote {
-                border: none;
+            hr {
+                margin-top:2px;
+                margin-bottom: 2px;
             }
 
-            .no-print, .no-print *{
-                display: none !important;
+            table th{
+                white-space: nowrap;
             }
-        }
-    </style>
-</head>
-<body style="padding:20px 300px;">
-    <div class="btn-group no-print" role="group" aria-label="...">
-      <button type="button" class="btn btn-default btn-lg" onclick="window.print();">Print</button>
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Email
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" style="padding:5px">
-          <li>
-            <div id="email_results_input" class="input-group m-t-20" style="width:500px">
-                <input id="address" type="email" class="form-control" placeholder="Email Address">
-                <div class="input-group-btn">
-                    <button id="send" type="button" class="btn btn-default btn-primary" data-loading-text="Sending...">Send</button>
-                </div>
-            </div>   
-          </li>
-        </ul>
-      </div>
-    </div>
 
+            table td, th{
+                padding:0px !important;
+                border-top: none !important;
+            }
 
-    <h2 class="text-center" style="font-weight:500;">Patient Report</h2>
+            @media print{
+                body {
+                    padding: 5px 10px!important;
+                }
 
-    <hr/>
+                blockquote {
+                    border: none;
+                }
 
-    <table class="table" style="width:100%;border:none;">
-        <thead
-            <tr>
-                <td style="width:30%"></td>
-                <td></td>
-             </tr>
-        </thead>
+                .no-print, .no-print *{
+                    display: none !important;
+                }
+            }
+        </style>
+    </head>
+    <body style="padding:20px 300px;">
+        <div class="btn-group no-print" role="group" aria-label="...">
+          <button type="button" class="btn btn-default btn-lg" onclick="window.print();">Print</button>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Email
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" style="padding:5px">
+              <li>
+                <div id="email_results_input" class="input-group m-t-20" style="width:500px">
+                    <!-- <input id="address" type="email" class="form-control" placeholder="Email Address"> -->
+                    <ul id="jquery-tagIt-default">
+                    </ul>
 
-        <tbody>
-            <tr>
-                <th>Full name: </th>
-                <td>{{ patient.full_name }}</td>
-            </tr>
-
-            <tr>
-                <th>Your recommended therapy: </th>
-                <td>{{ patient.recommended_therapy.0 }}</td>
-            </tr>
-
-            <tr>
-                <th>In addition, you should: </th>
-                <td>{{ patient.recommended_therapy.1 }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <hr/>
-
-    <p>You have a condition known as Atrial Fibrillation (also called AFib or AF) it is basically an irregular heartbeat (arrhythmia). When this happens, blood does not flow properly through the heart and the rest of the body. That can lead to several health complications, most notably people with this condition have increased risks of strokes and major bleeding episodes. The following information explain the risks you have given your conditions.</p>
-
-    <center style="font-weight:bolder">http://tripletherapy.net</center>
-
-    <!-- *************************** PAGE BREAK ****************************** -->
-    <div style="page-break-after: always;"></div>
-
-    <h3>Stroke Risk</h3>
-    <hr/>
-
-    <p>People with Atrial Fibrillation may be at increased risk of blood clots. Blood clots can block blood vessels and that can lead to <b>strokes</b> which can happen if a blood vessel in the brain is blocked by a clot. Thus, you have a condition that increases the risk of having a stroke. The <b>CHADS<sub>2</sub></b> score is a tool that physicians use to determine the risk of stroke, the higher the CHADS<sub>2</sub> score, the greater the risk of stroke. The CHADS<sub>2</sub> score can go from 0 to 6. Scores of 0, 1 or 2 are considered low and scores equal or greater than 3 are considered high.
-
-    <p class="lead">Your <b>CHADS<sub>2</sub></b> score is <span class="big">{{ patient.chads2_score|floatformat:0 }}</span>, which is considered <span class="big">{{ patient.chads2_score_interpretation }}</span>.</p>
-
-    <p class="lead">For a CHADS<sub>2</sub> score like yours, over the course of 1 year, the associated <b>stroke risk</b> is <span class="big">{{ patient.chads2_risk.percentage|floatformat:0 }}</span>%.</p>
-
-    <h4><b>What does a stroke risk of {{ patient.chads2_risk.percentage|floatformat:0 }}% mean?</b></h4>
-
-    <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ chads2_relative.sad|floatformat:0 }} of those people (sad red faces) will suffer a stroke, and {{ chads2_relative.happy|floatformat:0 }} will not suffer a stroke (smiley green faces)</p>
-
-    {% for row in chads2_relative.rows %}
-        <div>
-            {% for face in row %}
-                {% if face == 'H' %}
-                    <img width="15" height="15" src="{% static 'data_entry/img/happy.png' %}">
-                {% else %}
-                    <img width="15" height="15" src="{% static 'data_entry/img/sad.png' %}">
-                {% endif %}
-            {% endfor %}
+                    <div class="input-group-btn">
+                        <button id="send" type="button" class="btn btn-default btn-primary" data-loading-text="Sending...">Send</button>
+                    </div>
+                </div>   
+              </li>
+            </ul>
+          </div>
         </div>
-    {% endfor %}
-
-    <center style="font-weight:bolder">http://tripletherapy.net</center>
-    <!-- *************************** PAGE BREAK ****************************** -->
-    <div style="page-break-after: always;"></div>
-
-    <h3>Bleeding Risk</h3>
-    <hr/>
-
-    <p>Here is some explanation of what a bleeding episode is and why the patient has a higher risk of having one. The <b>HAS-BLED</b> scores is a tool developed to assess 1-year risk of major bleeding in patients with Atrial Fibrillation. The higher the HAS-BLED score, the greater the risk of bleeding. The HAS-BLED score can go from 0 to 9. Scores of 0, 1, 2 or 3 are considered low and scores equal or greater than 4 are considered high.</p>
-
-    <p class="lead">Your <b>HAS-BLED</sub></b> score is <span class="big">{{ patient.hasbled_score|floatformat:0 }}</span>, which is considered <span class="big">{{ patient.hasbled_score_interpretation }}</span>.</p>
-
-    <p class="lead">For a HAS-BLED score like yours, over the course of 1 year, the associated <b>bleeding risk</b> is <span class="big">{{ patient.hasbled_risk.percentage|floatformat:0 }}</span>%.</p>
-
-    <h4><b>What does a bleeding risk of {{ patient.hasbled_risk.percentage|floatformat:0 }}% mean?</b></h4>
-
-    <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ hasbled_relative.sad|floatformat:0 }} of those people (sad red faces) will suffer a major bleeding episode, and {{ hasbled_relative.happy|floatformat:0 }} will not suffer a bleeding episode (smiley green faces)</p>
-
-    {% for row in hasbled_relative.rows %}
-        <div>
-            {% for face in row %}
-                {% if face == 'H' %}
-                    <img width="15" height="15" src="{% static 'data_entry/img/happy.png' %}">
-                {% else %}
-                    <img width="15" height="15" src="{% static 'data_entry/img/sad.png' %}">
-                {% endif %}
-            {% endfor %}
-        </div>
-    {% endfor %}
 
 
-    <center style="font-weight:bolder">http://tripletherapy.net</center>
+        <h2 class="text-center" style="font-weight:500;">Patient Report</h2>
 
-    <script>
-        $('.tagit').tagit();
+        <hr/>
 
-        $('#address').on('keyup', function(e){
-            $(this).parent().removeClass('has-error');
-            $(this).parent().removeClass('has-success');
-        });
+        <table class="table" style="width:100%;border:none;">
+            <thead
+                <tr>
+                    <td style="width:30%"></td>
+                    <td></td>
+                 </tr>
+            </thead>
 
-        $('#send').on('click', function(e){
-            e.stopPropagation();
-            var sendButton = $(this);
+            <tbody>
+                <tr>
+                    <th>Full name: </th>
+                    <td>{{ patient.full_name }}</td>
+                </tr>
 
-            var addressInput = $('#address');
-            var address = addressInput.val().trim();
+                <tr>
+                    <th>Your recommended therapy: </th>
+                    <td>{{ patient.recommended_therapy.0 }}</td>
+                </tr>
 
-            if (address.length == 0){
-                addressInput.parent().addClass('has-error');
-                return;
-            }else{
-                addressInput.parent().removeClass('has-error');
-            }
+                <tr>
+                    <th>In addition, you should: </th>
+                    <td>{{ patient.recommended_therapy.1 }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-            sendButton.button('loading');
-            addressInput.parent().removeClass('has-error');
-            addressInput.parent().removeClass('has-success');
+        <hr/>
 
-            var request = $.ajax({
-                url: 'email',
-                type: 'POST',
-                data: {address: address},
+        <p>You have a condition known as Atrial Fibrillation (also called AFib or AF) it is basically an irregular heartbeat (arrhythmia). When this happens, blood does not flow properly through the heart and the rest of the body. That can lead to several health complications, most notably people with this condition have increased risks of strokes and major bleeding episodes. The following information explain the risks you have given your conditions.</p>
+
+        <center style="font-weight:bolder">http://tripletherapy.net</center>
+
+        <!-- *************************** PAGE BREAK ****************************** -->
+        <div style="page-break-after: always;"></div>
+
+        <h3>Stroke Risk</h3>
+        <hr/>
+
+        <p>People with Atrial Fibrillation may be at increased risk of blood clots. Blood clots can block blood vessels and that can lead to <b>strokes</b> which can happen if a blood vessel in the brain is blocked by a clot. Thus, you have a condition that increases the risk of having a stroke. The <b>CHADS<sub>2</sub></b> score is a tool that physicians use to determine the risk of stroke, the higher the CHADS<sub>2</sub> score, the greater the risk of stroke. The CHADS<sub>2</sub> score can go from 0 to 6. Scores of 0, 1 or 2 are considered low and scores equal or greater than 3 are considered high.
+
+        <p class="lead">Your <b>CHADS<sub>2</sub></b> score is <span class="big">{{ patient.chads2_score|floatformat:0 }}</span>, which is considered <span class="big">{{ patient.chads2_score_interpretation }}</span>.</p>
+
+        <p class="lead">For a CHADS<sub>2</sub> score like yours, over the course of 1 year, the associated <b>stroke risk</b> is <span class="big">{{ patient.chads2_risk.percentage|floatformat:0 }}</span>%.</p>
+
+        <h4><b>What does a stroke risk of {{ patient.chads2_risk.percentage|floatformat:0 }}% mean?</b></h4>
+
+        <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ chads2_relative.sad|floatformat:0 }} of those people (sad red faces) will suffer a stroke, and {{ chads2_relative.happy|floatformat:0 }} will not suffer a stroke (smiley green faces)</p>
+
+        {% for row in chads2_relative.rows %}
+            <div>
+                {% for face in row %}
+                    {% if face == 'H' %}
+                        <img width="15" height="15" src="{% static 'data_entry/img/happy.png' %}">
+                    {% else %}
+                        <img width="15" height="15" src="{% static 'data_entry/img/sad.png' %}">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <center style="font-weight:bolder">http://tripletherapy.net</center>
+        <!-- *************************** PAGE BREAK ****************************** -->
+        <div style="page-break-after: always;"></div>
+
+        <h3>Bleeding Risk</h3>
+        <hr/>
+
+        <p>Here is some explanation of what a bleeding episode is and why the patient has a higher risk of having one. The <b>HAS-BLED</b> scores is a tool developed to assess 1-year risk of major bleeding in patients with Atrial Fibrillation. The higher the HAS-BLED score, the greater the risk of bleeding. The HAS-BLED score can go from 0 to 9. Scores of 0, 1, 2 or 3 are considered low and scores equal or greater than 4 are considered high.</p>
+
+        <p class="lead">Your <b>HAS-BLED</sub></b> score is <span class="big">{{ patient.hasbled_score|floatformat:0 }}</span>, which is considered <span class="big">{{ patient.hasbled_score_interpretation }}</span>.</p>
+
+        <p class="lead">For a HAS-BLED score like yours, over the course of 1 year, the associated <b>bleeding risk</b> is <span class="big">{{ patient.hasbled_risk.percentage|floatformat:0 }}</span>%.</p>
+
+        <h4><b>What does a bleeding risk of {{ patient.hasbled_risk.percentage|floatformat:0 }}% mean?</b></h4>
+
+        <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ hasbled_relative.sad|floatformat:0 }} of those people (sad red faces) will suffer a major bleeding episode, and {{ hasbled_relative.happy|floatformat:0 }} will not suffer a bleeding episode (smiley green faces)</p>
+
+        {% for row in hasbled_relative.rows %}
+            <div>
+                {% for face in row %}
+                    {% if face == 'H' %}
+                        <img width="15" height="15" src="{% static 'data_entry/img/happy.png' %}">
+                    {% else %}
+                        <img width="15" height="15" src="{% static 'data_entry/img/sad.png' %}">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+
+        <center style="font-weight:bolder">http://tripletherapy.net</center>
+
+        <script>
+            $('#jquery-tagIt-default').tagit();
+
+            $('#address').on('keyup', function(e){
+                $(this).parent().removeClass('has-error');
+                $(this).parent().removeClass('has-success');
             });
 
-            request.done(function(data, textStatus, jqXHR) {
-                console.log('Success');
-                console.log(data);
-                sendButton.button('reset');
-                addressInput.parent().addClass('has-success');
-            });
-           
-            request.fail(function(jqXHR, textStatus, errorThrown) {
-                console.log('Fail');
-                console.log(jqXHR);
-                sendButton.button('reset');
-                addressInput.parent().addClass('has-error');
-            });
+            // stop the dropdown from closing when you click on it
+            $('.dropdown-menu').on('click', function(e){e.stopPropagation();});
 
-        });
-    </script>
-</body>
+            $('#send').on('click', function(e){
+                e.stopPropagation();
+                var sendButton = $(this);
+
+                var tagitInput = $('#jquery-tagIt-default');
+                var addresses = tagitInput.tagit("assignedTags");
+
+                if (addresses.length == 0){
+                    tagitInput.parent().addClass('has-error');
+                    return;
+                }else{
+                    tagitInput.parent().removeClass('has-error');
+                }
+
+                sendButton.button('loading');
+                tagitInput.parent().removeClass('has-error');
+                tagitInput.parent().removeClass('has-success');
+
+                var request = $.ajax({
+                    url: 'email',
+                    type: 'POST',
+                    data: {'addresses': addresses},
+                });
+
+                request.done(function(data, textStatus, jqXHR) {
+                    console.log('Success');
+                    console.log(data);
+                    sendButton.button('reset');
+                    tagitInput.parent().addClass('has-success');
+                });
+               
+                request.fail(function(jqXHR, textStatus, errorThrown) {
+                    console.log('Fail');
+                    console.log(jqXHR);
+                    sendButton.button('reset');
+                    tagitInput.parent().addClass('has-error');
+                });
+
+            });
+        </script>
+    </body>
 </html>

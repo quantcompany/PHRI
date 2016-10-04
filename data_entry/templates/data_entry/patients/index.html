@@ -39,8 +39,8 @@
                             <td>{{ patient.age }}</td>
                             <td>{{ patient.created|date:"d/m/Y" }}</td>
                             <td>
-                                <a type="button" class="btn btn-sm btn-success" href="{% url 'data_entry:patients:medical_report' patient.id %}" target="_blank"><i class="fa fa-user-md"></i> Medical Report</a>
-                                <a type="button" class="btn btn-sm btn-warning" href="{% url 'data_entry:patients:patient_report' patient.id %}" target="_blank"><i class="fa fa-user"></i> Patient Report</a>
+                                <a type="button" class="btn btn-sm btn-success" href="{% url 'data_entry:patients:medical_report' patient.key %}" target="_blank"><i class="fa fa-user-md"></i> Medical Report</a>
+                                <a type="button" class="btn btn-sm btn-warning" href="{% url 'data_entry:patients:patient_report' patient.key %}" target="_blank"><i class="fa fa-user"></i> Patient Report</a>
                             </td>
                         </tr>
                     {% endfor %}

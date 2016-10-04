@@ -153,7 +153,7 @@
                 dob = new Date(dob);
                 $('#calculated_age').html('Age: ' + calculateAge(dob));
             }
-        }); //.mask("99/99/9999");
+        }).mask("99/99/9999");
 
         $('#date_of_procedure').datepicker({
             format: 'dd/mm/yyyy',
@@ -186,31 +186,18 @@
 
         function clearFields(){
             $('#identification').val('');
-
             $('#first_name').val('');
-
             $('#middle_name').val('');
-
             $('#last_name').val('');
-
             $('#date_of_birth').val('');
-
             $('#date_of_procedure').val('');
-
             $('[name="vessels_pci"]').prop('checked', false);
-
             $('[name="stent"]').prop('checked', false);
-
             $('#prev_anti_coagulation').val('0').trigger('change');
-
             $('input[type="number"]').val('');
-
             $('input[class="bootstrap-switch"]').bootstrapSwitch('state', false);
-
             $('#followed_recommendation').bootstrapSwitch('state', true);
-
             $('#reason_not_followed').val('');
-
         }
 
         function submitPatient(){
