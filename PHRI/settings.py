@@ -27,7 +27,7 @@ DEBUG = False
 
 ADMINS = [('Armando', 'mando.alvarado.jose@gmail.com'), ('Alvaro', 'director.qc@gmail.com')]
 
-ALLOWED_HOSTS = ['trippletherapy.net']
+ALLOWED_HOSTS = ['tripletherapy.net']
 
 
 # Application definition
