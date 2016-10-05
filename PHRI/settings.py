@@ -29,6 +29,7 @@ ADMINS = [('Armando', 'mando.alvarado.jose@gmail.com'), ('Alvaro', 'director.qc@
 
 ALLOWED_HOSTS = ['tripletherapy.net']
 
+SERVER_EMAIL = 'info@tripletherapy.net'
 
 # Application definition
 
