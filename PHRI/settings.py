@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7(1o23j!nbss!$80_=8brvjy2o%d05!3xok93h7u)%os7h4gsx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ADMINS = [('Armando', 'mando.alvarado.jose@gmail.com'), ('Alvaro', 'director.qc@gmail.com')]
+
+ALLOWED_HOSTS = ['trippletherapy.net']
 
 
 # Application definition

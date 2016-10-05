@@ -68,9 +68,9 @@
                             <span class="">{{ user.user_name|default:"Anonymouse" }}</span> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu animated fadeInLeft f-s-14">
-                            <li><a href="{% url 'users:me' %}">Edit Profile</a></li>
+                            <li><a href="{% url 'users:me' %}">{% trans 'Edit Profile' %}</a></li>
                             <li class="divider"></li>
-                            <li><a href="{% url 'users:logout' %}">Log Out</a></li>
+                            <li><a href="{% url 'users:logout' %}">{% trans 'Log Out' %}</a></li>
                         </ul>
                     </li>
                 </ul>
