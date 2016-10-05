@@ -27,7 +27,7 @@ DEBUG = False
 
 ADMINS = [('Armando', 'mando.alvarado.jose@gmail.com'), ('Alvaro', 'director.qc@gmail.com')]
 
-ALLOWED_HOSTS = ['tripletherapy.net']
+ALLOWED_HOSTS = ['tripletherapy.net', '159.203.61.7']
 
 SERVER_EMAIL = 'info@tripletherapy.net'
 
