@@ -75,7 +75,10 @@ def patient_index(request):
             new_patient.user = request.user
             new_patient.save()
             form.save_m2m()
-            return JsonResponse({'link': '/patients/{0}/reports/medical'.format(new_patient.id)})
+            return JsonResponse({
+                'medical_report_link': '/patients/{0}/reports/medical'.format(new_patient.key),
+                'patient_report_link': '/patients/{0}/reports/patient'.format(new_patient.key)
+            })
         else:
             return JsonResponse(form.errors, status=400)
 

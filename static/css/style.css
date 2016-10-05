@@ -3986,12 +3986,15 @@ body .fc button:active {
     font-size: 28px;
 }
 .login .login-header .brand .logo {
-    border: 14px solid transparent;
-    border-color: #4DCACA #31A3A3 #1D8888;
+    /*border: 14px solid transparent;*/
+    /*border-color: #4DCACA #31A3A3 #1D8888;*/
+    background-image: url("/static/favicon.ico"); 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     width: 28px;
     height: 28px;
     position: relative;
-    font-size: 0;
+    font-size: 28px;
     margin-right: 10px;
     top: -9px;
 }
