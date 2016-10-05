@@ -1,41 +1,43 @@
 {% extends 'data_entry/panel_base.html' %}
 
-{% block panel_heading %}Personal Information{% endblock %}
+{% load i18n %}
+
+{% block panel_heading %}{% trans 'Personal Information' %}{% endblock %}
             
 {% block fa_icon %}fa fa-user{% endblock %}
 
 {% block panel_body %}
     <div class="form-horizontal form-bordered">
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="identification">ID Number *<br/><span></span></label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="identification">{% trans 'ID Number *' %}<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
                 <input id="identification" type="text" name="identification" class="form-control f-s-14 id-mask" placeholder="___-___-___"  />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="first_name">First name</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="first_name">{% trans 'First name' %}</label>
             <div class="col-md-6 col-sm-6">
                 <input id="first_name" type="text" name="first_name" class="form-control f-s-14" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="middle_name">Middle name</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="middle_name">{% trans 'Middle name' %}</label>
             <div class="col-md-6 col-sm-6">
                 <input id="middle_name" type="text" name="middle_name" class="form-control f-s-14" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="last_name">Last name</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="last_name">{% trans 'Last name' %}</label>
             <div class="col-md-6 col-sm-6">
                 <input id="last_name" type="text" name="last_name" class="form-control f-s-14" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="date_of_birth">Date of birth *<br/><span></span></label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="date_of_birth">{% trans 'Date of birth *' %}<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
                 <div class="input-group" id="">
                     <input id="date_of_birth" type="text" name="date_of_birth" class="form-control f-s-14 id-mask" placeholder="dd/mm/yyyy"  />
@@ -47,11 +49,11 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="gender">Gender *<br/><span></span></label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="gender">{% trans 'Gender *' %}<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
                 <select id="gender" name="gender" class="form-control f-s-14 default-select2">
                     {% for choice in choices.GENDER_CHOICES %}
-                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    <option value="{{ choice.0 }}">{% trans choice.1 %}</option>
                     {% endfor %}
                 </select>
             </div>

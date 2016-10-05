@@ -1,5 +1,6 @@
 {% extends 'base_theme.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block body %}
     <!-- begin #page-loader -->
@@ -28,31 +29,31 @@
                         <li class="{% block menu1 %}{% endblock %}">
                             <a href="{% url 'data_entry:form' %}">
                                 <i class="fa fa-pencil-square-o"></i>
-                                <span>Patient Form</span>
+                                <span>{% trans 'Patient Form' %}</span>
                             </a>
                         </li>
                         <li class="{% block menu2 %}{% endblock %}">
                             <a href="{% url 'data_entry:patients:index' %}">
                                 <i class="fa fa-users"></i> 
-                                <span>My Patients</span>
+                                <span>{% trans 'My Patients' %}</span>
                             </a>
                         </li>
                         <li class="{% block menu3 %}{% endblock %}">
                             <a href="{% url 'database:index' %}">
                                 <i class="fa fa-database"></i> 
-                                <span>Database</span>
+                                <span>{% trans 'Database' %}</span>
                             </a>
                         </li>
                         <li class="{% block menu4 %}{% endblock %}">
                             <a href="{% url 'data_entry:guidelines' %}">
                                 <i class="fa fa-book"></i> 
-                                <span>Guidelines</span>
+                                <span>{% trans 'Guidelines' %}</span>
                             </a>
                         </li>
                         <li class="{% block menu5 %}{% endblock %}">
                             <a href="{% url 'data_entry:recommendations' %}">
                                 <i class="fa fa-book"></i>
-                                <span>Recommendations</span>
+                                <span>{% trans 'Recommendations' %}</span>
                             </a>
                         </li>
                     </ul>

@@ -77,7 +77,7 @@
             <div class="right-content">
                 <div class="hidden-sm hidden-md hidden-lg">
                     <div class="bg-blue text-center"> 
-                        <h2 class="text-white" style="margin:0px;padding: 10px 0px 10px 0px;"><i class="fa fa-heartbeat text-white"></i> Triple Therapy Aid</h2>
+                        <h2 class="text-white" style="margin:0px;padding: 10px 0px 10px 0px;"><i class="fa fa-heartbeat text-white"></i> {% trans 'Triple Therapy Aid' %}</h2>
                     </div>
 
                     <div class="row vertical-align">
@@ -94,62 +94,61 @@
                         </div>
                     </div>
                 </div>
-                <h1 class="register-header">Sign In</h1>
+                <h1 class="register-header">{% trans 'Sign In' %}</h1>
                 <!-- begin register-content -->
                 <div class="register-content">
                     <form id="signin-form" action="{% url 'users:login' %}" method="POST" class="margin-bottom-0 form-horizontal" data-parsley-validate>
                         {% csrf_token %}
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Email</label>
+                            <label class="col-md-3 control-label">{% trans 'Email' %}</label>
                             <div class="col-md-9">
                                 <input type="text" id="email-field" name="email" class="form-control" placeholder="Email address" data-parsley-required="true" data-parsley-type="email"/>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Password</label>
+                            <label class="col-md-3 control-label">{% trans 'Password' %}</label>
                             <div class="col-md-9">
                                 <input type="password" name="password" class="form-control" placeholder="Password" data-parsley-required="true"/>
                             </div>
                         </div>
 
                         <div class="register-buttons">
-                            <button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">{% trans 'Sign In' %}</button>
                         </div>
                         
                         <div id="signin-form-errors" class="row text-center parsley-errors-list">
                         </div>
 
-                        <div class="m-t-10">
-                            Forgot your password? <a href="{% url 'password_reset_recover' %}">Click here</a>.
+                        <div class="m-t-10">{% trans 'Forgot your password?' %}<a href="{% url 'password_reset_recover' %}">{% trans 'Click here' %}</a>.
                         </div>
                     </form>
                 </div>
                 <!-- end register-content -->
                 <hr>
-                <h1 class="register-header">Register</h1>
+                <h1 class="register-header">{% trans 'Register' %}</h1>
                 <!-- begin register-content -->
                 <div class="register-content">
                     <form id="signup-form" action="{% url 'users:register' %}" method="POST" class="margin-bottom-0 form-horizontal" data-parsley-validate>
                         {% csrf_token %}
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Email *</label>
+                            <label class="col-md-3 control-label">{% trans 'Email' %}</label>
                             <div class="col-md-9">
                                 <input type="text" id="email-field" name="email" class="form-control" placeholder="Email address" data-parsley-required="true" data-parsley-type="email" data-parsley-remote="{% url 'users:exists' %}" data-parsley-remote data-parsley-remote-reverse="true" data-parsley-remote-message="That email is already taken"/>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Password *</label>
+                            <label class="col-md-3 control-label">{% trans 'Password' %}</label>
                             <div class="col-md-9">
                                 <input type="password" name="password1" class="form-control" placeholder="Password" data-parsley-required="true"/>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Re-enter *</label>
+                            <label class="col-md-3 control-label">{% trans 'Re-enter' %}</label>
                             <div class="col-md-9">
                                 <input type="password" name="password2" class="form-control" placeholder="Re-enter password" data-parsley-required="true" />
                             </div>
@@ -157,12 +156,12 @@
 
                         <div class="checkbox m-b-15">
                             <label>
-                                <input type="checkbox" required/> By clicking Sign Up, you agree to our <a href="#">Terms</a> and that you have read our <a href="#">Data Policy</a>, including our <a href="#">Cookie Use</a>.
+                                <input type="checkbox" required/> {% trans 'By clicking Sign Up, you agree to our' %} <a href="#">{% trans 'Terms' %}</a> {% trans 'and that you have read our' %} <a href="#">{% trans 'Data Policy' %}</a>, {% trans 'including our' %} <a href="#">{% trans 'Cookie Use' %}</a>.
                             </label>
                         </div>
 
                         <div class="register-buttons">
-                            <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">{% trans 'Sign Up' %}</button>
                         </div>
 
                         <div id="signup-form-errors" class="row text-center parsley-errors-list">

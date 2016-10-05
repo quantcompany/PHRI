@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block head_css %}
     <link href="{% static 'plugins/bootstrap-datepicker/css/datepicker.css' %}" rel="stylesheet" />
@@ -9,7 +10,7 @@
     <link href="{% static 'plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet">
 {% endblock %}
 
-{% block page_title %}Patient Form{% endblock %}
+{% block page_title %}{% trans 'Patient Form' %}{% endblock %}
 
 {% block menu1 %}active{% endblock %}
 
@@ -76,21 +77,21 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Patient Saved</h4>
+                        <h4 class="modal-title">{% trans 'Patient Saved' %}</h4>
                     </div>
                     <div class="modal-body f-s-14">
                         <div class="row">
                             <div class="col-md-4 center-block">
                                 <button id="email_results_button" type="button" class="btn btn-block btn-lg btn-primary">
                                     <i class="fa fa-envelope fa-3x"></i><br/>
-                                    <span class="f-s-20 f-w-300">Email report</span>
+                                    <span class="f-s-20 f-w-300">{% trans 'Email Report' %}</span>
                                 </button>
 
                                 
                                 <div id="email_results_input" class="input-group m-t-20" style="display:none;">
                                     <input type="email" class="form-control" placeholder="Email Address">
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-primary">Send</button>
+                                        <button type="button" class="btn btn-primary">{% trans 'Send' %}</button>
                                     </div>
                                 </div>                                
                             </div>
@@ -98,20 +99,20 @@
                             <div class="col-md-4">
                                 <a href="#" id="print_results_button" target="_blank" type="button" class="btn btn-block btn-lg btn-primary">
                                     <i class="fa fa-print fa-3x"></i><br/>
-                                    <span class="f-s-20 f-w-300">Print report<span>
+                                    <span class="f-s-20 f-w-300">{% trans 'Print Report' %}<span>
                                 </a>
                             </div>
 
                             <div class="col-md-4">
                                 <a href="{% url 'data_entry:patients:index' %}" type="button" class="btn btn-block btn-lg btn-primary">
                                     <i class="fa fa-users fa-3x"></i><br/>
-                                    <span class="f-s-20 f-w-300">Go to my patients<span>
+                                    <span class="f-s-20 f-w-300">{% trans 'Go to my patients' %}<span>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                        <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">{% trans 'Close' %}</a>
                     </div>
                 </div>
             </div>

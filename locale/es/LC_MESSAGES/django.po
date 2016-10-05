@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-03 11:10-0600\n"
+"POT-Creation-Date: 2016-10-05 08:08-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,165 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: .\data_entry\templates\data_entry\form.html:13 .\templates\base.html:32
+msgid "Patient Form"
+msgstr "Formulario De Paciente"
+
+#: .\data_entry\templates\data_entry\form.html:80
+msgid "Patient Saved"
+msgstr "Paciente Guardado"
+
+#: .\data_entry\templates\data_entry\form.html:87
+msgid "Email Report"
+msgstr "Enviar Reporte"
+
+#: .\data_entry\templates\data_entry\form.html:94
+msgid "Send"
+msgstr "Enviar"
+
+#: .\data_entry\templates\data_entry\form.html:102
+msgid "Print Report"
+msgstr "Imprimir Reporte"
+
+#: .\data_entry\templates\data_entry\form.html:109
+msgid "Go to my patients"
+msgstr "Ver mis pacientes"
+
+#: .\data_entry\templates\data_entry\form.html:115
+msgid "Close"
+msgstr "Cerrar"
+
+#: .\data_entry\templates\data_entry\includes\personal_info_panel.html:5
+msgid "Personal Information"
+msgstr "Informacion Personal"
+
+#: .\data_entry\templates\data_entry\includes\personal_info_panel.html:12
+msgid "ID Number *"
+msgstr "No. De Identificacion *"
+
+#: .\data_entry\templates\data_entry\includes\personal_info_panel.html:19
+msgid "First name"
+msgstr "Primer Nombre"
+
+#: .\data_entry\templates\data_entry\includes\personal_info_panel.html:26
+msgid "Middle name"
+msgstr "Segundo Nombre"
+
+#: .\data_entry\templates\data_entry\includes\personal_info_panel.html:33
+msgid "Last name"
+msgstr "Apellido"
+
+#: .\data_entry\templates\data_entry\includes\personal_info_panel.html:40
+msgid "Date of birth *"
+msgstr "Fecha de nacimiento"
+
+#: .\data_entry\templates\data_entry\includes\personal_info_panel.html:52
+msgid "Gender *"
+msgstr "Sexo *"
+
+#: .\templates\base.html:38
+#, fuzzy
+#| msgid "Go to my patients"
+msgid "My Patients"
+msgstr "Ver mis pacientes"
+
+#: .\templates\base.html:44
+msgid "Database"
+msgstr ""
+
+#: .\templates\base.html:50
+msgid "Guidelines"
+msgstr ""
+
+#: .\templates\base.html:56
+msgid "Recommendations"
+msgstr ""
+
 #: .\templates\email_verification\verify_email.html:3
 msgid "Dear"
 msgstr "Estimado"
 
 #: .\templates\email_verification\verify_email.html:5
 msgid "Please click on the following link to activate your account:"
-msgstr ""
+msgstr "Por favor haga click en el siguiente enlace para activar tu cuenta:"
 
 #: .\templates\report_emails\medical.html:3
 #: .\templates\report_emails\patient.html:3
 msgid "Please click on the following link to view the report:"
-msgstr ""
+msgstr "Por favor haga click en el siguiente enlace para ver el reporte:"
 
 #: .\users\templates\users\landing.html:69
+#: .\users\templates\users\landing.html:80
 msgid "Triple Therapy Aid"
-msgstr "Triple Therapy Ayuda"
+msgstr "Triple Therapy Aid"
+
+#: .\users\templates\users\landing.html:71
+msgid ""
+"HIU Antiplatelet/Anticuagulant Physician Decision Aid for Patients with "
+"Atrial Fibrillation and CAD undergoing PCI"
+msgstr ""
+
+#: .\users\templates\users\landing.html:97
+#: .\users\templates\users\landing.html:118
+msgid "Sign In"
+msgstr "Iniciar Sesion"
+
+#: .\users\templates\users\landing.html:104
+#: .\users\templates\users\landing.html:137
+msgid "Email"
+msgstr "Correo"
+
+#: .\users\templates\users\landing.html:111
+#: .\users\templates\users\landing.html:144
+msgid "Password"
+msgstr "Contraseña"
+
+#: .\users\templates\users\landing.html:124
+msgid "Forgot your password?"
+msgstr "Olvidaste tu contraseña?"
+
+#: .\users\templates\users\landing.html:124
+msgid "Click here"
+msgstr "Haz click aqui"
+
+#: .\users\templates\users\landing.html:130
+msgid "Register"
+msgstr "Registrate"
+
+#: .\users\templates\users\landing.html:151
+msgid "Re-enter"
+msgstr "Repetir"
+
+#: .\users\templates\users\landing.html:159
+msgid "By clicking Sign Up, you agree to our"
+msgstr "Al registrarte, aceptas que estas de acuerdo con nuestros"
+
+#: .\users\templates\users\landing.html:159
+msgid "Terms"
+msgstr "Terminos"
+
+#: .\users\templates\users\landing.html:159
+msgid "and that you have read our"
+msgstr "y que has leido nuestra"
+
+#: .\users\templates\users\landing.html:159
+msgid "Data Policy"
+msgstr "Politica De Datos"
+
+#: .\users\templates\users\landing.html:159
+msgid "including our"
+msgstr "incluyendo nuestro"
+
+#: .\users\templates\users\landing.html:159
+msgid "Cookie Use"
+msgstr "Uso De Cookies"
+
+#: .\users\templates\users\landing.html:164
+msgid "Sign Up"
+msgstr "Registrarte"
+
+#~ msgid "Male"
+#~ msgstr "Masculino"
+
+#~ msgid "Female"
+#~ msgstr "Femenino"
