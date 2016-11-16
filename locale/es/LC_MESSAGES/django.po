@@ -19,11 +19,11 @@ msgstr ""
 
 #: .\data_entry\templates\data_entry\form.html:13 .\templates\base.html:32
 msgid "Patient Form"
-msgstr "Formulario De Paciente"
+msgstr ""
 
 #: .\data_entry\templates\data_entry\form.html:80
 msgid "Patient Saved"
-msgstr "Paciente Guardado"
+msgstr ""
 
 #: .\data_entry\templates\data_entry\form.html:87
 msgid "Email Report"
@@ -67,7 +67,7 @@ msgstr "Apellido"
 
 #: .\data_entry\templates\data_entry\includes\personal_info_panel.html:40
 msgid "Date of birth *"
-msgstr "Fecha de nacimiento"
+msgstr "Fecha de nacimiento *"
 
 #: .\data_entry\templates\data_entry\includes\personal_info_panel.html:52
 msgid "Gender *"
@@ -81,15 +81,15 @@ msgstr "Ver mis pacientes"
 
 #: .\templates\base.html:44
 msgid "Database"
-msgstr ""
+msgstr "Base de datos"
 
 #: .\templates\base.html:50
 msgid "Guidelines"
-msgstr ""
+msgstr "Guias"
 
 #: .\templates\base.html:56
 msgid "Recommendations"
-msgstr ""
+msgstr "Recomendaciones"
 
 #: .\templates\email_verification\verify_email.html:3
 msgid "Dear"

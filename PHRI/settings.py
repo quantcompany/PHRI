@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import environ
+
+env = environ.Env(DEBUG=(bool, False),) # set default values and casting
+environ.Env.read_env() # reading .env file
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,11 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    
+
     # 3rd party apps
     'custom_user',
     'password_reset',
-    
+
     # Local apps
     'users',
     'data_entry',
@@ -91,8 +95,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'phri',
-        'USER': 'phri_user',
-        'PASSWORD': 'DB_phri_16092016',
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD', default=''),
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -171,8 +175,8 @@ EMAIL_PORT = 465
 # EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_HOST_USER = 'info@tripletherapy.net'
-EMAIL_HOST_PASSWORD = 'quant_zx_963'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'info@tripletherapy.net'
 
 LOCALE_PATHS = [
@@ -183,5 +187,3 @@ try:
     from local_settings import *
 except:
     pass
-
-
