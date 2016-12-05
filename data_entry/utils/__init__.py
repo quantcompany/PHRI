@@ -12,12 +12,9 @@ def patients_csv_size_estimate():
 def patients_csv_headers():
     return '\ufeff' + ', '.join([
         'IDENTIFICATION',
-        'FIRST NAME',
-        'MIDDLE NAME',
-        'LAST NAME',
-        'DATE OF BIRTH',
+        'INITIALS',
+        'AGE',
         'GENDER',
-        'DATE OF PROCEDURE',
         'INDICATION',
         'VESSELS PCI',
         'BMS STENT',
@@ -27,25 +24,7 @@ def patients_csv_headers():
         'WARFARIN INTOLERANCE',
         'INR INSTABILITY',
         'NOAC ALLERGY OR INTOLERANCE',
-        'HB',
-        'HB UM',
-        'PLTS',
-        'PLTS UM',
-        'INR',
-        'CREAT',
-        'CREAT UM',
-        'EGFR',
-        'EGFR UM',
-        'AST',
-        'AST UM',
-        'ALT',
-        'ALT UM',
-        'GGT',
-        'GGT UM',
-        'BILIRUBIN',
-        'BILIRUBIN UM',
-        'TROPONIN',
-        'TROPONIN UM',
+        # bloodwork fields removed
         'CHF',
         'HTN',
         'DIABETES MELLITUS',
@@ -53,17 +32,11 @@ def patients_csv_headers():
         'TIA',
         'VASCULAR DISEASE',
         'RENAL DYSFUNCTION',
-        'CKD ON DIALYSIS',
-        'RENAL TRANSPLANT',
         'LIVER DYSFUNCTION',
         'HX OF BLEEDING',
         'ALCOHOL ABUSE',
         'DRUG ABUSE',
-        'CHRONIC NSAIDS RX',
-        'EXCESSIVE FALL RISK',
-        'HX OF MALIGNANCY',
         'ASA ALLERGY',
-        'UPCOMING NON CARDIATIC SURGERY',
         'FOLLOWED RECOMMENDATION',
         'USER',
         'CREATED',
@@ -74,7 +47,7 @@ def patients_csv():
     # \ufeff is unicode Byte Order Mark (BOM).
     # put it at the start of the file
     # so that excell will understand the encoding
-    
+
     # first row, yield the headers
     yield patients_csv_headers()
 

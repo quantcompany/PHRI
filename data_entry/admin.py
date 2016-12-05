@@ -5,7 +5,7 @@ from .models import *
 class PatientAdmin(admin.ModelAdmin):
     readonly_fields = ('chads2_score', 'hasbled_score', 'key')
     list_display = (
-        'full_name',
+        'initials',
         'age',
         'chads2_score',
         'hasbled_score'

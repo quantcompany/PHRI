@@ -33,7 +33,8 @@
             </div>
 
             <div class="col-md-6">
-                {% include 'data_entry/includes/blood_work_panel.html' %}
+                <!-- Bloodwork panel removed -->
+                <!-- include 'data_entry/includes/blood_work_panel.html' -->
             </div>
         </div>
 
@@ -85,7 +86,7 @@
                                 <a href="#" id="medical_report_button" type="button" class="btn btn-block btn-lg btn-primary">
                                     <i class="fa fa-envelope fa-3x"></i><br/>
                                     <span class="f-s-20 f-w-300">{% trans 'Medical Report' %}</span>
-                                </a>                            
+                                </a>
                             </div>
 
                             <div class="col-md-4">
@@ -132,40 +133,24 @@
     <script src="{% static 'data_entry/js/gauges.js' %}"></script>
 
     <script>
-        // $("#identification").mask("999-999-999");
-        
-        $("#date_of_birth").on('keyup', function(){
-            var parts = $(this).val().split('/');
-            var formatted = parts[1] + '/' + parts[0] + '/' + parts[2];
-
-            var dob = Date.parse(formatted);
-
-            if (isNaN(dob)){
-                $('#calculated_age').html('');
-            } else {
-                dob = new Date(dob);
-                $('#calculated_age').html('Age: ' + calculateAge(dob));
-            }
-        }).mask("99/99/9999");
-
-        $('#date_of_procedure').datepicker({
-            format: 'dd/mm/yyyy',
-            todayHighlight: true,
-            autoclose: true,
-            startView: 1,
-        });
-
         $(".default-select2").select2({
             minimumResultsForSearch: 1,
-            theme: "default",
-            placeholder: '---------'
+            placeholder: '---------',
+            theme: "default"
+        });
+
+        $(".nullable-select2").select2({
+            allowClear: true,
+            minimumResultsForSearch: 1,
+            placeholder: '---------',
+            theme: "default"
         });
 
         $(".multiple-select2").select2({ placeholder: "---------" });
 
 
         $(".bootstrap-switch").bootstrapSwitch();
-        
+
         $("#followed_recommendation").bootstrapSwitch({
             onSwitchChange: function(event, state){
                 var ta = $('#reason_not_followed');
@@ -182,8 +167,7 @@
             $('#first_name').val('');
             $('#middle_name').val('');
             $('#last_name').val('');
-            $('#date_of_birth').val('');
-            $('#date_of_procedure').val('');
+            $('#age').val('');
             $('[name="vessels_pci"]').prop('checked', false);
             $('[name="stent"]').prop('checked', false);
             $('#prev_anti_coagulation').val('0').trigger('change');
@@ -195,9 +179,9 @@
 
         function submitPatient(){
             event.preventDefault();
-            
+
             var form = $('#patient_form')[0];
-            
+
             var fd = new FormData(form);
 
             if ($('#bms_stent').is(':checked')){
@@ -227,7 +211,7 @@
                     clearFields();
                     // window.location.replace("{% url 'data_entry:form' %}");
                 });
-               
+
                 request.fail(function(jqXHR, textStatus, errorThrown) {
                     console.log('Fail');
                     console.log(jqXHR);
@@ -250,7 +234,7 @@
                     }
 
                     return false;
-                    // var errorMessage = jqXHR.responseJSON.error; 
+                    // var errorMessage = jqXHR.responseJSON.error;
                     // $('#signup-form-errors').addClass('filled').html(errorMessage)
                 });
             });

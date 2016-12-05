@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from django.test import SimpleTestCase
-from django.utils import timezone 
+from django.utils import timezone
 
 from .models import Patient
 
@@ -20,19 +20,11 @@ from .models import Patient
 # stent
 # vascular_disease
 
-dob64 = timezone.now().date() - timedelta(days=365*64) #date of birth for age 64
-dob65 = timezone.now().date() - timedelta(days=365*65) #date of birth for age 65
-dob66 = timezone.now().date() - timedelta(days=365*66) #date of birth for age 66
-
-dob74 = timezone.now().date() - timedelta(days=365*74) #date of birth for age 74
-dob75 = timezone.now().date() - timedelta(days=365*75) #date of birth for age 75
-dob76 = timezone.now().date() - timedelta(days=365*76) #date of birth for age 76
-
 def P(**kwargs):
     # function that builds a Patient object using default values where possible.
-    # kwargs are expected to only include fields that affect the formula's result. 
+    # kwargs are expected to only include fields that affect the formula's result.
     # If any fields are not included in the kwargs, their defaults are used
-    dob = kwargs.pop('dob', timezone.now().date())
+    age = kwargs.pop('age', 0)
     gender = kwargs.pop('gender', 'M')
 
     return Patient(
@@ -40,7 +32,7 @@ def P(**kwargs):
         first_name='Barrack',
         middle_name='Hussein',
         last_name='Obama',
-        date_of_birth=dob,
+        age=age,
         gender=gender,
         **kwargs
     )
@@ -66,9 +58,9 @@ class Chads2TestCase(SimpleTestCase):
 
     def test_age(self):
         """Testing "age" variable """
-        self.assertEqual(P(dob=dob74).chads2_score(), 0)
-        self.assertEqual(P(dob=dob75).chads2_score(), 1)
-        self.assertEqual(P(dob=dob76).chads2_score(), 1)
+        self.assertEqual(P(age=74).chads2_score(), 0)
+        self.assertEqual(P(age=75).chads2_score(), 1)
+        self.assertEqual(P(age=76).chads2_score(), 1)
 
     def test_diabetes_melitus(self):
         """Testing "diabetes_melitus" variable """
@@ -91,7 +83,7 @@ class Chads2TestCase(SimpleTestCase):
         self.assertEqual(P(
             chf=True,
             htn=1,
-            dob=dob76,
+            age=76,
             diabetes_mellitus=True,
             stroke=True,
             tia=True
@@ -122,12 +114,12 @@ class Cha2TestCase(SimpleTestCase):
         # < 65 = 0
         # >= 65 < 75 = 1
         # >= 75 = 2
-        self.assertEqual(P(dob=dob64).cha2_score(), 0)
-        self.assertEqual(P(dob=dob65).cha2_score(), 1)
-        self.assertEqual(P(dob=dob66).cha2_score(), 1)
-        self.assertEqual(P(dob=dob74).cha2_score(), 1)
-        self.assertEqual(P(dob=dob75).cha2_score(), 2)
-        self.assertEqual(P(dob=dob76).cha2_score(), 2)
+        self.assertEqual(P(age=64).cha2_score(), 0)
+        self.assertEqual(P(age=65).cha2_score(), 1)
+        self.assertEqual(P(age=66).cha2_score(), 1)
+        self.assertEqual(P(age=74).cha2_score(), 1)
+        self.assertEqual(P(age=75).cha2_score(), 2)
+        self.assertEqual(P(age=76).cha2_score(), 2)
 
     def test_diabetes_melitus(self):
         """Testing "diabetes_melitus" variable """
@@ -166,7 +158,7 @@ class Cha2TestCase(SimpleTestCase):
         self.assertEqual(P(
             chf=True,
             htn=1,
-            dob=dob64, # age 64
+            age=64, # age 64
             diabetes_mellitus=True,
             stroke=True,
             tia=True,
@@ -177,7 +169,7 @@ class Cha2TestCase(SimpleTestCase):
         self.assertEqual(P(
             chf=True,
             htn=1,
-            dob=dob66, # age 66
+            age=66, # age 66
             diabetes_mellitus=True,
             stroke=True,
             tia=True,
@@ -188,7 +180,7 @@ class Cha2TestCase(SimpleTestCase):
         self.assertEqual(P(
             chf=True,
             htn=1,
-            dob=dob76, # age 76
+            age=76, # age 76
             diabetes_mellitus=True,
             stroke=True,
             tia=True,
@@ -242,9 +234,9 @@ class HasbledTestCase(SimpleTestCase):
 
     def test_age(self):
         """Testing "age" variable """
-        self.assertEqual(P(dob=dob64).hasbled_score(), 0)
-        self.assertEqual(P(dob=dob65).hasbled_score(), 1)
-        self.assertEqual(P(dob=dob66).hasbled_score(), 1)
+        self.assertEqual(P(age=64).hasbled_score(), 0)
+        self.assertEqual(P(age=65).hasbled_score(), 1)
+        self.assertEqual(P(age=66).hasbled_score(), 1)
 
     def test_alcohol_abuse(self):
         """Testing "alcohol_abuse" variable """
@@ -271,7 +263,7 @@ class HasbledTestCase(SimpleTestCase):
             stroke=True,
             hx_of_bleeding=1,
             inr_instability=True,
-            dob=dob64, # age 64
+            age=64, # age 64
             alcohol_abuse=1,
             drug_abuse=True
         ).hasbled_score(), 7)
@@ -283,7 +275,7 @@ class HasbledTestCase(SimpleTestCase):
             stroke=True,
             hx_of_bleeding=1,
             inr_instability=True,
-            dob=dob65, # age 65
+            age=65, # age 65
             alcohol_abuse=1,
             drug_abuse=True
         ).hasbled_score(), 8)
@@ -295,7 +287,7 @@ class HasbledTestCase(SimpleTestCase):
             stroke=True,
             hx_of_bleeding=1,
             inr_instability=True,
-            dob=dob64, # age 64
+            age=64, # age 64
             alcohol_abuse=2,
             drug_abuse=True
         ).hasbled_score(), 8)
@@ -307,7 +299,7 @@ class HasbledTestCase(SimpleTestCase):
             stroke=True,
             hx_of_bleeding=1,
             inr_instability=True,
-            dob=dob65, # age 65
+            age=65, # age 65
             alcohol_abuse=2,
             drug_abuse=True
         ).hasbled_score(), 9)

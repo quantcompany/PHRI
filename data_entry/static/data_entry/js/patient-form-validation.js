@@ -36,15 +36,10 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     identification: {
       required: true
     },
-    date_of_birth: {
-      required: true,
-      dateITA: true
+    age: {
+      required: true
     },
     gender: "required",
-    date_of_procedure: {
-      required: false,
-      dateITA: true
-    },
     indication: "required",
     // vessels_pci: "required",
     stent: "required",
@@ -53,7 +48,6 @@ var patientFormValidator = $("form[name='patient_form']").validate({
       min: 0,
       max: 9
     },
-    af_type: "required",
     htn: "required",
     alcohol_abuse: "required",
     reason_not_followed: {
@@ -81,7 +75,7 @@ var patientFormValidator = $("form[name='patient_form']").validate({
   // Make sure the form is submitted to the destination defined
   // in the "action" attribute of the form when valid
   submitHandler: function(form) {
-    if ($(form).valid()){ 
+    if ($(form).valid()){
       submitPatient();
     }else{
       $.gritter.add({

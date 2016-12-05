@@ -6,9 +6,7 @@ $('#middle_name').val('Hussein');
 
 $('#last_name').val('Obama');
 
-$('#date_of_birth').val('08/04/1961');
-
-$('#date_of_procedure').val('01/10/2015');
+$('#age').val('65');
 
 // $('#vessels_pci').val(1).trigger('change');
 

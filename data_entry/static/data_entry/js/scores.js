@@ -4,41 +4,41 @@ var scores = {
     hasbled: 0
 };
 
-function calculateAge(birthDate){
-    var birthYear = birthDate.getFullYear();
-    var birthMonth = birthDate.getMonth();
-    var birthDay = birthDate.getDate();
-
-    var todayDate = new Date();
-    var todayYear = todayDate.getFullYear();
-    var todayMonth = todayDate.getMonth();
-    var todayDay = todayDate.getDate();
-
-    var age = todayYear - birthYear;
-
-    if (todayMonth < birthMonth){
-        age--;
-    }
-
-    if (birthMonth == todayMonth && todayDay < birthDay){
-        age--;
-    }
-
-    return age;
-}
+// function calculateAge(birthDate){
+//     var birthYear = birthDate.getFullYear();
+//     var birthMonth = birthDate.getMonth();
+//     var birthDay = birthDate.getDate();
+//
+//     var todayDate = new Date();
+//     var todayYear = todayDate.getFullYear();
+//     var todayMonth = todayDate.getMonth();
+//     var todayDay = todayDate.getDate();
+//
+//     var age = todayYear - birthYear;
+//
+//     if (todayMonth < birthMonth){
+//         age--;
+//     }
+//
+//     if (birthMonth == todayMonth && todayDay < birthDay){
+//         age--;
+//     }
+//
+//     return age;
+// }
 
 function updateEverything(){
     updateChads2Score();
     updateCha2Score();
     updateHasbledScore();
-    
+
     // these three are in guages.js
     updateChads2Gauges();
     updateCha2Gauges();
     updateHasbledGauges();
 
     updatePlots(); // this one is in plot.js
-    
+
     updateRecommendedTherapy(); // this is in therapy.js
 }
 
@@ -48,29 +48,23 @@ function updateChads2Score(){
 
     // calculate chf value
     var chfValue = $('#chf').bootstrapSwitch('state') ? 1:0;
-    
+
     // calculate htn value
     // htn has 3 possible choices (0, 1 and 2)
     // if the choice is 0, the value should be 0
     // if the choice is 1 or 2, the value should be 1
     var htnValue = parseInt($('#htn').val()) ? 1:0;
-    
-    // calculate ageValue
-    var birth_timestamp = Date.parse($('#date_of_birth').val());
 
-    if (isNaN(birth_timestamp)){
-        var ageValue = 0;
-    }else{
-        var birthDate = new Date(birth_timestamp);
-        var ageValue = calculateAge(birthDate) >= 75 ? 1:0;
-    }
+    // calculate ageValue
+    var age = parseInt($('#age').val()) || 0;
+    var ageValue = age >= 75 ? 1:0;
 
     // calculate diabetes
     var diabetesValue = $('#diabetes_mellitus').bootstrapSwitch('state') ? 1:0;
 
     // calculate stroke
     var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
-    
+
     // calculate TIA
     var tiaValue = $('#tia').bootstrapSwitch('state') ? 1:0;
 
@@ -91,29 +85,22 @@ function updateCha2Score(){
 
     // calculate chf value
     var chfValue = $('#chf').bootstrapSwitch('state') ? 1:0;
-    
+
     // calculate htn value
     // htn has 3 possible choices (0, 1 and 2)
     // if the choice is 0, the value should be 0
     // if the choice is 1 or 2, the value should be 1
     var htnValue = parseInt($('#htn').val()) ? 1:0;
-    
+
     // calculate ageValue
-    var birth_timestamp = Date.parse($('#date_of_birth').val());
+    var age = parseInt($('#age').val()) || 0;
 
-    if (isNaN(birth_timestamp)){
+    if (age < 65){
         var ageValue = 0;
-    }else{
-        var birthDate = new Date(birth_timestamp);
-        var age = calculateAge(birthDate);
-
-        if (age < 65){
-            var ageValue = 0;
-        }else if (age >= 65 && age < 75){
-            var ageValue = 1;
-        }else if (age >= 75){
-            var ageValue = 2;
-        }
+    }else if (age >= 65 && age < 75){
+        var ageValue = 1;
+    }else if (age >= 75){
+        var ageValue = 2;
     }
 
     // calculate diabetes
@@ -121,7 +108,7 @@ function updateCha2Score(){
 
     // calculate stroke
     var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
-    
+
     // calculate TIA
     var tiaValue = $('#tia').bootstrapSwitch('state') ? 1:0;
 
@@ -167,14 +154,8 @@ function updateHasbledScore(){
     var inrValue = $('#inr_instability').bootstrapSwitch('state') ? 1:0;
 
     // calculate ageValue
-    var birth_timestamp = Date.parse($('#date_of_birth').val());
-
-    if (isNaN(birth_timestamp)){
-        var ageValue = 0;
-    }else{
-        var birthDate = new Date(birth_timestamp);
-        var ageValue = calculateAge(birthDate) >= 65 ? 1:0;
-    }
+    var age = parseInt($('#age').val()) || 0;
+    var ageValue = age >= 65 ? 1:0;
 
     // Drug abuse
     var drugAbuseValue = $('#drug_abuse').bootstrapSwitch('state') ? 1:0;
@@ -210,6 +191,6 @@ $('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability
     updateEverything();
 });
 
-$('#htn, #date_of_birth, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #hx_of_bleeding').on('change', function(event, state){
+$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #hx_of_bleeding').on('change', function(event, state){
     updateEverything();
 });

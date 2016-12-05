@@ -17,34 +17,25 @@ from .forms import PatientForm, EmailForm
 
 @login_required
 def form(request):
-    vessels_cutoff = math.ceil(VesselsPCI.objects.count() / 2)
+    vessels_cutoff = math.ceil(VesselsPCI.objects.count() / 3)
     v1 = VesselsPCI.objects.all()[:vessels_cutoff]
-    v2 = VesselsPCI.objects.all()[vessels_cutoff:]
+    v2 = VesselsPCI.objects.all()[vessels_cutoff:vessels_cutoff*2]
+    v3 = VesselsPCI.objects.all()[vessels_cutoff * 2:]
 
     context = {
         'choices': {
-            'HB_UM_CHOICES': HB_UM_CHOICES, 
-            'PLTS_UM_CHOICES': PLTS_UM_CHOICES, 
-            'CREAT_UM_CHOICES': CREAT_UM_CHOICES, 
-            'EGFR_UM_CHOICES': EGFR_UM_CHOICES, 
-            'AST_UM_CHOICES': AST_UM_CHOICES, 
-            'ALT_UM_CHOICES': ALT_UM_CHOICES, 
-            'GGT_UM_CHOICES': GGT_UM_CHOICES, 
-            'BILIRUBIN_UM_CHOICES': BILIRUBIN_UM_CHOICES, 
-            'TROPONIN_UM_CHOICES': TROPONIN_UM_CHOICES, 
-            'GENDER_CHOICES': GENDER_CHOICES, 
+            # bloodwork UM choices removed
+            'GENDER_CHOICES': GENDER_CHOICES,
             'HTN_CHOICES': HTN_CHOICES,
-            'ALCOHOL_ABUSE_CHOICES': ALCOHOL_ABUSE_CHOICES, 
-            'VASCULAR_DISEASE_CHOICES': VASCULAR_DISEASE_CHOICES, 
-            'AF_TYPE_CHOICES': AF_TYPE_CHOICES, 
-            'INDICATION_CHOICES': INDICATION_CHOICES, 
-            'ANTI_COAGULATION_CHOICES': ANTI_COAGULATION_CHOICES, 
-            'BLEEDING_CHOICES': BLEEDING_CHOICES, 
-            'MALIGNANCY_CHOICES': MALIGNANCY_CHOICES, 
-            'NON_CARDIATIC_SURGERY_CHOICES': NON_CARDIATIC_SURGERY_CHOICES, 
+            'ALCOHOL_ABUSE_CHOICES': ALCOHOL_ABUSE_CHOICES,
+            'VASCULAR_DISEASE_CHOICES': VASCULAR_DISEASE_CHOICES,
+            'AF_TYPE_CHOICES': AF_TYPE_CHOICES,
+            'INDICATION_CHOICES': INDICATION_CHOICES,
+            'ANTI_COAGULATION_CHOICES': ANTI_COAGULATION_CHOICES,
+            'BLEEDING_CHOICES': BLEEDING_CHOICES,
         },
 
-        'vessels_pairs': itertools.zip_longest(v1, v2)
+        'vessels_tris': itertools.zip_longest(v1, v2, v3)
     }
 
     return render(request, 'data_entry/form.html', context)
@@ -75,6 +66,8 @@ def patient_index(request):
             new_patient.user = request.user
             new_patient.save()
             form.save_m2m()
+            print('patient saved? yes!')
+            print(new_patient)
             return JsonResponse({
                 'medical_report_link': '/patients/{0}/reports/medical'.format(new_patient.key),
                 'patient_report_link': '/patients/{0}/reports/patient'.format(new_patient.key)
@@ -109,7 +102,7 @@ def patient_report(request, patient_key):
         'sad': round(patient.chads2_risk()['percentage']),
         'happy': 100 - round(patient.chads2_risk()['percentage'])
     }
-    faces = ('S' * chads2_relative['sad']) + ('H' * chads2_relative['happy']) 
+    faces = ('S' * chads2_relative['sad']) + ('H' * chads2_relative['happy'])
     chads2_relative['rows'] = utils.chunks(faces, 10)
 
 
@@ -117,12 +110,12 @@ def patient_report(request, patient_key):
         'sad': round(patient.hasbled_risk()['percentage']),
         'happy': 100 - round(patient.hasbled_risk()['percentage'])
     }
-    faces = ('S' * hasbled_relative['sad']) + ('H' * hasbled_relative['happy']) 
+    faces = ('S' * hasbled_relative['sad']) + ('H' * hasbled_relative['happy'])
     hasbled_relative['rows'] = utils.chunks(faces, 10)
     context = {
         'patient': patient,
         'chads2_relative': chads2_relative,
-        'hasbled_relative': hasbled_relative,        
+        'hasbled_relative': hasbled_relative,
     }
 
     return render(request, 'data_entry/patients/reports/patient.html', context)
@@ -174,25 +167,15 @@ def email_patient_report(request, patient_key):
 def form_test(request):
     context = {
         'choices': {
-            'HB_UM_CHOICES': HB_UM_CHOICES, 
-            'PLTS_UM_CHOICES': PLTS_UM_CHOICES, 
-            'CREAT_UM_CHOICES': CREAT_UM_CHOICES, 
-            'EGFR_UM_CHOICES': EGFR_UM_CHOICES, 
-            'AST_UM_CHOICES': AST_UM_CHOICES, 
-            'ALT_UM_CHOICES': ALT_UM_CHOICES, 
-            'GGT_UM_CHOICES': GGT_UM_CHOICES, 
-            'BILIRUBIN_UM_CHOICES': BILIRUBIN_UM_CHOICES, 
-            'TROPONIN_UM_CHOICES': TROPONIN_UM_CHOICES, 
-            'GENDER_CHOICES': GENDER_CHOICES, 
+            # bloodwork um choices removed
+            'GENDER_CHOICES': GENDER_CHOICES,
             'HTN_CHOICES': HTN_CHOICES,
-            'ALCOHOL_ABUSE_CHOICES': ALCOHOL_ABUSE_CHOICES, 
-            'VASCULAR_DISEASE_CHOICES': VASCULAR_DISEASE_CHOICES, 
-            'AF_TYPE_CHOICES': AF_TYPE_CHOICES, 
-            'INDICATION_CHOICES': INDICATION_CHOICES, 
-            'ANTI_COAGULATION_CHOICES': ANTI_COAGULATION_CHOICES, 
-            'BLEEDING_CHOICES': BLEEDING_CHOICES, 
-            'MALIGNANCY_CHOICES': MALIGNANCY_CHOICES, 
-            'NON_CARDIATIC_SURGERY_CHOICES': NON_CARDIATIC_SURGERY_CHOICES, 
+            'ALCOHOL_ABUSE_CHOICES': ALCOHOL_ABUSE_CHOICES,
+            'VASCULAR_DISEASE_CHOICES': VASCULAR_DISEASE_CHOICES,
+            'AF_TYPE_CHOICES': AF_TYPE_CHOICES,
+            'INDICATION_CHOICES': INDICATION_CHOICES,
+            'ANTI_COAGULATION_CHOICES': ANTI_COAGULATION_CHOICES,
+            'BLEEDING_CHOICES': BLEEDING_CHOICES,
         },
 
         'values': {

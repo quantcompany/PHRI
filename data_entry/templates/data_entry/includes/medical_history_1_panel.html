@@ -52,29 +52,5 @@
                 </select>
             </div>
         </div>
-
-
-        <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="hx_of_malignancy">Hx of malignancy</label>
-            <div class="col-md-6 col-sm-6">
-                <select id="hx_of_malignancy" name="hx_of_malignancy" class="form-control f-s-14 default-select2">
-                    {% for choice in choices.MALIGNANCY_CHOICES %}
-                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="upcoming_non_cardiatic_surgery">Upcoming non-cardiac surgery</label>
-            <div class="col-md-6 col-sm-6">
-                <select id="upcoming_non_cardiatic_surgery" name="upcoming_non_cardiatic_surgery" class="form-control f-s-14 default-select2">
-                    {% for choice in choices.NON_CARDIATIC_SURGERY_CHOICES %}
-                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
     </div>
 {% endblock %}

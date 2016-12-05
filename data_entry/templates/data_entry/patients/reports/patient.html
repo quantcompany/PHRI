@@ -70,7 +70,7 @@
                     <div class="input-group-btn">
                         <button id="send" type="button" class="btn btn-default btn-primary" data-loading-text="Sending...">Send</button>
                     </div>
-                </div>   
+                </div>
               </li>
             </ul>
           </div>
@@ -91,8 +91,8 @@
 
             <tbody>
                 <tr>
-                    <th>Full name: </th>
-                    <td>{{ patient.full_name }}</td>
+                    <th>Initials: </th>
+                    <td>{{ patient.initials }}</td>
                 </tr>
 
                 <tr>
@@ -214,7 +214,7 @@
                     sendButton.button('reset');
                     tagitInput.parent().addClass('has-success');
                 });
-               
+
                 request.fail(function(jqXHR, textStatus, errorThrown) {
                     console.log('Fail');
                     console.log(jqXHR);

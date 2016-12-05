@@ -16,44 +16,25 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="first_name">{% trans 'Initials' %}</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14">{% trans 'Initials' %}</label>
 
             <div class="col-md-2 col-sm-2">
                 <input id="first_name" type="text" name="first_name" class="form-control f-s-14 text-center" style="text-transform: uppercase;" placeholder="First" maxlength="1" />
             </div>
 
             <div class="col-md-2 col-sm-2">
-                <input id="first_name" type="text" name="first_name" class="form-control f-s-14 text-center" style="text-transform: uppercase;" placeholder="Middle" maxlength="1" />
+                <input id="middle_name" type="text" name="middle_name" class="form-control f-s-14 text-center" style="text-transform: uppercase;" placeholder="Middle" maxlength="1" />
             </div>
 
             <div class="col-md-2 col-sm-2">
-                <input id="first_name" type="text" name="first_name" class="form-control f-s-14 text-center" style="text-transform: uppercase;" placeholder="Last" maxlength="1" />
+                <input id="last_name" type="text" name="last_name" class="form-control f-s-14 text-center" style="text-transform: uppercase;" placeholder="Last" maxlength="1" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="middle_name">{% trans 'Middle name' %}</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="age">{% trans 'Age *' %}<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
-                <input id="middle_name" type="text" name="middle_name" class="form-control f-s-14" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="last_name">{% trans 'Last name' %}</label>
-            <div class="col-md-6 col-sm-6">
-                <input id="last_name" type="text" name="last_name" class="form-control f-s-14" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="date_of_birth">{% trans 'Date of birth *' %}<br/><span></span></label>
-            <div class="col-md-6 col-sm-6">
-                <div class="input-group" id="">
-                    <input id="date_of_birth" type="text" name="date_of_birth" class="form-control f-s-14 id-mask" placeholder="dd/mm/yyyy"  />
-                    <span class="input-group-addon">
-                        <span id="calculated_age"></span>
-                    </span>
-                </div>
+                <input id="age" name="age" type="number" step="1" class="form-control f-s-14" />
             </div>
         </div>
 

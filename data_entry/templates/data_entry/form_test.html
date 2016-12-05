@@ -148,23 +148,6 @@
 
     <script>
         $("#identification").mask("999-999-999");
-        
-        $("#date_of_birth").on('keyup', function(){
-            var dob = Date.parse($(this).val());
-            if (isNaN(dob)){
-                $('#calculated_age').html('');
-            } else {
-                dob = new Date(dob);
-                $('#calculated_age').html('Age: ' + calculateAge(dob));
-            }
-        }).mask("99/99/9999");
-
-        $('#date_of_procedure').datepicker({
-            format: 'dd/mm/yyyy',
-            todayHighlight: true,
-            autoclose: true,
-            startView: 1,
-        });
 
         $(".default-select2").select2({
             minimumResultsForSearch: 1,
@@ -176,7 +159,7 @@
 
 
         $(".bootstrap-switch").bootstrapSwitch();
-        
+
         $("#followed_recommendation").bootstrapSwitch({
             onSwitchChange: function(event, state){
                 var ta = $('#reason_not_followed');
@@ -190,11 +173,11 @@
 
         function submitPatient(){
             event.preventDefault();
-            
+
             var form = $('#patient_form')[0];
-            
+
             var fd = new FormData(form);
-            
+
             Pace.track(function(){
               $('#signup-form-errors').removeClass('filled').html('');
                 var request = $.ajax({
@@ -270,7 +253,7 @@
                     $('#submit-modal').modal('show');
                     // window.location.replace("{% url 'data_entry:form' %}");
                 });
-               
+
                 request.fail(function(jqXHR, textStatus, errorThrown) {
                     console.log('Fail');
                     console.log(jqXHR);
@@ -281,7 +264,7 @@
                         position: 'top-left'
                     });
                     return false;
-                    // var errorMessage = jqXHR.responseJSON.error; 
+                    // var errorMessage = jqXHR.responseJSON.error;
                     // $('#signup-form-errors').addClass('filled').html(errorMessage)
                 });
             });

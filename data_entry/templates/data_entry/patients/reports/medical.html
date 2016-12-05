@@ -63,7 +63,7 @@
                     <div class="input-group-btn">
                         <button id="send" type="button" class="btn btn-default btn-primary" data-loading-text="Sending...">Send</button>
                     </div>
-                </div>   
+                </div>
               </li>
             </ul>
           </div>
@@ -90,16 +90,16 @@
                     <th>Identification Number</th>
                     <td>{{ patient.identification }}</td>
                     <td></td>
-                    <th>Name</th>
-                    <td>{{ patient.full_name }}</td>
+                    <th>Initials</th>
+                    <td>{{ patient.initials }}</td>
                 </tr>
 
                 <tr>
                     <th>Gender</th>
                     <td>{{ patient.get_gender_display }}</td>
                     <td></td>
-                    <th>Date Of Birth</th>
-                    <td>{{ patient.date_of_birth|date:"d/m/Y" }}</td>
+                    <th>Age</th>
+                    <td>{{ patient.age }}</td>
                 </tr>
 
                 <tr>
@@ -126,13 +126,13 @@
             </thead>
 
             <tbody>
-                <tr>
+                <!-- <tr>
                     <th>Date</th>
                     <td>{{ patient.date_of_procedure|date:"d/m/Y" }}</td>
                     <td></td>
                     <th>Indication</th>
                     <td>{{ patient.indication }}</td>
-                </tr>
+                </tr> -->
 
                 <tr>
                     <th>Vessels PCI</th>
@@ -184,78 +184,7 @@
             </tbody>
         </table>
 
-        <h3>Blood Work</h3>
-        <hr/>
-        <table class="table" style="width:100%;border:none;">
-            <thead>
-                <tr>
-                    <td style="width:11%"></td>
-                    <td style="width:15%"></td>
-                    
-                    <td style="width:11%"></td>
-                    
-                    <td style="width:11%"></td>
-                    <td style="width:15%"></td>
-                    
-                    <td style="width:11%"></td>
-
-                    <td style="width:11%"></td>
-                    <td style="width:15%"></td>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <th>HB</th>
-                    <td>{{ patient.hb|default:"N/A" }} {{ patient.get_hb_um_display }}</td>
-
-                    <td></td>
-
-                    <th>PLTS</th>
-                    <td>{{ patient.plts|default:"N/A" }} {{ patient.get_plts_um_display }}</td>
-
-                    <td></td>
-
-                    <th>CREAT</th>
-                    <td>{{ patient.creat|default:"N/A" }} {{ patient.get_creat_um_display }}</td>
-                </tr>
-
-                <tr>
-                    <th>AST</th>
-                    <td>{{ patient.ast|default:"N/A" }} {{ patient.get_ast_um_display }}</td>
-
-                    <td></td>
-                    
-                    <th>ALT</th>
-                    <td>{{ patient.alt|default:"N/A" }} {{ patient.get_alt_um_display }}</td>
-                    
-                    <td></td>
-
-                    <th>GGT</th>
-                    <td>{{ patient.ggt|default:"N/A" }} {{ patient.get_ggt_um_display }}</td>
-                </tr>
-
-                <tr>
-                    <th>Bilirubin</th>
-                    <td>{{ patient.bilirubin|default:"N/A" }} {{ patient.get_bilirubin_um_display }}</td>
-
-                    <td></td>
-                    
-                    <th>Troponin</th>
-                    <td>{{ patient.troponin|default:"N/A" }} {{ patient.get_troponin_um_display }}</td>
-                    
-                    <td></td>
-
-                    <th>INR</th>
-                    <td>{{ patient.inr|default:"N/A" }}</td>
-                </tr>
-
-                <tr>
-                    <th>EGFR</th>
-                    <td colspan="7">{{ patient.egfr|default:"N/A" }} {{ patient.get_egfr_um_display }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Bloodwork table removed -->
 
         <h3>Medical History</h3>
         <hr/>
@@ -274,7 +203,7 @@
                 <tr>
                     <th>HTN</th>
                     <td>{{ patient.get_htn_display }}</td>
-                    
+
                     <td></td>
 
                     <th>Vascular Disease</th>
@@ -284,7 +213,7 @@
                 <tr>
                     <th>Hx Of Bleeding</th>
                     <td>{{ patient.get_hx_of_bleeding_display }}</td>
-                    
+
                     <td></td>
 
                     <th>Alcohol Abuse</th>
@@ -292,30 +221,19 @@
                 </tr>
 
                 <tr>
-                    <th>Hx Of Malignancy</th>
-                    <td>{{ patient.get_hx_of_malignancy_display }}</td>
-                    
-                    <td></td>
-
-                    <th>Upcoming Non-Cardiatic Surgery</th>
-                    <td>{{ patient.get_upcoming_non_cardiatic_surgery_display }}</td>
-                </tr>
-
-                <tr>
                     <th>CHF</th>
                     <td>{{ patient.chf|yesno|capfirst }}</td>
-                    
+
                     <td></td>
 
                     <th>Diabetes Mellitus</th>
                     <td>{{ patient.diabetes_mellitus|yesno|capfirst }}</td>
-
                 </tr>
 
                 <tr>
                     <th>Stroke</th>
                     <td>{{ patient.stroke|yesno|capfirst }}</td>
-                    
+
                     <td></td>
 
                     <th>TIA</th>
@@ -325,21 +243,11 @@
                 <tr>
                     <th>Renal Dysfunction</th>
                     <td>{{ patient.renal_dysfunction|yesno|capfirst }}</td>
-                    
+
                     <td></td>
 
                     <th>Drug Abuse</th>
                     <td>{{ patient.drug_abuse|yesno|capfirst }}</td>
-                </tr>
-
-                <tr>
-                    <th>Chronic NSAIDS RX</th>
-                    <td>{{ patient.chronic_nsaids_rx|yesno|capfirst }}</td>
-                    
-                    <td></td>
-
-                    <th>Excessive Fall Risk</th>
-                    <td>{{ patient.excessive_fall_risk|yesno|capfirst }}</td>
                 </tr>
 
                 <tr>
@@ -488,7 +396,7 @@
                     sendButton.button('reset');
                     tagitInput.parent().addClass('has-success');
                 });
-               
+
                 request.fail(function(jqXHR, textStatus, errorThrown) {
                     console.log('Fail');
                     console.log(jqXHR);
