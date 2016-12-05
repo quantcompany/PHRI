@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block panel_heading %}{% trans 'Personal Information' %}{% endblock %}
-            
+
 {% block fa_icon %}fa fa-user{% endblock %}
 
 {% block panel_body %}
@@ -15,10 +15,19 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="first_name">{% trans 'First name' %}</label>
-            <div class="col-md-6 col-sm-6">
-                <input id="first_name" type="text" name="first_name" class="form-control f-s-14" />
+        <div class="form-group row">
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="first_name">{% trans 'Initials' %}</label>
+
+            <div class="col-md-2 col-sm-2">
+                <input id="first_name" type="text" name="first_name" class="form-control f-s-14 text-center" style="text-transform: uppercase;" placeholder="First" maxlength="1" />
+            </div>
+
+            <div class="col-md-2 col-sm-2">
+                <input id="first_name" type="text" name="first_name" class="form-control f-s-14 text-center" style="text-transform: uppercase;" placeholder="Middle" maxlength="1" />
+            </div>
+
+            <div class="col-md-2 col-sm-2">
+                <input id="first_name" type="text" name="first_name" class="form-control f-s-14 text-center" style="text-transform: uppercase;" placeholder="Last" maxlength="1" />
             </div>
         </div>
 
