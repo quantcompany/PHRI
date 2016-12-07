@@ -31,7 +31,7 @@ class ProfileForm(forms.ModelForm):
             'last_name',
             'institution',
             'specialty',
-            'practice_type',
+            'practices',
             'education_level',
             'country',
             'researcher'

@@ -1,4 +1,14 @@
 
+SPECIALTY_CHOICES = [
+    (0, 'Cardiology'),
+    (1, 'General Physician'),
+    (2, 'Hematology'),
+    (3, 'Internal Medicine'),
+    (4, 'Neurology'),
+    (5, 'Nurse Practitioner'),
+    (6, 'Pharmacist'),
+]
+
 COUNTRY_CHOICES = [
     ('AF', 'Afghanistan'),
     ('AX', 'Åland Islands'),

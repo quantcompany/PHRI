@@ -27,7 +27,7 @@
                     <div class="panel-body">
                         <fieldset>
                             <legend>Account Info</legend>
-                            
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -42,7 +42,7 @@
                                         <div class="col-md-6">
                                             <input type="text" class="form-control f-s-14" id="user_name" name="user_name" value="{{ user.user_name }}" />
                                         </div>
-                                    </div>                                    
+                                    </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">First Name</label>
@@ -116,23 +116,25 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">Practice Type</label>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control f-s-14" id="practice_type" name="practice_type" value="{{ user.practice_type }}"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
                                         <label class="col-md-4 control-label">Specialty</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control f-s-14" id="specialty" name="specialty" value="{{ user.specialty }}"/>
+                                            <select id="specialty" name="specialty" class="form-control f-s-14 nullable-select2">
+                                                <option value="">None</option>
+                                                {% for choice in specialties %}
+                                                  {% if user.specialty == choice.0 %}
+                                                    <option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
+                                                  {% else %}
+                                                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                                  {% endif %}
+                                                {% endfor %}
+                                            </select>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Country</label>
                                         <div class="col-md-6">
-                                            <select id="country" name="country" class="default-select2" style="width:100%">
+                                            <select id="country" name="country" class="flag-select2" style="width:100%">
                                                 {% for code, name in countries %}
                                                     {% if code == user.country %}
                                                     <option value="{{ code }}" selected="selected"><i class="flag-icon flag-icon-hn" /> {{ name }}</option>
@@ -141,6 +143,26 @@
                                                     {% endif %}
                                                 {% endfor %}
                                             </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Practice Type</label>
+                                        <div class="col-md-6">
+                                          {% for practice in practices %}
+                                              <div class="row">
+                                                  <div class="col-md-12 col-sm-12">
+                                                      <label for="practice{{ practice.id }}" style="cursor:pointer;">
+                                                        {% if practice in user.practices.all %}
+                                                        <input checked id="practice{{ practice.id }}" type="checkbox" name="practices" value="{{ practice.id }}" style="cursor:pointer;"/>
+                                                        {% else %}
+                                                        <input id="practice{{ practice.id }}" type="checkbox" name="practices" value="{{ practice.id }}" style="cursor:pointer;"/>
+                                                        {% endif %}
+                                                        {{ practice.name }}
+                                                      </label>
+                                                  </div>
+                                              </div>
+                                          {% endfor %}
                                         </div>
                                     </div>
                                 </div>
@@ -215,12 +237,19 @@
             return $('<span><i class="flag-icon flag-icon-' + data.id.toLowerCase() + '"/> ' + data.text + '</span>');
         }
 
-        $(".default-select2").select2({
+        $(".flag-select2").select2({
             minimumResultsForSearch: 1,
             theme: "default",
             placeholder: '---------',
             templateResult: formatOption,
             templateSelection: formatSelection
+        });
+
+        $(".nullable-select2").select2({
+            allowClear: true,
+            minimumResultsForSearch: 1,
+            placeholder: '---------',
+            theme: "default"
         });
 
         $('#new_password1').passwordStrength({targetDiv: '#password-strength'});
@@ -239,9 +268,9 @@
             $('#new_password2').val('').trigger('keyup');
         });
 
-        function submit(){            
+        function submit(){
             var form = $('#profile-form')[0];
-            
+
             var fd = new FormData(form);
 
             if ($('#password_form').is(':visible')){
@@ -264,7 +293,7 @@
                         window.location.reload()
                     }
                 });
-               
+
                 request.fail(function(jqXHR, textStatus, errorThrown) {
                     console.log('Fail');
                     console.log(jqXHR);

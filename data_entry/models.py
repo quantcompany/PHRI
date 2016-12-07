@@ -35,7 +35,7 @@ class Patient(models.Model):
 
     # Atrial Fibrillation
     af_type = models.IntegerField(choices=AF_TYPE_CHOICES, blank=True, null=True)
-    prev_anti_coagulation = models.IntegerField(default=0, choices=ANTI_COAGULATION_CHOICES)
+    prev_anti_coagulation = models.IntegerField(default=0, choices=ANTI_COAGULATION_CHOICES, blank=True, null=True)
     warfarin_intolerance = models.BooleanField(default=False)
     inr_instability = models.BooleanField(default=False)
     noac_allergy_or_intolerance = models.BooleanField(default=False)

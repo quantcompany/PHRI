@@ -10,9 +10,9 @@ from django.contrib.sites.shortcuts import get_current_site
 
 from emails import send_verification_email
 
-from .models import User, EmailVerification
+from .models import User, EmailVerification, PracticeType
 from .forms import RegistrationForm, ProfileForm
-from .choices import COUNTRY_CHOICES
+from .choices import COUNTRY_CHOICES, SPECIALTY_CHOICES
 
 
 def landing(request, *args, **kwargs):
@@ -61,8 +61,8 @@ def register(request):
 
         email = form.cleaned_data['email']
         password = form.cleaned_data['password1']
-        
-        # will not be active until email address is verified        
+
+        # will not be active until email address is verified
         # new_user = authenticate(username=email, password=password)
         # login(request, new_user)
         return JsonResponse({}, status=200)
@@ -74,7 +74,11 @@ def register(request):
 @login_required
 def me(request):
     if request.method == 'GET':
-        context = {'countries': COUNTRY_CHOICES}
+        context = {
+            'countries': COUNTRY_CHOICES,
+            'specialties': SPECIALTY_CHOICES,
+            'practices': PracticeType.objects.all()
+        }
         return render(request, 'users/my_profile.html', context)
     elif request.method == 'POST':
         form = ProfileForm(request.POST, instance=request.user)
@@ -95,10 +99,10 @@ def me(request):
         else:
             return JsonResponse(form.errors, status=400) # validation errors
 
-@login_required
-def profile(request, user_id):
-    context = {'countries': COUNTRY_CHOICES}
-    return render(request, 'users/profile.html', context)
+# @login_required
+# def profile(request, user_id):
+#     context = {'countries': COUNTRY_CHOICES}
+#     return render(request, 'users/profile.html', context)
 
 
 def exists(request):
