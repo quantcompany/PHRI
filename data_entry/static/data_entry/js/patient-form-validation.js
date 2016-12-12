@@ -41,8 +41,9 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     },
     gender: "required",
     indication: "required",
-    // vessels_pci: "required",
-    stent: "required",
+    stent: {
+      required: function(){return $('#indication').val() === 'SCAD';}
+    },
     balloons: {
       required: true,
       min: 0,
@@ -68,8 +69,6 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     // gender: "This field is required",
     // date_of_procedure: "This field is required",
     // indication: "This field is required",
-    // vessels_pci: "This field is required",
-    // vessels_pci: "This field is required",
     // balloons: "This field is required",
   },
   // Make sure the form is submitted to the destination defined

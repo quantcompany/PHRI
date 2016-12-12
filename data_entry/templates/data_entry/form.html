@@ -23,18 +23,7 @@
             </div>
 
             <div class="col-md-6">
-                {% include 'data_entry/includes/procedure_details_panel.html' %}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                {% include 'data_entry/includes/atrial_fibrilation_panel.html' %}
-            </div>
-
-            <div class="col-md-6">
-                <!-- Bloodwork panel removed -->
-                <!-- include 'data_entry/includes/blood_work_panel.html' -->
+                {% include 'data_entry/includes/procedure_details_atrial_fibrilation_panel.html' %}
             </div>
         </div>
 
@@ -66,8 +55,12 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12">
-                {% include 'data_entry/includes/recommendation_panel.html' %}
+            <div class="col-md-6">
+                {% include 'data_entry/includes/recommendation_mcmaster_panel.html' %}
+            </div>
+
+            <div class="col-md-6">
+                {% include 'data_entry/includes/recommendation_ccs_panel.html' %}
             </div>
         </div>
 
@@ -131,6 +124,7 @@
     <script src="{% static 'data_entry/js/patient-form-validation.js' %}"></script>
     <script src="{% static 'data_entry/js/plots.js' %}"></script>
     <script src="{% static 'data_entry/js/gauges.js' %}"></script>
+    <script src="{% static 'data_entry/js/options.js' %}"></script>
 
     <script>
         $(".default-select2").select2({
@@ -162,14 +156,26 @@
             }
         });
 
+        $('#no_pci').on('change', function(elem) {
+          var checked = $(this).is(':checked');
+
+          if (checked) {
+            $('#bms_stent').prop('checked', false).prop('disabled', true);
+            $('#des_stent').prop('checked', false).prop('disabled', true);
+          } else {
+            $('#bms_stent').prop('disabled', false);
+            $('#des_stent').prop('disabled', false);
+          }
+        });
+
         function clearFields(){
             $('#identification').val('');
             $('#first_name').val('');
             $('#middle_name').val('');
             $('#last_name').val('');
             $('#age').val('');
-            $('[name="vessels_pci"]').prop('checked', false);
             $('[name="stent"]').prop('checked', false);
+            $('[name="no_pci"]').prop('checked', false);
             $('#prev_anti_coagulation').val('0').trigger('change');
             $('input[type="number"]').val('');
             $('input[class="bootstrap-switch"]').bootstrapSwitch('state', false);

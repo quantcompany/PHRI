@@ -27,11 +27,8 @@ class Patient(models.Model):
 
     # Procedure Details
     indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
-    vessels_pci = models.ManyToManyField('data_entry.VesselsPCI', blank=True)
     bms_stent = models.BooleanField(default=False)
     des_stent = models.BooleanField(default=False)
-    # stent = models.IntegerField(default=0, choices=STENT_CHOICES)
-    # balloons = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(9)])
 
     # Atrial Fibrillation
     af_type = models.IntegerField(choices=AF_TYPE_CHOICES, blank=True, null=True)
@@ -100,9 +97,6 @@ class Patient(models.Model):
             return '.'.join(parts2)
         else:
             return 'anonymous'
-
-    def vessels_pci_display(self):
-        return ', '.join(self.vessels_pci.all().values_list('value', flat=True))
 
     def stents_display(self):
         if self.bms_stent and self.des_stent:
@@ -230,7 +224,6 @@ class Patient(models.Model):
             self.field_csv(self.age, int),
             self.field_csv(self.get_gender_display(), str),
             self.field_csv(self.indication, str),
-            self.field_csv(self.vessels_pci_display(), str),
             self.field_csv(self.bms_stent, bool),
             self.field_csv(self.des_stent, bool),
             self.field_csv(self.get_af_type_display(), str),
@@ -256,10 +249,3 @@ class Patient(models.Model):
             self.field_csv(self.created, datetime)
         ])
         return buf.getvalue()
-
-
-class VesselsPCI(models.Model):
-    value = models.CharField(max_length=60, unique=True)
-
-    def __str__(self):
-        return self.value

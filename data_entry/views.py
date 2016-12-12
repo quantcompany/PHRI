@@ -17,11 +17,6 @@ from .forms import PatientForm, EmailForm
 
 @login_required
 def form(request):
-    vessels_cutoff = math.ceil(VesselsPCI.objects.count() / 3)
-    v1 = VesselsPCI.objects.all()[:vessels_cutoff]
-    v2 = VesselsPCI.objects.all()[vessels_cutoff:vessels_cutoff*2]
-    v3 = VesselsPCI.objects.all()[vessels_cutoff * 2:]
-
     context = {
         'choices': {
             # bloodwork UM choices removed
@@ -33,9 +28,7 @@ def form(request):
             'INDICATION_CHOICES': INDICATION_CHOICES,
             'ANTI_COAGULATION_CHOICES': ANTI_COAGULATION_CHOICES,
             'BLEEDING_CHOICES': BLEEDING_CHOICES,
-        },
-
-        'vessels_tris': itertools.zip_longest(v1, v2, v3)
+        }
     }
 
     return render(request, 'data_entry/form.html', context)
@@ -176,10 +169,6 @@ def form_test(request):
             'INDICATION_CHOICES': INDICATION_CHOICES,
             'ANTI_COAGULATION_CHOICES': ANTI_COAGULATION_CHOICES,
             'BLEEDING_CHOICES': BLEEDING_CHOICES,
-        },
-
-        'values': {
-            'vessels_pci': VesselsPCI.objects.all(),
         }
     }
 

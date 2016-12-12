@@ -167,15 +167,15 @@ function updateHasbledScore(){
     var alcoholAbuseChoice = parseInt($('#alcohol_abuse').val()) || 0; // in case the selection is empty
     var alcoholAbuseValue = alcoholAbuseChoice == 2 ? 1:0;
 
-    console.log('htnValue: ' + htnValue);
-    console.log('renalDysfunctionValue: ' + renalDysfunctionValue);
-    console.log('liverDysfunctionValue: ' + liverDysfunctionValue);
-    console.log('strokeValue: ' + strokeValue);
-    console.log('bleedingValue: ' + bleedingValue);
-    console.log('inrValue: ' + inrValue);
-    console.log('ageValue: ' + ageValue);
-    console.log('drugAbuseValue: ' + drugAbuseValue);
-    console.log('alcoholAbuseValue: ' + alcoholAbuseValue);
+    // console.log('htnValue: ' + htnValue);
+    // console.log('renalDysfunctionValue: ' + renalDysfunctionValue);
+    // console.log('liverDysfunctionValue: ' + liverDysfunctionValue);
+    // console.log('strokeValue: ' + strokeValue);
+    // console.log('bleedingValue: ' + bleedingValue);
+    // console.log('inrValue: ' + inrValue);
+    // console.log('ageValue: ' + ageValue);
+    // console.log('drugAbuseValue: ' + drugAbuseValue);
+    // console.log('alcoholAbuseValue: ' + alcoholAbuseValue);
 
     scores.hasbled = htnValue + renalDysfunctionValue + liverDysfunctionValue + strokeValue +
     bleedingValue + inrValue + ageValue + drugAbuseValue + alcoholAbuseValue;
@@ -187,10 +187,10 @@ function updateHasbledScore(){
 // so that the scores, plot, and recommended therapy get updated as the
 // form is filled out
 
-$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #renal_dysfunction, #drug_abuse').on('switchChange.bootstrapSwitch', function(event, state){
+$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #noac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse').on('switchChange.bootstrapSwitch', function(event, state){
     updateEverything();
 });
 
-$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #hx_of_bleeding').on('change', function(event, state){
+$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #no_pci, #hx_of_bleeding').on('change', function(event, state){
     updateEverything();
 });

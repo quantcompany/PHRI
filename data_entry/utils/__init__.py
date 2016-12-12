@@ -16,7 +16,6 @@ def patients_csv_headers():
         'AGE',
         'GENDER',
         'INDICATION',
-        'VESSELS PCI',
         'BMS STENT',
         'DES STENT',
         'AF TYPE',
