@@ -51,9 +51,7 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     },
     htn: "required",
     alcohol_abuse: "required",
-    reason_not_followed: {
-      required: function(){return !$('#followed_recommendation').bootstrapSwitch('state');}
-    }
+    reason: "required",
   },
   // Specify validation error messages
   messages: {

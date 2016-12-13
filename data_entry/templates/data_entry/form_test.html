@@ -160,17 +160,6 @@
 
         $(".bootstrap-switch").bootstrapSwitch();
 
-        $("#followed_recommendation").bootstrapSwitch({
-            onSwitchChange: function(event, state){
-                var ta = $('#reason_not_followed');
-                if (state === true){
-                    ta.stop().slideUp(100);
-                }else{
-                    ta.stop().slideDown(100);
-                }
-            }
-        });
-
         function submitPatient(){
             event.preventDefault();
 

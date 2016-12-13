@@ -6801,3 +6801,13 @@ body .bootstrap-datetimepicker-widget table td {
   margin: 5px;
   /*border: 1px solid;*/
 }
+
+.therapy-option-button {
+  font-size: 20px;
+}
+
+/*.therapy-option-button.active {*/
+  /*font-family: FontAwesome;
+  content: "\f00c"*/
+  /*text-decoration: underline;*/
+/*}*/
