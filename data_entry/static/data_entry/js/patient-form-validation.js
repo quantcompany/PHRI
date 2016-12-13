@@ -21,21 +21,9 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     // The key name on the left side is the name attribute
     // of an input field. Validation rules are defined
     // on the right side
-    // firstname: "required",
-    // lastname: "required",
-    // email: {
-    //   required: true,
-    //   // Specify that email should be validated
-    //   // by the built-in "email" rule
-    //   email: true
+    // identification: {
+    //   required: true
     // },
-    // password: {
-    //   required: true,
-    //   minlength: 5
-    // }
-    identification: {
-      required: true
-    },
     age: {
       required: true
     },
