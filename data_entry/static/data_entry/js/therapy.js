@@ -11,6 +11,11 @@ var therapy = {
 }
 
 function renderTherapy(therapy){
+  if (therapy.choices.length == 0){
+      console.log('NO CHOICES!');
+      return '<div class="row"><div class="col-md-12 text-center"><h3 style="opacity: 0.3;">There is no recommended treatment</h3></div></div>';
+  }
+
   var out = '';
 
   for (var i = 0; i < therapy.choices.length; i++) {
