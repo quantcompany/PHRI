@@ -64,6 +64,12 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                {% include 'data_entry/includes/submission_panel.html' %}
+            </div>
+        </div>
+
 
         <!-- #modal-dialog -->
         <div class="modal fade" id="submit-modal">
@@ -142,19 +148,7 @@
 
         $(".multiple-select2").select2({ placeholder: "---------" });
 
-
         $(".bootstrap-switch").bootstrapSwitch();
-
-        $("#followed_recommendation").bootstrapSwitch({
-            onSwitchChange: function(event, state){
-                var ta = $('#reason_not_followed');
-                if (state === true){
-                    ta.stop().slideUp(100);
-                }else{
-                    ta.stop().slideDown(100);
-                }
-            }
-        });
 
         $('#no_pci').on('change', function(elem) {
           var checked = $(this).is(':checked');
@@ -168,6 +162,12 @@
           }
         });
 
+        $('.therapy-option-button').on('click', function(elem) {
+          $('.therapy-option-button').removeClass('active').addClass('btn-info');
+          $(this).addClass('active').removeClass('btn-info').addClass('btn-primary');
+          $('#submit-area').slideDown(100);
+        });
+
         function clearFields(){
             $('#identification').val('');
             $('#first_name').val('');
@@ -179,8 +179,8 @@
             $('#prev_anti_coagulation').val('0').trigger('change');
             $('input[type="number"]').val('');
             $('input[class="bootstrap-switch"]').bootstrapSwitch('state', false);
-            $('#followed_recommendation').bootstrapSwitch('state', true);
-            $('#reason_not_followed').val('');
+            $('#reason').val('');
+            $('.therapy-option-button').removeClass('active').addClass('btn-info');
         }
 
         function submitPatient(){
@@ -197,6 +197,10 @@
             if ($('#des_stent').is(':checked')){
                 fd.append('des_stent', 'on');
             }
+
+            var chosenTherapy = $('.therapy-option-button.active').data('chosen-therapy') || 'other';
+
+            fd.append('chosen_therapy', chosenTherapy);
 
             Pace.track(function(){
               $('#signup-form-errors').removeClass('filled').html('');
@@ -215,7 +219,6 @@
                     $('#patient_report_button').attr('href', data.patient_report_link);
                     $('#submit-modal').modal('show');
                     clearFields();
-                    // window.location.replace("{% url 'data_entry:form' %}");
                 });
 
                 request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -240,8 +243,6 @@
                     }
 
                     return false;
-                    // var errorMessage = jqXHR.responseJSON.error;
-                    // $('#signup-form-errors').addClass('filled').html(errorMessage)
                 });
             });
         }

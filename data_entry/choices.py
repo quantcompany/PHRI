@@ -4,6 +4,12 @@
 # If the choices include a NO or NONE option, then we use integers
 # and treat the NO/NONE/NULL choice as zero. Otherwise, we use strings.
 
+CHOSEN_THERAPY_CHOICES = (
+    ('mcm', 'McMaster'),
+    ('ccs', 'CCS'),
+    ('other', 'Other'),
+)
+
 HB_UM_CHOICES = (
     ('g/L', 'g/L'),
     ('g/dL', 'g/dL'),

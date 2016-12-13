@@ -79,8 +79,8 @@ class Patient(models.Model):
     # upcoming_non_cardiatic_surgery = models.IntegerField(default=0, choices=NON_CARDIATIC_SURGERY_CHOICES)
 
     # Recommendation
-    followed_recommendation = models.BooleanField(default=True)
-    reason_not_followed = models.TextField(blank=True)
+    chosen_therapy = models.CharField(max_length=10, choices=CHOSEN_THERAPY_CHOICES)
+    reason = models.TextField()
     # Meta Info
     user = models.ForeignKey('users.User', related_name='patients')
     created = models.DateTimeField(auto_now_add=True)
@@ -244,7 +244,7 @@ class Patient(models.Model):
             self.field_csv(self.get_alcohol_abuse_display(), str),
             self.field_csv(self.drug_abuse, bool),
             self.field_csv(self.asa_allergy, bool),
-            self.field_csv(self.followed_recommendation, bool),
+            self.field_csv(self.get_chosen_therapy_display(), str),
             self.field_csv(self.user.user_name, str),
             self.field_csv(self.created, datetime)
         ])
