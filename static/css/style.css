@@ -6795,3 +6795,9 @@ body .bootstrap-datetimepicker-widget table td {
     width: 100%;
     margin: 0px;
 }
+
+
+.therapy-option > *{
+  margin: 5px;
+  /*border: 1px solid;*/
+}

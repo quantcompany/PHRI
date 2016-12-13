@@ -17,24 +17,24 @@ function renderTherapy(therapy){
     var choice = therapy.choices[i];
 
     out += '<div class="row p-10 m-b-20">';
-    out += '<div class="col-md-8 col-md-offset-2">';
+    out += '<div class="col-md-10 col-md-offset-1">';
 
     out += '<div class="note note-info m-b-0 p-5 text-center">';
-    out += '<h4 class="m-0"><h1>Option ' + (i + 1) + '</h1>';
+    out += '<h1 class="m-5">Option ' + (i + 1) + '</h1>';
     out += '</div>';
 
     for (var j = 0; j < choice.steps.length; j++) {
       var step = choice.steps[j];
-      out += '<div class="note note-default m-b-0 p-10 text-center">';
+      out += '<div class="therapy-option note note-default m-b-0 p-10 text-center">';
       out += step.option;
       if (step.extra) {
-        out += '<h3><em><strong>(' + step.extra + ')</strong></em></h4>';
+        out += '<h4 class="m-0"><em><strong>(' + step.extra + ')</strong></em></h4>';
       }
       out += '</div>';
 
       if (j !== choice.steps.length - 1) {
         out += '<div class="note note-default m-b-0 p-5 text-center">';
-        out += '<h4 class="m-0"><strong>then</strong></h4>';
+        out += '<h4 class="m-0"><em><strong>then</strong></em></h4>';
         out += '</div>';
       }
     }
