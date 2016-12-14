@@ -5,14 +5,13 @@
 {% block panel_heading %}McMaster University Recommendation{% endblock %}
 
 {% block fa_icon %}fa fa-clipboard{% endblock %}
-
 {% block panel_body %}
+   <center><h4><a href="{% static 'data_entry/References/Recommendations/Algorithm_MacMaster.pdf'%}" target="_blank">View the algorithm on which we based this recommendation</a></h4></center>
     <div id="mcm_recommendation" class="panel-body">
       <div class="row">
         <div class="col-md-12 text-center">
           <h3 style="opacity: 0.3;">Please fill out the form to receive a recommendation</h3>
-          <h4><a href="{% static 'data_entry/References/Recommendations/Algorithm_MacMaster.pdf'%}" target="_blank">View the algorithm on which we based this recommendation</a></h4>
         </div>
       </div>
-    </div>
+   </div>
 {% endblock %}
