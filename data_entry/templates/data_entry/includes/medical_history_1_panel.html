@@ -9,7 +9,7 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="htn">HTN *<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
-                <select id="htn" name="htn" class="form-control f-s-14 default-select2">
+                <select id="htn" name="htn" class="form-control f-s-14 default-select">
                     {% for choice in choices.HTN_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
@@ -21,7 +21,7 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="vascular_disease">Vascular disease</label>
             <div class="col-md-6 col-sm-6">
-                <select id="vascular_disease" name="vascular_disease" class="form-control f-s-14 default-select2">
+                <select id="vascular_disease" name="vascular_disease" class="form-control f-s-14 default-select">
                     {% for choice in choices.VASCULAR_DISEASE_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
@@ -33,7 +33,7 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="hx_of_bleeding">Hx of bleeding</label>
             <div class="col-md-6 col-sm-6">
-                <select id="hx_of_bleeding" name="hx_of_bleeding" class="form-control f-s-14 default-select2">
+                <select id="hx_of_bleeding" name="hx_of_bleeding" class="form-control f-s-14 default-select">
                     {% for choice in choices.BLEEDING_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
@@ -45,7 +45,7 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="alcohol_abuse">Alcohol abuse *<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
-                <select id="alcohol_abuse" name="alcohol_abuse" class="form-control f-s-14 default-select2">
+                <select id="alcohol_abuse" name="alcohol_abuse" class="form-control f-s-14 default-select">
                     {% for choice in choices.ALCOHOL_ABUSE_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}

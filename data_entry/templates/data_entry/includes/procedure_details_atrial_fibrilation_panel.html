@@ -9,7 +9,7 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="indication">Indication *<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
-                <select id="indication" name="indication" class="form-control f-s-14 default-select2" >
+                <select id="indication" name="indication" class="form-control f-s-14 default-select" >
                     {% for choice in choices.INDICATION_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
@@ -41,9 +41,9 @@
 
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="af_type">Type<br/><span></span></label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="af_type">Type of Atrial Fibrillation<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
-                <select id="af_type" name="af_type" class="form-control f-s-14 nullable-select2">
+                <select id="af_type" name="af_type" class="form-control f-s-14 nullable-select">
                     <option value="">None</option>
                     {% for choice in choices.AF_TYPE_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
@@ -57,7 +57,7 @@
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="prev_anti_coagulation">Previous anti-coagulation</label>
             <div class="col-md-6 col-sm-6">
-                <select id="prev_anti_coagulation" name="prev_anti_coagulation" class="form-control f-s-14 nullable-select2">
+                <select id="prev_anti_coagulation" name="prev_anti_coagulation" class="form-control f-s-14 nullable-select">
                     <option value="">None</option>
                     {% for choice in choices.ANTI_COAGULATION_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
