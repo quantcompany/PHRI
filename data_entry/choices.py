@@ -86,7 +86,7 @@ INDICATION_CHOICES = (
     ('STEMI', 'STEMI'),
     ('NSTEMI', 'NSTEMI'),
     ('UA', 'UA'),
-    ('SCAD', 'SCAD'),
+    ('SCAD', 'Stable CAD'),
 )
 
 ANTI_COAGULATION_CHOICES = (
