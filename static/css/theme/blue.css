@@ -11,11 +11,11 @@ Website: http://www.seantheme.com/color-admin-v2.0/admin/html/
     border-color: #2F83CF #2a72b5 #1f5688;
 }
 .navbar.navbar-inverse .navbar-brand,
-.sidebar .nav > li.active > a, 
-.sidebar .nav > li.active > a:focus, 
+.sidebar .nav > li.active > a,
+.sidebar .nav > li.active > a:focus,
 .sidebar .nav > li.active > a:hover,
-.page-sidebar-minified .sidebar .nav > li.has-sub.active:focus > a, 
-.page-sidebar-minified .sidebar .nav > li.has-sub.active:hover > a, 
+.page-sidebar-minified .sidebar .nav > li.has-sub.active:focus > a,
+.page-sidebar-minified .sidebar .nav > li.has-sub.active:hover > a,
 .page-sidebar-minified .sidebar .nav > li.has-sub.active > a,
 .label.label-theme,
 .btn.btn-scroll-to-top {
@@ -32,22 +32,27 @@ Website: http://www.seantheme.com/color-admin-v2.0/admin/html/
     .navbar-inverse .navbar-header {
         background: #348fe2;
     }
+
+    .navbar-user {
+      float:left!important;
+      width:100%;
+    }
 }
 
 
 /* Added in v1.5 */
 
 .gradient-enabled .navbar.navbar-inverse .navbar-brand,
-.gradient-enabled .sidebar .nav > li.active > a, 
-.gradient-enabled .sidebar .nav > li.active > a:focus, 
+.gradient-enabled .sidebar .nav > li.active > a,
+.gradient-enabled .sidebar .nav > li.active > a:focus,
 .gradient-enabled .sidebar .nav > li.active > a:hover,
-.gradient-enabled.page-sidebar-minified .sidebar .nav > li.has-sub.active:focus > a, 
-.gradient-enabled.page-sidebar-minified .sidebar .nav > li.has-sub.active:hover > a, 
+.gradient-enabled.page-sidebar-minified .sidebar .nav > li.has-sub.active:focus > a,
+.gradient-enabled.page-sidebar-minified .sidebar .nav > li.has-sub.active:hover > a,
 .gradient-enabled.page-sidebar-minified .sidebar .nav > li.has-sub.active > a,
 .gradient-enabled .label.label-theme,
 .gradient-enabled .btn.btn-scroll-to-top,
-.gradient-enabled .top-menu .nav > li.active > a, 
-.gradient-enabled .top-menu .nav > li.active > a:focus, 
+.gradient-enabled .top-menu .nav > li.active > a,
+.gradient-enabled .top-menu .nav > li.active > a:focus,
 .gradient-enabled .top-menu .nav > li.active > a:hover {
     background: rgb(103,176,240); /* Old browsers */
     /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -82,8 +87,8 @@ Website: http://www.seantheme.com/color-admin-v2.0/admin/html/
 
 /* Added in v1.9 */
 
-.top-menu .nav > li.active > a, 
-.top-menu .nav > li.active > a:focus, 
+.top-menu .nav > li.active > a,
+.top-menu .nav > li.active > a:focus,
 .top-menu .nav > li.active > a:hover {
     background: #348fe2;
 }
