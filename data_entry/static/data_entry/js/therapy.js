@@ -83,11 +83,14 @@ function getIndication(){
 }
 
 function updateRecommendedTherapy(){
-    updateMCMTherapy();
-    updateCCSTherapy();
+    var mcmTherapy = determineMCMTherapy();
+    $('#mcm_recommendation').html(renderTherapy(mcmTherapy));
+
+    var ccsTherapy = determineCCSTherapy();
+    $('#ccs_recommendation').html(renderTherapy(ccsTherapy));
 }
 
-function updateMCMTherapy(){
+function determineMCMTherapy(){
   // chads2: low <= 2 < high
   // hasbled: low <= 3 < high
 
@@ -587,10 +590,10 @@ function updateMCMTherapy(){
       }
   }
 
-  $('#mcm_recommendation').html(renderTherapy(therapy));
+  return therapy;
 }
 
-function updateCCSTherapy(){
+function determineCCSTherapy(){
   var age = getAge();
   var indication = getIndication();
   var stent = getStent();
@@ -736,5 +739,6 @@ function updateCCSTherapy(){
       }
     }
   }
-  $('#ccs_recommendation').html(renderTherapy(therapy));
+
+  return therapy;
 }
