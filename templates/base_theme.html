@@ -76,6 +76,10 @@
             });
         </script>
 
+        <script src="https://cdn.ravenjs.com/3.10.0/raven.min.js" crossorigin="anonymous"></script>
+        <script>
+            Raven.config('https://d221725a2815476dba351ab7d36d50bf@sentry.io/138345').install();
+        </script>
         {% block tail_js %}
         {% endblock %}
 

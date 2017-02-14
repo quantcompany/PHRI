@@ -1,3 +1,4 @@
+import json
 import io
 import csv
 import uuid
@@ -79,6 +80,8 @@ class Patient(models.Model):
     # upcoming_non_cardiatic_surgery = models.IntegerField(default=0, choices=NON_CARDIATIC_SURGERY_CHOICES)
 
     # Recommendation
+    mcm_therapy = models.TextField(blank=True)
+    ccs_therapy = models.TextField(blank=True)
     chosen_therapy = models.CharField(max_length=10, choices=CHOSEN_THERAPY_CHOICES)
     reason = models.TextField()
     # Meta Info
@@ -170,6 +173,12 @@ class Patient(models.Model):
 
     def hasbled_risk(self):
         return risks.hasbled[self.hasbled_score()]
+
+    def parse_mcm_therapy(self):
+        return json.loads(self.mcm_therapy)
+
+    def parse_ccs_therapy(self):
+        return json.loads(self.ccs_therapy)
 
     def recommended_therapy(self):
         chads2 = self.chads2_score()

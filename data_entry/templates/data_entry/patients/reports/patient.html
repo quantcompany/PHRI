@@ -50,6 +50,35 @@
                     display: none !important;
                 }
             }
+
+            .therapy-recommendations {
+                width: 100%;
+            }
+
+            .therapy-recommendations h2 {
+                font-size: 18px;
+            }
+
+            .therapy-recommendations h3 {
+                margin: 0px;
+                font-size: 16px;
+            }
+
+            .therapy-recommendations h4 {
+                margin: 0px;
+                font-size: 14px;
+            }
+
+            .therapy-recommendations td {
+                vertical-align: top;
+                text-align: center;
+            }
+
+             .therapy-recommendations th {
+                font-size: 16px;
+                vertical-align: top;
+                text-align: center;   
+             }
         </style>
     </head>
     <body style="padding:20px 300px;">
@@ -96,25 +125,22 @@
                 </tr>
 
                 <tr>
-                    <th>Your recommended therapy: </th>
-                    <td>{{ patient.recommended_therapy.0 }}</td>
+                    <th>Gender</th>
+                    <td>{{ patient.get_gender_display }}</td>
                 </tr>
 
                 <tr>
-                    <th>In addition, you should: </th>
-                    <td>{{ patient.recommended_therapy.1 }}</td>
+                    <th>Age</th>
+                    <td>{{ patient.age }}</td>
                 </tr>
             </tbody>
         </table>
 
-        <hr/>
-
-        <p>You have a condition known as Atrial Fibrillation (also called AFib or AF) it is basically an irregular heartbeat (arrhythmia). When this happens, blood does not flow properly through the heart and the rest of the body. That can lead to several health complications, most notably people with this condition have increased risks of strokes and major bleeding episodes. The following information explain the risks you have given your conditions.</p>
-
-        <center style="font-weight:bolder">http://tripletherapy.net</center>
-
-        <!-- *************************** PAGE BREAK ****************************** -->
-        <div style="page-break-after: always;"></div>
+        <h3>Condition</h3>
+        <hr />
+        <p>
+            You have a condition known as Atrial Fibrillation (also called AFib or AF) it is basically an irregular heartbeat (arrhythmia). When this happens, blood does not flow properly through the heart and the rest of the body. That can lead to several health complications, most notably people with this condition have increased risks of strokes and major bleeding episodes. The following information explain the risks you have given your conditions.
+        </p>
 
         <h3>Stroke Risk</h3>
         <hr/>
@@ -172,7 +198,66 @@
 
 
         <center style="font-weight:bolder">http://tripletherapy.net</center>
+        <!-- *************************** PAGE BREAK ****************************** -->
+        <div style="page-break-after: always;"></div>
 
+        <h3>Recommended Therapy</h3>
+        <hr />
+
+        <table class="therapy-recommendations">
+            <thead>
+                <tr>
+                    <th>McMaster University recommendation</th>
+                    <th>CCS recommendation</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td style="width:50%;">
+                        {% for choice in patient.parse_mcm_therapy.choices %}
+                            <h2><b>Option {{ forloop.counter }}</b></h2>
+                            {% for step in choice.steps %}
+                                {{ step.option|safe }}
+                                <b><i>({{ step.extra }}{% if not forloop.last%}, then...{% endif %})</i></b>
+                                <br/>
+                                <br/>
+                            {% endfor %}
+                        {% empty %}
+                            <h2>Nothing here</h2>
+                        {% endfor %}
+                    </td>
+
+                    <td style="width:50%;">
+                        {% for choice in patient.parse_ccs_therapy.choices %}
+                            <h2><b>Option {{ forloop.counter }}</b></h2>
+                            {% for step in choice.steps %}
+                                {{ step.option|safe }}
+                                <b><i>({{ step.extra }}{% if not forloop.last%}, then...{% endif %})</i></b>
+                                <br/>
+                                <br/>
+                            {% endfor %}
+                        {% empty %}
+                            <h2>Nothing here</h2>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <center style="font-weight:bolder">http://tripletherapy.net</center>
+        <!-- *************************** PAGE BREAK ****************************** -->
+        <div style="page-break-after: always;"></div>
+
+        <h3>Chosen Therapy</h3>
+        <hr />
+
+        <p class="lead">Therapy recommendation being folowed: <span class="big"><b>{{ patient.get_chosen_therapy_display }}</b></span>.</p>
+
+        <p class="lead">Reason: <b>"{{ patient.reason }}"</b></p>
+
+        <center style="font-weight:bolder">http://tripletherapy.net</center>
+        
         <script>
             $('#jquery-tagIt-default').tagit();
 

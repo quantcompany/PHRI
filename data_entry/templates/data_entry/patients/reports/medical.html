@@ -43,6 +43,38 @@
                     display: none !important;
                 }
             }
+
+            .therapy-recommendations {
+                width: 100%;
+            }
+
+            .therapy-recommendations h2 {
+                font-size: 18px;
+            }
+
+            .therapy-recommendations h3 {
+                margin: 0px;
+                font-size: 16px;
+            }
+
+            .therapy-recommendations h4 {
+                margin: 0px;
+                font-size: 14px;
+            }
+
+            .therapy-recommendations td {
+                vertical-align: top;
+                text-align: center;
+            }
+
+            .therapy-recommendations th h3 {
+                font-size: 24px;
+                font-weight: 500;
+                vertical-align: top;
+                text-align: center;
+                margin: 0px;
+                padding: 0px;   
+             }
         </style>
     </head>
     <body style="padding:20px 300px;">
@@ -100,14 +132,6 @@
                     <td></td>
                     <th>Age</th>
                     <td>{{ patient.age }}</td>
-                </tr>
-
-                <tr>
-                    <th>Age</th>
-                    <td>{{ patient.age }}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
                 </tr>
             </tbody>
         </table>
@@ -333,26 +357,69 @@
             </tbody>
         </table>
 
-        <br/>
+        <center style="font-weight:bolder">www.tripletherapy.net</center>
+        <!-- *************************** PAGE BREAK ****************************** -->
+        <div style="page-break-after: always;"></div>
 
-        <h3>Recommended Therapy</h3>
+        <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Therapy</h2>
+
+        <table class="therapy-recommendations">
+            <thead>
+                <tr>
+                    <th><h3>McMaster University recommendation</h3></th>
+                    <th><h3>CCS recommendation</h3></th>
+                </tr>
+
+                <tr>
+                    <th colspan="2"><hr/></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td style="width:50%;">
+                        {% for choice in patient.parse_mcm_therapy.choices %}
+                            <h2><b>Option {{ forloop.counter }}</b></h2>
+                            {% for step in choice.steps %}
+                                {{ step.option|safe }}
+                                <b><i>({{ step.extra }}{% if not forloop.last%}, then...{% endif %})</i></b>
+                                <br/>
+                                <br/>
+                            {% endfor %}
+                        {% empty %}
+                            <h2>Nothing here</h2>
+                        {% endfor %}
+                    </td>
+
+                    <td style="width:50%;">
+                        {% for choice in patient.parse_ccs_therapy.choices %}
+                            <h2><b>Option {{ forloop.counter }}</b></h2>
+                            {% for step in choice.steps %}
+                                {{ step.option|safe }}
+                                <b><i>({{ step.extra }}{% if not forloop.last%}, then...{% endif %})</i></b>
+                                <br/>
+                                <br/>
+                            {% endfor %}
+                        {% empty %}
+                            <h2>Nothing here</h2>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <center style="font-weight:bolder">www.tripletherapy.net</center>
+        <!-- *************************** PAGE BREAK ****************************** -->
+        <div style="page-break-after: always;"></div>
+
+        <h3>Chosen Therapy</h3>
         <hr />
-        <p style="font-size:18px;">{{ patient.recommended_therapy.0 }} {{ patient.recommended_therapy.1 }}<p>
 
-        {% if patient.followed_recommendation %}
-            <p style="font-size:14px;">The therapy recommendation is being followed.<p>
-        {% else %}
-            <p style="font-size:14px;">The therapy recommendation is <strong>not</strong> being followed.<p>
+        <p class="lead">Therapy recommendation being folowed: <span class="big"><b>{{ patient.get_chosen_therapy_display }}</b></span>.</p>
 
-            <blockquote>
-                <p><i>"{{ patient.reason_not_followed }}"</i></p>
-                <footer>{{ patient.user.guess_user_name }} ({{ user.email }})</footer>
-            </blockquote>
-        {% endif %}
+        <p class="lead">Reason: <b>"{{ patient.reason }}"</b></p>
 
-
-        <p class="f-w-700">Report generated on {% now "d/m/Y" %} by {{ user.guess_user_name }} ({{ user.email }})</p>
-
+        <p class="f-w-700" style="text-align:center;">Report generated on {% now "d/m/Y" %} by {{ user.guess_user_name }} ({{ user.email }})</p>
         <center style="font-weight:bolder">www.tripletherapy.net</center>
 
         <script>
