@@ -159,11 +159,11 @@
                 </tr> -->
 
                 <tr>
-                    <th>Vessels PCI</th>
-                    <td>FIELD REMOVED</td>
+                    <th>Bare-Metal Stent</th>
+                    <td>{{ patient.bms_stent | yesno | title }}</td>
                     <td></td>
-                    <th>Stents</th>
-                    <td>{{ patient.stents_display }}</td>
+                    <th>Drug-Eluting Stent</th>
+                    <td>{{ patient.des_stent | yesno | title }}</td>
                 </tr>
             </tbody>
         </table>
