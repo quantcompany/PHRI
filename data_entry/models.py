@@ -208,6 +208,14 @@ class Patient(models.Model):
 
         return therapy
 
+    def chosen_therapy_display(self):
+        if self.chosen_therapy == 'mcm':
+            return 'Hamilton AF-PCI recommendation'
+        elif self.chosen_therapy == 'ccs':
+            return 'CCS recommendation'
+        else:
+            return 'Other'
+
     def field_csv(self, value, type):
         empty = not bool(value)
 
