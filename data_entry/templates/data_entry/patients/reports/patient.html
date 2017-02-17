@@ -153,19 +153,39 @@
 
         <h4><b>What does a stroke risk of {{ patient.chads2_risk.percentage|floatformat:0 }}% mean?</b></h4>
 
-        <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ chads2_relative.sad|floatformat:0 }} of those people (sad red faces) will suffer a stroke, and {{ chads2_relative.happy|floatformat:0 }} will not suffer a stroke (smiley green faces)</p>
+        <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ chads2_relative.sad|floatformat:0 }} of those people (sad faces) will suffer a stroke, and {{ chads2_relative.happy|floatformat:0 }} will not suffer a stroke (smiley faces).</p>
 
-        {% for row in chads2_relative.rows %}
-            <div>
-                {% for face in row %}
-                    {% if face == 'H' %}
-                        <img width="15" height="15" src="{% static 'data_entry/img/happy.png' %}">
-                    {% else %}
-                        <img width="15" height="15" src="{% static 'data_entry/img/sad.png' %}">
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endfor %}
+        <table width="100%">
+            <tbody>
+                <tr>
+                    <td rowspan="2" style="text-align:center;">
+                        {% for row in chads2_relative.rows %}
+                            <div>
+                                {% for face in row %}
+                                    {% if face == 'H' %}
+                                        <img width="18" height="18" src="{% static 'data_entry/img/happy.png' %}">
+                                    {% else %}
+                                        <img width="18" height="18" src="{% static 'data_entry/img/sad.png' %}">
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </td>
+
+                    <td>
+                        <img src="{% static 'data_entry/img/sad.png' %}">
+                        <span class="lead">&nbsp;&nbsp;At risk</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <img src="{% static 'data_entry/img/happy.png' %}">
+                        <span class="lead">&nbsp;&nbsp;Not at risk</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
         <center style="font-weight:bolder">http://tripletherapy.net</center>
         <!-- *************************** PAGE BREAK ****************************** -->
@@ -182,19 +202,39 @@
 
         <h4><b>What does a bleeding risk of {{ patient.hasbled_risk.percentage|floatformat:0 }}% mean?</b></h4>
 
-        <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ hasbled_relative.sad|floatformat:0 }} of those people (sad red faces) will suffer a major bleeding episode, and {{ hasbled_relative.happy|floatformat:0 }} will not suffer a bleeding episode (smiley green faces)</p>
+        <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ hasbled_relative.sad|floatformat:0 }} of those people (sad faces) will suffer a major bleeding episode, and {{ hasbled_relative.happy|floatformat:0 }} will not suffer a bleeding episode (smiley faces).</p>
 
-        {% for row in hasbled_relative.rows %}
-            <div>
-                {% for face in row %}
-                    {% if face == 'H' %}
-                        <img width="15" height="15" src="{% static 'data_entry/img/happy.png' %}">
-                    {% else %}
-                        <img width="15" height="15" src="{% static 'data_entry/img/sad.png' %}">
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endfor %}
+        <table width="100%">
+            <tbody>
+                <tr>
+                    <td rowspan="2" style="text-align:center;">
+                        {% for row in hasbled_relative.rows %}
+                            <div>
+                                {% for face in row %}
+                                    {% if face == 'H' %}
+                                        <img width="18" height="18" src="{% static 'data_entry/img/happy.png' %}">
+                                    {% else %}
+                                        <img width="18" height="18" src="{% static 'data_entry/img/sad.png' %}">
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </td>
+
+                    <td>
+                        <img src="{% static 'data_entry/img/sad.png' %}">
+                        <span class="lead">&nbsp;&nbsp;At risk</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <img src="{% static 'data_entry/img/happy.png' %}">
+                        <span class="lead">&nbsp;&nbsp;Not at risk</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
 
         <center style="font-weight:bolder">http://tripletherapy.net</center>
