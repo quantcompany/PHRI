@@ -131,6 +131,7 @@
     <script src="{% static 'data_entry/js/plots.js' %}"></script>
     <script src="{% static 'data_entry/js/gauges.js' %}"></script>
     <script src="{% static 'data_entry/js/options.js' %}"></script>
+    <script src="{% static 'data_entry/js/formCache.js' %}"></script>
 
     <script>
         $(".default-select2").select2({
@@ -168,20 +169,20 @@
           $('#submit-area').slideDown(100);
         });
 
-        function clearFields(){
-            $('#identification').val('');
-            $('#first_name').val('');
-            $('#middle_name').val('');
-            $('#last_name').val('');
-            $('#age').val('');
-            $('[name="stent"]').prop('checked', false);
-            $('[name="no_pci"]').prop('checked', false);
-            $('#prev_anti_coagulation').val('0').trigger('change');
-            $('input[type="number"]').val('');
-            $('input[class="bootstrap-switch"]').bootstrapSwitch('state', false);
-            $('#reason').val('');
-            $('.therapy-option-button').removeClass('active').addClass('btn-info');
-        }
+        // function clearFields(){
+        //     $('#identification').val('');
+        //     $('#first_name').val('');
+        //     $('#middle_name').val('');
+        //     $('#last_name').val('');
+        //     $('#age').val('');
+        //     $('[name="stent"]').prop('checked', false);
+        //     $('[name="no_pci"]').prop('checked', false);
+        //     $('#prev_anti_coagulation').val('0').trigger('change');
+        //     $('input[type="number"]').val('');
+        //     $('input[class="bootstrap-switch"]').bootstrapSwitch('state', false);
+        //     $('#reason').val('');
+        //     $('.therapy-option-button').removeClass('active').addClass('btn-info');
+        // }
 
         function submitPatient(){
             event.preventDefault();
@@ -220,12 +221,12 @@
                 });
 
                 request.done(function(data, textStatus, jqXHR) {
-                    console.log('Success');
-                    console.log(data);
+                    // console.log('Success');
+                    // console.log(data);
                     $('#medical_report_button').attr('href', data.medical_report_link);
                     $('#patient_report_button').attr('href', data.patient_report_link);
                     $('#submit-modal').modal('show');
-                    clearFields();
+                    clearForm() // this is in formCache.js
                 });
 
                 request.fail(function(jqXHR, textStatus, errorThrown) {
