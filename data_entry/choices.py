@@ -92,7 +92,7 @@ INDICATION_CHOICES = (
 ANTI_COAGULATION_CHOICES = (
 #    (0, 'No'), I commented this one, because having both "None" and "No" was redundant
     (1, 'Warfarin'),
-    (2, 'Ribaroxaban'),
+    (2, 'Rivaroxaban'),
     (3, 'Dabigatran'),
     (4, 'Apixiban'),
 )
