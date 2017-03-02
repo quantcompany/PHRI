@@ -208,13 +208,13 @@ class Patient(models.Model):
 
         return therapy
 
-    def chosen_therapy_display(self):
-        if self.chosen_therapy == 'mcm':
-            return 'Hamilton AF-PCI recommendation'
-        elif self.chosen_therapy == 'ccs':
-            return 'CCS recommendation'
-        else:
-            return 'Other'
+    # def chosen_therapy_display(self):
+    #     if self.chosen_therapy == 'mcm':
+    #         return 'Hamilton AF-PCI recommendation'
+    #     elif self.chosen_therapy == 'ccs':
+    #         return 'CCS recommendation'
+    #     else:
+    #         return 'Other'
 
     def field_csv(self, value, type):
         empty = not bool(value)
@@ -261,6 +261,9 @@ class Patient(models.Model):
             self.field_csv(self.get_alcohol_abuse_display(), str),
             self.field_csv(self.drug_abuse, bool),
             self.field_csv(self.asa_allergy, bool),
+            self.field_csv(self.chads2_score(), int),
+            self.field_csv(self.cha2_score(), int),
+            self.field_csv(self.hasbled_score(), int),
             self.field_csv(self.get_chosen_therapy_display(), str),
             self.field_csv(self.user.user_name, str),
             self.field_csv(self.created, datetime)

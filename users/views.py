@@ -99,10 +99,9 @@ def me(request):
         else:
             return JsonResponse(form.errors, status=400) # validation errors
 
-# @login_required
-# def profile(request, user_id):
-#     context = {'countries': COUNTRY_CHOICES}
-#     return render(request, 'users/profile.html', context)
+
+def terms(request):
+    return render(request, 'terms.html')
 
 
 def exists(request):
@@ -122,6 +121,7 @@ def verify(request, code):
         return render(request, 'email_verification/verified.html')
     except EmailVerification.DoesNotExist:
         return render(request, 'email_verification/error.html')
+
 
 def verification_sent(request):
     return render(request, 'email_verification/sent.html')

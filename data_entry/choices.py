@@ -5,7 +5,7 @@
 # and treat the NO/NONE/NULL choice as zero. Otherwise, we use strings.
 
 CHOSEN_THERAPY_CHOICES = (
-    ('mcm', 'McMaster'),
+    ('mcm', 'Hamilton AF-PCI'),
     ('ccs', 'CCS'),
     ('other', 'Other'),
 )

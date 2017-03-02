@@ -18,12 +18,12 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^login$', views.login_view, name='login'),
-    url(r'^logout$', views.logout_view, name='logout'),
-    url(r'^register$', views.register, name='register'),
-    url(r'^me$', views.me, name='me'),
     # url(r'^(?P<user_id>\d+)$', views.profile, name='profile'),
     url(r'^exists$', views.exists, name='exists'),
-    url(r'^verify/(?P<code>.+)$', views.verify, name='verify'),
+    url(r'^login$', views.login_view, name='login'),
+    url(r'^logout$', views.logout_view, name='logout'),
+    url(r'^me$', views.me, name='me'),
+    url(r'^register$', views.register, name='register'),
     url(r'^verification_sent$', views.verification_sent, name='verification_sent'),
+    url(r'^verify/(?P<code>.+)$', views.verify, name='verify'),
 ]

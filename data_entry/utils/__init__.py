@@ -10,6 +10,9 @@ def patients_csv_size_estimate():
 
 
 def patients_csv_headers():
+    # \ufeff is unicode Byte Order Mark (BOM).
+    # put it at the start of the file
+    # so that excell will understand the encoding
     return '\ufeff' + ', '.join([
         'IDENTIFICATION',
         'INITIALS',
@@ -36,6 +39,9 @@ def patients_csv_headers():
         'ALCOHOL ABUSE',
         'DRUG ABUSE',
         'ASA ALLERGY',
+        'CHADS SCORE',
+        'CHA2DS2-VASC SCORE',
+        'HASBLED SCORE',
         'FOLLOWED RECOMMENDATION',
         'USER',
         'CREATED',
@@ -43,10 +49,6 @@ def patients_csv_headers():
 
 
 def patients_csv():
-    # \ufeff is unicode Byte Order Mark (BOM).
-    # put it at the start of the file
-    # so that excell will understand the encoding
-
     # first row, yield the headers
     yield patients_csv_headers()
 
