@@ -93,13 +93,14 @@
               <li>
                 <div id="email_results_input" class="input-group m-t-20" style="width:500px">
                     <!-- <input id="address" type="email" class="form-control" placeholder="Email Address"> -->
-                    <ul id="jquery-tagIt-default">
+                    <ul id="jquery-tagIt-default" name="fuck">
                     </ul>
 
                     <div class="input-group-btn">
                         <button id="send" type="button" class="btn btn-default btn-primary" data-loading-text="Sending...">Send</button>
                     </div>
                 </div>
+                <div id="email-message" style="display:none;"></div>
               </li>
             </ul>
           </div>
@@ -299,11 +300,24 @@
         <center style="font-weight:bolder">http://tripletherapy.net</center>
         
         <script>
+            function showEmailSuccessMessage(){
+                $('#email-message').css('color', 'green').html('Email has been sent!').show();
+            }
+
+            function showEmailErrorMessage(){
+                $('#email-message').css('color', 'red').html('Error sending email!').show();
+            }
+
+            function clearEmailMessage(){
+                $('#email-message').hide().html('');
+            }
+
             $('#jquery-tagIt-default').tagit();
 
-            $('#address').on('keyup', function(e){
+            $('#jquery-tagIt-default').find('input').on('keyup', function(e){
                 $(this).parent().removeClass('has-error');
                 $(this).parent().removeClass('has-success');
+                clearEmailMessage();
             });
 
             // stop the dropdown from closing when you click on it
@@ -338,6 +352,7 @@
                     console.log(data);
                     sendButton.button('reset');
                     tagitInput.parent().addClass('has-success');
+                    showEmailSuccessMessage();
                 });
 
                 request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -345,6 +360,7 @@
                     console.log(jqXHR);
                     sendButton.button('reset');
                     tagitInput.parent().addClass('has-error');
+                    showEmailErrorMessage();
                 });
 
             });

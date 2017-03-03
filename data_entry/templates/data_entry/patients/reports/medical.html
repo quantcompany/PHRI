@@ -96,6 +96,7 @@
                         <button id="send" type="button" class="btn btn-default btn-primary" data-loading-text="Sending...">Send</button>
                     </div>
                 </div>
+                <div id="email-message" style="display:none;"></div>
               </li>
             </ul>
           </div>
@@ -107,13 +108,13 @@
         <h3>Personal Information</h3>
         <hr />
         <table class="table" style="width:100%;border:none;">
-            <thead
+            <thead>
                 <tr>
-                    <td style="width:32%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:14%"></td>
                     <td style="width:30%"></td>
+                    <td style="width:16%"></td>
+                    <td style="width:4%"></td>
+                    <td style="width:28%"></td>
+                    <td style="width:22%"></td>
                 </tr>
             </thead>
 
@@ -141,11 +142,11 @@
         <table class="table" style="width:100%;border:none;">
             <thead>
                 <tr>
-                    <td style="width:32%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:32%"></td>
-                    <td style="width:12%"></td>
+                    <td style="width:30%"></td>
+                    <td style="width:16%"></td>
+                    <td style="width:4%"></td>
+                    <td style="width:28%"></td>
+                    <td style="width:22%"></td>
                 </tr>
             </thead>
 
@@ -173,11 +174,11 @@
         <table class="table" style="width:100%;border:none;">
             <thead>
                 <tr>
-                    <td style="width:32%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:32%"></td>
-                    <td style="width:12%"></td>
+                    <td style="width:30%"></td>
+                    <td style="width:16%"></td>
+                    <td style="width:4%"></td>
+                    <td style="width:28%"></td>
+                    <td style="width:22%"></td>
                 </tr>
             </thead>
 
@@ -215,11 +216,11 @@
         <table class="table" style="width:100%;border:none;">
             <thead>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td style="width:30%"></td>
+                    <td style="width:16%"></td>
+                    <td style="width:4%"></td>
+                    <td style="width:28%"></td>
+                    <td style="width:22%"></td>
                 </tr>
             </thead>
 
@@ -270,11 +271,16 @@
 
                     <td></td>
 
-                    <th>Drug Abuse</th>
-                    <td>{{ patient.drug_abuse|yesno|capfirst }}</td>
+                    <th>Liver Dysfunction</th>
+                    <td>{{ patient.liver_dysfunction|yesno|capfirst }}</td>
                 </tr>
 
                 <tr>
+                    <th>Drug Abuse</th>
+                    <td>{{ patient.drug_abuse|yesno|capfirst }}</td>
+
+                    <td></td>
+
                     <th>ASA Allergy</th>
                     <td>{{ patient.asa_allergy|yesno|capfirst }}</td>
                 </tr>
@@ -382,7 +388,17 @@
                             <h2><b>Option {{ forloop.counter }}</b></h2>
                             {% for step in choice.steps %}
                                 {{ step.option|safe }}
-                                <b><i>({{ step.extra }}{% if not forloop.last%}, then...{% endif %})</i></b>
+                                {% if step.extra %}
+                                    {% if not forloop.last %}
+                                        <b><i>({{ step.extra }}, then...)</i></b>
+                                    {% else %}
+                                        <b><i>({{ step.extra }})</i></b>
+                                    {% endif %}
+                                {% else %}
+                                    {% if not forloop.last %}
+                                        <b><i>then...</i></b>
+                                    {% endif %}
+                                {% endif %}
                                 <br/>
                                 <br/>
                             {% endfor %}
@@ -396,7 +412,17 @@
                             <h2><b>Option {{ forloop.counter }}</b></h2>
                             {% for step in choice.steps %}
                                 {{ step.option|safe }}
-                                <b><i>({{ step.extra }}{% if not forloop.last%}, then...{% endif %})</i></b>
+                                {% if step.extra %}
+                                    {% if not forloop.last %}
+                                        <b><i>({{ step.extra }}, then...)</i></b>
+                                    {% else %}
+                                        <b><i>({{ step.extra }})</i></b>
+                                    {% endif %}
+                                {% else %}
+                                    {% if not forloop.last %}
+                                        <b><i>then...</i></b>
+                                    {% endif %}
+                                {% endif %}
                                 <br/>
                                 <br/>
                             {% endfor %}
@@ -423,11 +449,24 @@
         <center style="font-weight:bolder">www.tripletherapy.net</center>
 
         <script>
+            function showEmailSuccessMessage(){
+                $('#email-message').css('color', 'green').html('Email has been sent!').show();
+            }
+
+            function showEmailErrorMessage(){
+                $('#email-message').css('color', 'red').html('Error sending email!').show();
+            }
+
+            function clearEmailMessage(){
+                $('#email-message').hide().html('');
+            }
+
             $('#jquery-tagIt-default').tagit();
 
-            $('#address').on('keyup', function(e){
+            $('#jquery-tagIt-default').find('input').on('keyup', function(e){
                 $(this).parent().removeClass('has-error');
                 $(this).parent().removeClass('has-success');
+                clearEmailMessage();
             });
 
             // stop the dropdown from closing when you click on it
@@ -462,6 +501,7 @@
                     console.log(data);
                     sendButton.button('reset');
                     tagitInput.parent().addClass('has-success');
+                    showEmailSuccessMessage();
                 });
 
                 request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -469,6 +509,7 @@
                     console.log(jqXHR);
                     sendButton.button('reset');
                     tagitInput.parent().addClass('has-error');
+                    showEmailErrorMessage();
                 });
 
             });
