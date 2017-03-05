@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 
 
-from users.views import landing, terms
+from users.views import landing, terms, about
 
 urlpatterns = i18n_patterns(
     url(r'^$', landing, name='landing'),
@@ -29,7 +29,8 @@ urlpatterns = i18n_patterns(
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^users/password/', include('password_reset.urls')),
     url(r'^favicon.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
-    url(r'^terms', terms, name='terms')
+    url(r'^terms', terms, name='terms'),
+    url(r'^about', about, name='about')
 )
 
 

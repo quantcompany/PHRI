@@ -56,6 +56,12 @@
                                 <span>{% trans 'Recommendations' %}</span>
                             </a>
                         </li>
+                        <li class="{% block menu6 %}{% endblock %}">
+                            <a href="{% url 'about' %}">
+                                <i class="fa fa-info-circle"></i>
+                                <span>{% trans 'About' %}</span>
+                            </a>
+                        </li>
                         <li class="dropdown navbar-user pull-right">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-user"></i>

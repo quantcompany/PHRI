@@ -104,6 +104,10 @@ def terms(request):
     return render(request, 'terms.html')
 
 
+def about(request):
+    return render(request, 'about.html')
+
+
 def exists(request):
     email = request.GET.get('email')
     if User.objects.filter(email=email).exists():
