@@ -251,7 +251,7 @@ function determineMCMTherapy(){
                 // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
                 therapy.choices.push({
                   steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'}
+                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'}
                   ]
                 });
               } else if (noacAllergy == false) {
@@ -276,7 +276,7 @@ function determineMCMTherapy(){
                 // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
                 therapy.choices.push({
                   steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'}
+                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'}
                   ]
                 });
               } else if (noacAllergy == false) {
@@ -362,14 +362,14 @@ function determineMCMTherapy(){
                 therapy.choices.push({
                   steps: [
                     {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong or consider E lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'}
+                    {option: options.mcm.h, extra: 'Lifelong or consider E lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'}
                   ]
                 });
 
                 // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
                 therapy.choices.push({
                   steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'},
+                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'},
                   ]
                 });
               } else if (noacAllergy == false) {
@@ -477,14 +477,14 @@ function determineMCMTherapy(){
                 therapy.choices.push({
                   steps: [
                     {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong or consider E lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'}
+                    {option: options.mcm.h, extra: 'Lifelong or consider E lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'}
                   ]
                 });
 
                 // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
                 therapy.choices.push({
                   steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'},
+                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'},
                   ]
                 });
               } else if (noacAllergy == false) {
