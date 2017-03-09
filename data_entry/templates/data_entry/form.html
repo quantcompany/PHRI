@@ -230,8 +230,6 @@
                 });
 
                 request.fail(function(jqXHR, textStatus, errorThrown) {
-                    console.log('Fail');
-                    console.log(jqXHR);
                     $.gritter.add({
                         title: 'Validation Error',
                         text: 'Please fix the errors on the marked fields',

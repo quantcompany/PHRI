@@ -156,7 +156,7 @@
 
                         <div class="checkbox m-b-15">
                             <label>
-                                <input type="checkbox" required/> {% trans 'By clicking Sign Up, you acknowledge that you have read and agreed to our ' %} <a href="{% url 'terms' %}" target='_blank'>{% trans 'Terms and Conditions' %}</a>.
+                                <input type="checkbox" name="terms" data-parsley-required="true"/> {% trans 'By clicking Sign Up, you acknowledge that you have read and agreed to our ' %} <a href="{% url 'terms' %}" target='_blank'>{% trans 'Terms and Conditions' %}</a>.
                             </label>
                         </div>
 
@@ -225,8 +225,22 @@
                     });
                      
                     request.fail(function(jqXHR, textStatus, errorThrown) {
-                        var errorMessage = jqXHR.responseJSON.error; 
-                        $('#signup-form-errors').addClass('filled').html(errorMessage)
+                        try {
+                            var errorDict = JSON.parse(jqXHR.responseText);
+                            var errorMessages = [];
+
+                            for (var key in errorDict) {
+                                if (errorDict.hasOwnProperty(key)) {
+                                    errorMessages.push(errorDict[key]);
+                                }
+                            }
+                        } catch(e) {
+                            var errorMessages = ['Something went wrong, please try again'];
+                        }
+
+                        var errorMessageHTML = errorMessages.join('<br/>');
+
+                        $('#signup-form-errors').addClass('filled').html(errorMessageHTML);
                     });
                 });
             });
@@ -253,8 +267,15 @@
                     });
                      
                     request.fail(function(jqXHR, textStatus, errorThrown) {
-                        var errorMessage = JSON.parse(jqXHR.responseText).error; 
-                        $('#signin-form-errors').addClass('filled').html(errorMessage)
+                        try {
+                            var errorMessages = [JSON.parse(jqXHR.responseText).error];
+                        } catch(e) {
+                            var errorMessages = ['Something went wrong, please try again'];
+                        }
+
+                        var errorMessageHTML = errorMessages.join('<br/>');
+                         
+                        $('#signin-form-errors').addClass('filled').html(errorMessageHTML)
                     });
                 });
             });

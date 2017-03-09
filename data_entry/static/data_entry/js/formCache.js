@@ -8,6 +8,12 @@ $(document).ready(function() {
 function loadForm() {
 	var storage = window.sessionStorage;
 
+	if (storage.getItem('dirty') !== 'true') {
+		// the session storage isn't dirty yet, i.e. the user hasn't inputed any 
+		// data into the form, them se just skip loading form data.
+		return;
+	}
+
 	// load text inputs
 	$('input[type="text"],input[type="number"],textarea').each(function() {
 		var element = $(this);
@@ -61,16 +67,25 @@ function clearForm() {
 
 	// clear therapy option buttons
 	$('button.therapy-option-button').removeClass('active');
+
+	if (window.sessionStorage){
+		window.sessionStorage.clear();
+	}
 }
 
 function registerChangeListeners() {
 	var storage = window.sessionStorage;
+
+	var makeDirty = function() {
+		storage.setItem('dirty', 'true');
+	};
 
 	$('input[type="text"],input[type="number"],textarea').on('change', function() { // when text inputs change
 		var element = $(this);
 		var key = element.prop('id');
 		var value = element.val();
 		storage.setItem(key, value);
+		makeDirty();
 	});
 
 
@@ -91,6 +106,7 @@ function registerChangeListeners() {
 				storage.removeItem(key);
 			}
 		}
+		makeDirty();
 	});
 
 
@@ -104,6 +120,7 @@ function registerChangeListeners() {
 		} else {
 			storage.removeItem(key);
 		}
+		makeDirty();
 	});
 
 
@@ -117,6 +134,7 @@ function registerChangeListeners() {
 		} else {
 			storage.removeItem(key);
 		}
+		makeDirty();
 	});
 
 
@@ -125,5 +143,6 @@ function registerChangeListeners() {
 		var key = "selected-therapy-option-button";
 		var value = element.prop('id');
 		storage.setItem(key, value);
+		makeDirty();
 	});
 }
