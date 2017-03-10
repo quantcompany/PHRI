@@ -239,65 +239,6 @@
 
 
         <center style="font-weight:bolder">http://tripletherapy.net</center>
-        <!-- *************************** PAGE BREAK ****************************** -->
-        <div style="page-break-after: always;"></div>
-
-        <h3>Recommended Therapy</h3>
-        <hr />
-
-        <table class="therapy-recommendations">
-            <thead>
-                <tr>
-                    <th>Hamilton AF-PCI recommendation</th>
-                    <th>CCS recommendation</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td style="width:50%;">
-                        {% for choice in patient.parse_mcm_therapy.choices %}
-                            <h2><b>Option {{ forloop.counter }}</b></h2>
-                            {% for step in choice.steps %}
-                                {{ step.option|safe }}
-                                <b><i>({{ step.extra }}{% if not forloop.last%}, then...{% endif %})</i></b>
-                                <br/>
-                                <br/>
-                            {% endfor %}
-                        {% empty %}
-                            <h2>Nothing here</h2>
-                        {% endfor %}
-                    </td>
-
-                    <td style="width:50%;">
-                        {% for choice in patient.parse_ccs_therapy.choices %}
-                            <h2><b>Option {{ forloop.counter }}</b></h2>
-                            {% for step in choice.steps %}
-                                {{ step.option|safe }}
-                                <b><i>({{ step.extra }}{% if not forloop.last%}, then...{% endif %})</i></b>
-                                <br/>
-                                <br/>
-                            {% endfor %}
-                        {% empty %}
-                            <h2>Nothing here</h2>
-                        {% endfor %}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <center style="font-weight:bolder">http://tripletherapy.net</center>
-        <!-- *************************** PAGE BREAK ****************************** -->
-        <div style="page-break-after: always;"></div>
-
-        <h3>Chosen Therapy</h3>
-        <hr />
-
-        <p class="lead">Therapy recommendation being folowed: <span class="big"><b>{{ patient.get_chosen_therapy_display }}</b></span>.</p>
-
-        <p class="lead">Reason: <b>"{{ patient.reason }}"</b></p>
-
-        <center style="font-weight:bolder">http://tripletherapy.net</center>
         
         <script>
             function showEmailSuccessMessage(){

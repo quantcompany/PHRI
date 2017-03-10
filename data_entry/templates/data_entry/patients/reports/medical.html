@@ -169,7 +169,7 @@
             </tbody>
         </table>
 
-        <h3>Atrial Fibrilation</h3>
+        <h3>Atrial Fibrillation</h3>
         <hr/>
         <table class="table" style="width:100%;border:none;">
             <thead>
@@ -184,27 +184,27 @@
 
             <tbody>
                 <tr>
-                    <th>Indication</th>
-                    <td>{{ patient.get_indication_display }}</td>
+                    <th>Type of Atrial Fibrillation</th>
+                    <td>{{ patient.get_af_type_display }}</td>
                     <td></td>
                     <th>Previous Anticoagulation</th>
                     <td>{{ patient.get_prev_anti_coagulation_display }}</td>
                 </tr>
 
                 <tr>
-                    <th>Warfarin Intolerance</th>
-                    <td>{{ patient.warfarin_intolerance|yesno|capfirst }}</td>
+                    <th>Indication</th>
+                    <td>{{ patient.get_indication_display }}</td>
                     <td></td>
                     <th>INR Instability</th>
                     <td>{{ patient.inr_instability|yesno|capfirst }}</td>
                 </tr>
 
                 <tr>
+                    <th>Warfarin Intolerance</th>
+                    <td>{{ patient.warfarin_intolerance|yesno|capfirst }}</td>
+                    <td></td>
                     <th>NOAC Allergy Or Intollerance</th>
                     <td>{{ patient.noac_allergy_or_intolerance|yesno|capfirst }}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
                 </tr>
             </tbody>
         </table>

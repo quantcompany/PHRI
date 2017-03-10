@@ -38,12 +38,14 @@
                                 <span>{% trans 'My Patients' %}</span>
                             </a>
                         </li>
+                        {% if user.researcher %}
                         <li class="{% block menu3 %}{% endblock %}">
                             <a href="{% url 'database:index' %}">
                                 <i class="fa fa-database"></i>
                                 <span>{% trans 'Database' %}</span>
                             </a>
                         </li>
+                        {% endif %}
                         <li class="{% block menu4 %}{% endblock %}">
                             <a href="{% url 'data_entry:guidelines' %}">
                                 <i class="fa fa-book"></i>
@@ -65,7 +67,7 @@
                         <li class="dropdown navbar-user pull-right">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-user"></i>
-                                <span class="">{{ user.user_name|default:"Anonymouse" }}</span> <b class="caret"></b>
+                                <span class="">{{ user.user_name|default:"Anonymous" }}</span> <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu animated fadeInLeft f-s-14">
                                 <li><a href="{% url 'users:me' %}">{% trans 'Edit Profile' %}</a></li>
