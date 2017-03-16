@@ -4,7 +4,10 @@ from data_entry.models import *
 def patients_csv_size_estimate():
     patient_sample = Patient.objects.order_by('?')[:50]
     csv_size = sum([len(p.csv()) for p in patient_sample])
-    csv_size_per_patient = csv_size / patient_sample.count()
+    if csv_size != 0:
+        csv_size_per_patient = csv_size / patient_sample.count()
+    else:
+        csv_size_per_patient = 0
     csv_headers_size = len(patients_csv_headers())
     return csv_headers_size + (csv_size_per_patient * Patient.objects.all().count())
 
