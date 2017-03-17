@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     # Local apps
     'users',
     'data_entry',
-    'database'
+    'database',
+    'surveys',
 ]
 
 MIDDLEWARE = [
