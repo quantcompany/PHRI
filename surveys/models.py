@@ -14,35 +14,32 @@ from utils.models import PublishDataMixin
 import shortuuid
 
 class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):
+    
+    """
+    a) Interventional Cardiologist/Fellow
+    b) EP/Arrhythmia Specialist/Fellow
+    c) General Cardiologist
+    d) Internist
+    e) Specialist in thrombosis (internal medicine, haematology, thrombosis)
+    f) Cardiology resident
+    g) Internal medicine resident
+    """
+    Q1CHOICES = (
+            ('a', 'Interventional Cardiologist/Fellow'),
+            ('b', 'EP/Arrhythmia Specialist/Fellow'),
+            ('c', 'General Cardiologist'),
+            ('d', 'Internist'),
+            ('e', 'Specialist in thrombosis (internal medicine, haematology, thrombosis)'),
+            ('f', 'Cardiology resident'),
+            ('g', 'Internal medicine resident'),
+        )
+
     user = models.ForeignKey('users.User')
-    key = models.CharField(max_length=22, null=False, unique=True)
-    title = models.CharField(max_length=128, null=False)
-    description = models.TextField(null=True)
-    deadline = models.DateTimeField(null=True)
-    # create a unique id for the survey
-    def __init__(self, *args, **kwargs):
-        super(Survey, self).__init__(*args, **kwargs)
-        if not self.key:
-            self.key = shortuuid.uuid()
-        if not self.last_modified:
-            self.last_modified = datetime.now()
-        if kwargs.get('title'):
-            self.title = kwargs['title']
+    q1 = models.CharField('', max_length=1, choices=Q1CHOICES)
 
-    def __unicode__(self):
-        return 'id=%s, key = %s, user=%s, title = %s, last_modified = %s, is_published=%s' % (
-            self.id,
-            self.key,
-            self.user.username,
-            self.title,
-            self.modified.strftime('%H:%M, %d %B, %Y'),
-            self.is_published)
 
-    def get_absolute_url(self):
-        return "/view_survey/%s" % self.key
-
-    class Meta:
-        ordering = ['id']
+class SurveyQuestion(CreateModifactionDateMixin, CreatedModificationUserMixin):
+    l_q1 = models.CharField('label_q1', max_length=128)
 
 
 class Question(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):

@@ -30,6 +30,7 @@ class User(AbstractEmailUser):
     education_level = models.CharField(max_length=100, blank=True)
     country = models.CharField(max_length=100, blank=True, choices=COUNTRY_CHOICES) # Add country list
     researcher = models.BooleanField(default=False)
+    #apply_survey = models.BooleanField(default=True)
 
     def guess_user_name(self):
         if not self.user_name:

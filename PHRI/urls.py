@@ -30,7 +30,8 @@ urlpatterns = i18n_patterns(
     url(r'^users/password/', include('password_reset.urls')),
     url(r'^favicon.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     url(r'^terms', terms, name='terms'),
-    url(r'^about', about, name='about')
+    url(r'^about', about, name='about'),
+    url(r'^survey/', include('surveys.urls', namespace='survey')),
 )
 
 
