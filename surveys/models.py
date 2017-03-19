@@ -1,0 +1,159 @@
+from django.db import models
+from django.utils.timezone import now as timezone_now
+from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
+
+
+#utils
+from utils.models import CreateModifactionDateMixin
+from utils.models import CreatedModificationUserMixin
+from utils.models import PublishDataMixin
+
+import shortuuid
+
+class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):
+    key = models.CharField(max_length=22, null=False, unique=True)
+    title = models.CharField(max_length=128, null=False)
+    description = models.TextField(null=True)
+    def __init__(self, *args, **kwargs):
+        super(Survey, self).__init__(*args, **kwargs)
+        if not self.key:
+            self.key = shortuuid.uuid()
+        if kwargs.get('title'):
+            self.title = kwargs['title']
+
+    def __str__(self):
+        return 'id=%s, title = %s, last_modified = %s, is_published=%s' % (
+            self.id,
+            self.title,
+            self.modified.strftime('%H:%M, %d %B, %Y'),
+            self.publish)
+
+    def get_absolute_url(self):
+        return "/view_survey/%s" % self.key
+
+    class Meta:
+        ordering = ['id']
+
+
+class Question(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):
+    survey = models.ForeignKey(Survey, related_name='questions')
+    QUESTION_TYPE_CHOICES = (
+        ('multiplechoice', 'MultipleChoiceQuestion'),
+        ('checkbox', 'CheckboxQuestion'),
+        ('paragraph', 'ParagraphQuestion'),
+        ('numeric', 'NumericQuestion'),
+        ('text', 'TextQuestion')
+    )
+    type = models.CharField(choices=QUESTION_TYPE_CHOICES, max_length=25)
+    title = models.CharField(max_length=500, null=False)
+    help_text = models.CharField(max_length=500, null=True)
+    is_required = models.BooleanField(default=False)
+
+    def __str__(self):
+        return 'No.%d, title=%s, type=%s, required=%s' % (self.order, self.title, self.type, self.is_required)
+
+    class Meta:
+        ordering = ["order"]
+
+
+
+
+class ParagraphQuestion(Question):
+    max_no_characters = models.IntegerField()
+
+    def __init__(self, *args, **kwargs):
+        super(Question, self).__init__(*args, **kwargs)
+        self.type = "paragraph"
+
+
+class NumericQuestion(Question):
+    min_value = models.FloatField(null=True)
+    max_value = models.FloatField(null=True)
+
+    def __init__(self, *args, **kwargs):
+        super(Question, self).__init__(*args, **kwargs)
+        self.type = "numeric"
+
+    def __str__(self):
+        return 'title=%s, min=%f, max=%f' % (self.title, self.min_value, self.max_value)
+
+
+class CheckboxQuestion(Question):
+    max_checked = models.IntegerField(null=True)
+    min_checked = models.IntegerField(null=True)
+
+    def __init__(self, *args, **kwargs):
+        super(Question, self).__init__(*args, **kwargs)
+        self.type = "checkbox"
+
+
+class CheckboxChoice(models.Model):
+    question = models.ForeignKey(CheckboxQuestion, related_name='choices')
+    label = models.CharField(max_length=200)
+    order = models.IntegerField()
+    free_text = models.BooleanField(default=False)
+
+    def __str__(self):
+        return 'label%d: %s' % (self.id, self.label)
+
+    class Meta:
+        ordering = ["order"]
+
+
+class MultipleChoiceQuestion(Question):
+    def __init__(self, *args, **kwargs):
+        super(Question, self).__init__(*args, **kwargs)
+        self.type = "multiplechoice"
+
+
+class MultipleChoice(models.Model):
+    question = models.ForeignKey(MultipleChoiceQuestion, related_name='choices')
+    label = models.CharField(max_length=200)
+    order = models.IntegerField()
+    free_text = models.BooleanField(default=False)
+
+    def __str__(self):
+        return 'label%d: %s' % (self.order, self.label)
+
+    class Meta:
+        ordering = ["order"]
+
+
+class TextQuestion(Question):
+    max_no_characters = models.IntegerField(null=True)
+
+    def __init__(self, *args, **kwargs):
+        super(Question, self).__init__(*args, **kwargs)
+        self.type = "text"
+
+    def __unicode__(self):
+        return 'title=%s, max_no_characters=%d' % (self.title, self.max_no_characters)
+
+
+class Response(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):
+	survey = models.ForeignKey(Survey)
+	user = models.ForeignKey('users.User')
+
+	def __unicode__(self):
+		return ("response %s" % self.survey)
+
+class AnswerBase(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):
+	question = models.ForeignKey(Question, related_name='answers')
+	response = models.ForeignKey(Response, related_name='answers')
+
+class AnswerParagraph(AnswerBase):
+	body = models.TextField(blank=True, null=True)
+
+class AnswerNumeric(AnswerBase):
+	body = models.IntegerField(blank=True, null=True)
+
+class AnswerCheckbox(AnswerBase):
+	body = models.TextField(blank=True, null=True)
+
+class AnswerMultipleChoice(AnswerBase):
+	body = models.TextField(blank=True, null=True)
+
+class AnswerText(AnswerBase):
+	body = models.TextField(blank=True, null=True)
+

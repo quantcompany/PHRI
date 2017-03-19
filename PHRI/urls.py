@@ -25,6 +25,7 @@ urlpatterns = i18n_patterns(
     url(r'^$', landing, name='landing'),
     url(r'^', include('data_entry.urls', namespace='data_entry')),
     url(r'^database/', include('database.urls', namespace='database')),
+    url(r'^survey/', include('surveys.urls', namespace='surveys')),
     url(r'^admin/', admin.site.urls),
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^users/password/', include('password_reset.urls')),

@@ -40,8 +40,6 @@ class CreatedModificationUserMixin(models.Model):
 		abstract = True
 
 
-
-
 class PublishDataMixin(models.Model):
 	"""
 		Abstract class to manage the order and publish state of content

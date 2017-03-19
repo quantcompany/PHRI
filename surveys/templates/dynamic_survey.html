@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_css %}
+    <link href="{% static 'plugins/DataTables/media/css/dataTables.bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/DataTables/extensions/Select/css/select.bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block page_title %}{{page_title}}{% endblock %}
+
+{% block content %}
+	{% if Message %}
+		<h1>{{Message}}</h1>
+	{% else %}
+		<h1>Title</h1>
+	{% endif %}
+
+	{% for question in survey %}
+		<p>{{question}}</p>
+		{% for choice in question.choices %}
+			<p>{{choice}}</p>
+		{% endfor %}
+	{% endfor %}
+{% endblock %}
