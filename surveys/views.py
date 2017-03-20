@@ -26,9 +26,15 @@ from django.http import JsonResponse, Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
+
+@require_http_methods(['GET'])
+@login_required
+def apply_survey(request):
+	return(JsonResponse({ 'apply_survey' : (request.user.apply_survey and not request.user.survey_completed()) }, status=200))
 
 
-
+@login_required
 def display_survey(request):
 
 	try:
@@ -47,6 +53,9 @@ def display_survey(request):
 
 	return render(request,'dynamic_survey.html', context_dict)
 
+
+@require_http_methods(['POST'])
+@login_required
 def ajax_save_survey(request):
 
 	survey = get_object_or_404(Survey, id = request.POST.get('survey_id'))

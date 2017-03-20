@@ -6,6 +6,9 @@ from custom_user.models import AbstractEmailUser
 
 from .choices import COUNTRY_CHOICES, SPECIALTY_CHOICES
 
+#Extra models
+from surveys.models import Response
+
 
 class EmailVerification(models.Model):
     user = models.ForeignKey('users.User', related_name='verifications')
@@ -30,7 +33,7 @@ class User(AbstractEmailUser):
     education_level = models.CharField(max_length=100, blank=True)
     country = models.CharField(max_length=100, blank=True, choices=COUNTRY_CHOICES) # Add country list
     researcher = models.BooleanField(default=False)
-
+    apply_survey = models.BooleanField(default=True)
     def guess_user_name(self):
         if not self.user_name:
             if self.first_name or self.last_name:
@@ -61,3 +64,7 @@ class User(AbstractEmailUser):
             'education_level': self.education_level,
             'country': self.country
         }
+
+    def survey_completed(self):
+        print( Response.objects.filter(user=self, survey__publish=True) )
+        return Response.objects.filter(user=self, survey__publish=True).count() > 0

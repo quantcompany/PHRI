@@ -50,6 +50,33 @@
         {% endif %}
         </div>
 
+        <div id="survey-confirmation-agreement" class="modal fade">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Survey Agreement</h5>
+              </div>
+              <div class="modal-body">
+                <p>
+                    Before accessing the application, we would appreciate if you agree to complete a Survey that will collect information on your current practice management of patients with atrial fibrillation and coronary artery disease. We also want you to be aware that the information collected after using the application will be used for operational and monitoring purposes.
+                </p>
+
+                <p>
+                    No personal identifiers such as your name, your e-mail address or affiliations will be disclosed to any other third parties.
+                </p>
+
+                <p>
+                    Do you agree to complete the Survey and consent to use the information collected in the Survey and Application for research purposes?
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger">I don't agree</button>
+                <button type="button" class="btn btn-primary">I agree</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- ================== BEGIN BASE JS ================== -->
         <script src="{% static 'plugins/jquery/jquery-1.9.1.min.js' %}"></script>
         <script src="{% static 'plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
@@ -91,6 +118,32 @@
                     time: 50000,
                     position: 'bottom-left'
                 });
+            });
+        </script>
+        <script type="text/javascript">
+            $.get("{% url 'surveys:iapply'  %}", function( data ) {
+                if( data.apply_survey ) {
+                    switch( window.location.pathname.toString() ) {
+                        case '{% url "surveys:dynamic_survey" %}':
+                            break;
+                        default:
+                            var options = {
+                                keyboard: false,
+                                backdrop: 'static'
+                            };
+                            $('#survey-confirmation-agreement').modal(options);
+                            $('#survey-confirmation-agreement').modal('show');
+                            break;
+                    }
+                }
+            });
+
+            $('#survey-confirmation-agreement button.btn-primary').on('click', function(){
+                window.location = "{% url 'surveys:dynamic_survey'%}";
+            });
+
+            $('#survey-confirmation-agreement button.btn-danger').on('click', function(){
+                window.location = "{% url 'users:logout' %}";
             });
         </script>
     </body>

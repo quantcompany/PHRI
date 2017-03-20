@@ -28,6 +28,9 @@ def login_view(request):
 
     if user is not None:
         login(request, user)
+        #if(user.apply_survey and not user.survey_completed() ):
+            #return redirect('dynamic_survey')
+            #return JsonResponse({'goto':'survey'})
         return JsonResponse({})
     else:
         return JsonResponse({'error': 'Invalid email and/or password'}, status=401)
