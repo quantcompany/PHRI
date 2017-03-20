@@ -31,7 +31,8 @@ from django.views.decorators.http import require_http_methods
 @require_http_methods(['GET'])
 @login_required
 def apply_survey(request):
-	return(JsonResponse({ 'apply_survey' : (request.user.apply_survey and not request.user.survey_completed()) }, status=200))
+
+	return(JsonResponse({ 'apply_survey' : ( (Survey.objects.filter(publish=True).count() > 0) and request.user.apply_survey and not request.user.survey_completed()) }, status=200))
 
 
 @login_required
