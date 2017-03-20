@@ -21,8 +21,9 @@ function validate_survey(questions)
 	$('h4').css('color', '#000000');
 	$('.question_error').css('display', 'none')
 	.html('');
-	var 
+	var data = {};
 	$(questions).each(function(i, obj) {
+		var responses = [];
 		var current_question = $(this);
 		var current_id = this.id;
 		var type_question = current_question.attr('question-type');
@@ -39,6 +40,20 @@ function validate_survey(questions)
 			{
 				set_error_message(current_id,'Please fill out the free text option.');
 			}
+			current_question.find('input[type=radio]').each(function(key, item){
+				
+				responses.push(
+					{
+						"id" : $(item).attr('id').split('question_choice_')[1],
+						"value": ($(item).hasClass('free_text')?$(item).next().val() : $(item).val()),
+						"selected": $(item).is(':checked')
+					}
+				);
+			});
+			data[current_id.split("question_")[1]] = {
+				"type" : type_question,
+				"responses": responses
+			}
 		}
 		if(type_question === 'checkbox')
 		{
@@ -53,12 +68,27 @@ function validate_survey(questions)
 			{
 				set_error_message(current_id,'Please fill out the free text option.');
 			}
+			
+			current_question.find('input[type=checkbox]').each(function(key, item){
+				
+				responses.push(
+					{
+						"id" : $(item).attr('id').split('question_choice_')[1],
+						"value": ($(item).hasClass('free_text')?$(item).next().val() : $(item).val()),
+						"selected": $(item).is(':checked')
+					}
+				);
+			});
+			data[current_id.split("question_")[1]] = {
+				"type" : type_question,
+				"responses": responses
+			}
 		}
 		if(type_question === 'numeric')
 		{
 			var min = $('#'+current_id+' input[type=number]').attr('min');
 			var max = $('#'+current_id+' input[type=number]').attr('max');
-			var value = parseInt($('#'+current_id+' input[type=number]').val(),10);
+			var value = $('#'+current_id+' input[type=number]').val();
 			if(!isNaN(value))
 			{
 				value = parseInt(value,10);
@@ -72,6 +102,17 @@ function validate_survey(questions)
 				set_error_message(current_id,'Please fill out the field.');
 			}
 			
+			responses.push(
+				{
+					"value": value
+				}
+			);
+			
+			data[current_id.split("question_")[1]] = {
+				"type" : type_question,
+				"responses": responses
+			}
+			
 		}
 		if(type_question === 'paragraph')
 		{
@@ -80,6 +121,16 @@ function validate_survey(questions)
 			if(value > max)
 			{
 				set_error_message(current_id,'You can only input a maximum of '+ max + 'characters including spaces.');
+			}
+			responses.push(
+				{
+					"value": value
+				}
+			);
+			
+			data[current_id.split("question_")[1]] = {
+				"type" : type_question,
+				"responses": responses
 			}
 		}
 		if(type_question === 'text')
@@ -90,9 +141,20 @@ function validate_survey(questions)
 			{
 				set_error_message(current_id,'You can only input a maximum of '+ max + 'characters including spaces.');
 			}
+			responses.push(
+				{
+					"value": value
+				}
+			);
+			
+			data[current_id.split("question_")[1]] = {
+				"type" : type_question,
+				"responses": responses
+			}
 		}
 
     }); 
+	console.log(data);
 }
 
 function set_error_message(element_id, message)
