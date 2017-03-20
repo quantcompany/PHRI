@@ -1,4 +1,22 @@
+import io
+import csv
 from data_entry.models import *
+from surveys.models import Survey
+
+def survey_csv(survey_id):
+    survey = Survey.objects.get( id = survey_id )
+
+    data = survey.get_report_data()
+    header = '\ufeff' + ', '.join(data.get('headers')) + '\n'
+    yield header
+
+    buf = io.StringIO()
+    writer = csv.writer(buf)
+    for r in data.get('rows'):
+        writer.writerow(r)
+
+    yield buf.getvalue()
+
 
 
 def patients_csv_size_estimate():

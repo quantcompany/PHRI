@@ -32,6 +32,42 @@ class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDa
     def get_absolute_url(self):
         return "/view_survey/%s" % self.key
 
+    def get_report_data(self):
+        headers = ["user", "created"]
+        rows = []
+        
+        #armando los headers
+        for q in self.questions.all():
+            if(q.type == 'multiplechoice'):
+                #for ch in q.multiplechoicequestion.choices.all():
+                    #headers.append(q.title + ' | ' + ch.label)
+                headers.append(q.title)
+            if( q.type == 'checkbox' ):
+                for ch in q.checkboxquestion.choices.all():
+                    headers.append(q.title + ' | ' + ch.label)
+            if( q.type in ('paragraph','numeric','text') ):
+                headers.append(q.title)
+
+        #armando la data
+        for r in self.responses.all():
+            a_row = [r.user.user_name, r.created]
+            for a in r.answers.all():
+                if( a.question.type == 'multiplechoice' ):
+                    a_row.append( a.answermultiplechoice.body )
+                if( a.question.type == 'checkbox' ):
+                    options_selected = a.answercheckbox.body.split(',')
+                    for chch in a.question.checkboxquestion.choices.all():
+                        a_row.append( ( chch.label in options_selected ) )
+                if( a.question.type == 'paragraph' ):
+                    a_row.append( a.answerparagraph.body )
+                if( a.question.type == 'numeric' ):
+                    a_row.append( a.answernumeric.body )
+                if( a.question.type == 'text' ):
+                    a_row.append( a.answertext.body )
+            rows.append(a_row)
+
+        return dict(headers=headers, rows=rows)
+
     class Meta:
         ordering = ['id']
 
@@ -55,8 +91,6 @@ class Question(CreateModifactionDateMixin, CreatedModificationUserMixin, Publish
 
     class Meta:
         ordering = ["order"]
-
-
 
 
 class ParagraphQuestion(Question):
@@ -127,15 +161,15 @@ class TextQuestion(Question):
         super(Question, self).__init__(*args, **kwargs)
         self.type = "text"
 
-    def __unicode__(self):
+    def __str__(self):
         return 'title=%s, max_no_characters=%d' % (self.title, self.max_no_characters)
 
 
 class Response(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):
-	survey = models.ForeignKey(Survey)
+	survey = models.ForeignKey(Survey, related_name="responses")
 	user = models.ForeignKey('users.User')
 
-	def __unicode__(self):
+	def __str__(self):
 		return ("response %s" % self.survey)
 
 class AnswerBase(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):
