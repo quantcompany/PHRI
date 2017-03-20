@@ -39,8 +39,6 @@ class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDa
         #armando los headers
         for q in self.questions.all():
             if(q.type == 'multiplechoice'):
-                #for ch in q.multiplechoicequestion.choices.all():
-                    #headers.append(q.title + ' | ' + ch.label)
                 headers.append('"'+q.title+'"')
             if( q.type == 'checkbox' ):
                 for ch in q.checkboxquestion.choices.all():
@@ -57,14 +55,13 @@ class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDa
                 if a.question.type == 'checkbox':
                     options_selected = a.answercheckbox.body.split('#@#')
                     all_checkbox_choices = a.question.checkboxquestion.choices.all()
+                    all_checkbox_choices_label = [x.label for x in all_checkbox_choices]
                     for chch in all_checkbox_choices:
                         if chch.free_text:
-                            a_row.append(a.answercheckbox.body)
-                            #for os in options_selected:
-                                #x for x in all_checkbox_choices if x.label == os
-                                #if os not in all_checkbox_choices.label:
-                                    #a_row.append(os)
-
+                            #a_row.append(a.answercheckbox.body)
+                            for os_str in options_selected:
+                                if os_str not in all_checkbox_choices_label:
+                                    a_row.append(os_str)
                         else:
                             a_row.append( ( chch.label in options_selected ) )
                 if a.question.type == 'paragraph' :
@@ -175,28 +172,27 @@ class TextQuestion(Question):
 
 
 class Response(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):
-	survey = models.ForeignKey(Survey, related_name="responses")
-	user = models.ForeignKey('users.User')
+    survey = models.ForeignKey(Survey, related_name="responses")
+    user = models.ForeignKey('users.User')
 
-	def __str__(self):
-		return ("response %s" % self.survey)
+    def __str__(self):
+        return ("response %s" % self.survey)
 
 class AnswerBase(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):
-	question = models.ForeignKey(Question, related_name='answers')
-	response = models.ForeignKey(Response, related_name='answers')
+    question = models.ForeignKey(Question, related_name='answers')
+    response = models.ForeignKey(Response, related_name='answers')
 
 class AnswerParagraph(AnswerBase):
-	body = models.TextField(blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
 
 class AnswerNumeric(AnswerBase):
-	body = models.IntegerField(blank=True, null=True)
+    body = models.IntegerField(blank=True, null=True)
 
 class AnswerCheckbox(AnswerBase):
-	body = models.TextField(blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
 
 class AnswerMultipleChoice(AnswerBase):
-	body = models.TextField(blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
 
 class AnswerText(AnswerBase):
-	body = models.TextField(blank=True, null=True)
-
+    body = models.TextField(blank=True, null=True)
