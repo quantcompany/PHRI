@@ -120,8 +120,9 @@ class NumericQuestion(Question):
 
 
 class CheckboxQuestion(Question):
-    max_checked = models.IntegerField(null=True)
+    
     min_checked = models.IntegerField(null=True)
+    max_checked = models.IntegerField(null=True)
 
     def __init__(self, *args, **kwargs):
         super(Question, self).__init__(*args, **kwargs)

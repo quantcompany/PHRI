@@ -44,8 +44,8 @@ class PublishDataMixin(models.Model):
 	"""
 		Abstract class to manage the order and publish state of content
 	"""
-	publish = models.BooleanField(_("Publicar"), blank=True, default=True, help_text="Este campo activará el contenido en la pagina.")
-	order = models.IntegerField(_("Orden"), blank=True, default=0, help_text="Este campo será utilizado para definir el orden del contenido. ")
+	publish = models.BooleanField(_("Publish"), blank=True, default=True, help_text="Este campo activará el contenido en la pagina.")
+	order = models.IntegerField(_("Order"), blank=True, default=0, help_text="Este campo será utilizado para definir el orden del contenido. ")
 
 	class Meta:
 		abstract = True
