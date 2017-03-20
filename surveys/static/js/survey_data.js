@@ -73,7 +73,8 @@ function validate_survey(questions)
 			var min = $('#'+current_id+' input[type=number]').attr('min');
 			var max = $('#'+current_id+' input[type=number]').attr('max');
 			var value = $('#'+current_id+' input[type=number]').val();
-			if(!isNaN(value))
+			//if(!isNaN(value) && value.length > 0)
+			if(!isNaN(value) && value.length > 0)
 			{
 				value = parseInt(value,10);
 				if(value < min || value > max || value === NaN)

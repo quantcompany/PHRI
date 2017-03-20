@@ -23,10 +23,10 @@ class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDa
             self.title = kwargs['title']
 
     def __str__(self):
-        return 'id=%s, title = %s, last_modified = %s, is_published=%s' % (
+        return 'id=%s, title = %s, created = %s, is_published=%s' % (
             self.id,
             self.title,
-            self.modified.strftime('%H:%M, %d %B, %Y'),
+            self.created.strftime('%H:%M, %d %B, %Y'),
             self.publish)
 
     def get_absolute_url(self):
@@ -41,28 +41,37 @@ class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDa
             if(q.type == 'multiplechoice'):
                 #for ch in q.multiplechoicequestion.choices.all():
                     #headers.append(q.title + ' | ' + ch.label)
-                headers.append(q.title)
+                headers.append('"'+q.title+'"')
             if( q.type == 'checkbox' ):
                 for ch in q.checkboxquestion.choices.all():
-                    headers.append(q.title + ' | ' + ch.label)
+                    headers.append('"'+q.title + ' | ' + ch.label+'"')
             if( q.type in ('paragraph','numeric','text') ):
-                headers.append(q.title)
+                headers.append('"'+q.title+'"')
 
         #armando la data
         for r in self.responses.all():
             a_row = [r.user.user_name, r.created]
             for a in r.answers.all():
-                if( a.question.type == 'multiplechoice' ):
+                if a.question.type == 'multiplechoice':
                     a_row.append( a.answermultiplechoice.body )
-                if( a.question.type == 'checkbox' ):
-                    options_selected = a.answercheckbox.body.split(',')
-                    for chch in a.question.checkboxquestion.choices.all():
-                        a_row.append( ( chch.label in options_selected ) )
-                if( a.question.type == 'paragraph' ):
+                if a.question.type == 'checkbox':
+                    options_selected = a.answercheckbox.body.split('#@#')
+                    all_checkbox_choices = a.question.checkboxquestion.choices.all()
+                    for chch in all_checkbox_choices:
+                        if chch.free_text:
+                            a_row.append(a.answercheckbox.body)
+                            #for os in options_selected:
+                                #x for x in all_checkbox_choices if x.label == os
+                                #if os not in all_checkbox_choices.label:
+                                    #a_row.append(os)
+
+                        else:
+                            a_row.append( ( chch.label in options_selected ) )
+                if a.question.type == 'paragraph' :
                     a_row.append( a.answerparagraph.body )
-                if( a.question.type == 'numeric' ):
+                if a.question.type == 'numeric':
                     a_row.append( a.answernumeric.body )
-                if( a.question.type == 'text' ):
+                if a.question.type == 'text':
                     a_row.append( a.answertext.body )
             rows.append(a_row)
 

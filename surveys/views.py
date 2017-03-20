@@ -72,7 +72,7 @@ def ajax_save_survey(request):
 				choice_selected = question_reponse.get('selected')
 				if choice_selected:
 					choice_value.append(question_reponse.get('value'))
-			new_answer_multiplechoice = AnswerMultipleChoice(question = this_question, response= new_resp, body= ",".join(choice_value) )
+			new_answer_multiplechoice = AnswerMultipleChoice(question = this_question, response= new_resp, body= "#@#".join(choice_value) )
 			new_answer_multiplechoice.save()
 		if( this_question.type == 'checkbox'):
 			choice_value = []
@@ -81,7 +81,7 @@ def ajax_save_survey(request):
 				choice_selected = question_reponse.get('selected')
 				if choice_selected:
 					choice_value.append(question_reponse.get('value'))
-			new_answer_checkbox = AnswerCheckbox(question = this_question, response= new_resp, body= ",".join(choice_value) )
+			new_answer_checkbox = AnswerCheckbox(question = this_question, response= new_resp, body= "#@#".join(choice_value) )
 			new_answer_checkbox.save()
 		if( this_question.type == 'paragraph'):
 			data_value = question.get('responses')[0]

@@ -39,16 +39,19 @@ admin.site.register(Survey)
 admin.site.register(ParagraphQuestion)
 admin.site.register(NumericQuestion)
 admin.site.register(CheckboxQuestion, CheckboxChoiceQuestionAdmin)
-admin.site.register(CheckboxChoice)
 admin.site.register(MultipleChoiceQuestion, MultipleChoiceQuestionAdmin)
 admin.site.register(TextQuestion)
 admin.site.register(Response)
+'''
+admin.site.register(CheckboxChoice)
 admin.site.register(AnswerBase)
 admin.site.register(AnswerParagraph)
 admin.site.register(AnswerNumeric)
 admin.site.register(AnswerCheckbox)
 admin.site.register(AnswerMultipleChoice)
 admin.site.register(AnswerText)
+'''
+
 
 
 
