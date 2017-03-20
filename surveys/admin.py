@@ -26,6 +26,11 @@ class MultipleChoiceInline(admin.TabularInline):
 
 class MultipleChoiceQuestionAdmin(admin.ModelAdmin):
 	inlines = [MultipleChoiceInline]
+	exclude = ('type',)
+
+	def save_model(self, request, obj, form, change):
+		obj.type = 'multiplechoice'
+		super(MultipleChoiceQuestionAdmin, self).save_model(request, obj, form, change)
 
 
 class CheckboxChoiceInline(admin.TabularInline):
@@ -34,23 +39,41 @@ class CheckboxChoiceInline(admin.TabularInline):
 
 class CheckboxChoiceQuestionAdmin(admin.ModelAdmin):
 	inlines = [CheckboxChoiceInline]
+	exclude = ('type',)
+
+	def save_model(self, request, obj, form, change):
+		obj.type = 'checkbox'
+		super(CheckboxChoiceQuestionAdmin, self).save_model(request, obj, form, change)
+
+class ParagraphQuestionAdmin(admin.ModelAdmin):
+	exclude = ('type',)
+
+	def save_model(self, request, obj, form, change):
+		obj.type = 'paragraph'
+		super(ParagraphQuestionAdmin, self).save_model(request, obj, form, change)
+
+
+class NumericQuestionAdmin(admin.ModelAdmin):
+	exclude = ('type',)
+
+	def save_model(self, request, obj, form, change):
+		obj.type = 'numeric'
+		super(NumericQuestionAdmin, self).save_model(request, obj, form, change)
+
+class TextQuestionAdmin(admin.ModelAdmin):
+	exclude = ('type',)
+
+	def save_model(self, request, obj, form, change):
+		obj.type = 'text'
+		super(TextQuestionAdmin, self).save_model(request, obj, form, change)
 
 admin.site.register(Survey)
-admin.site.register(ParagraphQuestion)
-admin.site.register(NumericQuestion)
+admin.site.register(ParagraphQuestion, ParagraphQuestionAdmin)
+admin.site.register(NumericQuestion, NumericQuestionAdmin)
 admin.site.register(CheckboxQuestion, CheckboxChoiceQuestionAdmin)
 admin.site.register(MultipleChoiceQuestion, MultipleChoiceQuestionAdmin)
-admin.site.register(TextQuestion)
+admin.site.register(TextQuestion, TextQuestionAdmin)
 admin.site.register(Response)
-'''
-admin.site.register(CheckboxChoice)
-admin.site.register(AnswerBase)
-admin.site.register(AnswerParagraph)
-admin.site.register(AnswerNumeric)
-admin.site.register(AnswerCheckbox)
-admin.site.register(AnswerMultipleChoice)
-admin.site.register(AnswerText)
-'''
 
 
 
