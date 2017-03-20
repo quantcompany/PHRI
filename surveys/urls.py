@@ -20,4 +20,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.display_survey, name='dynamic_survey'),
+    url(r'^save/$', views.ajax_save_survey, name='save_survey'),
 ]
