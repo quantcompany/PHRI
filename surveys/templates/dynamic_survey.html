@@ -112,7 +112,7 @@
 			<div class="panel-footer m-t-25">
 				<div class="row">
 					<div class="col-md-12 text-right m-t-20 m-b-20">
-						<button class="btn btn-info btn-block btn-lg bg-blue" type="button" onclick="processSurvey()"  value="submit">Submit</button>
+						<button class="btn btn-info btn-block btn-lg bg-blue" type="button" onclick="processSurvey(this)" data-loading-text="Wait a moment..." value="submit">Submit</button>
 					</div>
 				</div>
 				
@@ -146,8 +146,9 @@
 			window.location = "{% url 'data_entry:form' %}";
 		});
 
-		function processSurvey()
+		function processSurvey(btn)
 		{
+			$(btn).button('loading');
 			var questions = $('.question.required');
 			var data_result = validate_survey(questions);
 			if(!$('.question_error').is(':visible'))
@@ -159,7 +160,6 @@
 						survey_data : JSON.stringify(data_result),
 						survey_id : {{survey.id}}
 					},
-					//contentType : "text/json",
 					dataType:'json',
 					error: function(jqXHR, textStatus, errorThrown){
 						console.log("ERROR");
@@ -167,8 +167,10 @@
 						console.log(textStatus);
 						console.log(errorThrown);
 						alert('An error has occured, please contact the systema administrator.');
+						$(btn).button('reset');
 					},
 					success: function(resp) {
+						$(btn).button('reset');
 						console.log('guardado completado');
 						var options = {
 							keyboard: false,
@@ -182,6 +184,7 @@
 			}
 			else
 			{
+				$(btn).button('reset');
 				$('html, body').animate({
         			scrollTop: $('.question_error').first().offset().top - 200
     			}, 700);
