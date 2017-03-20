@@ -10,16 +10,112 @@
 {% block page_title %}{{page_title}}{% endblock %}
 
 {% block content %}
-	{% if Message %}
-		<h1>{{Message}}</h1>
-	{% else %}
-		<h1>Title</h1>
-	{% endif %}
+<div class="container" id="content">
+    <!-- The main page content -->
+<div class="row">
+	<div class = "col-md-12">
+		<div class="panel panel-default">
+			<div class="my-panel-heading bg-blue">
+				<div class="row">
+					<div class="col-xs-11">
+						{% if Message %}
+							<h1>{{Message}}</h1>
+						{% else %}
+						<div>
+							<h2 style="color:#FFFFFF;">{{survey.title}}</h2>
+						</div>
+						<h4 style="color:#FFFFFF;">{{survey.description}}</h4>
+						{% endif %}
+					</div>
+					<div class="col-xs-1 text-right m-t-20">
+						<i class="fa fa-pencil-square-o"></i>
+					</div>
+				</div>
+			</div>
+			<form method="POST" action="#">
+			<div class="panel-body panel-form">
+				<div class = "row">
+					<div class="col-md-12">
+						
+							<!-- List of questions -->
+							{% for question in questions %}
+								<div class="row m-t-20 m-b-20 m-l-10">
+									<div class="col-md-12">
+										<div id="question_{{question.id}}">
+											<h4>{{ forloop.counter }} | {{question.title}} <br/> {% if question.help_text %}<small>{{question.help_text}}</small>{% endif %}</h4>
+											{% if question.type == 'multiplechoice' %}
+												<div class="row">
+													<div class="col-md-8 m-t-10">
+														{% for choice in question.multiplechoicequestion.choices.all %}
+															{% if choice.free_text %}
+																<p><input type="text" class="form-control" id="question_{{choice.id}}" placeholder="{{choice.label}}" name="question_{{question.id}}"><p>
+															{% elif forloop.counter == 1 %}
+																<p><input type="radio" name="question_{{question.id}}" value="{{choice.label}}"  /> {{choice.label}}</p>
+															{%else%}
+																<p><input type="radio" name="question_{{question.id}}" value="{{choice.label}}" /> {{choice.label}}</p>
+															{% endif %}
+														{% endfor %}
+													</div>
+												</div>
+											{% elif question.type == 'checkbox' %}
+												<div class="row">
+													<div class="col-md-8 m-t-10">
+														{% for choice in question.checkboxquestion.choices.all %}
+															{% if choice.free_text %}
+																<p><input type="text" class="form-control" id="question_{{choice.id}}" placeholder="{{choice.label}}"><p>
+															{% elif forloop.counter == 1 %}
+																<p><input type="checkbox" name="question_{{question.id}}" value="{{choice.label}}"/> {{choice.label}}</p>
+															{%else%}
+																<p><input type="checkbox" name="question_{{question.id}}" value="{{choice.label}}" /> {{choice.label}}</p>
+															{% endif %}
+														{% endfor %}
+													</div>
+												</div>
+											{% elif question.type == 'numeric' %}
+												<div class="row">
+													<div class="col-md-8 m-t-10">
+													 	<input type="number" name="quantity" min="{{question.numericquestion.min_value}}" max="{{question.numericquestion.max_value}}">
+													</div>
+												</div>
+											{% elif question.type == 'paragraph' %}
+												<div class="row">
+													<div class="col-md-8 m-t-10">
+														<textarea rows="4" cols="50"></textarea>
+													</div>
+												</div>
+											{%else%}
+												<div class="row">
+													<div class="col-md-8 m-t-10">
+														<input type="text">
+													</div>
+												</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+								{% if not forloop.last %}
+								<div class="row">
+									<div class="col-md-12">
+										<hr/>
+									</div>
+								</div>
 
-	{% for question in survey %}
-		<p>{{question}}</p>
-		{% for choice in question.choices %}
-			<p>{{choice}}</p>
-		{% endfor %}
-	{% endfor %}
+								{% endif %}
+							{% endfor %}
+						
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer m-t-25">
+				<div class="row">
+					<div class="col-md-12 text-right m-t-20 m-b-20">
+						<button class="btn btn-info btn-block btn-lg bg-blue" type="submit"  value="submit" > Submit</button>
+					</div>
+				</div>
+				
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
 {% endblock %}

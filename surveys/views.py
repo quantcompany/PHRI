@@ -34,18 +34,19 @@ from django.views.decorators.csrf import csrf_exempt
 def display_survey(request):
 
 	try:
-		survey = Survey.objects.filter(publish=True)
+		survey = Survey.objects.get(publish=True)
 	except Exception as e:
 		context_dict={ 'Message: ': "Sorry there are no surveys active right now!" }
 		return render(request,'dynamic_survey.html', context_dict)
 
-	questions = survey[0].questions.all()
-	for question in questions:
-		print(question)
+	questions = survey.questions.all()
+	#for question in questions:
+	#choices = question.multiplechoicequestion.choices.all()
 
 	context_dict={
 				'page_title': 'Survey',
 				'survey': survey,
+				'questions':questions
 				}
 
 	return render(request,'dynamic_survey.html', context_dict)

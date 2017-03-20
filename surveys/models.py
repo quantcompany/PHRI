@@ -47,7 +47,7 @@ class Question(CreateModifactionDateMixin, CreatedModificationUserMixin, Publish
     )
     type = models.CharField(choices=QUESTION_TYPE_CHOICES, max_length=25)
     title = models.CharField(max_length=500, null=False)
-    help_text = models.CharField(max_length=500, null=True)
+    help_text = models.CharField(max_length=500, blank=True)
     is_required = models.BooleanField(default=False)
 
     def __str__(self):

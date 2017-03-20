@@ -28,10 +28,17 @@ class MultipleChoiceQuestionAdmin(admin.ModelAdmin):
 	inlines = [MultipleChoiceInline]
 
 
+class CheckboxChoiceInline(admin.TabularInline):
+	model = CheckboxChoice
+	extra = 1
+
+class CheckboxChoiceQuestionAdmin(admin.ModelAdmin):
+	inlines = [CheckboxChoiceInline]
+
 admin.site.register(Survey)
 admin.site.register(ParagraphQuestion)
 admin.site.register(NumericQuestion)
-admin.site.register(CheckboxQuestion)
+admin.site.register(CheckboxQuestion, CheckboxChoiceQuestionAdmin)
 admin.site.register(CheckboxChoice)
 admin.site.register(MultipleChoiceQuestion, MultipleChoiceQuestionAdmin)
 admin.site.register(TextQuestion)
