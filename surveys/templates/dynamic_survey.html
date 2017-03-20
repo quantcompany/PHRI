@@ -2,9 +2,6 @@
 {% load static %}
 
 {% block head_css %}
-    <link href="{% static 'plugins/DataTables/media/css/dataTables.bootstrap.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'plugins/DataTables/extensions/Select/css/select.bootstrap.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block page_title %}{{page_title}}{% endblock %}
@@ -24,7 +21,7 @@
 						<div>
 							<h2 style="color:#FFFFFF;">{{survey.title}}</h2>
 						</div>
-						<h3 style="color:#FFFFFF;">{{survey.description}}</h3>
+						<h4 style="color:#FFFFFF;">{{survey.description}}</h4>
 						{% endif %}
 					</div>
 					<div class="col-xs-1 text-right m-t-20">

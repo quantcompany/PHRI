@@ -73,7 +73,6 @@ function validate_survey(questions)
 			var min = $('#'+current_id+' input[type=number]').attr('min');
 			var max = $('#'+current_id+' input[type=number]').attr('max');
 			var value = $('#'+current_id+' input[type=number]').val();
-			//if(!isNaN(value) && value.length > 0)
 			if(!isNaN(value) && value.length > 0)
 			{
 				value = parseInt(value,10);
@@ -103,8 +102,8 @@ function validate_survey(questions)
 		if(type_question === 'paragraph')
 		{
 			var max = $('#'+current_id+' textarea').attr('maxlength');
-			var value = $('#'+current_id+' textarea').val().length;
-			if(value > max)
+			var value = $('#'+current_id+' textarea').val();
+			if(value.length > max)
 			{
 				set_error_message(current_id,'You can only input a maximum of '+ max + 'characters including spaces.');
 			}
@@ -123,8 +122,8 @@ function validate_survey(questions)
 		if(type_question === 'text')
 		{
 			var max = $('#'+current_id+' input[type=text]').attr('maxlength');
-			var value = $('#'+current_id+' input[type=text]').val().length;
-			if(value > max)
+			var value = $('#'+current_id+' input[type=text]').val();
+			if(value.length > max)
 			{
 				set_error_message(current_id,'You can only input a maximum of '+ max + 'characters including spaces.');
 			}

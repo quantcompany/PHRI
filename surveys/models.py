@@ -1,15 +1,9 @@
 from django.db import models
-from django.utils.timezone import now as timezone_now
-from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
-
-
-#utils
 from utils.models import CreateModifactionDateMixin
 from utils.models import CreatedModificationUserMixin
 from utils.models import PublishDataMixin
-
 import shortuuid
+
 
 class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):
     key = models.CharField(max_length=22, null=False, unique=True)
@@ -36,40 +30,37 @@ class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDa
         headers = ["user", "created"]
         rows = []
         
-        #armando los headers
+        # creating headers
         for q in self.questions.all():
-            if(q.type == 'multiplechoice'):
-                headers.append('"'+q.title+'"')
-            if( q.type == 'checkbox' ):
+            if q.type == 'checkbox':
                 for ch in q.checkboxquestion.choices.all():
                     headers.append('"'+q.title + ' | ' + ch.label+'"')
-            if( q.type in ('paragraph','numeric','text') ):
-                headers.append('"'+q.title+'"')
+            else:
+                headers.append('"' + q.title + '"')
 
-        #armando la data
+        # Generating rows
         for r in self.responses.all():
             a_row = [r.user.user_name, r.created]
             for a in r.answers.all():
                 if a.question.type == 'multiplechoice':
-                    a_row.append( a.answermultiplechoice.body )
+                    a_row.append(a.answermultiplechoice.body)
                 if a.question.type == 'checkbox':
                     options_selected = a.answercheckbox.body.split('#@#')
                     all_checkbox_choices = a.question.checkboxquestion.choices.all()
                     all_checkbox_choices_label = [x.label for x in all_checkbox_choices]
                     for chch in all_checkbox_choices:
                         if chch.free_text:
-                            #a_row.append(a.answercheckbox.body)
                             for os_str in options_selected:
                                 if os_str not in all_checkbox_choices_label:
                                     a_row.append(os_str)
                         else:
-                            a_row.append( ( chch.label in options_selected ) )
-                if a.question.type == 'paragraph' :
-                    a_row.append( a.answerparagraph.body )
+                            a_row.append(chch.label in options_selected)
+                if a.question.type == 'paragraph':
+                    a_row.append(a.answerparagraph.body)
                 if a.question.type == 'numeric':
-                    a_row.append( a.answernumeric.body )
+                    a_row.append(a.answernumeric.body)
                 if a.question.type == 'text':
-                    a_row.append( a.answertext.body )
+                    a_row.append(a.answertext.body)
             rows.append(a_row)
 
         return dict(headers=headers, rows=rows)
@@ -120,7 +111,6 @@ class NumericQuestion(Question):
 
 
 class CheckboxQuestion(Question):
-    
     min_checked = models.IntegerField(null=True)
     max_checked = models.IntegerField(null=True)
 
@@ -179,21 +169,27 @@ class Response(CreateModifactionDateMixin, CreatedModificationUserMixin, Publish
     def __str__(self):
         return ("response %s" % self.survey)
 
+
 class AnswerBase(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDataMixin):
     question = models.ForeignKey(Question, related_name='answers')
     response = models.ForeignKey(Response, related_name='answers')
 
+
 class AnswerParagraph(AnswerBase):
     body = models.TextField(blank=True, null=True)
+
 
 class AnswerNumeric(AnswerBase):
     body = models.IntegerField(blank=True, null=True)
 
+
 class AnswerCheckbox(AnswerBase):
     body = models.TextField(blank=True, null=True)
 
+
 class AnswerMultipleChoice(AnswerBase):
     body = models.TextField(blank=True, null=True)
+
 
 class AnswerText(AnswerBase):
     body = models.TextField(blank=True, null=True)

@@ -1,31 +1,28 @@
 from __future__ import unicode_literals
 from django.db import models
-from django.db.models import QuerySet
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.utils.timezone import now as timezone_now
 
 from datetime import datetime
 
+
 class CreateModifactionDateMixin(models.Model):
-	"""
-		Abstract class created to manage the creation an modification of date and time of any data.
-	"""
-	created = models.DateField(_("Creation Date and Time"), default=datetime.now, editable=False)
-	modified = models.DateField(_("Modification Date and Time"), null=True, editable=False)
+    created = models.DateTimeField(_("Creation Date and Time"), default=datetime.now, editable=False)
+    modified = models.DateTimeField(_("Modification Date and Time"), null=True, editable=False)
 
-	def save(self, *args, **kwargs):
-		if not self.pk:
-			self.created = timezone_now()
-		else:
-			if not self.created:
-				self.created = timezone_now()
-			self.modified = timezone_now()
-		super(CreateModifactionDateMixin, self).save(*args, **kwargs)
-	save.alters_data = True
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.created = timezone_now()
+        else:
+            if not self.created:
+                self.created = timezone_now()
+            self.modified = timezone_now()
+        super(CreateModifactionDateMixin, self).save(*args, **kwargs)
+    save.alters_data = True
 
-	class Meta:
-		abstract = True
+    class Meta:
+        abstract = True
 
 
 class CreatedModificationUserMixin(models.Model):
