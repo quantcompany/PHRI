@@ -41,7 +41,7 @@ def send_verification_email(verification, site):
 def send_report_email(patient, report_type, addresses, site):
     assert report_type in ['medical', 'patient'], 'Invalid report type'
 
-    subject = 'Trippletherapy {0} Report'.format(report_type.capitalize())
+    subject = 'Tripletherapy {0} Report'.format(report_type.capitalize())
     message = ''
     html = render_to_string('report_emails/{0}.html'.format(report_type), {'site': site, 'patient': patient})
     recipients = addresses
