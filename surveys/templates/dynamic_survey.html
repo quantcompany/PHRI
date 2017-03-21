@@ -52,7 +52,7 @@
 																</p>
 															{%else%}
 																<p>
-																	<input type="radio" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" /> {{choice.label}}
+																	<label><input type="radio" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" /> {{choice.label}}</label>
 																</p>
 															{% endif %}
 														{% endfor %}
@@ -68,7 +68,7 @@
 																	<input type="text" class="form-control"  placeholder="{{choice.label}}" style="display:inline-block; width:90%;">
 																</p>
 															{%else%}
-																<p><input type="checkbox" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" /> {{choice.label}}</p>
+																<p><label><input type="checkbox" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" /> {{choice.label}}</label></p>
 															{% endif %}
 														{% endfor %}
 													</div>
