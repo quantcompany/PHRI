@@ -142,7 +142,7 @@
                 window.location = "{% url 'surveys:dynamic_survey'%}";
             });
 
-            $('#survey-confirmation-agreement button.btn-danger').on('click', function(){
+            $('#survey-confirmation-agreement button.btn-link').on('click', function(){
                 window.location = "{% url 'users:logout' %}";
             });
         </script>
