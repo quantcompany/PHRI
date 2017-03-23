@@ -26,23 +26,25 @@ class CreateModifactionDateMixin(models.Model):
 
 
 class CreatedModificationUserMixin(models.Model):
-	"""
-		Abstract class for created_by and modified_by fields
-	"""
+    """
+    Abstract class for created_by and modified_by fields
+    """
+    created_by = models.ForeignKey('users.User', related_name="%(class)s_user_crea", editable=False)
+    modified_by = models.ForeignKey('users.User', related_name="%(class)s_user_mod", null=True, editable=False)
 
-	created_by = models.ForeignKey('users.User', related_name="%(class)s_user_crea", editable=False)
-	modified_by = models.ForeignKey('users.User', related_name="%(class)s_user_mod", null=True, editable=False)
-	
-	class Meta:
-		abstract = True
+    class Meta:
+        abstract = True
 
 
 class PublishDataMixin(models.Model):
-	"""
-		Abstract class to manage the order and publish state of content
-	"""
-	publish = models.BooleanField(_("Publish"), blank=True, default=True, help_text="Este campo activará el contenido en la pagina.")
-	order = models.IntegerField(_("Order"), blank=True, default=0, help_text="Este campo será utilizado para definir el orden del contenido. ")
+    """
+    Abstract class to manage the order and publish state of content
+    """
 
-	class Meta:
-		abstract = True
+    publish = models.BooleanField(_("Publish"), blank=True, default=True,
+                                  help_text="This field will activate the content in the site")
+    order = models.IntegerField(_("Order"), blank=True, default=0,
+                                help_text="This field will be used to order the content")
+
+    class Meta:
+        abstract = True

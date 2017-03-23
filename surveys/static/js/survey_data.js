@@ -16,7 +16,7 @@ function validate_survey(questions)
 		{
 			if(current_question.find('input[type=radio]').is(':checked') == false)
 			{
-				set_error_message(current_id,'Please select on of the choices below or fill out the free text option.');
+				set_error_message(current_id,'Please select one of the choices below or fill out the free text option.');
 			}
 			else if(current_question.find('input[type=radio].free_text').is(':checked') && current_question.find('input[type=radio].free_text').first().next().val().length < 1 )
 			{

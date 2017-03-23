@@ -38,7 +38,7 @@
 								<div class="row m-t-20 m-b-20 m-l-10">
 									<div class="col-md-12">
 										<div id="question_{{question.id}}" class="question {% if question.is_required %}required{% endif %}" question-type="{{question.type}}">
-											<h4>{{ forloop.counter }} | {{question.title}} <br/> {% if question.help_text %}<small>{{question.help_text}}</small>{% endif %}</h4>
+											<h3>{{ forloop.counter }}. {{question.title}} <br/> {% if question.help_text %}<small>{{question.help_text}}</small>{% endif %}</h3>
 											<small class="question_error" style='display:none;'></small>
 											{% if question.type == 'multiplechoice' %}
 												<div class="row">
@@ -46,12 +46,12 @@
 														{% for choice in question.multiplechoicequestion.choices.all %}
 															
 															{% if choice.free_text %}
-																<p>
+																<p style="font-size: 1.3em">
 																	<input type="radio" class="free_text" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" style="display:inline-block;" />
 																	<input type="text" class="form-control"  placeholder="{{choice.label}}" style="display:inline-block; width:90%;">
 																</p>
 															{%else%}
-																<p>
+																<p style="font-size: 1.3em">
 																	<label><input type="radio" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" /> {{choice.label}}</label>
 																</p>
 															{% endif %}
@@ -63,12 +63,12 @@
 													<div class="col-md-8 m-t-10 choices" min="{{question.checkboxquestion.min_checked}}" max="{{question.checkboxquestion.max_checked}}">
 														{% for choice in question.checkboxquestion.choices.all %}
 															{% if choice.free_text %}
-																<p>
+																<p style="font-size: 1.3em">
 																	<input type="checkbox" class="free_text" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" style="display:inline-block;" />
 																	<input type="text" class="form-control"  placeholder="{{choice.label}}" style="display:inline-block; width:90%;">
 																</p>
 															{%else%}
-																<p><label><input type="checkbox" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" /> {{choice.label}}</label></p>
+																<p style="font-size: 1.3em"><label><input type="checkbox" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" /> {{choice.label}}</label></p>
 															{% endif %}
 														{% endfor %}
 													</div>
@@ -126,8 +126,8 @@
 				<h3 class="modal-title">Survey completed!</h3>
 			</div>
 			<div class="modal-body">
-				<p style="font-size: 1.2em">
-					Your data was saved succesfully, thank you for your time, now you'll be redirected to the homepage.
+				<p style="font-size: 1.3em">
+					Your data was saved succesfully. Thank you for your time, now you'll be redirected to the form.
 				</p>
 			</div>
 			<div class="modal-footer">
