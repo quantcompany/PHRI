@@ -174,6 +174,9 @@ class AnswerBase(CreateModifactionDateMixin, CreatedModificationUserMixin, Publi
     question = models.ForeignKey(Question, related_name='answers')
     response = models.ForeignKey(Response, related_name='answers')
 
+    class Meta:
+        ordering = ["question__order"]
+
 
 class AnswerParagraph(AnswerBase):
     body = models.TextField(blank=True, null=True)
