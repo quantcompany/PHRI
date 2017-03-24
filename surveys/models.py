@@ -50,13 +50,11 @@ class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDa
                     all_checkbox_choices_label = [x.label for x in all_checkbox_choices]
                     for chch in all_checkbox_choices:
                         if chch.free_text:
-                            inserted = False
                             for os_str in options_selected:
                                 if os_str not in all_checkbox_choices_label:
-                                    inserted = True
                                     a_row.append(os_str)
-                            if not inserted:
-                                a_row.append(False)
+                                else:
+                                    a_row.append(False)    
                         else:
                             a_row.append(chch.label in options_selected)
                 if a.question.type == 'paragraph':
