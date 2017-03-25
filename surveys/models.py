@@ -59,9 +59,6 @@ class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDa
                                     a_row.append(os_str)
                                     inserted = True
                                     break
-                                '''else:
-                                    a_row.append(False)
-                                    break'''
                             if not inserted:
                                 a_row.append(False)
                         else:

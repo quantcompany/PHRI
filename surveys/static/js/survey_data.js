@@ -49,7 +49,9 @@ function validate_survey(questions)
 			}
 			else if(current_question.find('input[type=checkbox].free_text').is(':checked') && current_question.find('input[type=checkbox].free_text').first().next().val().length < 1 )
 			{
-				set_error_message(current_id,'Please fill out the free text option.');
+				//set_error_message(current_id,'Please fill out the free text option.');
+				var placeholder = current_question.find('input[type=checkbox].free_text').first().next().attr('placeholder');
+				current_question.find('input[type=checkbox].free_text').first().next().attr('value', placeholder);
 			}
 			
 			current_question.find('input[type=checkbox]').each(function(key, item){
@@ -57,7 +59,7 @@ function validate_survey(questions)
 				responses.push(
 					{
 						"id" : $(item).attr('id').split('question_choice_')[1],
-						"value": ($(item).hasClass('free_text')?$(item).next().val() : $(item).val()),
+						"value": ($(item).hasClass('free_text') ? $(item).next().val() : $(item).val()),
 						"selected": $(item).is(':checked')
 					}
 				);
@@ -188,4 +190,11 @@ jQuery(document).ajaxSend(function(event, xhr, settings) {
     if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
     }
+});
+
+$(document).ready( function(){
+	$('.free_text').next().on('keyup', function(){
+		$(this).prev().prop('checked', ($.trim($(this).val()).length > 0));
+		$(this).prev().prop('disabled', ($.trim($(this).val()).length > 0));
+	});
 });
