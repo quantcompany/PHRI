@@ -34,9 +34,9 @@ class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDa
         for q in self.questions.all():
             if q.type == 'checkbox':
                 for ch in q.checkboxquestion.choices.all():
-                    headers.append('"'+q.title + ' | ' + ch.label+'"')
+                    headers.append(q.title + ' [' + ch.label + ']')
             else:
-                headers.append('"' + q.title + '"')
+                headers.append(q.title)
 
         # Generating rows
         for r in self.responses.all():
@@ -45,18 +45,30 @@ class Survey(CreateModifactionDateMixin, CreatedModificationUserMixin, PublishDa
                 if a.question.type == 'multiplechoice':
                     a_row.append(a.answermultiplechoice.body)
                 if a.question.type == 'checkbox':
+
+
                     options_selected = a.answercheckbox.body.split('#@#')
                     all_checkbox_choices = a.question.checkboxquestion.choices.all()
                     all_checkbox_choices_label = [x.label for x in all_checkbox_choices]
+
                     for chch in all_checkbox_choices:
                         if chch.free_text:
+                            inserted = False
                             for os_str in options_selected:
                                 if os_str not in all_checkbox_choices_label:
                                     a_row.append(os_str)
-                                else:
-                                    a_row.append(False)    
+                                    inserted = True
+                                    break
+                                '''else:
+                                    a_row.append(False)
+                                    break'''
+                            if not inserted:
+                                a_row.append(False)
                         else:
                             a_row.append(chch.label in options_selected)
+
+
+
                 if a.question.type == 'paragraph':
                     a_row.append(a.answerparagraph.body)
                 if a.question.type == 'numeric':

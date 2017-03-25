@@ -8,11 +8,11 @@ def survey_csv(survey_id):
     survey = Survey.objects.get( id = survey_id )
 
     data = survey.get_report_data()
-    header = '\ufeff' + ', '.join(data.get('headers')) + '\n'
+    header = '\ufeff' + '| '.join(data.get('headers')) + '\n'
     yield header
 
     buf = io.StringIO()
-    writer = csv.writer(buf)
+    writer = csv.writer(buf, delimiter="|")
     for r in data.get('rows'):
         writer.writerow(r)
 
