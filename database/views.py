@@ -28,8 +28,8 @@ def index(request):
 def get_survey_csv(request, survey_id):
     if not request.user.researcher:
         raise PermissionDenied
-    filename = 'survey_{0}_{1}.csv'.format(survey_id, timezone.now().strftime('%Y%m%d'))
-    resp = StreamingHttpResponse(survey_csv(survey_id), content_type='text/csv; charset=utf-8')
+    filename = 'survey_{0}_{1}.txt'.format(survey_id, timezone.now().strftime('%Y%m%d'))
+    resp = StreamingHttpResponse(survey_csv(survey_id), content_type='text/plain; charset=utf-8')
     resp['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
     return resp
 
