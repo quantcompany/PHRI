@@ -1,0 +1,70 @@
+{% extends 'data_entry/panel_base.html' %}
+
+{% block panel_heading %}PCI Risk{% endblock %}
+
+{% block fa_icon %}fa fa-hospital-o{% endblock %}
+
+{% block panel_body %}
+    <div class="form-horizontal form-bordered">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <input id="pci_risk_1" type="checkbox" name="pci_risk" value="pci_risk_1" style="cursor:pointer;"/>
+                    <label for="pci_risk_1" style="cursor:pointer;">
+                        Long Stented Segment &gt;30mm
+                    </label>
+                </div>
+
+                <div class="col-md-12">
+                    <input id="pci_risk_2" type="checkbox" name="pci_risk" value="pci_risk_2" style="cursor:pointer;"/>
+                    <label for="pci_risk_2" style="cursor:pointer;">
+                        Small Diameter &lt;2.5mm
+                    </label>
+                </div>
+
+                <div class="col-md-12">
+                    <input id="pci_risk_3" type="checkbox" name="pci_risk" value="pci_risk_3" style="cursor:pointer;"/>
+                    <label for="pci_risk_3" style="cursor:pointer;">
+                        IN-Stent Restenosis Intervention
+                    </label>
+                </div>
+
+                <div class="col-md-12">
+                    <input id="pci_risk_4" type="checkbox" name="pci_risk" value="pci_risk_4" style="cursor:pointer;"/>
+                    <label for="pci_risk_4" style="cursor:pointer;">
+                        Atherectomy
+                    </label>
+                </div>
+
+                <div class="col-md-12">
+                    <input id="pci_risk_5" type="checkbox" name="pci_risk" value="pci_risk_5" style="cursor:pointer;"/>
+                    <label for="pci_risk_5" style="cursor:pointer;">
+                        Bifurcation PCI
+                    </label>
+                </div>
+
+                <div class="col-md-12">
+                    <input id="pci_risk_6" type="checkbox" name="pci_risk" value="pci_risk_6" style="cursor:pointer;"/>
+                    <label for="pci_risk_6" style="cursor:pointer;">
+                        Left main PCI
+                    </label>
+                </div>
+
+                <div class="col-md-12">
+                    <input id="pci_risk_7" type="checkbox" name="pci_risk" value="pci_risk_7" style="cursor:pointer;"/>
+                    <label for="pci_risk_7" style="cursor:pointer;">
+                        Chronic Total Occlusion PCI
+                    </label>
+                </div>
+
+                <div class="col-md-12">
+                    <input id="pci_risk_8" type="checkbox" name="pci_risk" value="pci_risk_8" style="cursor:pointer;"/>
+                    <label for="pci_risk_8" style="cursor:pointer;">
+                        In the Opinion of the Interventional Cardiologist
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

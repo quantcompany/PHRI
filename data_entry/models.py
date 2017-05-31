@@ -26,6 +26,28 @@ class Patient(models.Model):
     age = models.IntegerField(default=0, validators=[MinValueValidator(18)])
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
 
+    '''
+    PCI Risk:
+        1 - Long Stented Segment >30mm
+        2 - Small Diameter <2.5mm
+        3 - IN-Stent Restenosis Intervention
+        4 - Atherectomy
+        5 - Bifurcation PCI
+        6 - Left main PCI
+        7 - Chronic Total Occlusion PCI
+        8 - In the Opinion of the Interventional Cardiologist
+    '''
+    '''
+    pci_risk_1 = models.BooleanField(default=False)
+    pci_risk_2 = models.BooleanField(default=False)
+    pci_risk_3 = models.BooleanField(default=False)
+    pci_risk_4 = models.BooleanField(default=False)
+    pci_risk_5 = models.BooleanField(default=False)
+    pci_risk_6 = models.BooleanField(default=False)
+    pci_risk_7 = models.BooleanField(default=False)
+    pci_risk_8 = models.BooleanField(default=False)
+    '''
+
     # Procedure Details
     indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
     bms_stent = models.BooleanField(default=False)

@@ -19,12 +19,22 @@
         {% csrf_token %}
         <div class="row">
             <div class="col-md-6">
-                {% include 'data_entry/includes/personal_info_panel.html' %}
+                <div class="row">
+                    <div class="col">
+                        {% include 'data_entry/includes/personal_info_panel.html' %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {% include 'data_entry/includes/pci_risk_panel.html' %}
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-6">
                 {% include 'data_entry/includes/procedure_details_atrial_fibrilation_panel.html' %}
             </div>
+
         </div>
 
         <div class="row">
