@@ -25,6 +25,8 @@ class Patient(models.Model):
     last_name = models.CharField(max_length=1, blank=True)
     age = models.IntegerField(default=0, validators=[MinValueValidator(18)])
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    #weight in kg
+    weight = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
     '''
     PCI Risk:
@@ -59,8 +61,10 @@ class Patient(models.Model):
     noac_allergy_or_intolerance = models.BooleanField(default=False)
 
     # Blood Work
-    # hb = models.FloatField(null=True, blank=True)
-    # hb_um = models.CharField(default='um1', max_length=20, choices=HB_UM_CHOICES)
+    #hb = models.FloatField(null=True, blank=True)
+    #hb_um = models.CharField(default='um1', max_length=20, choices=HB_UM_CHOICES)
+
+
     # plts = models.FloatField(null=True, blank=True)
     # plts_um = models.CharField(default='um1', max_length=20, choices=PLTS_UM_CHOICES)
     # inr = models.FloatField(null=True, blank=True)
@@ -98,6 +102,13 @@ class Patient(models.Model):
     # hx_of_malignancy = models.IntegerField(default=0, choices=MALIGNANCY_CHOICES)
     asa_allergy = models.BooleanField(default=False)
     # upcoming_non_cardiatic_surgery = models.IntegerField(default=0, choices=NON_CARDIATIC_SURGERY_CHOICES)
+
+    '''
+        Hemoglobin
+        A = mg/dL
+        B = g/L
+    '''
+    hemoglobin_mgdL = models.FloatField(null=True, blank=True)
 
     # Recommendation
     mcm_therapy = models.TextField(blank=True)
@@ -289,3 +300,11 @@ class Patient(models.Model):
             self.field_csv(self.created, datetime)
         ])
         return buf.getvalue()
+
+    
+    @property
+    def hemoglobin_gL(self):
+        return self.mgdL_to_gL(self.hemoglobin_mgdL or 0)
+
+    def mgdL_to_gL(self, mgdL):
+        return mgdL * 0.01

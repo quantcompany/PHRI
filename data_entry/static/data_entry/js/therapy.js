@@ -92,6 +92,18 @@ function getAge(){
     return parseInt($('#age').val()) || 0;
 }
 
+function getWeight(){
+  return parseFloat( $('#weight').val() ) || 0;
+}
+
+function getGender(){
+  return $('#gender').val();
+}
+
+function isFemaleBit(){
+  return getGender() == 'F' ? 1 : 0;
+}
+
 function getIndication(){
     return $('#indication').val();
 }

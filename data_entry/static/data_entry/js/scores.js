@@ -183,6 +183,22 @@ function updateHasbledScore(){
     $('#hasbled_score').html(scores.hasbled);
 }
 
+function computeGFR(){
+    var weight = getWeight();
+    var age = getAge();
+    var numerator = (140 - age) * weight;
+    var denominator = 72 * creatinina;
+
+    var GFR = (numerator / denominator);
+
+    if( getGender() == 'F' ) {
+        GFR *= 0.85;
+    }
+
+    return GFR;
+
+}
+
 // Register change listeners to all fields involved in the formula,
 // so that the scores, plot, and recommended therapy get updated as the
 // form is filled out

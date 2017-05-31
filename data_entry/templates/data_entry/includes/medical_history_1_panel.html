@@ -8,7 +8,7 @@
     <div class="form-horizontal form-bordered">
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="htn">HTN *<br/><span></span></label>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6">
                 <select id="htn" name="htn" class="form-control f-s-14 default-select">
                     {% for choice in choices.HTN_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
@@ -20,7 +20,7 @@
 
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="vascular_disease">Vascular disease</label>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6">
                 <select id="vascular_disease" name="vascular_disease" class="form-control f-s-14 default-select">
                     {% for choice in choices.VASCULAR_DISEASE_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
@@ -32,7 +32,7 @@
 
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="hx_of_bleeding">Hx of bleeding</label>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6">
                 <select id="hx_of_bleeding" name="hx_of_bleeding" class="form-control f-s-14 default-select">
                     {% for choice in choices.BLEEDING_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
@@ -44,7 +44,7 @@
 
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-4 f-s-14" for="alcohol_abuse">Alcohol abuse *<br/><span></span></label>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6">
                 <select id="alcohol_abuse" name="alcohol_abuse" class="form-control f-s-14 default-select">
                     {% for choice in choices.ALCOHOL_ABUSE_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
@@ -52,5 +52,39 @@
                 </select>
             </div>
         </div>
+
+        <div class="form-group row">
+            <!-- PENDING MULTI_LANG SUPPORT -->
+            <label class="control-label col-md-4 col-sm-4 f-s-14">Hemoglobin</label>
+            <div class="col-md-4">
+                <input id="hemoglobin_gL" type="number" name="hemoglobin_gL" class="form-control f-s-14 text-right" placeholder="0.00" min="0">
+                <input id="hemoglobin_mgdL" type="number" name="hemoglobin_mgdL" class="form-control f-s-14 text-right" style="display: none;" placeholder="0.00" min="0">
+            </div>
+            <div class="col-md-2">
+                <select class="form-control f-s-14 default-select">
+                    <option name="hemoglobin" value="gL">g/L</option>
+                    <option name="hemoglobin" value="mgdL">mg/dL</option>
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <!-- PENDING MULTI_LANG SUPPORT -->
+            <label class="control-label col-md-4 col-sm-4 f-s-14">Creatinine</label>
+            <div class="col-md-4">
+                <input id="creatinine_mgdL" type="number" name="creatinine_mgdL" class="form-control f-s-14 text-right" placeholder="0.00" min="0">
+                <input id="creatinine_umolL" type="number" name="creatinine_umolL" class="form-control f-s-14 text-right" style="display: none;" placeholder="0.00" min="0">
+            </div>
+            <div class="col-md-2">
+                <select class="form-control f-s-14 default-select">
+                    <option name="creatinine" value="mgdL">mg/dL</option>
+                    <option name="creatinine" value="umolL">μmol</option>
+                </select>
+            </div>
+
+        </div>
+
     </div>
 {% endblock %}
