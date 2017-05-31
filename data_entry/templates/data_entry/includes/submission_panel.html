@@ -3,6 +3,7 @@
 {% block panel_heading %}Therapy choice{% endblock %}
 
 {% block fa_icon %}fa fa-check-square-o{% endblock %}
+{% load static %}
 
 {% block panel_body %}
     <div class="panel-body">
@@ -15,7 +16,16 @@
               <button id="mcm-therapy-option-button" type="button" class="btn btn-info btn-block btn-lg therapy-option-button" data-chosen-therapy="mcm">Hamilton AF-PCI</button>
               <button id="ccs-therapy-option-button" type="button" class="btn btn-info btn-block btn-lg therapy-option-button" data-chosen-therapy="ccs">CCS</button>
               <button id="other-therapy-option-button" type="button" class="btn btn-info btn-block btn-lg therapy-option-button" data-chosen-therapy="other">Other</button>
-            </div>
+              <br>
+              <br>
+              <a href="{% static 'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf'%}" target="_blank">
+                <img style="margin:0 auto;" src="{% static 'img/pioneer-af-pci.png' %}" class="img-responsive" alt="Cinque Terre">
+                <div class="alert alert-warning" style="text-decoration: none;">
+                  <p>Rivaroxaban 15 mg qd*</p>
+                  <p>Clopidogrel 75 mg qd&#10013;</p>
+                </div>
+              </div>
+              </a>
         </div>
 
         <div id="submit-area" class="row p-10 m-b-20 form-group" style="display:none;">
