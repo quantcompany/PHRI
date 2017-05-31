@@ -250,11 +250,11 @@ function clasifyGFR(value){
 
     if( value >= 90 ){
         stage = stages[0];
-    } else if ( value >=60 && value <= 89 ) {
+    } else if ( value >=60 && value < 90 ) {
         stage = stages[1];
-    } else if ( value >=30 && value <= 59 ) {
+    } else if ( value >=30 && value < 60 ) {
         stage = stages[2];
-    } else if ( value >=15 && value <= 29 ) {
+    } else if ( value >=15 && value < 30 ) {
         stage = stages[3];
     } else if ( value < 15 ) {
         stage = stages[4];
