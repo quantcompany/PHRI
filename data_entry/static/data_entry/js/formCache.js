@@ -22,6 +22,15 @@ function loadForm() {
 		element.val(value).trigger('change');
 	});
 
+	//load PCI-RISK checkboxes
+	$('input[type="checkbox"][name^="pci_risk_"]').each(function(){
+		var element = $(this);
+		var key = element.prop('id');
+		var data = storage.getItem(key);
+		var value =  data ? JSON.parse(data) : false;
+		element.prop('checked', value).trigger('change');
+	});
+
 	// load stent checkboxes
 	$('#bms_stent,#des_stent,#no_pci').each(function() {
 		var element = $(this);
@@ -79,6 +88,16 @@ function registerChangeListeners() {
 	var makeDirty = function() {
 		storage.setItem('dirty', 'true');
 	};
+
+	$('input[type="checkbox"][name^="pci_risk_"]').on('change', function() {
+		var element = $(this);
+		var key = element.prop('id');
+		var value = element.is(':checked');
+		console.log('VALUE --> ' + value);
+		storage.setItem(key, value);
+		makeDirty();
+	});
+
 
 	$('input[type="text"],input[type="number"],textarea').on('change', function() { // when text inputs change
 		var element = $(this);

@@ -100,7 +100,6 @@ function updateRecommendedTherapy(){
     //$('#mcm_recommendation').html(renderTherapy(mcmTherapy));
 
     var mcmTherapy = determineMCMTherapy_2();
-    console.log(' ---> ' + mcmTherapy);
     renderTherapyImage(mcmTherapy);
 
     var ccsTherapy = determineCCSTherapy();
@@ -122,10 +121,7 @@ function getPciRisk(){
     Gets a list of 8 booleans, if any element is True
     Then returs "High" else "Low"
   **/
-  console.log( $('[name^="pci_risk_"]:checked').length );
-  var result = $('[name^="pci_risk_"]:checked').length == 0 ? 'low' : 'high';
-  console.log(result);
-  return result; 
+  return $('[name^="pci_risk_"]:checked').length == 0 ? 'low' : 'high'; 
 
 }
 
