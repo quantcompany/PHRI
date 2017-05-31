@@ -51,6 +51,19 @@ function renderTherapy(therapy){
   return out;
 }
 
+function renderTherapyImage(therapy){
+
+  $('.hamilton_therapy_options').stop(true, true).hide(0, function(){
+    if (therapy == null){
+        console.log('NO CHOICES!');
+        $('.hamilton_therapy_options.isnull').stop(true, true).show('fast');
+    }else {
+      $('.hamilton_therapy_options.'+therapy).stop(true, true).show('fast');
+    }
+  
+  });
+}
+
 
 function getStent(){
     if ($('#des_stent').is(':checked')){
@@ -83,11 +96,87 @@ function getIndication(){
 }
 
 function updateRecommendedTherapy(){
-    var mcmTherapy = determineMCMTherapy();
-    $('#mcm_recommendation').html(renderTherapy(mcmTherapy));
+    //var mcmTherapy = determineMCMTherapy();
+    //$('#mcm_recommendation').html(renderTherapy(mcmTherapy));
+
+    var mcmTherapy = determineMCMTherapy_2();
+    console.log(' ---> ' + mcmTherapy);
+    renderTherapyImage(mcmTherapy);
 
     var ccsTherapy = determineCCSTherapy();
     $('#ccs_recommendation').html(renderTherapy(ccsTherapy));
+}
+
+
+function getBleedingRisk(){
+  /**
+    Returns:
+        Low: hasbled_score <= 3
+        High: hasbled_score >=4
+  **/
+  return scores.hasbled <= 3 ? "low" : "high";
+}
+
+function getPciRisk(){
+  /**
+    Gets a list of 8 booleans, if any element is True
+    Then returs "High" else "Low"
+  **/
+  console.log( $('[name^="pci_risk_"]:checked').length );
+  var result = $('[name^="pci_risk_"]:checked').length == 0 ? 'low' : 'high';
+  console.log(result);
+  return result; 
+
+}
+
+function determineMCMTherapy_2(){
+  var therapy = "";
+  var indication = getIndication();
+  var pciRisk = getPciRisk();
+  var bleedingRisk = getBleedingRisk();
+
+  if (scores.chads2 == 0 ){
+    if( indication == 'SCAD' ) {
+      therapy = "A";
+    } else {
+      //it is STEMI, NSTEMI, UA (ACS)
+      therapy = "B";
+    }
+  }else if ( scores.chads2 == 1 ) {
+    if( indication == 'SCAD' ){
+      therapy = "C";
+    }else {
+      //it is STEMI, NSTEMI, UA (ACS)
+      therapy = "D";
+    }
+  }else if ( scores.chads2 >= 2 ) {
+    if( indication == 'SCAD' ) {
+      if( pciRisk == 'low' ) {
+        therapy = "E";
+      } else {
+        //pciRisk is High
+        if( bleedingRisk == 'low' ) {
+          therapy = "F";
+        }else {
+          //bleedingRisk is HIGH
+          therapy = "E";
+        }
+      }
+    }else {
+      //it is STEMI, NSTEMI, UA (ACS)
+      if( bleedingRisk == 'low' ) {
+        therapy = "F";
+      }else{
+        //bleedingRisk is HIGH
+        therapy = "E";
+      }
+    }
+  }else{
+    console.log('No therapy found');
+    therapy = null;
+  }
+
+  return therapy;
 }
 
 function determineMCMTherapy(){

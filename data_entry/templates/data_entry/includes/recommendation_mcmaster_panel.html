@@ -8,10 +8,57 @@
 {% block panel_body %}
    <center><h4><a href="{% static 'data_entry/References/Recommendations/Algorithm_MacMaster.pdf'%}" target="_blank">View the algorithm on which we based this recommendation</a></h4></center>
     <div id="mcm_recommendation" class="panel-body">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h3 style="opacity: 0.3;">Please fill out the form to receive a recommendation</h3>
-        </div>
-      </div>
+
+	      <div class="row hamilton_therapy_options initial">
+	        <div class="col-md-12 text-center">
+	          <h3 style="opacity: 0.3;">Please fill out the form to receive a recommendation</h3>
+	        </div>
+	      </div>
+
+      	<div class="row hamilton_therapy_options isnull" style="display: none;">
+      		<div class="col-md-12 text-center">
+      			<h3 style="opacity: 0.3;">There is no recommended treatment</h3>
+  			</div>
+		</div>
+
+
+			<div class="row hamilton_therapy_options A" style="display: none;">
+				<div class="col-md-12 text-center">
+					<img src="{% static 'data_entry/img/hamilton_therapy_options/A.png'%}" alt="Therapy A" class="img-thumbnail">
+				</div>
+			</div>
+
+			<div class="row hamilton_therapy_options B" style="display: none;">
+				<div class="col-md-12 text-center">
+					<img src="{% static 'data_entry/img/hamilton_therapy_options/B.png'%}" alt="Therapy B" class="img-thumbnail">
+				</div>
+			</div>
+
+			<div class="row hamilton_therapy_options C" style="display: none;">
+				<div class="col-md-12 text-center">
+					<img src="{% static 'data_entry/img/hamilton_therapy_options/C.png'%}" alt="Therapy C" class="img-thumbnail">
+				</div>
+			</div>
+
+			<div class="row hamilton_therapy_options D" style="display: none;">
+				<div class="col-md-12 text-center">
+					<img src="{% static 'data_entry/img/hamilton_therapy_options/D.png'%}" alt="Therapy D" class="img-thumbnail">
+				</div>
+			</div>
+
+			<div class="row hamilton_therapy_options E" style="display: none;">
+				<div class="col-md-12 text-center">
+					<img src="{% static 'data_entry/img/hamilton_therapy_options/E.png'%}" alt="Therapy E" class="img-thumbnail">
+				</div>
+			</div>
+
+			<div class="row hamilton_therapy_options F" style="display: none;">
+				<div class="col-md-12 text-center">
+					<img src="{% static 'data_entry/img/hamilton_therapy_options/F.png'%}" alt="Therapy F" class="img-thumbnail">
+				</div>
+			</div>
+
+
+
    </div>
 {% endblock %}

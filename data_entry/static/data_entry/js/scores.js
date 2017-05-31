@@ -191,6 +191,6 @@ $('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability
     updateEverything();
 });
 
-$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #no_pci, #hx_of_bleeding').on('change', function(event, state){
+$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #no_pci, #hx_of_bleeding, #indication, input[type="checkbox"][name^="pci_risk_"]').on('change', function(event, state){
     updateEverything();
 });
