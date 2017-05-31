@@ -33,6 +33,18 @@
 
 
         <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 f-s-14" for="drug_abuse">Drug abuse</label>
+            <div class="col-md-3 col-sm-3">
+                <input id="drug_abuse" type="checkbox" name="drug_abuse" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
+            </div>
+
+            <label class="control-label col-md-3 col-sm-3 f-s-14" for="asa_allergy">ASA allergy</label>
+            <div class="col-md-3 col-sm-3">
+              <input id="asa_allergy" type="checkbox" name="asa_allergy" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 f-s-14" for="renal_dysfunction">
                 Renal dysfunction
                 <small class="text-muted">Dialysys, transplant, Cr >2.12mg/dL or >200 𝝻mol/L</small>
@@ -50,17 +62,5 @@
             </div>
         </div>
 
-
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 f-s-14" for="drug_abuse">Drug abuse</label>
-            <div class="col-md-3 col-sm-3">
-                <input id="drug_abuse" type="checkbox" name="drug_abuse" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
-            </div>
-
-            <label class="control-label col-md-3 col-sm-3 f-s-14" for="asa_allergy">ASA allergy</label>
-            <div class="col-md-3 col-sm-3">
-              <input id="asa_allergy" type="checkbox" name="asa_allergy" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
-            </div>
-        </div>
     </div>
 {% endblock %}

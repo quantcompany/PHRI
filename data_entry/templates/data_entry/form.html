@@ -8,6 +8,7 @@
     <link href="{% static 'plugins/select2/css/select2.css' %}" rel="stylesheet" />
     <link href="{% static 'plugins/switchery/switchery.min.css' %}" rel="stylesheet" />
     <link href="{% static 'plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet">
+    <link href="{% static 'plugins/lightbox/css/lightbox.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block page_title %}{% trans 'Patient Form' %}{% endblock %}
@@ -20,12 +21,12 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-12">
                         {% include 'data_entry/includes/personal_info_panel.html' %}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-12">
                         {% include 'data_entry/includes/pci_risk_panel.html' %}
                     </div>
                 </div>
@@ -142,6 +143,7 @@
     <script src="{% static 'data_entry/js/gauges.js' %}"></script>
     <script src="{% static 'data_entry/js/options.js' %}"></script>
     <script src="{% static 'data_entry/js/formCache.js' %}"></script>
+    <script src="{% static 'plugins/lightbox/js/lightbox-2.6.min.js' %}"></script>
 
     <script>
         $(".default-select2").select2({
