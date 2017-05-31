@@ -1,4 +1,6 @@
 {% extends 'data_entry/panel_base.html' %}
+{% load static %}
+
 
 {% block panel_heading %}Medical History{% endblock %}
 
@@ -89,12 +91,13 @@
         <div class="form-group row">
             <label id="gfr-score-lbl" class="control-label col-md-4 col-sm-4 f-s-14">GFR</label>
             <div class="col-md-6">
-                <div id="stage-details">
+                <div id="stage-details" onclick="$(this).parent().next().trigger('click');" style="cursor:pointer;">
                     <div class="alert alert-default">
                         ...
                     </div>
                 </div>
             </div>
+            <a href="{% static 'data_entry/img/GFR/stages-table.png'%}" data-lightbox="GFR-stages"></a>
         </div>
 
     </div>

@@ -30,7 +30,7 @@ function renderGFRStage(GFR){
   }else {
     var stageGFR = clasifyGFR(GFR);
     $('#stage-details').html('\
-      \<div class="alert alert-default" style="color:white;background-color:'+stageGFR.color+';">\
+      \<div class="stage-gfr alert alert-default" style="color:white;background-color:'+stageGFR.color+';">\
           <strong>'+stageGFR.label+'</strong>\
           <p>'+stageGFR.description+'</p>\
           <p>(GFR LEVEL: '+stageGFR.level+')</p>\
