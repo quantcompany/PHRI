@@ -78,18 +78,13 @@
 
 
         <div class="form-group">
-            {% with "Unstable/high INRs, time in therapeutic range < 60%" as inr_instability %}
-            <label 
-                data-toggle="tooltip" 
-                title="{{ inr_instability }}"
-                class="control-label col-md-4 col-sm-4 f-s-14" for="inr_instability">INR instability</label>
-            <div 
-                data-toggle="tooltip" 
-                title="{{ inr_instability }}"
-                class="col-md-6 col-sm-6">
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="inr_instability">
+                INR instability
+                <small class="text-muted">Unstable/high INRs, time in therapeutic range < 60%</small>
+            </label>
+            <div class="col-md-6 col-sm-6">
                 <input id="inr_instability" type="checkbox" name="inr_instability" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-size="normal" data-handle-width="50" data-label-width="10" />
             </div>
-            {% endwith %}
         </div>
 
 
