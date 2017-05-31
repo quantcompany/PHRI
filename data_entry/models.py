@@ -37,7 +37,6 @@ class Patient(models.Model):
         7 - Chronic Total Occlusion PCI
         8 - In the Opinion of the Interventional Cardiologist
     '''
-    '''
     pci_risk_1 = models.BooleanField(default=False)
     pci_risk_2 = models.BooleanField(default=False)
     pci_risk_3 = models.BooleanField(default=False)
@@ -46,7 +45,6 @@ class Patient(models.Model):
     pci_risk_6 = models.BooleanField(default=False)
     pci_risk_7 = models.BooleanField(default=False)
     pci_risk_8 = models.BooleanField(default=False)
-    '''
 
     # Procedure Details
     indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)

@@ -18,5 +18,9 @@ var options = {
     e: markdown.toHTML('###Aspirin 81 mg po QD\n\n###+\n\n###Ticagrelor 90 mg po BID\n\n###or\n\n###Clopidogrel 75 mg po QD'),
     f: markdown.toHTML('###Aspirin 81 mg po QD\n\n###+\n\n###Ticagrelor 90 mg po BID\n\n###or\n\n###Prasugrel 10 mg po QD\n\n###or\n\n###Clopidogrel 75 mg po QD'),
     g: markdown.toHTML('###Oral Anticoagulant (NOAC is preferred over Warfarin for non-valvular AF)\n\n###+\n\n###Clopidogrel 75 mg po QD\n\n###+\n\n###Aspirin 81 mg po QD')
+  },
+
+  mcm2: {
+    a: markdown.toHTML('#pendiente'),
   }
-};
+}

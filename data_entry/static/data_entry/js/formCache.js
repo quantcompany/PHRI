@@ -65,6 +65,9 @@ function clearForm() {
 	// clear text inputs
 	$('input[type="text"],input[type="number"],textarea').val('').trigger('change');
 
+	//clear pci_risk checkboxes
+	$('input[type="checkbox"][name^="pci_risk_"]').prop('checked', false).trigger('change');
+
 	// clear stent checkboxes
 	$('#bms_stent,#des_stent,#no_pci').prop('checked', false).trigger('change');
 
@@ -93,7 +96,6 @@ function registerChangeListeners() {
 		var element = $(this);
 		var key = element.prop('id');
 		var value = element.is(':checked');
-		console.log('VALUE --> ' + value);
 		storage.setItem(key, value);
 		makeDirty();
 	});

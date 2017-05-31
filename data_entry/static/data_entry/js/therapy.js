@@ -11,6 +11,7 @@ var therapy = {
 }
 
 function renderTherapy(therapy){
+  console.log(therapy);
   if (therapy.choices.length == 0){
       console.log('NO CHOICES!');
       return '<div class="row"><div class="col-md-12 text-center"><h3 style="opacity: 0.3;">There is no recommended treatment</h3></div></div>';
@@ -96,7 +97,7 @@ function getIndication(){
 }
 
 function updateRecommendedTherapy(){
-    //var mcmTherapy = determineMCMTherapy();
+    //var mcmTherapy = determineMCMTherapy_2();
     //$('#mcm_recommendation').html(renderTherapy(mcmTherapy));
 
     var mcmTherapy = determineMCMTherapy_2();
@@ -126,14 +127,21 @@ function getPciRisk(){
 }
 
 function determineMCMTherapy_2(){
-  var therapy = "";
   var indication = getIndication();
   var pciRisk = getPciRisk();
   var bleedingRisk = getBleedingRisk();
 
+  //var therapy = {choices: []};
+  var therapy = "";
+
   if (scores.chads2 == 0 ){
     if( indication == 'SCAD' ) {
       therapy = "A";
+      /*therapy.choices.push({
+        steps: [
+          {option: options.mcm2.a, extra: ''},
+        ]
+      });*/
     } else {
       //it is STEMI, NSTEMI, UA (ACS)
       therapy = "B";
