@@ -57,13 +57,13 @@
             <!-- PENDING MULTI_LANG SUPPORT -->
             <label class="control-label col-md-4 col-sm-4 f-s-14">Hemoglobin</label>
             <div class="col-md-4">
-                <input id="hemoglobin_gL" type="number" name="hemoglobin_gL" class="form-control f-s-14 text-right" placeholder="0.00" min="0">
-                <input id="hemoglobin_mgdL" type="number" name="hemoglobin_mgdL" class="form-control f-s-14 text-right" style="display: none;" placeholder="0.00" min="0">
+                <input id="hemoglobin_gL" type="number" name="hemoglobin_gL" class="form-control f-s-14 text-right" placeholder="g/L" min="0">
+                <input id="hemoglobin_mgdL" type="number" name="hemoglobin_mgdL" class="form-control f-s-14 text-right" style="display: none;" placeholder="mg/dL" min="0">
             </div>
             <div class="col-md-2">
-                <select class="form-control f-s-14 default-select">
-                    <option name="hemoglobin" value="gL">g/L</option>
-                    <option name="hemoglobin" value="mgdL">mg/dL</option>
+                <select id="hemoglobin_measure" class="form-control f-s-14 default-select">
+                    <option value="gL">g/L</option>
+                    <option value="mgdL">mg/dL</option>
                 </select>
 
             </div>
@@ -74,16 +74,27 @@
             <!-- PENDING MULTI_LANG SUPPORT -->
             <label class="control-label col-md-4 col-sm-4 f-s-14">Creatinine</label>
             <div class="col-md-4">
-                <input id="creatinine_mgdL" type="number" name="creatinine_mgdL" class="form-control f-s-14 text-right" placeholder="0.00" min="0">
-                <input id="creatinine_umolL" type="number" name="creatinine_umolL" class="form-control f-s-14 text-right" style="display: none;" placeholder="0.00" min="0">
+                <input id="creatinine_mgdL" type="number" name="creatinine_mgdL" class="form-control f-s-14 text-right" placeholder="mg/dL" min="0">
+                <input id="creatinine_umolL" type="number" name="creatinine_umolL" class="form-control f-s-14 text-right" style="display: none;" placeholder="μmol" min="0">
             </div>
             <div class="col-md-2">
-                <select class="form-control f-s-14 default-select">
-                    <option name="creatinine" value="mgdL">mg/dL</option>
-                    <option name="creatinine" value="umolL">μmol</option>
+                <select id="creatinine_measure" class="form-control f-s-14 default-select">
+                    <option value="mgdL">mg/dL</option>
+                    <option value="umolL">μmol</option>
                 </select>
             </div>
 
+        </div>
+
+        <div class="form-group row">
+            <label id="gfr-score-lbl" class="control-label col-md-4 col-sm-4 f-s-14">GFR</label>
+            <div class="col-md-6">
+                <div id="stage-details">
+                    <div class="alert alert-default">
+                        ...
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

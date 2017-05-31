@@ -109,6 +109,14 @@ class Patient(models.Model):
         B = g/L
     '''
     hemoglobin_mgdL = models.FloatField(null=True, blank=True)
+    hemoglobin_gL = models.FloatField(null=True, blank=True)
+    '''
+        Creatinine
+        A = mg/dL
+        B = umol/L
+    '''
+    creatinine_mgdL = models.FloatField(null=True, blank=True)
+    creatinine_umolL = models.FloatField(null=True, blank=True)
 
     # Recommendation
     mcm_therapy = models.TextField(blank=True)
@@ -300,11 +308,3 @@ class Patient(models.Model):
             self.field_csv(self.created, datetime)
         ])
         return buf.getvalue()
-
-    
-    @property
-    def hemoglobin_gL(self):
-        return self.mgdL_to_gL(self.hemoglobin_mgdL or 0)
-
-    def mgdL_to_gL(self, mgdL):
-        return mgdL * 0.01

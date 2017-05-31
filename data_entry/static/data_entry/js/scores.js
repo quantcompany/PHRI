@@ -40,6 +40,7 @@ function updateEverything(){
     updatePlots(); // this one is in plot.js
 
     updateRecommendedTherapy(); // this is in therapy.js
+    renderGFR();
 }
 
 function updateChads2Score(){
@@ -186,6 +187,8 @@ function updateHasbledScore(){
 function computeGFR(){
     var weight = getWeight();
     var age = getAge();
+    var creatinina = getCreatinine_mgdL();
+
     var numerator = (140 - age) * weight;
     var denominator = 72 * creatinina;
 
@@ -199,6 +202,69 @@ function computeGFR(){
 
 }
 
+function clasifyGFR(value){
+    var stages = [
+        {
+            id : 1,
+            label: "Stage 1 Kidney Disease",
+            description: "Healthy Kidneys or kidney damage with normal or high GFR",
+            level: "90 mL/min or more",
+            color: '#35a338',
+        },
+        {
+            id : 2,
+            label: "Stage 2 Kidney Disease",
+            description: "Kidney damage and mild decrease in GFR",
+            level: "60 to 89 mL/min",
+            color: '#85c12f',
+        },
+        {
+            id : 3,
+            label: "Stage 3A & 3B Kidney Disease",
+            description: "Moderate decrease in GFR",
+            level: "30 to 59 mL/min",
+            color: '#f19a12',
+        },
+        {
+            id : 4,
+            label: "Stage 4 Kidney Disease",
+            description: "Severe decrease in GFR",
+            level: "15 to 29 mL/min",
+            color: '#f16b1a',
+        },
+        {
+            id : 5,
+            label: "Stage 5 Kidney Disease",
+            description: "Kidney failure",
+            level: "Less than 15 mL/min or on dialysis",
+            color: '#9f0a1a',
+        },
+    ];
+    var stage = {
+        id : -1,
+        label: "",
+        description: "...",
+        level: "",
+        color: 'white',
+    };
+
+    if( value >= 90 ){
+        stage = stages[0];
+    } else if ( value >=60 && value <= 89 ) {
+        stage = stages[1];
+    } else if ( value >=30 && value <= 59 ) {
+        stage = stages[2];
+    } else if ( value >=15 && value <= 29 ) {
+        stage = stages[3];
+    } else if ( value < 15 ) {
+        stage = stages[4];
+    } else {
+        console.log('404: No clasifyGFR found');
+    }
+
+    return stage;
+}
+
 // Register change listeners to all fields involved in the formula,
 // so that the scores, plot, and recommended therapy get updated as the
 // form is filled out
@@ -207,6 +273,40 @@ $('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability
     updateEverything();
 });
 
-$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #no_pci, #hx_of_bleeding, #indication, input[type="checkbox"][name^="pci_risk_"]').on('change', function(event, state){
+$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #no_pci, #hx_of_bleeding, #indication, input[type="checkbox"][name^="pci_risk_"], #weight, [name^="creatinine_"]').on('change', function(event, state){
     updateEverything();
+});
+
+$('#creatinine_measure').on('change', function(){
+    var measure = $(this).val();
+    $('input[name^="creatinine_"]')
+    .stop(true, true).hide(0, function(){
+        $('#creatinine_'+measure).stop(true, true).show(0);
+    });
+});
+
+$('#hemoglobin_measure').on('change', function(){
+    var measure = $(this).val();
+    $('input[name^="hemoglobin_"]')
+    .stop(true, true).hide(0, function(){
+        $('#hemoglobin_'+measure).stop(true, true).show(0);
+    });
+});
+
+$('#hemoglobin_mgdL').on('change', function(){
+    var calc = (parseFloat($(this).val(), 10) || 0 ) * 0.01;
+    $('#hemoglobin_gL').val( calc )
+});
+$('#hemoglobin_gL').on('change', function(){
+    var calc = (parseFloat($(this).val(), 10) || 0 ) * 100;
+    $('#hemoglobin_mgdL').val( calc )
+});
+
+$('#creatinine_mgdL').on('change', function(){
+    var calc = (parseFloat($(this).val(), 10) || 0 ) * 88.4;
+    $('#creatinine_umolL').val( calc )
+});
+$('#creatinine_umolL').on('change', function(){
+    var calc = (parseFloat($(this).val(), 10) || 0 ) * 0.011312217194570135;
+    $('#creatinine_mgdL').val( calc )
 });

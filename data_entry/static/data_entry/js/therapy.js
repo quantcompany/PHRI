@@ -10,6 +10,35 @@ var therapy = {
     }
 }
 
+function renderGFR(){
+  var GFR = computeGFR();
+  renderGFRValue(GFR);
+  renderGFRStage(GFR);
+}
+
+function renderGFRValue(GFR){
+  if( isNaN(GFR) ){
+    $('#gfr-score-lbl').text('GFR');
+  }else {
+    $('#gfr-score-lbl').text('GFR = ' + GFR.toFixed(2) + ' mL/min');
+  }
+}
+
+function renderGFRStage(GFR){
+  if( isNaN(GFR) ){
+    $('#stage-details').html('<div class="alert alert-default">...</div>');
+  }else {
+    var stageGFR = clasifyGFR(GFR);
+    $('#stage-details').html('\
+      \<div class="alert alert-default" style="color:white;background-color:'+stageGFR.color+';">\
+          <strong>'+stageGFR.label+'</strong>\
+          <p>'+stageGFR.description+'</p>\
+          <p>(GFR LEVEL: '+stageGFR.level+')</p>\
+        </div>\
+    ');
+  }
+}
+
 function renderTherapy(therapy){
   console.log(therapy);
   if (therapy.choices.length == 0){
@@ -89,11 +118,11 @@ function getNoacAllergy(){
 }
 
 function getAge(){
-    return parseInt($('#age').val()) || 0;
+    return parseInt($('#age').val(), 10) || 0;
 }
 
 function getWeight(){
-  return parseFloat( $('#weight').val() ) || 0;
+  return parseFloat( $('#weight').val(), 10) || 0;
 }
 
 function getGender(){
@@ -102,6 +131,13 @@ function getGender(){
 
 function isFemaleBit(){
   return getGender() == 'F' ? 1 : 0;
+}
+
+function getCreatinine_mgdL() {
+  return parseFloat( $('#creatinine_mgdL').val(), 10 ) || 0;
+}
+function getCreatinine_umolL() {
+  return parseFloat( $('#creatinine_umolL').val(), 10 ) || 0;
 }
 
 function getIndication(){
