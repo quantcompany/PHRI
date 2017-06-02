@@ -27,6 +27,25 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     age: {
       required: true
     },
+    weight: {
+      required: true
+    },
+    hemoglobin_gL : {
+      required: function(){return $('#hemoglobin_measure').val() === 'gL';},
+      min: 0
+    },
+    hemoglobin_mgdL : {
+      required: function(){return $('#hemoglobin_measure').val() === 'mgdL';},
+      min: 0
+    },
+    creatinine_mgdL : {
+      required: function(){return $('#creatinine_measure').val() === 'mgdL';},
+      min: 0
+    },
+    creatinine_umolL : {
+      required: function(){return $('#creatinine_measure').val() === 'umolL';},
+      min: 0
+    },
     gender: "required",
     indication: "required",
     stent: {

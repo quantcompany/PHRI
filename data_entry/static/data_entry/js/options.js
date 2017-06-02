@@ -21,6 +21,6 @@ var options = {
   },
 
   mcm2: {
-    a: markdown.toHTML('#pendiente'),
+    a: '<table></table>',
   }
 }

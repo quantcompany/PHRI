@@ -118,6 +118,8 @@ class Patient(models.Model):
     creatinine_mgdL = models.FloatField(null=True, blank=True)
     creatinine_umolL = models.FloatField(null=True, blank=True)
 
+    gfr_mLmin = models.FloatField(null=True, blank=True)
+
     # Recommendation
     mcm_therapy = models.TextField(blank=True)
     ccs_therapy = models.TextField(blank=True)

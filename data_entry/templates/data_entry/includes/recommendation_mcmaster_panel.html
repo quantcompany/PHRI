@@ -62,5 +62,59 @@
      	</a>
       </div>
    </div>
+   <br>
+   <div class="row">
+     <div class="col-xs-12">
+      <legend>App Table</legend>
+       <table id="hamilton-app-table" class="table table-bordered table-condensed">
+         <thead>
+           <tr>
+             <th></th>
+             <th>Dabigratan</th>
+             <th>Rivaroxaban</th>
+             <th>Apixaban</th>
+             <th>Endoxaban</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <th>Dose</th>
+             <td>150 mg twice daily</td>
+             <td>20 mg once daily</td>
+             <td>5 mg twice daily</td>
+             <td>60 mg (or 30 mg) once daily</td>
+           </tr>
+           <tr>
+             <th>Dose Adjustment</th>
+             <td>None</td>
+             <td>
+               <p>110 mg twice daily if:</p>
+               <ul style="padding-left:7px;">
+                 <li>≥ 80 years</li>
+                 <li>CrCl 30 - 40 mL/min</li>
+               </ul>
+             </td>
+             <td>
+              <p>2.5 mg twice daily if serum creatinine ≥ 1.5 mg/dL</p>
+              <p>(133 µmol/L) plus age ≥ 80 years or weight ≤ 60 kg</p>
+             </td>
+             <td>
+               <p>30 mg one daily if:</p>
+                <ul style="padding-left:7px;"><li>CrCl 30 - 49 mL/min</li></ul>
+             </td>
+           </tr>
+         </tbody>
+         <tfoot>
+           <tr>
+             <th></th>
+             <th colspan="4" class="text-center">
+               Not recommended if CrCl < 30mL/min
+             </th>
+           </tr>
+         </tfoot>
+       </table>
+     </div>
+   </div>
+
 </div>
 {% endblock %}

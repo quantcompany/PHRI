@@ -1,0 +1,22 @@
+{% extends 'data_entry/panel_base_simple.html' %}
+{% load static %}
+
+{% block panel_body %}
+    <div class="row">
+        <div class="col-md-2 text-center align-middle align-middle">
+            <h2>GFR</h2>
+        </div>
+        <div class="col-md-4 text-center align-middle align-middle">
+            <h1><span id="gfr-score-lbl">--</span> <small>mL/min</small></h1>
+        </div>
+        <div class="col-md-6 align-middle">
+            <div id="stage-details" onclick="$(this).parent().next().trigger('click');" style="cursor:pointer;">
+                <div class="alert alert-default">
+                    <i class="fa fa-info-circle"></i> To calculate the GFR we need the value of: Creatinine, Age, Sex and Weight
+                </div>
+            </div>
+        </div>
+        <a href="{% static 'data_entry/img/GFR/stages-table.png'%}" data-lightbox="GFR-stages"></a>
+    </div>
+    <input type="hidden" name="gfr_mLmin" id="gfr_mLmin">
+{% endblock %}

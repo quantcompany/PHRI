@@ -184,6 +184,8 @@ function updateHasbledScore(){
     $('#hasbled_score').html(scores.hasbled);
 }
 
+
+
 function computeGFR(){
     var weight = getWeight();
     var age = getAge();
@@ -283,6 +285,10 @@ $('#creatinine_measure').on('change', function(){
     .stop(true, true).hide(0, function(){
         $('#creatinine_'+measure).stop(true, true).show(0);
     });
+    $('label[for^="creatinine_"]')
+    .stop(true, true).hide(0, function(){
+        $('label[for^="creatinine_'+measure+'"]').stop(true, true).show(0);
+    });
 });
 
 $('#hemoglobin_measure').on('change', function(){
@@ -291,6 +297,10 @@ $('#hemoglobin_measure').on('change', function(){
     .stop(true, true).hide(0, function(){
         $('#hemoglobin_'+measure).stop(true, true).show(0);
     });
+    $('label[for^="hemoglobin_"]')
+    .stop(true, true).hide(0, function(){
+        $('label[for^="hemoglobin_'+measure+'"]').stop(true, true).show(0);
+    });
 });
 
 $('#hemoglobin_mgdL').on('change', function(){
@@ -298,15 +308,15 @@ $('#hemoglobin_mgdL').on('change', function(){
     $('#hemoglobin_gL').val( calc )
 });
 $('#hemoglobin_gL').on('change', function(){
-    var calc = (parseFloat($(this).val(), 10) || 0 ) * 100;
+    var calc = (parseFloat($(this).val(), 10) || 0 ) / 0.01;
     $('#hemoglobin_mgdL').val( calc )
 });
 
 $('#creatinine_mgdL').on('change', function(){
-    var calc = (parseFloat($(this).val(), 10) || 0 ) * 88.4;
+    var calc = (parseFloat($(this).val(), 10) || 0 ) * 88.5;
     $('#creatinine_umolL').val( calc )
 });
 $('#creatinine_umolL').on('change', function(){
-    var calc = (parseFloat($(this).val(), 10) || 0 ) * 0.011312217194570135;
+    var calc = (parseFloat($(this).val(), 10) || 0 ) / 88.5;
     $('#creatinine_mgdL').val( calc )
 });
