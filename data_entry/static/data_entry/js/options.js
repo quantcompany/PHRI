@@ -125,14 +125,14 @@ var options = {
                   <strong>Aspirin</strong> 81 mg po QD\
                 </p>\
                 <strong>or</strong>\
-                <p class="text-left">\
+                <p class="text-left bg-warning" style="padding:4px;">\
                   <strong>Clopidogrel</strong> 75 mg po QD <br>\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
-                <p class="text-left">\
+                <p class="text-left bg-warning" style="padding:4px;">\
                   &#8226; Rivaroxaban 15 mg po QD\
                 </p>\
                 <strong>or</strong>\
@@ -250,14 +250,14 @@ var options = {
           <tbody>\
             <tr>\
               <td>\
-                <p class="text-left">\
+                <p class="text-left bg-warning" style="padding:4px;">\
                   <strong>Clopidogrel</strong> 75 mg po QD <br>\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
-                <p class="text-left">\
+                <p class="text-left bg-warning" style="padding:4px;">\
                   &#8226; Rivaroxaban 15 mg po QD\
                 </p>\
                 <strong>or</strong>\
@@ -308,7 +308,7 @@ var options = {
           </tbody>\
         </table>',
 
-    f: '<table id="mcm2-B" class="table table-bordered">\
+    f: '<table id="mcm2-F" class="table table-bordered">\
           <thead>\
             <tr>\
               <th class="text-center">For 1 - 3 months</th>\
@@ -352,14 +352,14 @@ var options = {
               </td>\
               \
               <td>\
-                <p class="text-left">\
+                <p class="text-left bg-warning" style="padding:4px;">\
                   <strong>Clopidogrel</strong> 75 mg po QD\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
-                <p class="text-left">\
+                <p class="text-left bg-warning" style="padding:4px;">\
                   &#8226; Rivaroxaban 15 mg po QD\
                 </p>\
                 <strong>or</strong>\

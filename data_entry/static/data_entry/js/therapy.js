@@ -193,7 +193,7 @@ function determineMCMTherapy_2(){
     if( indication == 'SCAD' ) {
       therapy.choices.push({
         steps: [
-          {option: options.mcm2.f, extra: ''},
+          {option: options.mcm2.a, extra: ''},
         ]
       });
     } else {
