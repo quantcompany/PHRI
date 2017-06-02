@@ -308,6 +308,135 @@ var options = {
           </tbody>\
         </table>',
 
-    f: 'pending',
+    f: '<table id="mcm2-B" class="table table-bordered">\
+          <thead>\
+            <tr>\
+              <th class="text-center">For 1 - 3 months</th>\
+              <th class="text-center">After 1 - 3 months <br>through 12 months</th>\
+              <th class="text-center">After 12 months</th>\
+            </tr>\
+          </thead>\
+          <tbody>\
+            <tr>\
+              <td>\
+                <p class="text-left">\
+                  <strong>Aspirin</strong> 81 mg po QD<br>\
+                </p>\
+                <strong>+</strong>\
+                <p class="text-left">\
+                  <strong>Clopidogrel</strong> 75 mg po QD\
+                </p>\
+                <strong>+</strong>\
+                <p class="text-left">\
+                  <strong>Reduced dose of DOAC</strong> or VKA:\
+                </p>\
+                <p class="text-left">\
+                  &#8226; Rivaroxaban 15 mg po QD\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Dabigatran 110 mg po BID\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Apixaban 2.5 mg po BID\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Edoxaban 30 mg po QD\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; VKA\
+                </p>\
+              </td>\
+              \
+              <td>\
+                <p class="text-left">\
+                  <strong>Clopidogrel</strong> 75 mg po QD\
+                </p>\
+                <strong>+</strong>\
+                <p class="text-left">\
+                  <strong>Reduced dose of DOAC</strong> or VKA:\
+                </p>\
+                <p class="text-left">\
+                  &#8226; Rivaroxaban 15 mg po QD\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Dabigatran 110 mg po BID\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Apixaban 2.5 mg po BID\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Edoxaban 30 mg po QD\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; VKA\
+                </p>\
+                <hr>\
+                <strong>or</strong>\
+                <hr>\
+                <p class="text-left">\
+                  <strong>DOAC</strong>  or VKA:\
+                </p>\
+                <p class="text-left">\
+                  &#8226; Rivaroxaban 20 mg po QD*\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Dabigatran 150 mg po BID*\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Apixaban 5 mg po BID*\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Edoxaban 60 mg po QD*\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; VKA\
+                </p>\
+                <p class="text-center">\
+                  <strong>* Dose adjustment</strong>\
+                </p>\
+              </td>\
+              \
+              <td>\
+                <p class="text-left">\
+                  <strong>DOAC</strong> or VKA alone:\
+                </p>\
+                <p class="text-left">\
+                  &#8226; Rivaroxaban 20 mg po QD*\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Dabigatran 150 mg po BID*\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Apixaban 5 mg po BID*\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; Edoxaban 60 mg po QD*\
+                </p>\
+                <strong>or</strong>\
+                <p class="text-left">\
+                  &#8226; VKA\
+                </p>\
+                <p class="text-center">\
+                  <strong>* Dose adjustment</strong>\
+                </p>\
+              </td>\
+            </tr>\
+          </tbody>\
+        </table>',
   }
 }
