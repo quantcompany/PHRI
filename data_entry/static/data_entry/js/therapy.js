@@ -17,10 +17,9 @@ function renderGFR(){
 }
 
 function renderGFRValue(GFR){
-  console.log(GFR);
   if( isNaN(GFR) || !isFinite(GFR) ){
     $('#gfr-score-lbl').text('--');
-    $('#gfr_mLmin').val(0);
+    $('#gfr_mLmin').attr('value','');
   }else {
     $('#gfr-score-lbl').text(GFR.toFixed(2));
     $('#gfr_mLmin').val(GFR);
@@ -43,7 +42,6 @@ function renderGFRStage(GFR){
 }
 
 function renderTherapy(therapy){
-  console.log(therapy);
   if (therapy.choices.length == 0){
       console.log('NO CHOICES!');
       return '<div class="row"><div class="col-md-12 text-center"><h3 style="opacity: 0.3;">There is no recommended treatment</h3></div></div>';
@@ -287,7 +285,6 @@ function determineMCMTherapy(){
   var therapy = {choices: []};
 
   if (scores.chads2 <= 2){
-      console.log(1);
       therapy.choices.push({
         steps: [
           {option: options.mcm.f, extra: ''},
@@ -298,7 +295,6 @@ function determineMCMTherapy(){
         steps: [{option: options.mcm.g, extra: ''}]
       });
   } else {
-      console.log(1);
       if (scores.hasbled <= 3){ // low bleeding risk
         if (stent === 'bms') {
           if (warfarinIntolerance == true) {

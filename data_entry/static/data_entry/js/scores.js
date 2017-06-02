@@ -303,20 +303,48 @@ $('#hemoglobin_measure').on('change', function(){
     });
 });
 
-$('#hemoglobin_mgdL').on('change', function(){
-    var calc = (parseFloat($(this).val(), 10) || 0 ) * 0.01;
-    $('#hemoglobin_gL').val( calc )
+$('#hemoglobin_mgdL').on('keyup', function(){
+    var _value = $(this).val();
+    if( isNaN(_value) ) {
+        console.log('isNaN');
+        $('#hemoglobin_gL').setAttr('value','');
+        return;
+    }
+    console.log('Is not isNaN');
+    var calc = (parseFloat(_value, 10) || 0 ) * 0.01;
+    $('#hemoglobin_gL').val( calc.toFixed(2) );
 });
-$('#hemoglobin_gL').on('change', function(){
-    var calc = (parseFloat($(this).val(), 10) || 0 ) / 0.01;
-    $('#hemoglobin_mgdL').val( calc )
+$('#hemoglobin_gL').on('keyup', function(){
+    var _value = $(this).val();
+    if( isNaN(_value) ) {
+        console.log('isNaN');
+        $('#hemoglobin_mgdL').setAttr('value','');
+        return;
+    }
+    console.log('Is not isNaN');
+    var calc = (parseFloat(_value(), 10) || 0 ) / 0.01;
+    $('#hemoglobin_mgdL').val( calc.toFixed(2) );
 });
 
-$('#creatinine_mgdL').on('change', function(){
-    var calc = (parseFloat($(this).val(), 10) || 0 ) * 88.5;
-    $('#creatinine_umolL').val( calc )
+$('#creatinine_mgdL').on('keyup', function(){
+    var _value = $(this).val();
+    if( isNaN(_value) ) {
+        console.log('isNaN');
+        $('#creatinine_umolL').setAttr('value','');
+        return;
+    }
+    console.log('Is not isNaN');
+    var calc = (parseFloat(_value, 10) || 0 ) * 88.5;
+    $('#creatinine_umolL').val( calc.toFixed(2) );
 });
-$('#creatinine_umolL').on('change', function(){
-    var calc = (parseFloat($(this).val(), 10) || 0 ) / 88.5;
-    $('#creatinine_mgdL').val( calc )
+$('#creatinine_umolL').on('keyup', function(){
+    var _value = $(this).val();
+    if( isNaN(_value) ) {
+        console.log('isNaN');
+        $('#creatinine_mgdL').setAttr('value','');
+        return;
+    }
+    console.log('Is not isNaN');
+    var calc = (parseFloat(_value, 10) || 0 ) / 88.5;
+    $('#creatinine_mgdL').val( calc.toFixed(2) );
 });
