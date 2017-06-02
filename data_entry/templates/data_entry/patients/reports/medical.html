@@ -294,18 +294,26 @@
 
                 <tr>
                     <th>Hemoglobin</th>
+                    {% if patient.hemoglobin_mgdL != None %}
                     <td>
                         {{ patient.hemoglobin_mgdL }} mg/dL<br>
                         <i>({{patient.hemoglobin_gL}} g/L)</i>
                     </td>
+                    {% else %}
+                    <td>N/A</td>
+                    {% endif %}
 
                     <td></td>
 
                     <th>Creatinine</th>
+                    {% if patient.creatinine_mgdL != None %}
                     <td>
                         {{ patient.creatinine_mgdL }} mg/dL<br>
                         <i>({{patient.creatinine_umolL}} μmol/L)</i>
                     </td>
+                    {% else %}
+                    <td>N/A</td>
+                    {% endif %}
                 </tr>
 
             </tbody>
