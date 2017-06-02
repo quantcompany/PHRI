@@ -9,6 +9,11 @@
     <link href="{% static 'plugins/switchery/switchery.min.css' %}" rel="stylesheet" />
     <link href="{% static 'plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet">
     <link href="{% static 'plugins/lightbox/css/lightbox.css' %}" rel="stylesheet" />
+    <style type="text/css">
+        #hamilton-app-table th {
+            background-color: #f1f1f1;
+        }
+    </style>
 {% endblock %}
 
 {% block page_title %}{% trans 'Patient Form' %}{% endblock %}
@@ -47,6 +52,12 @@
                 {% include 'data_entry/includes/medical_history_2_panel.html' %}
             </div>
 
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                {% include 'data_entry/includes/GFR_panel.html' %}
+            </div>
         </div>
 
         <div class="row">

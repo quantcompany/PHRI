@@ -17,20 +17,23 @@ function renderGFR(){
 }
 
 function renderGFRValue(GFR){
-  if( isNaN(GFR) ){
-    $('#gfr-score-lbl').text('GFR');
+  console.log(GFR);
+  if( isNaN(GFR) || !isFinite(GFR) ){
+    $('#gfr-score-lbl').text('--');
+    $('#gfr_mLmin').val(0);
   }else {
-    $('#gfr-score-lbl').text('GFR = ' + GFR.toFixed(2) + ' mL/min');
+    $('#gfr-score-lbl').text(GFR.toFixed(2));
+    $('#gfr_mLmin').val(GFR);
   }
 }
 
 function renderGFRStage(GFR){
-  if( isNaN(GFR) ){
-    $('#stage-details').html('<div class="alert alert-default">...</div>');
+  if( isNaN(GFR) || !isFinite(GFR) ){
+    $('#stage-details').html('<div class="alert alert-default"><i class="fa fa-info-circle"></i> To calculate the GFR we need the value of: Creatinine, Age, Sex and Weight</div>');
   }else {
     var stageGFR = clasifyGFR(GFR);
     $('#stage-details').html('\
-      \<div class="stage-gfr alert alert-default" style="color:white;background-color:'+stageGFR.color+';">\
+      \<div class="stage-gfr alert alert-default" style="margin-bottom:0;color:white;background-color:'+stageGFR.color+';">\
           <strong>'+stageGFR.label+'</strong>\
           <p>'+stageGFR.description+'</p>\
           <p>(GFR LEVEL: '+stageGFR.level+')</p>\

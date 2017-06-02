@@ -285,6 +285,10 @@ $('#creatinine_measure').on('change', function(){
     .stop(true, true).hide(0, function(){
         $('#creatinine_'+measure).stop(true, true).show(0);
     });
+    $('label[for^="creatinine_"]')
+    .stop(true, true).hide(0, function(){
+        $('label[for^="creatinine_'+measure+'"]').stop(true, true).show(0);
+    });
 });
 
 $('#hemoglobin_measure').on('change', function(){
@@ -292,6 +296,10 @@ $('#hemoglobin_measure').on('change', function(){
     $('input[name^="hemoglobin_"]')
     .stop(true, true).hide(0, function(){
         $('#hemoglobin_'+measure).stop(true, true).show(0);
+    });
+    $('label[for^="hemoglobin_"]')
+    .stop(true, true).hide(0, function(){
+        $('label[for^="hemoglobin_'+measure+'"]').stop(true, true).show(0);
     });
 });
 
