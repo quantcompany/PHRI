@@ -290,7 +290,6 @@ $('#creatinine_measure').on('change', function(){
         $('label[for^="creatinine_'+measure+'"]').stop(true, true).show(0);
     });
 });
-
 $('#hemoglobin_measure').on('change', function(){
     var measure = $(this).val();
     $('input[name^="hemoglobin_"]')
@@ -303,20 +302,44 @@ $('#hemoglobin_measure').on('change', function(){
     });
 });
 
-$('#hemoglobin_mgdL').on('change', function(){
-    var calc = (parseFloat($(this).val(), 10) || 0 ) * 0.01;
-    $('#hemoglobin_gL').val( calc )
+/**
+    Compute the transformation of values over the measure based on the input the user is using
+    For: Hemoglobin & Creatinine
+**/
+$('#hemoglobin_mgdL').on('keyup', function(){
+    var _value = parseFloat($(this).val(), 10);
+    if( isNaN(_value) ) {
+        $('#hemoglobin_gL').attr('value','');
+        return;
+    }
+    var calc = _value * 0.01;
+    $('#hemoglobin_gL').val( calc.toFixed(2) );
 });
-$('#hemoglobin_gL').on('change', function(){
-    var calc = (parseFloat($(this).val(), 10) || 0 ) / 0.01;
-    $('#hemoglobin_mgdL').val( calc )
+$('#hemoglobin_gL').on('keyup', function(){
+    var _value = parseFloat($(this).val(), 10);
+    if( isNaN(_value) ) {
+        $('#hemoglobin_mgdL').attr('value','');
+        return;
+    }
+    var calc = _value / 0.01;
+    $('#hemoglobin_mgdL').val( calc.toFixed(2) );
 });
 
-$('#creatinine_mgdL').on('change', function(){
-    var calc = (parseFloat($(this).val(), 10) || 0 ) * 88.5;
-    $('#creatinine_umolL').val( calc )
+$('#creatinine_mgdL').on('keyup', function(){
+    var _value = parseFloat($(this).val(), 10);
+    if( isNaN(_value) ) {
+        $('#creatinine_umolL').attr('value','');
+        return;
+    }
+    var calc = _value * 88.5;
+    $('#creatinine_umolL').val( calc.toFixed(2) );
 });
-$('#creatinine_umolL').on('change', function(){
-    var calc = (parseFloat($(this).val(), 10) || 0 ) / 88.5;
-    $('#creatinine_mgdL').val( calc )
+$('#creatinine_umolL').on('keyup', function(){
+    var _value = parseFloat($(this).val(), 10);
+    if( isNaN(_value) ) {
+        $('#creatinine_mgdL').attr('value','');
+        return;
+    }
+    var calc = _value / 88.5;
+    $('#creatinine_mgdL').val( calc.toFixed(2) );
 });

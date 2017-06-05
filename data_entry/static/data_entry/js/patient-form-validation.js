@@ -31,11 +31,11 @@ var patientFormValidator = $("form[name='patient_form']").validate({
       required: true
     },
     hemoglobin_gL : {
-      required: function(){return $('#hemoglobin_measure').val() === 'gL';},
+      //required: function(){return $('#hemoglobin_measure').val() === 'gL';},
       min: 0
     },
     hemoglobin_mgdL : {
-      required: function(){return $('#hemoglobin_measure').val() === 'mgdL';},
+      //required: function(){return $('#hemoglobin_measure').val() === 'mgdL';},
       min: 0
     },
     creatinine_mgdL : {

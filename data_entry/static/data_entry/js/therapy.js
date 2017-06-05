@@ -17,10 +17,9 @@ function renderGFR(){
 }
 
 function renderGFRValue(GFR){
-  console.log(GFR);
   if( isNaN(GFR) || !isFinite(GFR) ){
     $('#gfr-score-lbl').text('--');
-    $('#gfr_mLmin').val(0);
+    $('#gfr_mLmin').attr('value','');
   }else {
     $('#gfr-score-lbl').text(GFR.toFixed(2));
     $('#gfr_mLmin').val(GFR);
@@ -43,7 +42,6 @@ function renderGFRStage(GFR){
 }
 
 function renderTherapy(therapy){
-  console.log(therapy);
   if (therapy.choices.length == 0){
       console.log('NO CHOICES!');
       return '<div class="row"><div class="col-md-12 text-center"><h3 style="opacity: 0.3;">There is no recommended treatment</h3></div></div>';
@@ -54,8 +52,10 @@ function renderTherapy(therapy){
   for (var i = 0; i < therapy.choices.length; i++) {
     var choice = therapy.choices[i];
 
-    out += '<div class="row p-10 m-b-20">';
-    out += '<div class="col-md-10 col-md-offset-1">';
+    //out += '<div class="row p-10 m-b-20">';
+    //out += '<div class="col-md-10 col-md-offset-1">';
+    out += '<div class="row">';
+    out += '<div class="col-md-12">';
 
     out += '<div class="note note-info m-b-0 p-5 text-center">';
     out += '<h1 class="m-5">Option ' + (i + 1) + '</h1>';
@@ -152,7 +152,9 @@ function updateRecommendedTherapy(){
     //$('#mcm_recommendation').html(renderTherapy(mcmTherapy));
 
     var mcmTherapy = determineMCMTherapy_2();
-    renderTherapyImage(mcmTherapy);
+    //renderTherapyImage(mcmTherapy);
+    $('#mcm_recommendation').html(renderTherapy(mcmTherapy));
+
 
     var ccsTherapy = determineCCSTherapy();
     $('#ccs_recommendation').html(renderTherapy(ccsTherapy));
@@ -182,53 +184,84 @@ function determineMCMTherapy_2(){
   var pciRisk = getPciRisk();
   var bleedingRisk = getBleedingRisk();
 
-  //var therapy = {choices: []};
-  var therapy = "";
+  var therapy = {choices: []};
+  //var therapy = "";
 
   if (scores.chads2 == 0 ){
     if( indication == 'SCAD' ) {
-      therapy = "A";
-      /*therapy.choices.push({
+      therapy.choices.push({
         steps: [
           {option: options.mcm2.a, extra: ''},
         ]
-      });*/
+      });
     } else {
       //it is STEMI, NSTEMI, UA (ACS)
-      therapy = "B";
+      therapy.choices.push({
+        steps: [
+          {option: options.mcm2.b, extra: ''},
+        ]
+      });
     }
   }else if ( scores.chads2 == 1 ) {
     if( indication == 'SCAD' ){
-      therapy = "C";
+      therapy.choices.push({
+        steps: [
+          {option: options.mcm2.c, extra: ''},
+        ]
+      });
     }else {
       //it is STEMI, NSTEMI, UA (ACS)
-      therapy = "D";
+      therapy.choices.push({
+        steps: [
+          {option: options.mcm2.d, extra: ''},
+        ]
+      });
     }
   }else if ( scores.chads2 >= 2 ) {
     if( indication == 'SCAD' ) {
       if( pciRisk == 'low' ) {
-        therapy = "E";
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm2.e, extra: ''},
+          ]
+        });
       } else {
         //pciRisk is High
         if( bleedingRisk == 'low' ) {
-          therapy = "F";
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm2.f, extra: ''},
+            ]
+          });
         }else {
           //bleedingRisk is HIGH
-          therapy = "E";
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm2.e, extra: ''},
+            ]
+          });
         }
       }
     }else {
       //it is STEMI, NSTEMI, UA (ACS)
       if( bleedingRisk == 'low' ) {
-        therapy = "F";
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm2.f, extra: ''},
+          ]
+        });
       }else{
         //bleedingRisk is HIGH
-        therapy = "E";
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm2.e, extra: ''},
+          ]
+        });
       }
     }
   }else{
     console.log('No therapy found');
-    therapy = null;
+    //therapy = null;
   }
 
   return therapy;
@@ -252,7 +285,6 @@ function determineMCMTherapy(){
   var therapy = {choices: []};
 
   if (scores.chads2 <= 2){
-      console.log(1);
       therapy.choices.push({
         steps: [
           {option: options.mcm.f, extra: ''},
@@ -263,7 +295,6 @@ function determineMCMTherapy(){
         steps: [{option: options.mcm.g, extra: ''}]
       });
   } else {
-      console.log(1);
       if (scores.hasbled <= 3){ // low bleeding risk
         if (stent === 'bms') {
           if (warfarinIntolerance == true) {
