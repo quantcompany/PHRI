@@ -7,6 +7,7 @@
         <link href="{% static 'plugins/jquery-ui/themes/base/minified/jquery-ui.min.css' %}" rel="stylesheet" />
         <link href="{% static '/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css' %}" rel="stylesheet" />
         <link href="{% static 'plugins/jquery-tag-it/css/jquery.tagit.css' %}" rel="stylesheet" />
+        <link href="{% static 'plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" />
         <script src="{% static 'plugins/jquery/jquery-1.9.1.min.js' %}"></script>
         <script src="{% static 'plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
         <script src="{% static 'plugins/jquery-ui/ui/minified/jquery-ui.min.js' %}"></script>
@@ -75,6 +76,11 @@
                 margin: 0px;
                 padding: 0px;   
              }
+             @media print {
+                a[href]:after {
+                    content: none !important;
+                }
+            }
         </style>
     </head>
     <body style="padding:20px 300px;">
@@ -140,6 +146,61 @@
                     <td></td>
                     <th></th>
                     <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>PCI Risks</h3>
+        <hr>
+        <table class="table" style="width: 100%;border:none">
+            <thead>
+                <tr>
+                    <td style="width:40%"></td>
+                    <td style="width:8%"></td>
+
+                    <td style="width:4%"></td>
+
+                    <td style="width:40%"></td>
+                    <td style="width:8%"></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- <tr>
+                    <th>Date</th>
+                    <td>{{ patient.date_of_procedure|date:"d/m/Y" }}</td>
+                    <td></td>
+                    <th>Indication</th>
+                    <td>{{ patient.indication }}</td>
+                </tr> -->
+
+                <tr>
+                    <th>Long Stented Segment &gt; 30mm</th>
+                    <td>{{ patient.pci_risk_1 | yesno | title }}</td>
+                    <td></td>
+                    <th>Small Diameter &lt; 2.5mm</th>
+                    <td>{{ patient.pci_risk_2 | yesno | title }}</td>
+                </tr>
+                <tr>
+                    <th>IN-Stent Restenosis Intervention</th>
+                    <td>{{ patient.pci_risk_3 | yesno | title }}</td>
+                    <td></td>
+                    <th>Atherectomy</th>
+                    <td>{{ patient.pci_risk_4 | yesno | title }}</td>
+                </tr>
+                <tr>
+                    <th>Bifurcation PCI</th>
+                    <td>{{ patient.pci_risk_5 | yesno | title }}</td>
+                    <tr></tr>
+                    <th>Left main PCI</th>
+                    <td>{{ patient.pci_risk_6 | yesno | title }}</td>
+                </tr>
+                <tr>
+                    <th>Chronic Total Occlusion PCI</th>
+                    <td>{{ patient.pci_risk_7 | yesno | title }}</td>
+                    <tr></tr>
+                    <th>In the Opinion of the Interventional<br>Cardiologist</th>
+                    <td>{{ patient.pci_risk_8 | yesno | title }}</td>
                 </tr>
             </tbody>
         </table>
@@ -318,6 +379,26 @@
 
             </tbody>
         </table>
+        <hr>
+        <table class="table" style="width: 100%;border:none;">
+            <thead>
+                <tr>
+                    <td style="width:30%"></td>
+                    <td style="width:70%"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th class="text-center">
+                        <h3>GFR</h3>
+                    </th>
+                    <th class="text-center">
+                        <h3>{{ patient.gfr_mLmin|floatformat:2 }} <small>mL/min</small></h3>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
 
         <center style="font-weight:bolder">www.tripletherapy.net</center>
         <!-- *************************** PAGE BREAK ****************************** -->
@@ -404,8 +485,9 @@
         <table class="therapy-recommendations">
             <thead>
                 <tr>
-                    <th><h3>Hamilton AF-PCI recommendation</h3></th>
-                    <th><h3>CCS recommendation</h3></th>
+                    <th style="width:48%;"><h3>Hamilton AF-PCI recommendation</h3></th>
+                    <th style="width: 4%;"></th>
+                    <th style="width:48%;"><h3>CCS recommendation</h3></th>
                 </tr>
 
                 <tr>
@@ -415,9 +497,9 @@
 
             <tbody>
                 <tr>
-                    <td style="width:50%;">
+                    <td>
                         {% for choice in patient.parse_mcm_therapy.choices %}
-                            <h2><b>Option {{ forloop.counter }}</b></h2>
+                            {% comment %}<h2><b>Option {{ forloop.counter }}</b></h2> {% endcomment %}
                             {% for step in choice.steps %}
                                 {{ step.option|safe }}
                                 {% if step.extra %}
@@ -438,10 +520,10 @@
                             <h2>Nothing here</h2>
                         {% endfor %}
                     </td>
-
-                    <td style="width:50%;">
+                    <td></td>
+                    <td>
                         {% for choice in patient.parse_ccs_therapy.choices %}
-                            <h2><b>Option {{ forloop.counter }}</b></h2>
+                            {% comment %}<h2><b>Option {{ forloop.counter }}</b></h2> {% endcomment %}
                             {% for step in choice.steps %}
                                 {{ step.option|safe }}
                                 {% if step.extra %}

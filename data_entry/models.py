@@ -281,6 +281,17 @@ class Patient(models.Model):
             self.field_csv(self.initials(), str),
             self.field_csv(self.age, int),
             self.field_csv(self.get_gender_display(), str),
+            self.field_csv(self.weight, float),
+            #PCI Risks
+            self.field_csv(self.pci_risk_1, bool),
+            self.field_csv(self.pci_risk_2, bool),
+            self.field_csv(self.pci_risk_3, bool),
+            self.field_csv(self.pci_risk_4, bool),
+            self.field_csv(self.pci_risk_5, bool),
+            self.field_csv(self.pci_risk_6, bool),
+            self.field_csv(self.pci_risk_7, bool),
+            self.field_csv(self.pci_risk_8, bool),
+
             self.field_csv(self.indication, str),
             self.field_csv(self.bms_stent, bool),
             self.field_csv(self.des_stent, bool),
@@ -300,6 +311,13 @@ class Patient(models.Model):
             self.field_csv(self.liver_dysfunction, bool),
             self.field_csv(self.get_hx_of_bleeding_display(), str),
             self.field_csv(self.get_alcohol_abuse_display(), str),
+
+            self.field_csv(self.hemoglobin_gL, float),
+            self.field_csv(self.hemoglobin_mgdL, float),
+            self.field_csv(self.creatinine_mgdL, float),
+            self.field_csv(self.creatinine_umolL, float),
+            self.field_csv(self.gfr_mLmin, float),
+
             self.field_csv(self.drug_abuse, bool),
             self.field_csv(self.asa_allergy, bool),
             self.field_csv(self.chads2_score(), int),

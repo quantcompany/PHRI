@@ -1,6 +1,20 @@
 // Initialize form validation on the registration form.
 // It has the name attribute "registration"
 var patientFormValidator = $("form[name='patient_form']").validate({
+  focusInvalid: false,
+  invalidHandler: function(form, validator) {
+
+      if (!validator.numberOfInvalids())
+          return;
+
+      $('html, body').animate({
+          scrollTop: $(validator.errorList[0].element).offset().top - 70
+      }, 1000, function() {
+        $(validator.errorList[0].element).focus();
+        $(validator.errorList[0].element).addClass('animated shake');
+      });
+
+  },
   errorElement: "small",
   errorPlacement: function(error, element){
     error.appendTo(element.parents('.form-group').find('label').find('span'));
