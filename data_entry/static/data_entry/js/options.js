@@ -260,8 +260,7 @@ var options = {
     e: '<div class="row">\
           <div class="col-md-6">\
             <p class="bg-warning" style="padding:8px;">\
-              <i class="fa fa-exclamation-triangle fa-2x text-warning" aria-hidden="true"></i><br>\
-              Safety recommendation for high risk bleeding patients\
+              <i class="fa fa-exclamation-circle fa-2x text-warning" aria-hidden="true"></i>\
             </p>\
           </div>\
           <div class="col-md-6">\
@@ -285,28 +284,28 @@ var options = {
             <tr>\
               <td>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  <strong><i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i>Clopidogrel</strong> 75 mg po QD <br>\
+                  <strong><i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i>Clopidogrel</strong> 75 mg po QD <br>\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  &#8226; <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i>Rivaroxaban 15 mg po QD\
-                </p>\
+                  &#8226; <i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i>Rivaroxaban 15 mg po QD\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; Dabigatran 110 mg po BID\
-                </p>\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; Apixaban 2.5 mg po BID\
-                </p>\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; Edoxaban 30 mg po QD\
-                </p>\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; VKA\
                 </p>\
@@ -345,8 +344,7 @@ var options = {
     f: '<div class="row">\
           <div class="col-md-6">\
             <p class="bg-warning" style="padding:8px;">\
-              <i class="fa fa-exclamation-triangle fa-2x text-warning" aria-hidden="true"></i><br>\
-              Safety recommendation for high risk bleeding patients\
+              <i class="fa fa-exclamation-circle fa-2x text-warning" aria-hidden="true"></i>\
             </p>\
           </div>\
           <div class="col-md-6">\
@@ -404,28 +402,28 @@ var options = {
               \
               <td>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  <strong><i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i>Clopidogrel</strong> 75 mg po QD\
+                  <strong><i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i>Clopidogrel</strong> 75 mg po QD\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  &#8226; <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i>Rivaroxaban 15 mg po QD\
-                </p>\
+                  &#8226; <i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i>Rivaroxaban 15 mg po QD\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; Dabigatran 110 mg po BID\
-                </p>\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; Apixaban 2.5 mg po BID\
-                </p>\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; Edoxaban 30 mg po QD\
-                </p>\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; VKA\
                 </p>\
@@ -437,20 +435,20 @@ var options = {
                 </p>\
                 <p class="text-left">\
                   &#8226; Rivaroxaban 20 mg po QD*\
-                </p>\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; Dabigatran 150 mg po BID*\
-                </p>\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; Apixaban 5 mg po BID*\
-                </p>\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; Edoxaban 60 mg po QD*\
-                </p>\
                 <strong>or</strong>\
+                </p>\
                 <p class="text-left">\
                   &#8226; VKA\
                 </p>\
