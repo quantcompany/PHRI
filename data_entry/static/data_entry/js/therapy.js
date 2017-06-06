@@ -83,6 +83,42 @@ function renderTherapy(therapy){
   return out;
 }
 
+function renderTherapyMcm(therapy, use_extra){
+  if (therapy.choices.length == 0){
+      console.log('NO CHOICES!');
+      return '<div class="row"><div class="col-md-12 text-center"><h3 style="opacity: 0.3;">There is no recommended treatment</h3></div></div>';
+  }
+
+  var out = '';
+
+  for (var i = 0; i < therapy.choices.length; i++) {
+    var choice = therapy.choices[i];
+
+    out += '<div class="row">';
+    out += '<div class="col-md-12">';
+
+    for (var j = 0; j < choice.steps.length; j++) {
+      var step = choice.steps[j];
+      out += '<div class="therapy-option note note-default m-b-0 p-10 text-center">';
+      if (use_extra && step.extra2) {
+        out += step.extra2;
+      }
+      out += step.option;
+      out += '</div>';
+
+      if (j !== choice.steps.length - 1) {
+        out += '<div class="note note-default m-b-0 p-5 text-center">';
+        out += '<h4 class="m-0"><em><strong>then</strong></em></h4>';
+        out += '</div>';
+      }
+    }
+
+    out += '</div>';
+    out += '</div>';
+  }
+  return out;
+}
+
 function renderTherapyImage(therapy){
 
   $('.hamilton_therapy_options').stop(true, true).hide(0, function(){
@@ -147,13 +183,10 @@ function getIndication(){
 }
 
 function updateRecommendedTherapy(){
-    //var mcmTherapy = determineMCMTherapy_2();
+    //var mcmTherapy = determineMCMTherapy();
     //$('#mcm_recommendation').html(renderTherapy(mcmTherapy));
-
     var mcmTherapy = determineMCMTherapy_2();
-    //renderTherapyImage(mcmTherapy);
-    $('#mcm_recommendation').html(renderTherapy(mcmTherapy));
-
+    $('#mcm_recommendation').html(renderTherapyMcm(mcmTherapy, true));
 
     var ccsTherapy = determineCCSTherapy();
     $('#ccs_recommendation').html(renderTherapy(ccsTherapy));
@@ -184,20 +217,35 @@ function determineMCMTherapy_2(){
   var bleedingRisk = getBleedingRisk();
 
   var therapy = {choices: []};
-  //var therapy = "";
+  var _extra = '<div class="row pioneer-table-link">\
+                  <div class="col-md-6">\
+                    <p class="bg-warning" style="padding:8px;">\
+                      <i class="fa fa-exclamation-circle fa-2x text-warning" aria-hidden="true"></i>\
+                    </p>\
+                  </div>\
+                  <div class="col-md-6">\
+                      <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf" target="_blank">\
+                        <img src="'+static_url+'img/pioneer-af-pci.png" class="img-responsive"/>\
+                      </a>\
+                      <div class="alert alert-warning" style="text-decoration:none;margin:0;padding:0">\
+                        <p>Rivaroxaban 15 mg qd*</p>\
+                        <p style="margin-top:0;">Clopidogrel 75 mg qd✝</p>\
+                      </div>\
+                  </div>\
+                </div>';
 
   if (scores.chads2 == 0 ){
     if( indication == 'SCAD' ) {
       therapy.choices.push({
         steps: [
-          {option: options.mcm2.a, extra: ''},
+          {option: options.mcm2.a, extra: '', extra2: ''},
         ]
       });
     } else {
       //it is STEMI, NSTEMI, UA (ACS)
       therapy.choices.push({
         steps: [
-          {option: options.mcm2.b, extra: ''},
+          {option: options.mcm2.b, extra: '', extra2: ''},
         ]
       });
     }
@@ -205,14 +253,14 @@ function determineMCMTherapy_2(){
     if( indication == 'SCAD' ){
       therapy.choices.push({
         steps: [
-          {option: options.mcm2.c, extra: ''},
+          {option: options.mcm2.c, extra: '', extra2: _extra},
         ]
       });
     }else {
       //it is STEMI, NSTEMI, UA (ACS)
       therapy.choices.push({
         steps: [
-          {option: options.mcm2.d, extra: ''},
+          {option: options.mcm2.d, extra: '', extra2: ''},
         ]
       });
     }
@@ -221,7 +269,7 @@ function determineMCMTherapy_2(){
       if( pciRisk == 'low' ) {
         therapy.choices.push({
           steps: [
-            {option: options.mcm2.e, extra: ''},
+            {option: options.mcm2.e, extra: '', extra2: _extra, },
           ]
         });
       } else {
@@ -229,14 +277,14 @@ function determineMCMTherapy_2(){
         if( bleedingRisk == 'low' ) {
           therapy.choices.push({
             steps: [
-              {option: options.mcm2.f, extra: ''},
+              {option: options.mcm2.f, extra: '', extra2: _extra},
             ]
           });
         }else {
           //bleedingRisk is HIGH
           therapy.choices.push({
             steps: [
-              {option: options.mcm2.e, extra: ''},
+              {option: options.mcm2.e, extra: '', extra2: _extra},
             ]
           });
         }
@@ -246,14 +294,14 @@ function determineMCMTherapy_2(){
       if( bleedingRisk == 'low' ) {
         therapy.choices.push({
           steps: [
-            {option: options.mcm2.f, extra: ''},
+            {option: options.mcm2.f, extra: '', extra2: _extra},
           ]
         });
       }else{
         //bleedingRisk is HIGH
         therapy.choices.push({
           steps: [
-            {option: options.mcm2.e, extra: ''},
+            {option: options.mcm2.e, extra: '', extra2: _extra},
           ]
         });
       }

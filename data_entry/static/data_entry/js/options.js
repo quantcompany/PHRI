@@ -89,24 +89,7 @@ var options = {
           </tbody>\
         </table>',
 
-    c: '<div class="row">\
-          <div class="col-md-6">\
-            <p class="bg-warning" style="padding:8px;">\
-              <i class="fa fa-exclamation-triangle fa-2x text-warning" aria-hidden="true"></i><br>\
-              Safety recommendation for high risk bleeding patients\
-            </p>\
-          </div>\
-          <div class="col-md-6">\
-              <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf" target="_blank">\
-                <img src="'+static_url+'img/pioneer-af-pci.png" class="img-responsive"/>\
-              </a>\
-              <div class="alert alert-warning" style="text-decoration:none;margin:0;padding:0">\
-                <p>Rivaroxaban 15 mg qd*</p>\
-                <p style="margin-top:0;">Clopidogrel 75 mg qd✝</p>\
-              </div>\
-          </div>\
-        </div>\
-        <table id="mcm2-B" class="table table-bordered">\
+    c: '<table id="mcm2-B" class="table table-bordered">\
           <thead>\
             <tr>\
               <th class="text-center">First 6 months</th>\
@@ -257,23 +240,7 @@ var options = {
           </tbody>\
         </table>',
 
-    e: '<div class="row">\
-          <div class="col-md-6">\
-            <p class="bg-warning" style="padding:8px;">\
-              <i class="fa fa-exclamation-circle fa-2x text-warning" aria-hidden="true"></i>\
-            </p>\
-          </div>\
-          <div class="col-md-6">\
-              <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf" target="_blank">\
-                <img src="'+static_url+'img/pioneer-af-pci.png" class="img-responsive"/>\
-              </a>\
-              <div class="alert alert-warning" style="text-decoration:none;margin:0;padding:0">\
-                <p>Rivaroxaban 15 mg qd*</p>\
-                <p style="margin-top:0;">Clopidogrel 75 mg qd✝</p>\
-              </div>\
-          </div>\
-        </div>\
-        <table id="mcm2-E" class="table table-bordered">\
+    e: '<table id="mcm2-E" class="table table-bordered">\
           <thead>\
             <tr>\
               <th class="text-center">First 12 Months</th>\
@@ -284,14 +251,14 @@ var options = {
             <tr>\
               <td>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  <strong><i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i>Clopidogrel</strong> 75 mg po QD <br>\
+                  <strong><i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i> Clopidogrel</strong> 75 mg po QD <br>\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  &#8226; <i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i>Rivaroxaban 15 mg po QD\
+                  &#8226; <i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i> Rivaroxaban 15 mg po QD\
                 <strong>or</strong>\
                 </p>\
                 <p class="text-left">\
@@ -341,23 +308,7 @@ var options = {
           </tbody>\
         </table>',
 
-    f: '<div class="row">\
-          <div class="col-md-6">\
-            <p class="bg-warning" style="padding:8px;">\
-              <i class="fa fa-exclamation-circle fa-2x text-warning" aria-hidden="true"></i>\
-            </p>\
-          </div>\
-          <div class="col-md-6">\
-              <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf" target="_blank">\
-                <img src="'+static_url+'img/pioneer-af-pci.png" class="img-responsive"/>\
-              </a>\
-              <div class="alert alert-warning" style="text-decoration:none;margin:0;padding:0">\
-                <p>Rivaroxaban 15 mg qd*</p>\
-                <p style="margin-top:0;">Clopidogrel 75 mg qd✝</p>\
-              </div>\
-          </div>\
-        </div>\
-        <table id="mcm2-F" class="table table-bordered">\
+    f: '<table id="mcm2-F" class="table table-bordered">\
           <thead>\
             <tr>\
               <th class="text-center">For 1 - 3 months</th>\
@@ -402,14 +353,14 @@ var options = {
               \
               <td>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  <strong><i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i>Clopidogrel</strong> 75 mg po QD\
+                  <strong><i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i> Clopidogrel</strong> 75 mg po QD\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  &#8226; <i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i>Rivaroxaban 15 mg po QD\
+                  &#8226; <i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i> Rivaroxaban 15 mg po QD\
                 <strong>or</strong>\
                 </p>\
                 <p class="text-left">\
