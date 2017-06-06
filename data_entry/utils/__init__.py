@@ -39,6 +39,17 @@ def patients_csv_headers():
         'INITIALS',
         'AGE',
         'GENDER',
+        'WEIGHT(kg)',
+        # PCI RISKs
+        'PCI RISK 1',
+        'PCI RISK 2',
+        'PCI RISK 3',
+        'PCI RISK 4',
+        'PCI RISK 5',
+        'PCI RISK 6',
+        'PCI RISK 7',
+        'PCI RISK 8',
+
         'INDICATION',
         'BMS STENT',
         'DES STENT',
@@ -58,6 +69,13 @@ def patients_csv_headers():
         'LIVER DYSFUNCTION',
         'HX OF BLEEDING',
         'ALCOHOL ABUSE',
+
+        'HEMOGLOBIN(g/L)',
+        'HEMOGLOBIN(mg/dL)',
+        'CREATININE(mg/dL)',
+        'CREATININE(umol/L)',
+        'GFR(mL/min)',
+
         'DRUG ABUSE',
         'ASA ALLERGY',
         'CHADS SCORE',

@@ -57,9 +57,9 @@ function renderTherapy(therapy){
     out += '<div class="row">';
     out += '<div class="col-md-12">';
 
-    out += '<div class="note note-info m-b-0 p-5 text-center">';
-    out += '<h1 class="m-5">Option ' + (i + 1) + '</h1>';
-    out += '</div>';
+    //out += '<div class="note note-info m-b-0 p-5 text-center">';
+    //out += '<h1 class="m-5">Option ' + (i + 1) + '</h1>';
+    //out += '</div>';
 
     for (var j = 0; j < choice.steps.length; j++) {
       var step = choice.steps[j];
@@ -80,7 +80,6 @@ function renderTherapy(therapy){
     out += '</div>';
     out += '</div>';
   }
-
   return out;
 }
 
