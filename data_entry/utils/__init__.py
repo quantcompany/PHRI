@@ -61,7 +61,7 @@ def patients_csv_headers():
         'NOAC ALLERGY OR INTOLERANCE',
         # bloodwork fields removed
         'CHF',
-        'HTN',
+        'Hypertension',
         'DIABETES MELLITUS',
         'STROKE',
         'TIA',

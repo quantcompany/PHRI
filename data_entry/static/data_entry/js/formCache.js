@@ -31,7 +31,7 @@ function loadForm() {
 		element.prop('checked', value).trigger('change');
 	});
 
-	// load stent checkboxes
+	// load stent/intervention checkboxes
 	$('#bms_stent,#des_stent,#no_pci').each(function() {
 		var element = $(this);
 		var key = element.prop('id');
@@ -68,7 +68,7 @@ function clearForm() {
 	//clear pci_risk checkboxes
 	$('input[type="checkbox"][name^="pci_risk_"]').prop('checked', false).trigger('change');
 
-	// clear stent checkboxes
+	// clear stent/intervention checkboxes
 	$('#bms_stent,#des_stent,#no_pci').prop('checked', false).trigger('change');
 
 	// clear switches
