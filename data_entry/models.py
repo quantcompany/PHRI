@@ -63,7 +63,7 @@ class Patient(models.Model):
     prev_anti_coagulation = models.IntegerField(default=0, choices=ANTI_COAGULATION_CHOICES, blank=True, null=True)
     warfarin_intolerance = models.BooleanField(default=False)
     inr_instability = models.BooleanField(default=False)
-    noac_allergy_or_intolerance = models.BooleanField(default=False)
+    doac_allergy_or_intolerance = models.BooleanField(default=False)
 
     # Blood Work
     #hb = models.FloatField(null=True, blank=True)
@@ -323,7 +323,7 @@ class Patient(models.Model):
             self.field_csv(self.get_prev_anti_coagulation_display(), str),
             self.field_csv(self.warfarin_intolerance, bool),
             self.field_csv(self.inr_instability, bool),
-            self.field_csv(self.noac_allergy_or_intolerance, bool),
+            self.field_csv(self.doac_allergy_or_intolerance, bool),
             # blood work fields removed form here
             self.field_csv(self.chf, bool),
             self.field_csv(self.get_htn_display(), str),

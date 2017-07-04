@@ -271,7 +271,7 @@ function clasifyGFR(value){
 // so that the scores, plot, and recommended therapy get updated as the
 // form is filled out
 
-$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #noac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse').on('switchChange.bootstrapSwitch', function(event, state){
+$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse').on('switchChange.bootstrapSwitch', function(event, state){
     updateEverything();
 });
 

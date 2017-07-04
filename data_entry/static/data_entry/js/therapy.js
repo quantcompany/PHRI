@@ -151,8 +151,8 @@ function getInrInstability(){
     return $('#inr_instability').bootstrapSwitch('state') ? true:false;
 }
 
-function getNoacAllergy(){
-    return $('#noac_allergy_or_intolerance').bootstrapSwitch('state') ? true:false;
+function getDoacAllergy(){
+    return $('#doac_allergy_or_intolerance').bootstrapSwitch('state') ? true:false;
 }
 
 function getAge(){
@@ -328,7 +328,7 @@ function determineMCMTherapy(){
   var stent = getStent();
   var warfarinIntolerance = getWarfarinIntolerance();
   var inrInstability = getInrInstability();
-  var noacAllergy = getNoacAllergy()
+  var doacAllergy = getDoacAllergy()
   var therapy = {choices: []};
 
   if (scores.chads2 <= 2){
@@ -346,7 +346,7 @@ function determineMCMTherapy(){
         if (stent === 'bms') {
           if (warfarinIntolerance == true) {
             if (inrInstability == true) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
                 therapy.choices.push({
                   steps: [
@@ -361,7 +361,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 1 month and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -371,7 +371,7 @@ function determineMCMTherapy(){
                 });
               }
             } else if (inrInstability == false) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
                 therapy.choices.push({
                   steps: [
@@ -386,7 +386,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 1 month and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -398,7 +398,7 @@ function determineMCMTherapy(){
             }
           } else if (warfarinIntolerance == false) {
             if (inrInstability == true) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option A for 1 month and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -421,7 +421,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 1 month and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -431,7 +431,7 @@ function determineMCMTherapy(){
                 });
               }
             } else if (inrInstability == false) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // A for 1 month and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -439,7 +439,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.c, extra: 'Up to the 1st year'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // 1st option A for 1 month and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -461,7 +461,7 @@ function determineMCMTherapy(){
         } else if (stent == 'des') {
           if (warfarinIntolerance == true) {
             if (inrInstability == true) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
                 therapy.choices.push({
                   steps: [
@@ -476,7 +476,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 6 months and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -486,7 +486,7 @@ function determineMCMTherapy(){
                 });
               }
             } else if (inrInstability == false) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
                 therapy.choices.push({
                   steps: [
@@ -501,7 +501,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 6 months and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -513,7 +513,7 @@ function determineMCMTherapy(){
             }
           } else if (warfarinIntolerance == false) {
             if (inrInstability == true) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option A for 6 months and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -536,7 +536,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 6 months and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -546,7 +546,7 @@ function determineMCMTherapy(){
                 });
               }
             } else if (inrInstability == false) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // A for 6 months and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -554,7 +554,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.c, extra: 'Up to the 1st year'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // 1st option A for 6 months and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -579,7 +579,7 @@ function determineMCMTherapy(){
         if (stent === 'bms') {
           if (warfarinIntolerance == true) {
             if (inrInstability == true) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
                 therapy.choices.push({
                   steps: [
@@ -594,7 +594,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'},
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 1 month and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -604,7 +604,7 @@ function determineMCMTherapy(){
                 });
               }
             } else if (inrInstability == false) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
                 therapy.choices.push({
                   steps: [
@@ -619,7 +619,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'},
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 1 month and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -631,7 +631,7 @@ function determineMCMTherapy(){
             }
           } else if (warfarinIntolerance == false) {
             if (inrInstability == true) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option A for 1 month and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -654,7 +654,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 1 month and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -664,7 +664,7 @@ function determineMCMTherapy(){
                 });
               }
             } else if (inrInstability == false) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // A for 1 month and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -672,7 +672,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.c, extra: 'Up to the 1st year'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // 1st option A for 1 month and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -694,7 +694,7 @@ function determineMCMTherapy(){
         } else if (stent == 'des') {
           if (warfarinIntolerance == true) {
             if (inrInstability == true) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
                 therapy.choices.push({
                   steps: [
@@ -709,7 +709,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'},
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 3-6 months and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -719,7 +719,7 @@ function determineMCMTherapy(){
                 });
               }
             } else if (inrInstability == false) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
                 therapy.choices.push({
                   steps: [
@@ -734,7 +734,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'},
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 3-6 months and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -746,7 +746,7 @@ function determineMCMTherapy(){
             }
           } else if (warfarinIntolerance == false) {
             if (inrInstability == true) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // 1st option A for 3-6 months and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -769,7 +769,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.e, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // B for 3-6 months and then D up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -779,7 +779,7 @@ function determineMCMTherapy(){
                 });
               }
             } else if (inrInstability == false) {
-              if (noacAllergy == true) {
+              if (doacAllergy == true) {
                 // A for 3-6 months and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
@@ -787,7 +787,7 @@ function determineMCMTherapy(){
                     {option: options.mcm.c, extra: 'Up to the 1st year'}
                   ]
                 });
-              } else if (noacAllergy == false) {
+              } else if (doacAllergy == false) {
                 // 1st option A for 3-6 months and then C up to the 1st year
                 therapy.choices.push({
                   steps: [
