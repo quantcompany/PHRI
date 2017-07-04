@@ -32,7 +32,8 @@ function loadForm() {
 	});
 
 	// load stent/intervention checkboxes
-	$('#bms_stent,#des_stent,#no_pci').each(function() {
+	//$('#bms_stent,#des_stent,#no_pci').each(function() {
+	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent').each(function() {
 		var element = $(this);
 		var key = element.prop('id');
 		var value = storage.getItem(key) ? true : false;
@@ -69,7 +70,8 @@ function clearForm() {
 	$('input[type="checkbox"][name^="pci_risk_"]').prop('checked', false).trigger('change');
 
 	// clear stent/intervention checkboxes
-	$('#bms_stent,#des_stent,#no_pci').prop('checked', false).trigger('change');
+	//$('#bms_stent,#des_stent,#no_pci').prop('checked', false).trigger('change');
+	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent').prop('checked', false).trigger('change');
 
 	// clear switches
 	$('input[class="bootstrap-switch"]').bootstrapSwitch('state', false).trigger('change');
@@ -110,11 +112,14 @@ function registerChangeListeners() {
 	});
 
 
-	$('#bms_stent,#des_stent,#no_pci').on('change', function() { // when the stent checkboxes change
+	//$('#bms_stent,#des_stent,#no_pci').on('change', function() { // when the stent checkboxes change
+	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent').on('change', function() {
 		var keys = [
 			'bms_stent',
 			'des_stent',
-			'no_pci'
+			'poba',
+			'deb',
+			'drug_coated_stent',
 		];
 
 		for (var i = 0; i < keys.length; i++){

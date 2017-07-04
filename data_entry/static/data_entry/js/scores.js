@@ -275,7 +275,8 @@ $('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability
     updateEverything();
 });
 
-$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #no_pci, #hx_of_bleeding, #indication, input[type="checkbox"][name^="pci_risk_"], #weight, [name^="creatinine_"]').on('change', function(event, state){
+//$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #no_pci, #hx_of_bleeding, #indication, input[type="checkbox"][name^="pci_risk_"], #weight, [name^="creatinine_"]').on('change', function(event, state){
+$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #poba, #deb, #drug_coated_stent, #hx_of_bleeding, #indication, input[type="checkbox"][name^="pci_risk_"], #weight, [name^="creatinine_"]').on('change', function(event, state){
     updateEverything();
 });
 

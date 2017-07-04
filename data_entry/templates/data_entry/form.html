@@ -183,7 +183,7 @@
 
         $(".bootstrap-switch").bootstrapSwitch();
 
-        $('#no_pci').on('change', function(elem) {
+        /*$('#no_pci').on('change', function(elem) {
           var checked = $(this).is(':checked');
 
           if (checked) {
@@ -193,7 +193,7 @@
             $('#bms_stent').prop('disabled', false);
             $('#des_stent').prop('disabled', false);
           }
-        });
+        });*/
 
         $('.therapy-option-button').on('click', function(elem) {
           $('.therapy-option-button').removeClass('active').addClass('btn-info');
@@ -230,6 +230,20 @@
             if ($('#des_stent').is(':checked')){
                 fd.append('des_stent', 'on');
             }
+
+            if ($('#poba').is(':checked')){
+                fd.append('poba', 'on');
+            }
+
+            if ($('#deb').is(':checked')){
+                fd.append('deb', 'on');
+            }
+
+            if ($('#drug_coated_stent').is(':checked')){
+                fd.append('drug_coated_stent', 'on');
+            }
+
+            //#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent
 
 
             // submit MacMaster therapy recommendation

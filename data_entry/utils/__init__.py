@@ -54,6 +54,10 @@ def patients_csv_headers():
         'INDICATION',
         'BMS STENT',
         'DES STENT',
+        'POBA',
+        'DEB',
+        'DRUG COATED STENT',
+        
         'AF TYPE',
         'PREV ANTI COAGULATION',
         'WARFARIN INTOLERANCE',
@@ -61,7 +65,7 @@ def patients_csv_headers():
         'NOAC ALLERGY OR INTOLERANCE',
         # bloodwork fields removed
         'CHF',
-        'Hypertension',
+        'HYPERTENSION',
         'DIABETES MELLITUS',
         'STROKE',
         'TIA',
