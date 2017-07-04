@@ -49,6 +49,7 @@ def patients_csv_headers():
         'PCI-LEFT MAIN PCI',
         'PCI-CHRONIC TOTAL OCCLUSION PCI',
         'PCI-IN THE OPINION OF THE INTERVENTIONAL CARDIOLOGIST',
+        'PCI-GRAFT INTERVENTION',
 
         'INDICATION',
         'BMS STENT',

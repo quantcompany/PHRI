@@ -38,6 +38,7 @@ class Patient(models.Model):
         6 - Left main PCI
         7 - Chronic Total Occlusion PCI
         8 - In the Opinion of the Interventional Cardiologist
+        9 - Graft Intervention
     '''
     pci_risk_1 = models.BooleanField(default=False)
     pci_risk_2 = models.BooleanField(default=False)
@@ -47,6 +48,7 @@ class Patient(models.Model):
     pci_risk_6 = models.BooleanField(default=False)
     pci_risk_7 = models.BooleanField(default=False)
     pci_risk_8 = models.BooleanField(default=False)
+    pci_risk_9 = models.BooleanField(default=False)
 
     # Procedure Details
     indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
@@ -291,6 +293,7 @@ class Patient(models.Model):
             self.field_csv(self.pci_risk_6, bool),
             self.field_csv(self.pci_risk_7, bool),
             self.field_csv(self.pci_risk_8, bool),
+            self.field_csv(self.pci_risk_9, bool),
 
             self.field_csv(self.indication, str),
             self.field_csv(self.bms_stent, bool),
