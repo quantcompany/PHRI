@@ -31,7 +31,7 @@ class Patient(models.Model):
     '''
     PCI Risk:
         1 - Long Stented Segment >30mm
-        2 - Small Diameter <2.5mm
+        2 - Small Vessel Diameter <=2.5mm
         3 - IN-Stent Restenosis Intervention
         4 - Atherectomy
         5 - Bifurcation PCI

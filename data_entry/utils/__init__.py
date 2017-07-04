@@ -42,7 +42,7 @@ def patients_csv_headers():
         'WEIGHT(kg)',
         # PCI RISKs
         'PCI-LONG STENTED SEGMENT >30MM',
-        'PCI-SMALL DIAMETER <2.5MM',
+        'PCI-SMALL VESSEL DIAMETER <=2.5MM',
         'PCI-IN-STENT RESTENOSIS INTERVENTION',
         'PCI-ATHERECTOMY',
         'PCI-BIFURCATION PCI',
