@@ -263,7 +263,7 @@ class Patient(models.Model):
         if not self.warfarin_intolerance:
             therapy.append('Continue Warfarin.')
         else:
-            therapy.append('Reduced dose NOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd.')
+            therapy.append('Reduced dose DOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd.')
 
         return therapy
 

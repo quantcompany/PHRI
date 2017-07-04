@@ -62,7 +62,7 @@ def patients_csv_headers():
         'PREV ANTI COAGULATION',
         'WARFARIN INTOLERANCE',
         'INR INSTABILITY',
-        'NOAC ALLERGY OR INTOLERANCE',
+        'DOAC ALLERGY OR INTOLERANCE',
         # bloodwork fields removed
         'CHF',
         'HYPERTENSION',
