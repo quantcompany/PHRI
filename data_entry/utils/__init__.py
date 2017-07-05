@@ -64,7 +64,7 @@ def patients_csv_headers():
         'INR INSTABILITY',
         'DOAC ALLERGY OR INTOLERANCE',
         # bloodwork fields removed
-        'CHF',
+        'CONGESTIVE HEART FAILURE',
         'HYPERTENSION',
         'DIABETES MELLITUS',
         'STROKE',
