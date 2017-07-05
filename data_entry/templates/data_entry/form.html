@@ -218,6 +218,7 @@
 
         function submitPatient(){
             // event.preventDefault();
+            $('#patient_form button[type="submit"]').button('loading');
 
             var form = $('#patient_form')[0];
 
@@ -270,7 +271,8 @@
                     $('#medical_report_button').attr('href', data.medical_report_link);
                     $('#patient_report_button').attr('href', data.patient_report_link);
                     $('#submit-modal').modal('show');
-                    clearForm() // this is in formCache.js
+                    clearForm(); // this is in formCache.js
+                    $('#patient_form button[type="submit"]').button('reset');
                 });
 
                 request.fail(function(jqXHR, textStatus, errorThrown) {
