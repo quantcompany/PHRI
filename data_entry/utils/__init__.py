@@ -72,7 +72,7 @@ def patients_csv_headers():
         'VASCULAR DISEASE',
         'RENAL DYSFUNCTION',
         'LIVER DYSFUNCTION',
-        'HX OF BLEEDING',
+        'HISTORY OF BLEEDING',
         'ALCOHOL ABUSE',
 
         'HEMOGLOBIN(g/L)',
