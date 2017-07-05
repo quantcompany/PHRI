@@ -251,14 +251,14 @@ var options = {
             <tr>\
               <td>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  <strong><i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i> Clopidogrel</strong> 75 mg po QD <br>\
+                  <strong><i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Clopidogrel</strong> 75 mg po QD <br>\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  &#8226; <i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i> Rivaroxaban 15 mg po QD\
+                  &#8226; <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Rivaroxaban 15 mg po QD\
                 <strong>or</strong>\
                 </p>\
                 <p class="text-left">\
@@ -353,14 +353,14 @@ var options = {
               \
               <td>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  <strong><i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i> Clopidogrel</strong> 75 mg po QD\
+                  <strong><i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Clopidogrel</strong> 75 mg po QD\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  &#8226; <i class="fa fa-exclamation-circle text-warning" aria-hidden="true"></i> Rivaroxaban 15 mg po QD\
+                  &#8226; <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Rivaroxaban 15 mg po QD\
                 <strong>or</strong>\
                 </p>\
                 <p class="text-left">\

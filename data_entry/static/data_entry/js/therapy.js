@@ -218,19 +218,21 @@ function determineMCMTherapy_2(){
 
   var therapy = {choices: []};
   var _extra = '<div class="row pioneer-table-link">\
-                  <div class="col-md-6">\
-                    <p class="bg-warning" style="padding:8px;">\
-                      <i class="fa fa-exclamation-circle fa-2x text-warning" aria-hidden="true"></i>\
+                  <div class="col-md-3">\
+                    <p class="bg-warning" style="padding:8px;max-width:40px;margin:0 auto;">\
+                      <i class="fa fa-exclamation-triangle fa-2x text-warning" aria-hidden="true"></i>\
                     </p>\
                   </div>\
-                  <div class="col-md-6">\
+                  <div class="col-md-4">\
                       <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf" target="_blank">\
                         <img src="'+static_url+'img/pioneer-af-pci.png" class="img-responsive"/>\
                       </a>\
-                      <div class="alert alert-warning" style="text-decoration:none;margin:0;padding:0">\
-                        <p>Rivaroxaban 15 mg qd*</p>\
-                        <p style="margin-top:0;">Clopidogrel 75 mg qd✝</p>\
-                      </div>\
+                  </div>\
+                  <div class="col-md-5">\
+                    <div class="alert alert-warning" style="text-decoration:none;margin:0;padding:0">\
+                      <p>Rivaroxaban 15 mg qd*</p>\
+                      <p style="margin-top:0;">Clopidogrel 75 mg qd✝</p>\
+                    </div>\
                   </div>\
                 </div>';
 
