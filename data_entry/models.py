@@ -92,8 +92,11 @@ class Patient(models.Model):
     chf = models.BooleanField(default=False) # CHADS2
     htn = models.IntegerField(default=0, choices=HTN_CHOICES) # CHADS2
     diabetes_mellitus = models.BooleanField(default=False) # CHADS2
-    stroke = models.BooleanField(default=False)
-    tia = models.BooleanField(default=False)
+    
+    #stroke = models.BooleanField(default=False)
+    #tia = models.BooleanField(default=False)
+    tia_stroke_or_sysemb = models.BooleanField(default=False)
+
     vascular_disease = models.IntegerField(default=0, choices=VASCULAR_DISEASE_CHOICES)
     renal_dysfunction = models.BooleanField(default=False)
     # ckd_on_dialysis = models.BooleanField(default=False)
@@ -179,8 +182,8 @@ class Patient(models.Model):
         htn_value = int(bool(self.htn))
         age_value = int(self.age >= 75)
         diabetes_value = int(self.diabetes_mellitus)
-        stroke_tia_value = 2*(int(self.stroke) or int(self.tia))
-        return chf_value + htn_value + age_value + diabetes_value + stroke_tia_value
+        tia_stroke_or_sysemb_value = 2*(int(self.tia_stroke_or_sysemb))
+        return chf_value + htn_value + age_value + diabetes_value + tia_stroke_or_sysemb_value
 
     def chads2_score_interpretation(self):
         if self.chads2_score() <= 2:
@@ -199,11 +202,11 @@ class Patient(models.Model):
         age_in_6574_value = int(self.age >= 65) # Age 65-74, logically: Age>=65
         age_greater_than_75_value = int(self.age >= 75)
         diabetes_value = int(self.diabetes_mellitus)
-        stroke_tia_value = 2 * (int(self.stroke) or int(self.tia))
+        tia_stroke_or_sysemb_value = 2 * (int(self.tia_stroke_or_sysemb))
         vascular_disease_value = int(self.vascular_disease != 0)
         female_value = int(self.gender == 'F')
         return chf_value + htn_value + age_in_6574_value + age_greater_than_75_value + \
-               diabetes_value + stroke_tia_value + vascular_disease_value + female_value
+               diabetes_value + tia_stroke_or_sysemb_value + vascular_disease_value + female_value
 
     def cha2_risk(self):
         return risks.cha2[self.cha2_score()]
@@ -215,13 +218,13 @@ class Patient(models.Model):
         htn_value = int(bool(self.htn == 2))
         renal_dysfunction_value = int(self.renal_dysfunction)
         liver_dysfunction_value = int(self.liver_dysfunction)
-        stroke_value = int(self.stroke)
+        tia_stroke_or_sysemb_value = int(self.tia_stroke_or_sysemb)
         bleeding_value = int(self.hx_of_bleeding != 0)
         inr_value = int(self.inr_instability)
         age_value = int(self.age >= 65)
         #drugs_value = int(self.drug_abuse)
         alcohol_abuse_value = int(bool(self.alcohol_abuse == 2))
-        return htn_value + renal_dysfunction_value + liver_dysfunction_value + stroke_value + \
+        return htn_value + renal_dysfunction_value + liver_dysfunction_value + tia_stroke_or_sysemb_value + \
                 bleeding_value + inr_value + age_value + alcohol_abuse_value
                #bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value
 
@@ -329,8 +332,11 @@ class Patient(models.Model):
             self.field_csv(self.chf, bool),
             self.field_csv(self.get_htn_display(), str),
             self.field_csv(self.diabetes_mellitus, bool),
-            self.field_csv(self.stroke, bool),
-            self.field_csv(self.tia, bool),
+
+            #self.field_csv(self.stroke, bool),
+            #self.field_csv(self.tia, bool),
+            self.field_csv(self.tia_stroke_or_sysemb, bool),
+
             self.field_csv(self.get_vascular_disease_display(), str),
             self.field_csv(self.renal_dysfunction, bool),
             self.field_csv(self.liver_dysfunction, bool),

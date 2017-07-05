@@ -64,13 +64,15 @@ function updateChads2Score(){
     var diabetesValue = $('#diabetes_mellitus').bootstrapSwitch('state') ? 1:0;
 
     // calculate stroke
-    var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
+    //var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
 
     // calculate TIA
-    var tiaValue = $('#tia').bootstrapSwitch('state') ? 1:0;
+    //var tiaValue = $('#tia').bootstrapSwitch('state') ? 1:0;
+    
+    var tia_stroke_or_sysemb_value = $('#tia_stroke_or_sysemb').bootstrapSwitch('state') ? 1:0;
 
     // calculate final chads2 score
-    scores.chads2 = chfValue + htnValue + ageValue + diabetesValue + 2*(strokeValue || tiaValue);
+    scores.chads2 = chfValue + htnValue + ageValue + diabetesValue + 2*(tia_stroke_or_sysemb_value);
 
     // var score = scores.chads2;
     // var risk = risks.stroke.chads2Score(score);
@@ -108,10 +110,12 @@ function updateCha2Score(){
     var diabetesValue = $('#diabetes_mellitus').bootstrapSwitch('state') ? 1:0;
 
     // calculate stroke
-    var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
+    //var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
 
     // calculate TIA
-    var tiaValue = $('#tia').bootstrapSwitch('state') ? 1:0;
+    //var tiaValue = $('#tia').bootstrapSwitch('state') ? 1:0;
+
+    var tia_stroke_or_sysemb_value = $('#tia_stroke_or_sysemb').bootstrapSwitch('state') ? 1:0;
 
     // calculate vascular disease
     // vascular disease has 4 possible choices (0, 1, 2 and 3)
@@ -123,7 +127,7 @@ function updateCha2Score(){
     var genderValue = $('#gender').val() == 'F' ? 1:0;
 
     // calculate final cha2 score
-    scores.cha2 = chfValue + htnValue + ageValue + diabetesValue + 2*(strokeValue || tiaValue) + vascularDiseaseValue + genderValue;
+    scores.cha2 = chfValue + htnValue + ageValue + diabetesValue + 2*(tia_stroke_or_sysemb_value) + vascularDiseaseValue + genderValue;
 
     $('#cha2_score').html(scores.cha2);
 }
@@ -145,7 +149,9 @@ function updateHasbledScore(){
     var liverDysfunctionValue = $('#liver_dysfunction').bootstrapSwitch('state') ? 1:0;
 
     // calculate stroke
-    var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
+    //var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
+
+    var tia_stroke_or_sysemb_value = $('#tia_stroke_or_sysemb').bootstrapSwitch('state') ? 1:0;
 
     // Bleeding
     var bleedingChoice = parseInt($('#hx_of_bleeding').val());
@@ -178,7 +184,7 @@ function updateHasbledScore(){
     // console.log('drugAbuseValue: ' + drugAbuseValue);
     // console.log('alcoholAbuseValue: ' + alcoholAbuseValue);
 
-    scores.hasbled = htnValue + renalDysfunctionValue + liverDysfunctionValue + strokeValue +
+    scores.hasbled = htnValue + renalDysfunctionValue + liverDysfunctionValue + tia_stroke_or_sysemb_value +
     //bleedingValue + inrValue + ageValue + drugAbuseValue + alcoholAbuseValue;
     bleedingValue + inrValue + ageValue + alcoholAbuseValue;
 
@@ -273,7 +279,7 @@ function clasifyGFR(value){
 // form is filled out
 
 //$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse').on('switchChange.bootstrapSwitch', function(event, state){
-$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction').on('switchChange.bootstrapSwitch', function(event, state){
+$('#chf, #diabetes_mellitus, #tia_stroke_or_sysemb_value, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction').on('switchChange.bootstrapSwitch', function(event, state){
     updateEverything();
 });
 

@@ -67,8 +67,11 @@ def patients_csv_headers():
         'CONGESTIVE HEART FAILURE',
         'HYPERTENSION',
         'DIABETES MELLITUS',
-        'STROKE',
-        'TIA',
+
+        #'STROKE',
+        #'TIA',
+        'TIA-STROKE-OR-SYSTEMIC EMBOLISM',
+
         'VASCULAR DISEASE',
         'RENAL DYSFUNCTION',
         'LIVER DYSFUNCTION',
