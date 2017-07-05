@@ -159,7 +159,7 @@ function updateHasbledScore(){
     var ageValue = age >= 65 ? 1:0;
 
     // Drug abuse
-    var drugAbuseValue = $('#drug_abuse').bootstrapSwitch('state') ? 1:0;
+    //var drugAbuseValue = $('#drug_abuse').bootstrapSwitch('state') ? 1:0;
 
     // calculate alcohol abuses value
     // alcohol abuse has 3 possible choices (0, 1 and 2)
@@ -179,7 +179,8 @@ function updateHasbledScore(){
     // console.log('alcoholAbuseValue: ' + alcoholAbuseValue);
 
     scores.hasbled = htnValue + renalDysfunctionValue + liverDysfunctionValue + strokeValue +
-    bleedingValue + inrValue + ageValue + drugAbuseValue + alcoholAbuseValue;
+    //bleedingValue + inrValue + ageValue + drugAbuseValue + alcoholAbuseValue;
+    bleedingValue + inrValue + ageValue + alcoholAbuseValue;
 
     $('#hasbled_score').html(scores.hasbled);
 }
@@ -271,7 +272,8 @@ function clasifyGFR(value){
 // so that the scores, plot, and recommended therapy get updated as the
 // form is filled out
 
-$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse').on('switchChange.bootstrapSwitch', function(event, state){
+//$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse').on('switchChange.bootstrapSwitch', function(event, state){
+$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction').on('switchChange.bootstrapSwitch', function(event, state){
     updateEverything();
 });
 

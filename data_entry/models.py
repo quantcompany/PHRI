@@ -101,7 +101,7 @@ class Patient(models.Model):
     liver_dysfunction = models.BooleanField(default=False)
     hx_of_bleeding = models.IntegerField(default=0, choices=BLEEDING_CHOICES)
     alcohol_abuse = models.IntegerField(default=0, choices=ALCOHOL_ABUSE_CHOICES)
-    drug_abuse = models.BooleanField(default=False)
+    #drug_abuse = models.BooleanField(default=False)
     # chronic_nsaids_rx = models.BooleanField(default=False)
     # excessive_fall_risk = models.BooleanField(default=False)
     # hx_of_malignancy = models.IntegerField(default=0, choices=MALIGNANCY_CHOICES)
@@ -219,10 +219,11 @@ class Patient(models.Model):
         bleeding_value = int(self.hx_of_bleeding != 0)
         inr_value = int(self.inr_instability)
         age_value = int(self.age >= 65)
-        drugs_value = int(self.drug_abuse)
+        #drugs_value = int(self.drug_abuse)
         alcohol_abuse_value = int(bool(self.alcohol_abuse == 2))
         return htn_value + renal_dysfunction_value + liver_dysfunction_value + stroke_value + \
-               bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value
+                bleeding_value + inr_value + age_value + alcohol_abuse_value
+               #bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value
 
     def hasbled_score_interpretation(self):
         if self.hasbled_score() <= 3:
@@ -342,7 +343,7 @@ class Patient(models.Model):
             self.field_csv(self.creatinine_umolL, float),
             self.field_csv(self.gfr_mLmin, float),
 
-            self.field_csv(self.drug_abuse, bool),
+            #self.field_csv(self.drug_abuse, bool),
             self.field_csv(self.asa_allergy, bool),
             self.field_csv(self.chads2_score(), int),
             self.field_csv(self.cha2_score(), int),
