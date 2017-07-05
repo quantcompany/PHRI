@@ -141,7 +141,7 @@ var options = {
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
-                  &#8226; Edoxaban 30 mg po QD\
+                  &#8226; Endoxaban 30 mg po QD\
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
@@ -166,7 +166,7 @@ var options = {
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
-                  &#8226; Edoxaban 60 mg po QD*\
+                  &#8226; Endoxaban 60 mg po QD*\
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
@@ -226,7 +226,7 @@ var options = {
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
-                  &#8226; Edoxaban 60 mg po QD*\
+                  &#8226; Endoxaban 60 mg po QD*\
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
@@ -270,7 +270,7 @@ var options = {
                 <strong>or</strong>\
                 </p>\
                 <p class="text-left">\
-                  &#8226; Edoxaban 30 mg po QD\
+                  &#8226; Endoxaban 30 mg po QD\
                 <strong>or</strong>\
                 </p>\
                 <p class="text-left">\
@@ -294,7 +294,7 @@ var options = {
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
-                  &#8226; Edoxaban 60 mg po QD*\
+                  &#8226; Endoxaban 60 mg po QD*\
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
@@ -343,7 +343,7 @@ var options = {
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
-                  &#8226; Edoxaban 30 mg po QD\
+                  &#8226; Endoxaban 30 mg po QD\
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
@@ -372,7 +372,7 @@ var options = {
                 <strong>or</strong>\
                 </p>\
                 <p class="text-left">\
-                  &#8226; Edoxaban 30 mg po QD\
+                  &#8226; Endoxaban 30 mg po QD\
                 <strong>or</strong>\
                 </p>\
                 <p class="text-left">\
@@ -397,7 +397,7 @@ var options = {
                 <strong>or</strong>\
                 </p>\
                 <p class="text-left">\
-                  &#8226; Edoxaban 60 mg po QD*\
+                  &#8226; Endoxaban 60 mg po QD*\
                 <strong>or</strong>\
                 </p>\
                 <p class="text-left">\
@@ -425,7 +425,7 @@ var options = {
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
-                  &#8226; Edoxaban 60 mg po QD*\
+                  &#8226; Endoxaban 60 mg po QD*\
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
