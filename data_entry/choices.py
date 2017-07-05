@@ -71,9 +71,9 @@ ALCOHOL_ABUSE_CHOICES = (
 
 VASCULAR_DISEASE_CHOICES = (
     (0, 'No'),
-    (1, 'Aortic'),
-    (2, 'Coronary'),
-    (3, 'Peripheral'),
+    (1, 'Peripheral vascular disease'),#(1, 'Aortic'),
+    (2, 'Myocardial infarction'),#(2, 'Coronary'),
+    (3, 'Aortic plaque'),#(3, 'Peripheral'),
 )
 
 AF_TYPE_CHOICES = (
