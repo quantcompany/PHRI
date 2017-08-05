@@ -38,7 +38,19 @@
 								<div class="row m-t-20 m-b-20 m-l-10">
 									<div class="col-md-12">
 										<div id="question_{{question.id}}" class="question {% if question.is_required %}required{% endif %}" question-type="{{question.type}}">
-											<h3>{{ forloop.counter }}. {{question.title}} <br/> {% if question.help_text %}<small>{{question.help_text}}</small>{% endif %}</h3>
+											<h3>
+												{{ forloop.counter }}. {{question.title}} <br/> 
+												{% if question.important_text %}
+													<small>
+														<strong>
+															<i class="fa fa-info-circle"></i> {{question.important_text}}
+														</strong>
+													</small> <br/> 
+												{% endif %}
+												{% if question.help_text %}
+													<small><em>{{question.help_text}}</em></small>
+												{% endif %}
+											</h3>
 											<small class="question_error" style='display:none;'></small>
 											{% if question.type == 'multiplechoice' %}
 												<div class="row">

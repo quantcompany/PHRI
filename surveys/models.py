@@ -91,6 +91,7 @@ class Question(CreateModifactionDateMixin, CreatedModificationUserMixin, Publish
     )
     type = models.CharField(choices=QUESTION_TYPE_CHOICES, max_length=25)
     title = models.CharField(max_length=500, null=False)
+    important_text = models.CharField(max_length=500, blank=True, null=True)
     help_text = models.CharField(max_length=500, blank=True)
     is_required = models.BooleanField(default=True)
 
