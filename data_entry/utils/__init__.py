@@ -80,8 +80,8 @@ def patients_csv_headers():
         'HISTORY OF BLEEDING',
         'ALCOHOL ABUSE',
 
-        'HEMOGLOBIN(g/L)',
-        'HEMOGLOBIN(mg/dL)',
+        #'HEMOGLOBIN(g/L)',
+        #'HEMOGLOBIN(mg/dL)',
         'CREATININE(mg/dL)',
         'CREATININE(umol/L)',
         'GFR(mL/min)',

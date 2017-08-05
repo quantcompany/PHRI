@@ -119,8 +119,8 @@ class Patient(models.Model):
         A = mg/dL
         B = g/L
     '''
-    hemoglobin_mgdL = models.FloatField(null=True, blank=True)
-    hemoglobin_gL = models.FloatField(null=True, blank=True)
+    #hemoglobin_mgdL = models.FloatField(null=True, blank=True)
+    #hemoglobin_gL = models.FloatField(null=True, blank=True)
     '''
         Creatinine
         A = mg/dL
@@ -348,8 +348,8 @@ class Patient(models.Model):
             self.field_csv(self.get_hx_of_bleeding_display(), str),
             self.field_csv(self.get_alcohol_abuse_display(), str),
 
-            self.field_csv(self.hemoglobin_gL, float),
-            self.field_csv(self.hemoglobin_mgdL, float),
+            #self.field_csv(self.hemoglobin_gL, float),
+            #self.field_csv(self.hemoglobin_mgdL, float),
             self.field_csv(self.creatinine_mgdL, float),
             self.field_csv(self.creatinine_umolL, float),
             self.field_csv(self.gfr_mLmin, float),

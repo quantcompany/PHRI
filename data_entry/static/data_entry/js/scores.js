@@ -301,7 +301,7 @@ $('#creatinine_measure').on('change', function(){
         $('label[for^="creatinine_'+measure+'"]').stop(true, true).show(0);
     });
 });
-$('#hemoglobin_measure').on('change', function(){
+/*$('#hemoglobin_measure').on('change', function(){
     var measure = $(this).val();
     $('input[name^="hemoglobin_"]')
     .stop(true, true).hide(0, function(){
@@ -311,13 +311,13 @@ $('#hemoglobin_measure').on('change', function(){
     .stop(true, true).hide(0, function(){
         $('label[for^="hemoglobin_'+measure+'"]').stop(true, true).show(0);
     });
-});
+});*/
 
 /**
     Compute the transformation of values over the measure based on the input the user is using
     For: Hemoglobin & Creatinine
 **/
-$('#hemoglobin_mgdL').on('keyup', function(){
+/*$('#hemoglobin_mgdL').on('keyup', function(){
     var _value = parseFloat($(this).val(), 10);
     if( isNaN(_value) ) {
         $('#hemoglobin_gL').attr('value','');
@@ -335,6 +335,7 @@ $('#hemoglobin_gL').on('keyup', function(){
     var calc = _value / 0.01;
     $('#hemoglobin_mgdL').val( calc.toFixed(2) );
 });
+*/
 
 $('#creatinine_mgdL').on('keyup', function(){
     var _value = parseFloat($(this).val(), 10);
