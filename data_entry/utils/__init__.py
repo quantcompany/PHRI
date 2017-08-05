@@ -84,7 +84,7 @@ def patients_csv_headers():
         'CREATININE(umol/L)',
         'GFR(mL/min)',
 
-        #'DRUG ABUSE',
+        'DRUG ABUSE',
         'ASA ALLERGY',
         'CHADS SCORE',
         'CHA2DS2-VASC SCORE',

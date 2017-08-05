@@ -364,8 +364,15 @@
 
                     <td></td>
 
+                    <th>Drug Abuse</th>
+                    <td>{{ patient.drug_abuse|yesno|capfirst }}</td>
+                </tr>
+                <tr>
                     <th>Liver Dysfunction</th>
                     <td>{{ patient.liver_dysfunction|yesno|capfirst }}</td>
+                    <td></td>
+                    <th></th>
+                    <td></td>
                 </tr>
 
                 <tr>
