@@ -97,6 +97,9 @@ class Patient(models.Model):
     #tia = models.BooleanField(default=False)
     tia_stroke_or_sysemb = models.BooleanField(default=False)
 
+    #Use of antiplatelet agents, NSAIDs, or other anti-inflammatory meds
+    aim = models.BooleanField(default=False)
+
     vascular_disease = models.IntegerField(default=0, choices=VASCULAR_DISEASE_CHOICES)
     renal_dysfunction = models.BooleanField(default=False)
     # ckd_on_dialysis = models.BooleanField(default=False)
@@ -219,13 +222,14 @@ class Patient(models.Model):
         renal_dysfunction_value = int(self.renal_dysfunction)
         liver_dysfunction_value = int(self.liver_dysfunction)
         tia_stroke_or_sysemb_value = int(self.tia_stroke_or_sysemb)
+        aim_value = int(self.aim)
         bleeding_value = int(self.hx_of_bleeding != 0)
         inr_value = int(self.inr_instability)
         age_value = int(self.age >= 65)
         drugs_value = int(self.drug_abuse)
         alcohol_abuse_value = int(bool(self.alcohol_abuse == 2))
         return htn_value + renal_dysfunction_value + liver_dysfunction_value + tia_stroke_or_sysemb_value + \
-               bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value
+               bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value + aim_value
 
     def hasbled_score_interpretation(self):
         if self.hasbled_score() <= 3:
@@ -335,6 +339,8 @@ class Patient(models.Model):
             #self.field_csv(self.stroke, bool),
             #self.field_csv(self.tia, bool),
             self.field_csv(self.tia_stroke_or_sysemb, bool),
+
+            self.field_csv(self.aim, bool),
 
             self.field_csv(self.get_vascular_disease_display(), str),
             self.field_csv(self.renal_dysfunction, bool),

@@ -72,6 +72,8 @@ def patients_csv_headers():
         #'TIA',
         'TIA-STROKE-OR-SYSTEMIC EMBOLISM',
 
+        'ANTI-INFLAMMATORY MEDICATIONS',
+
         'VASCULAR DISEASE',
         'RENAL DYSFUNCTION',
         'LIVER DYSFUNCTION',

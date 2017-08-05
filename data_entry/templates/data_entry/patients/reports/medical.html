@@ -370,9 +370,11 @@
                 <tr>
                     <th>Liver Dysfunction</th>
                     <td>{{ patient.liver_dysfunction|yesno|capfirst }}</td>
+
                     <td></td>
-                    <th></th>
-                    <td></td>
+                    
+                    <th>Use of antiplatelet agents, <br>NSAIDs, or other anti-inflammatory meds</th>
+                    <td>{{ patient.aim|yesno|capfirst }}</td>
                 </tr>
 
                 <tr>

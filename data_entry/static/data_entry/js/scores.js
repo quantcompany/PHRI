@@ -153,6 +153,9 @@ function updateHasbledScore(){
 
     var tia_stroke_or_sysemb_value = $('#tia_stroke_or_sysemb').bootstrapSwitch('state') ? 1:0;
 
+    //Use of antiplatelet agents, NSAIDs, or other anti-inflammatory meds
+    var aim_value = $('#aim').bootstrapSwitch('state') ? 1:0;
+
     // Bleeding
     var bleedingChoice = parseInt($('#hx_of_bleeding').val());
     var bleedingValue = bleedingChoice ? 1:0;
@@ -185,7 +188,7 @@ function updateHasbledScore(){
     // console.log('alcoholAbuseValue: ' + alcoholAbuseValue);
 
     scores.hasbled = htnValue + renalDysfunctionValue + liverDysfunctionValue + tia_stroke_or_sysemb_value +
-    bleedingValue + inrValue + ageValue + drugAbuseValue + alcoholAbuseValue;
+    bleedingValue + inrValue + ageValue + drugAbuseValue + alcoholAbuseValue + aim_value;
 
     $('#hasbled_score').html(scores.hasbled);
 }
@@ -278,7 +281,7 @@ function clasifyGFR(value){
 // form is filled out
 
 //$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction').on('switchChange.bootstrapSwitch', function(event, state){
-$('#chf, #diabetes_mellitus, #tia_stroke_or_sysemb_value, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse').on('switchChange.bootstrapSwitch', function(event, state){
+$('#chf, #diabetes_mellitus, #tia_stroke_or_sysemb, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse, #aim').on('switchChange.bootstrapSwitch', function(event, state){
     updateEverything();
 });
 
