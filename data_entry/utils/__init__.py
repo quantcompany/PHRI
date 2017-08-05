@@ -82,6 +82,7 @@ def patients_csv_headers():
 
         #'HEMOGLOBIN(g/L)',
         #'HEMOGLOBIN(mg/dL)',
+        'ANEMIA',
         'CREATININE(mg/dL)',
         'CREATININE(umol/L)',
         'GFR(mL/min)',

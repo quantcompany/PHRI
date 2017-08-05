@@ -40,6 +40,14 @@ function loadForm() {
 		element.prop('checked', value).trigger('change');
 	});
 
+	// load Anemia checkboxes
+	$('#hxoa_anemia,#hemoglobin_anemia').each(function() {
+		var element = $(this);
+		var key = element.prop('id');
+		var value = storage.getItem(key) ? true : false;
+		element.prop('checked', value).trigger('change');
+	});
+
 	// load switches
 	$('input[class="bootstrap-switch"]').each(function() {
 		var element = $(this);
@@ -72,6 +80,9 @@ function clearForm() {
 	// clear stent/intervention checkboxes
 	//$('#bms_stent,#des_stent,#no_pci').prop('checked', false).trigger('change');
 	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent').prop('checked', false).trigger('change');
+
+	//  clear Anemia checkboxes
+	$('#hxoa_anemia,#hemoglobin_anemia').prop('checked', false).trigger('change');
 
 	// clear switches
 	$('input[class="bootstrap-switch"]').bootstrapSwitch('state', false).trigger('change');
@@ -120,6 +131,25 @@ function registerChangeListeners() {
 			'poba',
 			'deb',
 			'drug_coated_stent',
+		];
+
+		for (var i = 0; i < keys.length; i++){
+			var key = keys[i];
+			var value = $('#' + key).prop('checked');
+
+			if (value) {
+				storage.setItem(key, true);
+			} else {
+				storage.removeItem(key);
+			}
+		}
+		makeDirty();
+	});
+
+	$('#hxoa_anemia,#hemoglobin_anemia').on('change', function() { // when the anemia checkboxes change
+		var keys = [
+			'hxoa_anemia',
+			'hemoglobin_anemia',
 		];
 
 		for (var i = 0; i < keys.length; i++){

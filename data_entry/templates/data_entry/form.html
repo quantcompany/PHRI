@@ -244,6 +244,13 @@
                 fd.append('drug_coated_stent', 'on');
             }
 
+            if ($('#hxoa_anemia').is(':checked')){
+                fd.append('hxoa_anemia', 'on');
+            }
+            if ($('#hemoglobin_anemia').is(':checked')){
+                fd.append('hemoglobin_anemia', 'on');
+            }
+
 
             // submit MacMaster therapy recommendation
             fd.append('mcm_therapy', JSON.stringify( determineMCMTherapy_2() ));

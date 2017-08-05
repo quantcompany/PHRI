@@ -129,6 +129,9 @@ class Patient(models.Model):
     creatinine_mgdL = models.FloatField(null=True, blank=True)
     creatinine_umolL = models.FloatField(null=True, blank=True)
 
+    hxoa_anemia = models.BooleanField(default=False)
+    hemoglobin_anemia = models.BooleanField(default=False)
+
     gfr_mLmin = models.FloatField(null=True, blank=True)
 
     # Recommendation
@@ -152,6 +155,10 @@ class Patient(models.Model):
             return '.'.join(parts2)
         else:
             return 'anonymous'
+
+    @property
+    def anemia(self):
+        return self.hxoa_anemia or self.hemoglobin_anemia
 
     def stents_display(self):
         display_lst = list()
@@ -350,6 +357,9 @@ class Patient(models.Model):
 
             #self.field_csv(self.hemoglobin_gL, float),
             #self.field_csv(self.hemoglobin_mgdL, float),
+
+            self.field_csv(self.anemia, bool),
+
             self.field_csv(self.creatinine_mgdL, float),
             self.field_csv(self.creatinine_umolL, float),
             self.field_csv(self.gfr_mLmin, float),

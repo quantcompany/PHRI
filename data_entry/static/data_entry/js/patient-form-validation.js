@@ -44,14 +44,14 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     weight: {
       required: true
     },
-    hemoglobin_gL : {
+    /*hemoglobin_gL : {
       //required: function(){return $('#hemoglobin_measure').val() === 'gL';},
       min: 0
     },
     hemoglobin_mgdL : {
       //required: function(){return $('#hemoglobin_measure').val() === 'mgdL';},
       min: 0
-    },
+    },*/
     creatinine_mgdL : {
       required: function(){return $('#creatinine_measure').val() === 'mgdL';},
       min: 0
