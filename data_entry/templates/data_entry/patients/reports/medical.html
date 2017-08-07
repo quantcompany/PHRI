@@ -378,6 +378,16 @@
                 </tr>
 
                 <tr>
+                    <th>History Of Anemia</th>
+                    <td>{{ patient.hxoa_anemia|yesno|capfirst }}</td>
+
+                    <td></td>
+                    
+                    <th>Hemoglobin &lt;100 g/L or &lt;10 g/dL</th>
+                    <td>{{ patient.hemoglobin_anemia|yesno|capfirst }}</td>
+                </tr>
+
+                <tr>
                     <!--
                     <th>Hemoglobin</th>
                     {% if patient.hemoglobin_mgdL != None %}

@@ -83,6 +83,9 @@ def patients_csv_headers():
         #'HEMOGLOBIN(g/L)',
         #'HEMOGLOBIN(mg/dL)',
         'ANEMIA',
+        'HISTORY OF ANEMIA',
+        'HEMOGLOBIN <100 g/L or <10 g/dL',
+
         'CREATININE(mg/dL)',
         'CREATININE(umol/L)',
         'GFR(mL/min)',
