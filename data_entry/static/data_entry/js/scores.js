@@ -134,6 +134,9 @@ function updateCha2Score(){
 
 function updateHasbledScore(){
     //HASBLED = HTN* + Renal Dysfunction + Liver Dysfuntion + Stroke + Bleeding + Labile INR + Age>=65 + Alcohol >= 8 drinks/week + Drugs
+    /**
+        HASBLED = HTN* (only Yes, uncontrolled on meds SBP>160 mmHg) + Renal Dysfunction + Liver Dysfuntion + Stroke + History of bleeding + Labile INR + Age>=65 + 1*(Alcohol >= 8 drinks/week OR Drugs) 
+    **/
 
     // calculate htn value
     // htn has 3 possible choices (0, 1 and 2)
@@ -188,7 +191,7 @@ function updateHasbledScore(){
     // console.log('alcoholAbuseValue: ' + alcoholAbuseValue);
 
     scores.hasbled = htnValue + renalDysfunctionValue + liverDysfunctionValue + tia_stroke_or_sysemb_value +
-    bleedingValue + inrValue + ageValue + drugAbuseValue + alcoholAbuseValue + aim_value;
+    bleedingValue + inrValue + ageValue + (drugAbuseValue || alcoholAbuseValue) + aim_value;
 
     $('#hasbled_score').html(scores.hasbled);
 }

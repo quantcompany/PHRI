@@ -222,6 +222,9 @@ class Patient(models.Model):
         return risks.cha2[self.cha2_score()]
 
     def hasbled_score(self):
+        '''
+            HASBLED = HTN* (only Yes, uncontrolled on meds SBP>160 mmHg) + Renal Dysfunction + Liver Dysfuntion + Stroke + History of bleeding + Labile INR + Age>=65 + 1*(Alcohol >= 8 drinks/week OR Drugs)
+        '''
         # htn is an integer field with 3 possible choices (0, 1 and 2)
         # for hasbled, choice 2 should have a value of 1
         # choices 0 and 1 should have a value of 0
@@ -236,7 +239,8 @@ class Patient(models.Model):
         drugs_value = int(self.drug_abuse)
         alcohol_abuse_value = int(bool(self.alcohol_abuse == 2))
         return htn_value + renal_dysfunction_value + liver_dysfunction_value + tia_stroke_or_sysemb_value + \
-               bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value + aim_value
+               bleeding_value + inr_value + age_value + (drugs_value or alcohol_abuse_value) + aim_value
+               #bleeding_value + inr_value + age_value + drugs_value + alcohol_abuse_value + aim_value
 
     def hasbled_score_interpretation(self):
         if self.hasbled_score() <= 3:
@@ -359,6 +363,8 @@ class Patient(models.Model):
             #self.field_csv(self.hemoglobin_mgdL, float),
 
             self.field_csv(self.anemia, bool),
+            self.field_csv(self.hxoa_anemia, bool),
+            self.field_csv(self.hemoglobin_anemia, bool),
 
             self.field_csv(self.creatinine_mgdL, float),
             self.field_csv(self.creatinine_umolL, float),
