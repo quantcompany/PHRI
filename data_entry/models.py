@@ -257,33 +257,33 @@ class Patient(models.Model):
     def parse_ccs_therapy(self):
         return json.loads(self.ccs_therapy)
 
-    def recommended_therapy(self):
-        chads2 = self.chads2_score()
-        cha2 = self.cha2_score()
-        hasbled = self.hasbled_score()
+    # def recommended_therapy(self):
+    #     chads2 = self.chads2_score()
+    #     cha2 = self.cha2_score()
+    #     hasbled = self.hasbled_score()
 
-        therapy = []
+    #     therapy = []
 
-        if chads2 <= 2:
-            therapy.append('Only dual antiplatelet or oral anticoagulation plus one antiplatelet')
-        else:
-            if hasbled <= 3:
-                if self.des_stent:
-                    therapy.append('Triple Rx for 6 months, then oral anticoagulation plus one antiplatelet.')
-                else:
-                    therapy.append('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet.')
-            else:
-                if self.des_stent:
-                    therapy.append('Triple Rx for 3-6 months, then oral anticoagulation plus one antiplatelet.')
-                else:
-                    therapy.append('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet.')
+    #     if chads2 <= 2:
+    #         therapy.append('Only dual antiplatelet or oral anticoagulation plus one antiplatelet')
+    #     else:
+    #         if hasbled <= 3:
+    #             if self.des_stent:
+    #                 therapy.append('Triple Rx for 6 months, then oral anticoagulation plus one antiplatelet.')
+    #             else:
+    #                 therapy.append('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet.')
+    #         else:
+    #             if self.des_stent:
+    #                 therapy.append('Triple Rx for 3-6 months, then oral anticoagulation plus one antiplatelet.')
+    #             else:
+    #                 therapy.append('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet.')
 
-        if not self.warfarin_intolerance:
-            therapy.append('Continue Warfarin.')
-        else:
-            therapy.append('Reduced dose DOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd.')
+    #     if not self.warfarin_intolerance:
+    #         therapy.append('Continue Warfarin.')
+    #     else:
+    #         therapy.append('Reduced dose DOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd.')
 
-        return therapy
+    #     return therapy
 
     # def chosen_therapy_display(self):
     #     if self.chosen_therapy == 'mcm':

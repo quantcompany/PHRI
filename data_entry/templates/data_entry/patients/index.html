@@ -37,7 +37,7 @@
                             <td>{{ patient.initials }}</td>
                             <td>{{ patient.get_gender_display }}</td>
                             <td>{{ patient.age }}</td>
-                            <td>{{ patient.created|date:"d/m/Y" }}</td>
+                            <td>{{ patient.created|date:"Y/m/d" }}</td>
                             <td>
                                 <a type="button" class="btn btn-sm btn-success" href="{% url 'data_entry:patients:medical_report' patient.key %}" target="_blank"><i class="fa fa-user-md"></i> Medical Report</a>
                                 <a type="button" class="btn btn-sm btn-warning" href="{% url 'data_entry:patients:patient_report' patient.key %}" target="_blank"><i class="fa fa-user"></i> Patient Report</a>
