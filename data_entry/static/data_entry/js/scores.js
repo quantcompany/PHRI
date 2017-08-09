@@ -157,7 +157,7 @@ function updateHasbledScore(){
     var tia_stroke_or_sysemb_value = $('#tia_stroke_or_sysemb').bootstrapSwitch('state') ? 1:0;
 
     //Use of antiplatelet agents, NSAIDs, or other anti-inflammatory meds
-    var aim_value = $('#aim').bootstrapSwitch('state') ? 1:0;
+    var aimValue = $('#aim').bootstrapSwitch('state') ? 1:0;
 
     // Bleeding
     var bleedingChoice = parseInt($('#hx_of_bleeding').val());
@@ -191,7 +191,7 @@ function updateHasbledScore(){
     // console.log('alcoholAbuseValue: ' + alcoholAbuseValue);
 
     scores.hasbled = htnValue + renalDysfunctionValue + liverDysfunctionValue + tia_stroke_or_sysemb_value +
-    bleedingValue + inrValue + ageValue + (drugAbuseValue || alcoholAbuseValue) + aim_value;
+    bleedingValue + inrValue + ageValue + (drugAbuseValue || alcoholAbuseValue) + aimValue;
 
     $('#hasbled_score').html(scores.hasbled);
 }

@@ -182,6 +182,10 @@ function getIndication(){
     return $('#indication').val();
 }
 
+function getAnemia(){
+  return $('input[name="anemia"]:checked').length > 0;
+}
+
 function updateRecommendedTherapy(){
     //var mcmTherapy = determineMCMTherapy();
     //$('#mcm_recommendation').html(renderTherapy(mcmTherapy));
@@ -192,15 +196,32 @@ function updateRecommendedTherapy(){
     $('#ccs_recommendation').html(renderTherapy(ccsTherapy));
 }
 
+function getHxOfBleeding(){
+  var bleedingChoice = parseInt($('#hx_of_bleeding').val());
+  return bleedingChoice != 0
+}
+
 
 function getBleedingRisk(){
+  /**
+    Returns:
+        High: hasbled_score >= 3 or has anemia or history of bleeding
+        Low: not High
+  **/
+  var anemia = getAnemia();
+  var hxOfBleeding = getHxOfBleeding();
+
+  return (scores.hasbled >= 3 || anemia || hxOfBleeding) ? "high" : "low";
+}
+
+//function getBleedingRiskOld(){
   /**
     Returns:
         Low: hasbled_score <= 3
         High: hasbled_score >=4
   **/
-  return scores.hasbled <= 3 ? "low" : "high";
-}
+  //return scores.hasbled <= 3 ? "low" : "high";
+//}
 
 function getPciRisk(){
   /**
@@ -211,10 +232,16 @@ function getPciRisk(){
 
 }
 
-function determineMCMTherapy_2(){
+function getClinicalPresentation(){
+  //returns ELECTIVE or ACS
   var indication = getIndication();
+  return indication === 'SCAD' ? 'ELECTIVE' : 'ACS';
+}
+
+function determineMCMTherapy_2(){
   var pciRisk = getPciRisk();
   var bleedingRisk = getBleedingRisk();
+  var clinicalP = getClinicalPresentation();
 
   var therapy = {choices: []};
   var _extra = '<div class="row pioneer-table-link">\
@@ -236,6 +263,92 @@ function determineMCMTherapy_2(){
                   </div>\
                 </div>';
 
+  if( clinicalP === 'ELECTIVE') {
+    if( scores.chads2 == 0 ){
+      therapy.choices.push({
+        steps: [
+          {option: options.mcm2.a, extra: '', extra2: ''},
+        ]
+      });
+    }else if( scores.chads2 == 1 ){
+      therapy.choices.push({
+        steps: [
+          {option: options.mcm2.c, extra: '', extra2: _extra},
+        ]
+      });
+    }else if( scores.chads2 >=2 ){
+      if( pciRisk == 'low' ) {
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm2.e, extra: '', extra2: _extra, },
+          ]
+        });
+      } else {
+        /**
+          pciRisk is High
+        **/
+        if( bleedingRisk == 'low' ) {
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm2.f, extra: '', extra2: _extra},
+            ]
+          });
+        }else {
+          /**
+            bleedingRisk is HIGH
+          **/
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm2.e, extra: '', extra2: _extra},
+            ]
+          });
+        }
+      }
+    }else{
+      console.log('No therapy found');
+    }
+  }else {
+    /**
+      Clinical Presentation is ACS
+    **/
+    if( scores.chads2 == 0 ){
+      therapy.choices.push({
+        steps: [
+          {option: options.mcm2.b, extra: '', extra2: ''},
+        ]
+      });
+    }else if( scores.chads2 == 1 ){
+      therapy.choices.push({
+        steps: [
+          {option: options.mcm2.d, extra: '', extra2: ''},
+        ]
+      });
+    }else if( scores.chads2 >=2 ){
+      if( bleedingRisk == 'low' ) {
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm2.f, extra: '', extra2: _extra},
+          ]
+        });
+      }else{
+        /**
+          bleedingRisk is HIGH
+        **/
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm2.e, extra: '', extra2: _extra},
+          ]
+        });
+      }
+    }else{
+      console.log('No therapy found');
+    }
+  }
+
+  /**
+    Old Algortihm based on PDF May17
+  **/
+  /*
   if (scores.chads2 == 0 ){
     if( indication == 'SCAD' ) {
       therapy.choices.push({
@@ -312,6 +425,7 @@ function determineMCMTherapy_2(){
     console.log('No therapy found');
     //therapy = null;
   }
+  */
 
   return therapy;
 }
@@ -344,7 +458,7 @@ function determineMCMTherapy(){
         steps: [{option: options.mcm.g, extra: ''}]
       });
   } else {
-      if (scores.hasbled <= 3){ // low bleeding risk
+      if ( scores.hasbled <= 3 ){ // low bleeding risk
         if (stent === 'bms') {
           if (warfarinIntolerance == true) {
             if (inrInstability == true) {
