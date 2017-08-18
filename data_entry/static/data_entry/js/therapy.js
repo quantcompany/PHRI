@@ -100,10 +100,10 @@ function renderTherapyMcm(therapy, use_extra){
     for (var j = 0; j < choice.steps.length; j++) {
       var step = choice.steps[j];
       out += '<div class="therapy-option note note-default m-b-0 p-10 text-center">';
+      out += step.option;
       if (use_extra && step.extra2) {
         out += step.extra2;
       }
-      out += step.option;
       out += '</div>';
 
       if (j !== choice.steps.length - 1) {

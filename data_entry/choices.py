@@ -59,8 +59,8 @@ GENDER_CHOICES = (
 
 HTN_CHOICES = (
     (0, 'No'),
-    (1, 'Yes, Controlled on meds'),
-    (2, 'Yes, Uncontrolled on meds SBP > 160 mmHg'),
+    (1, 'Yes, Controlled on medicaments'),
+    (2, 'Yes, Uncontrolled on medicaments SBP > 160 mmHg'),
 )
 
 ALCOHOL_ABUSE_CHOICES = (
