@@ -551,6 +551,9 @@
                                         <b><i>then...</i></b>
                                     {% endif %}
                                 {% endif %}
+                                {% if step.extra2 %}
+                                {{ step.extra2|safe }}
+                                {% endif %}
                                 <br/>
                                 <br/>
                             {% endfor %}
