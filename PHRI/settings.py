@@ -29,7 +29,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ADMINS = [('Armando', 'mando.alvarado.jose@gmail.com'), ('Alvaro', 'director.qc@gmail.com')]
+ADMINS = [('Armando', 'mando.alvarado.jose@gmail.com'), ('Alvaro', 'director.qc@gmail.com'), ('Wil', 'wilfredo@codes.hn')]
 
 ALLOWED_HOSTS = ['tripletherapy.net', '159.203.61.7']
 
