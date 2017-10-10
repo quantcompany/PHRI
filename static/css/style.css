@@ -6811,3 +6811,9 @@ body .bootstrap-datetimepicker-widget table td {
   content: "\f00c"*/
   /*text-decoration: underline;*/
 /*}*/
+
+.icon-img {
+    width: 25px;
+    height: 25px;
+    border:2px solid #fff;
+}

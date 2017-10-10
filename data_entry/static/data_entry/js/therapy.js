@@ -245,23 +245,33 @@ function determineMCMTherapy_2(){
 
   var therapy = {choices: []};
   var _extra = '<div class="row pioneer-table-link">\
-                  <div class="col-md-3">\
-                    <p class="bg-warning" style="padding:8px;max-width:40px;margin:0 auto;">\
-                      <i class="fa fa-exclamation-triangle fa-2x text-warning" aria-hidden="true"></i>\
-                    </p>\
-                  </div>\
-                  <div class="col-md-4">\
+                  <div class="col-md-6">\
                       <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf" target="_blank">\
-                        <img src="'+static_url+'img/pioneer-af-pci.png" class="img-responsive"/>\
-                      </a>\
+                        <img src="'+static_url+'img/pioneer-af-pci-2.jpg" class="img-responsive"/>\
+                      </a><br>\
+                      <div class="alert bg-warning" style="text-decoration:none;margin:0;padding:0">\
+                        <p>Rivaroxaban 15 mg qd*</p>\
+                        <p style="margin-top:0;">Clopidogrel 75 mg qd✝</p>\
+                      </div>\
                   </div>\
-                  <div class="col-md-5">\
-                    <div class="alert alert-warning" style="text-decoration:none;margin:0;padding:0">\
-                      <p>Rivaroxaban 15 mg qd*</p>\
-                      <p style="margin-top:0;">Clopidogrel 75 mg qd✝</p>\
-                    </div>\
+                  <div class="col-md-6">\
+                      <a href="'+static_url+'img/2734848_RE-DUAL-PCI.jpg" target="_blank">\
+                        <img src="'+static_url+'img/2734848_RE-DUAL-PCI.jpg" class="img-responsive"/>\
+                      </a><br>\
+                      <div class="alert bg-warning" style="text-decoration:none;margin:0;padding:0">\
+                        <p>Dabigatran 110/150 mg qd</p>\
+                        <p style="margin-top:0;">Clopidogrel 75 mg qd</p>\
+                      </div>\
                   </div>\
                 </div>';
+
+  therapy.choices.push({
+    steps: [
+      {option: options.mcm2.f, extra: '', extra2: _extra},
+    ]
+  });
+
+  return therapy;
 
   if( clinicalP === 'ELECTIVE') {
     if( scores.chads2 == 0 ){

@@ -126,18 +126,23 @@ var options = {
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  <strong><i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i>Clopidogrel</strong> 75 mg po QD <br>\
+                  <strong>\
+                    <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/>\
+                    <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/>\
+                    Clopidogrel\
+                  </strong> 75 mg po QD\
+                  <br>\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  &#8226; <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i>Rivaroxaban 15 mg po QD\
+                  &#8226; <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/> Rivaroxaban 15 mg po QD\
                 </p>\
                 <strong>or</strong>\
-                <p class="text-left">\
-                  &#8226; Dabigatran 110 mg po BID\
+                <p class="text-left bg-warning" style="padding:4px;">\
+                  &#8226; <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/> Dabigatran 110 mg po BID\
                 </p>\
                 <strong>or</strong>\
                 <p class="text-left">\
@@ -251,19 +256,24 @@ var options = {
             <tr>\
               <td>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  <strong><i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Clopidogrel</strong> 75 mg po QD <br>\
+                  <strong>\
+                    <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/>\
+                    <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/>\
+                    Clopidogrel\
+                  </strong> 75 mg po QD\
+                  <br>\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  &#8226; <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Rivaroxaban 15 mg po QD\
-                <strong>or</strong>\
+                  &#8226; <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/> Rivaroxaban 15 mg po QD\
+                  <strong>or</strong>\
                 </p>\
-                <p class="text-left">\
-                  &#8226; Dabigatran 110 mg po BID\
-                <strong>or</strong>\
+                <p class="text-left bg-warning" style="padding:4px;">\
+                  &#8226; <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/> Dabigatran 110 mg po BID\
+                  <strong>or</strong>\
                 </p>\
                 <p class="text-left">\
                   &#8226; Apixaban 2.5 mg po BID\
@@ -353,19 +363,23 @@ var options = {
               \
               <td>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  <strong><i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Clopidogrel</strong> 75 mg po QD\
+                  <strong>\
+                    <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/>\
+                    <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/>\
+                    Clopidogrel\
+                  </strong> 75 mg po QD\
                 </p>\
                 <strong>+</strong>\
                 <p class="text-left">\
                   <strong>Reduced dose of DOAC</strong> or VKA:\
                 </p>\
                 <p class="text-left bg-warning" style="padding:4px;">\
-                  &#8226; <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Rivaroxaban 15 mg po QD\
-                <strong>or</strong>\
+                  &#8226; <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/> Rivaroxaban 15 mg po QD\
+                  <strong>or</strong>\
                 </p>\
-                <p class="text-left">\
-                  &#8226; Dabigatran 110 mg po BID\
-                <strong>or</strong>\
+                <p class="text-left bg-warning" style="padding:4px;">\
+                  &#8226; <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/> Dabigatran 110 mg po BID\
+                  <strong>or</strong>\
                 </p>\
                 <p class="text-left">\
                   &#8226; Apixaban 2.5 mg po BID\
