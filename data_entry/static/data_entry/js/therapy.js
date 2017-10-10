@@ -265,14 +265,6 @@ function determineMCMTherapy_2(){
                   </div>\
                 </div>';
 
-  therapy.choices.push({
-    steps: [
-      {option: options.mcm2.f, extra: '', extra2: _extra},
-    ]
-  });
-
-  return therapy;
-
   if( clinicalP === 'ELECTIVE') {
     if( scores.chads2 == 0 ){
       therapy.choices.push({
