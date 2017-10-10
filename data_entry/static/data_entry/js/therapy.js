@@ -255,7 +255,7 @@ function determineMCMTherapy_2(){
                       </div>\
                   </div>\
                   <div class="col-md-6">\
-                      <a href="'+static_url+'img/2734848_RE-DUAL-PCI.jpg" target="_blank">\
+                      <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/RE_DUAL_PCI_ESC-2017.pdf" target="_blank">\
                         <img src="'+static_url+'img/2734848_RE-DUAL-PCI.jpg" class="img-responsive"/>\
                       </a><br>\
                       <div class="alert bg-warning" style="text-decoration:none;margin:0;padding:0">\
