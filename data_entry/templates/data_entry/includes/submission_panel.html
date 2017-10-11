@@ -7,30 +7,37 @@
 
 {% block panel_body %}
     <div class="panel-body">
-        <div class="row p-20 m-b-20">
+        <div class="row m-b-20">
             <div class="col-md-12 text-center">
               <h2>Which therapy recommendation will you follow?</h2>
             </div>
-
             <div class="col-md-8 col-md-offset-2 p-20 text-center">
               <button id="mcm-therapy-option-button" type="button" class="btn btn-info btn-block btn-lg therapy-option-button" data-chosen-therapy="mcm">Hamilton AF-PCI</button>
               <button id="ccs-therapy-option-button" type="button" class="btn btn-info btn-block btn-lg therapy-option-button" data-chosen-therapy="ccs">CCS</button>
               <button id="other-therapy-option-button" type="button" class="btn btn-info btn-block btn-lg therapy-option-button" data-chosen-therapy="other">Other</button>
-              <br>
-              <br>
-              <h4 class="bg-warning" style="padding:8px;">
-                <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i><br>
-                Safety recommendation for high risk bleeding patients
-              </h4>
-              <br>
-              <div>
-                <a href="{% static 'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf'%}" target="_blank">
-                  <img style="margin:0 auto;" src="{% static 'img/pioneer-af-pci.png' %}" class="img-responsive" alt="Cinque Terre">
-                    <h5>Rivaroxaban 15 mg qd*</h5>
-                    <h5>Clopidogrel 75 mg qd&#10013;</h5>
-                </div>
-                </a>
-              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h4 class="bg-warning" style="padding:8px;">
+              <i class="fa fa-exclamation-triangle fa-2x text-warning" aria-hidden="true"></i><br>
+              Safety recommendations for high risk bleeding patients
+            </h4>
+          </div>
+          <div class="col-md-6 text-center">
+            <a href="{% static 'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf'%}" target="_blank">
+              <img style="margin:0 auto;" src="{% static 'img/pioneer-af-pci-2.jpg' %}" class="img-responsive" alt="PIONEER LOGO">
+                <h5>Rivaroxaban 15 mg qd*</h5>
+                <h5>Clopidogrel 75 mg qd&#10013;</h5>
+            </a>
+          </div>
+          <div class="col-md-6 text-center">
+            <a href="{% static 'data_entry/References/Guidelines/OtherReferences/nejmoa1708454.pdf'%}" target="_blank">
+              <img style="margin:0 auto;" src="{% static 'img/2734848_RE-DUAL-PCI.jpg' %}" class="img-responsive" alt="RE DUAL PCI">
+                <h5>Dabigatran 110/150 mg qd</h5>
+                <h5>Clopidogrel 75 mg qd</h5>
+            </a>
+          </div>
         </div>
 
         <div id="submit-area" class="row p-10 m-b-20 form-group" style="display:none;">
