@@ -86,23 +86,19 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 {% include 'data_entry/includes/recommendation_mcmaster_panel.html' %}
-            </div>
-
-            <div class="col-md-6">
-                {% include 'data_entry/includes/recommendation_ccs_panel.html' %}
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 {% include 'data_entry/includes/dose_adjustment_table.html' %}
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 {% include 'data_entry/includes/submission_panel.html' %}
             </div>
         </div>
@@ -201,10 +197,24 @@
           }
         });*/
 
-        $('.therapy-option-button').on('click', function(elem) {
+        /*$('.therapy-option-button').on('click', function(elem) {
           $('.therapy-option-button').removeClass('active').addClass('btn-info');
           $(this).addClass('active').removeClass('btn-info').addClass('btn-primary');
           $('#submit-area').slideDown(100);
+        });*/
+
+        $('[name="agree_option"]').on('change', function(elem) {
+            if( $(this).val() == 'yes' ) {
+                $('#submit-area')
+                .stop(true, true)
+                .hide('fast');
+            }else {
+                $('#submit-area')
+                .stop(true, true)
+                .show('fast', function(){
+                    $(this).slideDown(100);
+                });
+            }
         });
 
         // function clearFields(){
@@ -257,16 +267,20 @@
                 fd.append('hemoglobin_anemia', 'on');
             }
 
-
             // submit MacMaster therapy recommendation
             fd.append('mcm_therapy', JSON.stringify( determineMCMTherapy_2() ));
 
-            // submit CCS therapy recommendation
-            fd.append('ccs_therapy', JSON.stringify( determineCCSTherapy() ));
-
             // submit which therapy recommendation was chones
+            /*
             var chosenTherapy = $('.therapy-option-button.active').data('chosen-therapy') || 'other';
             fd.append('chosen_therapy', chosenTherapy);
+            */
+
+           var agreeTherapy = $('[name="agree_option"]:checked').val() == 'yes' ? true : false;
+           if( agreeTherapy ) {
+               fd.set('reason', 'Yes, i agree');
+           }
+           fd.append('agree_therapy', agreeTherapy);
 
             Pace.track(function(){
               $('#signup-form-errors').removeClass('filled').html('');

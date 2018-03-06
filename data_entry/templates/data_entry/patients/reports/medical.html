@@ -566,30 +566,6 @@
                             <h2>Nothing here</h2>
                         {% endfor %}
                     </td>
-                    <td></td>
-                    <td>
-                        {% for choice in patient.parse_ccs_therapy.choices %}
-                            {% comment %}<h2><b>Option {{ forloop.counter }}</b></h2> {% endcomment %}
-                            {% for step in choice.steps %}
-                                {{ step.option|safe }}
-                                {% if step.extra %}
-                                    {% if not forloop.last %}
-                                        <b><i>({{ step.extra }}, then...)</i></b>
-                                    {% else %}
-                                        <b><i>({{ step.extra }})</i></b>
-                                    {% endif %}
-                                {% else %}
-                                    {% if not forloop.last %}
-                                        <b><i>then...</i></b>
-                                    {% endif %}
-                                {% endif %}
-                                <br/>
-                                <br/>
-                            {% endfor %}
-                        {% empty %}
-                            <h2>Nothing here</h2>
-                        {% endfor %}
-                    </td>
                 </tr>
             </tbody>
         </table>

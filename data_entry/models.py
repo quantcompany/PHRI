@@ -65,62 +65,21 @@ class Patient(models.Model):
     inr_instability = models.BooleanField(default=False)
     doac_allergy_or_intolerance = models.BooleanField(default=False)
 
-    # Blood Work
-    #hb = models.FloatField(null=True, blank=True)
-    #hb_um = models.CharField(default='um1', max_length=20, choices=HB_UM_CHOICES)
-
-
-    # plts = models.FloatField(null=True, blank=True)
-    # plts_um = models.CharField(default='um1', max_length=20, choices=PLTS_UM_CHOICES)
-    # inr = models.FloatField(null=True, blank=True)
-    # creat = models.FloatField(null=True, blank=True)
-    # creat_um = models.CharField(default='um1', max_length=20, choices=CREAT_UM_CHOICES)
-    # egfr = models.FloatField(null=True, blank=True)
-    # egfr_um = models.CharField(default='um1', max_length=20, choices=EGFR_UM_CHOICES)
-    # ast = models.FloatField(null=True, blank=True)
-    # ast_um = models.CharField(default='um1', max_length=20, choices=AST_UM_CHOICES)
-    # alt = models.FloatField(null=True, blank=True)
-    # alt_um = models.CharField(default='um1', max_length=20, choices=ALT_UM_CHOICES)
-    # ggt = models.FloatField(null=True, blank=True)
-    # ggt_um = models.CharField(default='um1', max_length=20, choices=GGT_UM_CHOICES)
-    # bilirubin = models.FloatField(null=True, blank=True)
-    # bilirubin_um = models.CharField(default='um1', max_length=20, choices=BILIRUBIN_UM_CHOICES)
-    # troponin = models.FloatField(null=True, blank=True)
-    # troponin_um = models.CharField(default='um1', max_length=20, choices=TROPONIN_UM_CHOICES)
-
     #Medical History
     chf = models.BooleanField(default=False) # CHADS2
     htn = models.IntegerField(default=0, choices=HTN_CHOICES) # CHADS2
     diabetes_mellitus = models.BooleanField(default=False) # CHADS2
     
-    #stroke = models.BooleanField(default=False)
-    #tia = models.BooleanField(default=False)
     tia_stroke_or_sysemb = models.BooleanField(default=False)
-
-    #Use of antiplatelet agents, NSAIDs, or other anti-inflammatory meds
     aim = models.BooleanField(default=False)
 
     vascular_disease = models.IntegerField(default=0, choices=VASCULAR_DISEASE_CHOICES)
     renal_dysfunction = models.BooleanField(default=False)
-    # ckd_on_dialysis = models.BooleanField(default=False)
-    # renal_transplant = models.BooleanField(default=False)
     liver_dysfunction = models.BooleanField(default=False)
     hx_of_bleeding = models.IntegerField(default=0, choices=BLEEDING_CHOICES)
     alcohol_abuse = models.IntegerField(default=0, choices=ALCOHOL_ABUSE_CHOICES)
     drug_abuse = models.BooleanField(default=False)
-    # chronic_nsaids_rx = models.BooleanField(default=False)
-    # excessive_fall_risk = models.BooleanField(default=False)
-    # hx_of_malignancy = models.IntegerField(default=0, choices=MALIGNANCY_CHOICES)
     asa_allergy = models.BooleanField(default=False)
-    # upcoming_non_cardiatic_surgery = models.IntegerField(default=0, choices=NON_CARDIATIC_SURGERY_CHOICES)
-
-    '''
-        Hemoglobin
-        A = mg/dL
-        B = g/L
-    '''
-    #hemoglobin_mgdL = models.FloatField(null=True, blank=True)
-    #hemoglobin_gL = models.FloatField(null=True, blank=True)
     '''
         Creatinine
         A = mg/dL
@@ -136,8 +95,9 @@ class Patient(models.Model):
 
     # Recommendation
     mcm_therapy = models.TextField(blank=True)
-    ccs_therapy = models.TextField(blank=True)
-    chosen_therapy = models.CharField(max_length=10, choices=CHOSEN_THERAPY_CHOICES)
+    # ccs_therapy = models.TextField(blank=True)
+    # chosen_therapy = models.CharField(max_length=10, choices=CHOSEN_THERAPY_CHOICES)
+    agree_therapy = models.BooleanField(default=True)
     reason = models.TextField()
     # Meta Info
     user = models.ForeignKey('users.User', related_name='patients')
@@ -254,44 +214,6 @@ class Patient(models.Model):
     def parse_mcm_therapy(self):
         return json.loads(self.mcm_therapy)
 
-    def parse_ccs_therapy(self):
-        return json.loads(self.ccs_therapy)
-
-    # def recommended_therapy(self):
-    #     chads2 = self.chads2_score()
-    #     cha2 = self.cha2_score()
-    #     hasbled = self.hasbled_score()
-
-    #     therapy = []
-
-    #     if chads2 <= 2:
-    #         therapy.append('Only dual antiplatelet or oral anticoagulation plus one antiplatelet')
-    #     else:
-    #         if hasbled <= 3:
-    #             if self.des_stent:
-    #                 therapy.append('Triple Rx for 6 months, then oral anticoagulation plus one antiplatelet.')
-    #             else:
-    #                 therapy.append('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet.')
-    #         else:
-    #             if self.des_stent:
-    #                 therapy.append('Triple Rx for 3-6 months, then oral anticoagulation plus one antiplatelet.')
-    #             else:
-    #                 therapy.append('Triple Rx for 1 month, then oral anticoagulation plus one antiplatelet.')
-
-    #     if not self.warfarin_intolerance:
-    #         therapy.append('Continue Warfarin.')
-    #     else:
-    #         therapy.append('Reduced dose DOAC: dabigatran 110 mg BID, apixaban 2.5 mg BID, rivaroxaban 15 mg qd.')
-
-    #     return therapy
-
-    # def chosen_therapy_display(self):
-    #     if self.chosen_therapy == 'mcm':
-    #         return 'Hamilton AF-PCI recommendation'
-    #     elif self.chosen_therapy == 'ccs':
-    #         return 'CCS recommendation'
-    #     else:
-    #         return 'Other'
 
     def field_csv(self, value, type):
         empty = not bool(value)
@@ -347,8 +269,6 @@ class Patient(models.Model):
             self.field_csv(self.get_htn_display(), str),
             self.field_csv(self.diabetes_mellitus, bool),
 
-            #self.field_csv(self.stroke, bool),
-            #self.field_csv(self.tia, bool),
             self.field_csv(self.tia_stroke_or_sysemb, bool),
 
             self.field_csv(self.aim, bool),
@@ -358,9 +278,6 @@ class Patient(models.Model):
             self.field_csv(self.liver_dysfunction, bool),
             self.field_csv(self.get_hx_of_bleeding_display(), str),
             self.field_csv(self.get_alcohol_abuse_display(), str),
-
-            #self.field_csv(self.hemoglobin_gL, float),
-            #self.field_csv(self.hemoglobin_mgdL, float),
 
             self.field_csv(self.anemia, bool),
             self.field_csv(self.hxoa_anemia, bool),

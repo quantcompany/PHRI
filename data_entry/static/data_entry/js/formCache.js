@@ -65,9 +65,14 @@ function loadForm() {
 	});
 
 	// load selected therapy option button
+	/*
 	var selectedTherapyOptionButtonId = storage.getItem('selected-therapy-option-button');
 	$('button.therapy-option-button').removeClass('active').addClass('btn-info');
-	$('#' + selectedTherapyOptionButtonId).trigger('click'); 
+	$('#' + selectedTherapyOptionButtonId).trigger('click');
+	*/
+	var selectedAgreeOptionButtonId = storage.getItem('selected-agree-option-button');
+	$('button.agree-option-button').removeClass('active').addClass('btn-info');
+	$('#' + selectedAgreeOptionButtonId).trigger('click');
 }
 
 function clearForm() {
@@ -91,7 +96,8 @@ function clearForm() {
 	$('select.default-select,select.nullable-select').val(null).trigger('change');
 
 	// clear therapy option buttons
-	$('button.therapy-option-button').removeClass('active');
+	//$('button.therapy-option-button').removeClass('active');
+	$('button.agree-option-button').removeClass('active');
 
 	if (window.sessionStorage){
 		window.sessionStorage.clear();
@@ -194,9 +200,16 @@ function registerChangeListeners() {
 	});
 
 
-	$('button.therapy-option-button').on('click', function() { // when a therapy option button is clicked
+	/*$('button.therapy-option-button').on('click', function() { // when a therapy option button is clicked
 		var element = $(this);
 		var key = "selected-therapy-option-button";
+		var value = element.prop('id');
+		storage.setItem(key, value);
+		makeDirty();
+	});*/
+	$('button.agree-option-button').on('click', function() { // when a agree with the recommendation option button is clicked
+		var element = $(this);
+		var key = "selected-agree-option-button";
 		var value = element.prop('id');
 		storage.setItem(key, value);
 		makeDirty();

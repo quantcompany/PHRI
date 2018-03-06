@@ -6817,3 +6817,15 @@ body .bootstrap-datetimepicker-widget table td {
     height: 25px;
     border:2px solid #fff;
 }
+
+.agree-option-buttons {
+    width:100%;
+}
+
+.agree-option-buttons > label{
+    width:40%;
+}
+
+.agree-option-buttons > label#agree_option_yes {
+    margin-left:20px;
+}
