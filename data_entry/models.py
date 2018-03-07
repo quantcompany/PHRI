@@ -240,7 +240,6 @@ class Patient(models.Model):
             self.field_csv(self.age, int),
             self.field_csv(self.get_gender_display(), str),
             self.field_csv(self.weight, float),
-            #PCI Risks
             self.field_csv(self.pci_risk_1, bool),
             self.field_csv(self.pci_risk_2, bool),
             self.field_csv(self.pci_risk_3, bool),
@@ -250,52 +249,40 @@ class Patient(models.Model):
             self.field_csv(self.pci_risk_7, bool),
             self.field_csv(self.pci_risk_8, bool),
             self.field_csv(self.pci_risk_9, bool),
-
             self.field_csv(self.indication, str),
             self.field_csv(self.bms_stent, bool),
             self.field_csv(self.des_stent, bool),
             self.field_csv(self.poba, bool),
             self.field_csv(self.deb, bool),
             self.field_csv(self.drug_coated_stent, bool),
-
-
             self.field_csv(self.get_af_type_display(), str),
             self.field_csv(self.get_prev_anti_coagulation_display(), str),
             self.field_csv(self.warfarin_intolerance, bool),
             self.field_csv(self.inr_instability, bool),
             self.field_csv(self.doac_allergy_or_intolerance, bool),
-            # blood work fields removed form here
             self.field_csv(self.chf, bool),
             self.field_csv(self.get_htn_display(), str),
             self.field_csv(self.diabetes_mellitus, bool),
-
             self.field_csv(self.tia_stroke_or_sysemb, bool),
-
             self.field_csv(self.aim, bool),
-
             self.field_csv(self.get_vascular_disease_display(), str),
             self.field_csv(self.renal_dysfunction, bool),
             self.field_csv(self.liver_dysfunction, bool),
             self.field_csv(self.get_hx_of_bleeding_display(), str),
             self.field_csv(self.get_alcohol_abuse_display(), str),
-
             self.field_csv(self.anemia, bool),
             self.field_csv(self.hxoa_anemia, bool),
             self.field_csv(self.hemoglobin_anemia, bool),
-
             self.field_csv(self.creatinine_mgdL, float),
             self.field_csv(self.creatinine_umolL, float),
             self.field_csv(self.gfr_mLmin, float),
-
             self.field_csv(self.drug_abuse, bool),
             self.field_csv(self.asa_allergy, bool),
             self.field_csv(self.chads2_score(), int),
             self.field_csv(self.cha2_score(), int),
             self.field_csv(self.hasbled_score(), int),
-
             self.field_csv(self.agree_therapy, bool),
             self.field_csv(self.reason, str),
-            
             self.field_csv(self.user.user_name, str),
             self.field_csv(self.created, datetime)
         ])

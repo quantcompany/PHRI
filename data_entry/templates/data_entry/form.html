@@ -185,24 +185,6 @@
 
         $(".bootstrap-switch").bootstrapSwitch();
 
-        /*$('#no_pci').on('change', function(elem) {
-          var checked = $(this).is(':checked');
-
-          if (checked) {
-            $('#bms_stent').prop('checked', false).prop('disabled', true);
-            $('#des_stent').prop('checked', false).prop('disabled', true);
-          } else {
-            $('#bms_stent').prop('disabled', false);
-            $('#des_stent').prop('disabled', false);
-          }
-        });*/
-
-        /*$('.therapy-option-button').on('click', function(elem) {
-          $('.therapy-option-button').removeClass('active').addClass('btn-info');
-          $(this).addClass('active').removeClass('btn-info').addClass('btn-primary');
-          $('#submit-area').slideDown(100);
-        });*/
-
         $('[name="agree_option"]').on('change', function(elem) {
             $(this).parent().removeClass('btn-success');
             $(this).parent().removeClass('btn-danger');
@@ -227,70 +209,39 @@
             }
         });
 
-        // function clearFields(){
-        //     $('#identification').val('');
-        //     $('#first_name').val('');
-        //     $('#middle_name').val('');
-        //     $('#last_name').val('');
-        //     $('#age').val('');
-        //     $('[name="stent"]').prop('checked', false);
-        //     $('[name="no_pci"]').prop('checked', false);
-        //     $('#prev_anti_coagulation').val('0').trigger('change');
-        //     $('input[type="number"]').val('');
-        //     $('input[class="bootstrap-switch"]').bootstrapSwitch('state', false);
-        //     $('#reason').val('');
-        //     $('.therapy-option-button').removeClass('active').addClass('btn-info');
-        // }
-
         function submitPatient(){
-            // event.preventDefault();
             $('#patient_form button[type="submit"]').button('loading');
-
             var form = $('#patient_form')[0];
-
             var fd = new FormData(form);
-
             if ($('#bms_stent').is(':checked')){
                 fd.append('bms_stent', 'on');
             }
-
             if ($('#des_stent').is(':checked')){
                 fd.append('des_stent', 'on');
             }
-
             if ($('#poba').is(':checked')){
                 fd.append('poba', 'on');
             }
-
             if ($('#deb').is(':checked')){
                 fd.append('deb', 'on');
             }
-
             if ($('#drug_coated_stent').is(':checked')){
                 fd.append('drug_coated_stent', 'on');
             }
-
             if ($('#hxoa_anemia').is(':checked')){
                 fd.append('hxoa_anemia', 'on');
             }
             if ($('#hemoglobin_anemia').is(':checked')){
                 fd.append('hemoglobin_anemia', 'on');
             }
-
             // submit MacMaster therapy recommendation
             fd.append('mcm_therapy', JSON.stringify( determineMCMTherapy_2() ));
-
             // submit which therapy recommendation was chones
-            /*
-            var chosenTherapy = $('.therapy-option-button.active').data('chosen-therapy') || 'other';
-            fd.append('chosen_therapy', chosenTherapy);
-            */
-
-           var agreeTherapy = $('[name="agree_option"]:checked').val() == 'yes' ? true : false;
-           if( agreeTherapy ) {
-               fd.set('reason', 'Yes, i agree');
-           }
-           fd.append('agree_therapy', agreeTherapy);
+            var agreeTherapy = $('[name="agree_option"]:checked').val() == 'yes' ? true : false;
+            if( agreeTherapy ) {
+                fd.set('reason', 'Yes, i agree');
+            }
+            fd.append('agree_therapy', agreeTherapy);
 
             Pace.track(function(){
               $('#signup-form-errors').removeClass('filled').html('');

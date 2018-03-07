@@ -24,12 +24,10 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     }
   },
   highlight: function(element, errorClass, validClass) {
-    // $(element).addClass(errorClass).removeClass(validClass);
     $(element.form).find("label[for=" + element.id + "]").find('span')
       .addClass(errorClass);
   },
   unhighlight: function(element, errorClass, validClass) {
-    // $(element).removeClass(errorClass).addClass(validClass);
     $(element.form).find("label[for=" + element.id + "]").find('span')
       .removeClass(errorClass);
   },

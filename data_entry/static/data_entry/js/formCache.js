@@ -65,11 +65,6 @@ function loadForm() {
 	});
 
 	// load selected therapy option button
-	/*
-	var selectedTherapyOptionButtonId = storage.getItem('selected-therapy-option-button');
-	$('button.therapy-option-button').removeClass('active').addClass('btn-info');
-	$('#' + selectedTherapyOptionButtonId).trigger('click');
-	*/
 	var selectedAgreeOptionButtonId = storage.getItem('selected-agree-option-button');
 	$('button.agree-option-button').removeClass('active').addClass('btn-info');
 	$('#' + selectedAgreeOptionButtonId).trigger('click');
@@ -83,7 +78,6 @@ function clearForm() {
 	$('input[type="checkbox"][name^="pci_risk_"]').prop('checked', false).trigger('change');
 
 	// clear stent/intervention checkboxes
-	//$('#bms_stent,#des_stent,#no_pci').prop('checked', false).trigger('change');
 	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent').prop('checked', false).trigger('change');
 
 	//  clear Anemia checkboxes
@@ -95,8 +89,7 @@ function clearForm() {
 	// clear dropdowns
 	$('select.default-select,select.nullable-select').val(null).trigger('change');
 
-	// clear therapy option buttons
-	//$('button.therapy-option-button').removeClass('active');
+	// clear therapy yes no buttons
 	$('[name="agree_option"]')
 	.parent()
 	.removeClass('active')
@@ -126,7 +119,6 @@ function registerChangeListeners() {
 		makeDirty();
 	});
 
-
 	$('input[type="text"],input[type="number"],textarea').on('change', function() { // when text inputs change
 		var element = $(this);
 		var key = element.prop('id');
@@ -135,8 +127,6 @@ function registerChangeListeners() {
 		makeDirty();
 	});
 
-
-	//$('#bms_stent,#des_stent,#no_pci').on('change', function() { // when the stent checkboxes change
 	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent').on('change', function() {
 		var keys = [
 			'bms_stent',
@@ -207,13 +197,6 @@ function registerChangeListeners() {
 	});
 
 
-	/*$('button.therapy-option-button').on('click', function() { // when a therapy option button is clicked
-		var element = $(this);
-		var key = "selected-therapy-option-button";
-		var value = element.prop('id');
-		storage.setItem(key, value);
-		makeDirty();
-	});*/
 	$('button.agree-option-button').on('click', function() { // when a agree with the recommendation option button is clicked
 		var element = $(this);
 		var key = "selected-agree-option-button";
