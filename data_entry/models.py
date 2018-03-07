@@ -292,7 +292,10 @@ class Patient(models.Model):
             self.field_csv(self.chads2_score(), int),
             self.field_csv(self.cha2_score(), int),
             self.field_csv(self.hasbled_score(), int),
-            self.field_csv(self.get_chosen_therapy_display(), str),
+
+            self.field_csv(self.agree_therapy, bool),
+            self.field_csv(self.reason, str),
+            
             self.field_csv(self.user.user_name, str),
             self.field_csv(self.created, datetime)
         ])

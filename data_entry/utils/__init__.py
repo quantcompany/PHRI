@@ -95,7 +95,8 @@ def patients_csv_headers():
         'CHADS SCORE',
         'CHA2DS2-VASC SCORE',
         'HASBLED SCORE',
-        'FOLLOWED RECOMMENDATION',
+        'AGREE RECOMMENDATION',
+        'REASON',
         'USER',
         'CREATED',
     ]) + '\n'
