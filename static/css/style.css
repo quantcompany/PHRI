@@ -6823,9 +6823,10 @@ body .bootstrap-datetimepicker-widget table td {
 }
 
 .agree-option-buttons > label{
-    width:40%;
+    width:36%;
+    float:none!important;
 }
 
-.agree-option-buttons > label#agree_option_yes {
-    margin-left:20px;
+.agree-option-buttons > .btn:first-child {
+    margin-right:20px;
 }

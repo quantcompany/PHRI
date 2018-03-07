@@ -204,11 +204,21 @@
         });*/
 
         $('[name="agree_option"]').on('change', function(elem) {
+            $(this).parent().removeClass('btn-success');
+            $(this).parent().removeClass('btn-danger');
+            $(this).parent().addClass('btn-default');
+            
             if( $(this).val() == 'yes' ) {
+                $(this).parent().removeClass('btn-default');
+                $(this).parent().addClass('btn-success');
+
                 $('#submit-area')
                 .stop(true, true)
                 .hide('fast');
             }else {
+                $(this).parent().removeClass('btn-default');
+                $(this).parent().addClass('btn-danger');
+
                 $('#submit-area')
                 .stop(true, true)
                 .show('fast', function(){

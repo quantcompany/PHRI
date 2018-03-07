@@ -18,7 +18,7 @@ var patientFormValidator = $("form[name='patient_form']").validate({
   errorElement: "small",
   errorPlacement: function(error, element){
     if( element.is(':radio') ) {
-      error.prependTo( element.parent().parent() );
+      error.prependTo( element.parent().parent().parent() );
     } else {
       error.appendTo(element.parents('.form-group').find('label').find('span'));
     }

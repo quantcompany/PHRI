@@ -97,7 +97,14 @@ function clearForm() {
 
 	// clear therapy option buttons
 	//$('button.therapy-option-button').removeClass('active');
-	$('button.agree-option-button').removeClass('active');
+	$('[name="agree_option"]')
+	.parent()
+	.removeClass('active')
+	.removeClass('btn-success')
+	.removeClass('btn-danger')
+	.addClass('btn-default');
+
+	$('#reason').val('');
 
 	if (window.sessionStorage){
 		window.sessionStorage.clear();
