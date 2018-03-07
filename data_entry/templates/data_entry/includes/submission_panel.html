@@ -9,14 +9,37 @@
     <div class="panel-body">
         <div class="row m-b-20">
             <div class="col-md-12 text-center">
-              <h2>Which therapy recommendation will you follow?</h2>
+              <h2>Do you agree with the recommendation?</h2>
             </div>
             <div class="col-md-8 col-md-offset-2 p-20 text-center">
-              <button id="mcm-therapy-option-button" type="button" class="btn btn-info btn-block btn-lg therapy-option-button" data-chosen-therapy="mcm">Hamilton AF-PCI</button>
-              <button id="ccs-therapy-option-button" type="button" class="btn btn-info btn-block btn-lg therapy-option-button" data-chosen-therapy="ccs">CCS</button>
-              <button id="other-therapy-option-button" type="button" class="btn btn-info btn-block btn-lg therapy-option-button" data-chosen-therapy="other">Other</button>
+              <div class="btn-group agree-option-buttons" data-toggle="buttons">
+                <label class="btn btn-default btn-lg">
+                  <input type="radio" name="agree_option" id="agree_option_yes" autocomplete="off" value="yes"> Yes
+                </label>
+                <label class="btn btn-default btn-lg">
+                  <input type="radio" name="agree_option" id="agree_option_no" autocomplete="off" value="no"> No
+                </label>
+              </div>
             </div>
         </div>
+
+        <div id="submit-area" class="row p-10 m-b-20 form-group" style="display:none;">
+            <div class="col-md-12 text-center">
+              <h3>Please, tell us why you don't agree with the CCS recommendation:</h3>
+            </div>
+
+            <div class="col-md-6 col-md-offset-3 text-center f-s-14">
+              <textarea id="reason" name="reason" class="form-control f-s-14" rows="6" style="width:100%; height:100%; box-sizing: border-box;"></textarea>
+              <label form="reason"><span></span></label>
+            </div>
+        </div>
+
+        <div class="row p-10 m-b-20 form-group">
+            <div class="col-md-6 col-md-offset-3">
+              <button id="submit-patient-form" type="submit" class="btn btn-primary btn-block btn-lg" data-loading-text="Working...">Save record</button>
+            </div>
+        </div>
+
         <div class="row">
           <div class="col-sm-12 text-center">
             <h4 class="bg-warning" style="padding:8px;">
@@ -38,21 +61,6 @@
                 <h5>Clopidogrel 75 mg qd</h5>
             </a>
           </div>
-        </div>
-
-        <div id="submit-area" class="row p-10 m-b-20 form-group" style="display:none;">
-            <div class="col-md-12 text-center">
-              <h3>Please, tell us why (in case of "Other", specify):</h3>
-            </div>
-
-            <div class="col-md-6 col-md-offset-3 text-center f-s-14">
-              <textarea id="reason" name="reason" class="form-control f-s-14" rows="6" style="width:100%; height:100%; box-sizing: border-box;"></textarea>
-              <label form="reason"><span></span></label>
-            </div>
-
-            <div class="col-md-6 col-md-offset-3">
-              <button type="submit" class="btn btn-primary btn-block btn-lg" data-loading-text="Working...">Submit</button>
-            </div>
         </div>
     </div>
 {% endblock %}

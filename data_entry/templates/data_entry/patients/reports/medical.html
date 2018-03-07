@@ -99,7 +99,6 @@
             <ul class="dropdown-menu" style="padding:5px">
               <li>
                 <div id="email_results_input" class="input-group m-t-20" style="width:500px">
-                    <!-- <input id="address" type="email" class="form-control" placeholder="Email Address"> -->
                     <ul id="jquery-tagIt-default">
                     </ul>
 
@@ -171,13 +170,6 @@
             </thead>
 
             <tbody>
-                <!-- <tr>
-                    <th>Date</th>
-                    <td>{{ patient.date_of_procedure|date:"d/m/Y" }}</td>
-                    <td></td>
-                    <th>Indication</th>
-                    <td>{{ patient.indication }}</td>
-                </tr> -->
 
                 <tr>
                     <th>Long Stented Segment &gt; 30mm</th>
@@ -233,13 +225,6 @@
             </thead>
 
             <tbody>
-                <!-- <tr>
-                    <th>Date</th>
-                    <td>{{ patient.date_of_procedure|date:"d/m/Y" }}</td>
-                    <td></td>
-                    <th>Indication</th>
-                    <td>{{ patient.indication }}</td>
-                </tr> -->
 
                 <tr>
                     <th>Bare-Metal Stent</th>
@@ -306,8 +291,6 @@
                 </tr>
             </tbody>
         </table>
-
-        <!-- Bloodwork table removed -->
 
         <h3>Medical History</h3>
         <hr/>
@@ -393,17 +376,6 @@
                 </tr>
 
                 <tr>
-                    <!--
-                    <th>Hemoglobin</th>
-                    {% if patient.hemoglobin_mgdL != None %}
-                    <td>
-                        {{ patient.hemoglobin_mgdL }} mg/dL<br>
-                        <i>({{patient.hemoglobin_gL}} g/L)</i>
-                    </td>
-                    {% else %}
-                    <td>N/A</td>
-                    {% endif %}
-                    -->
                     <th>Anemia</th>
                     <td>{{ patient.anemia|yesno|capfirst }}</td>
 
@@ -528,11 +500,8 @@
         <table class="therapy-recommendations">
             <thead>
                 <tr>
-                    <th style="width:48%;"><h3>Hamilton AF-PCI recommendation</h3></th>
-                    <th style="width: 4%;"></th>
-                    <th style="width:48%;"><h3>CCS recommendation</h3></th>
+                    <th style="width:100%;"><h3>Hamilton AF-PCI recommendation</h3></th>
                 </tr>
-
                 <tr>
                     <th colspan="2"><hr/></th>
                 </tr>
@@ -566,30 +535,6 @@
                             <h2>Nothing here</h2>
                         {% endfor %}
                     </td>
-                    <td></td>
-                    <td>
-                        {% for choice in patient.parse_ccs_therapy.choices %}
-                            {% comment %}<h2><b>Option {{ forloop.counter }}</b></h2> {% endcomment %}
-                            {% for step in choice.steps %}
-                                {{ step.option|safe }}
-                                {% if step.extra %}
-                                    {% if not forloop.last %}
-                                        <b><i>({{ step.extra }}, then...)</i></b>
-                                    {% else %}
-                                        <b><i>({{ step.extra }})</i></b>
-                                    {% endif %}
-                                {% else %}
-                                    {% if not forloop.last %}
-                                        <b><i>then...</i></b>
-                                    {% endif %}
-                                {% endif %}
-                                <br/>
-                                <br/>
-                            {% endfor %}
-                        {% empty %}
-                            <h2>Nothing here</h2>
-                        {% endfor %}
-                    </td>
                 </tr>
             </tbody>
         </table>
@@ -598,10 +543,10 @@
         <!-- *************************** PAGE BREAK ****************************** -->
         <div style="page-break-after: always;"></div>
 
-        <h3>Chosen Therapy</h3>
+        <h3>Do you agree with the recommendation?</h3>
         <hr />
 
-        <p class="lead">Therapy recommendation being folowed: <span class="big"><b>{{ patient.get_chosen_therapy_display }}</b></span>.</p>
+        <p class="lead"><span class="big"><b>{{ patient.agree_therapy | yesno | title }}</b></span>.</p>
 
         <p class="lead">Reason: <b>"{{ patient.reason }}"</b></p>
 

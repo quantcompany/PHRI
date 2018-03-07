@@ -86,23 +86,19 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 {% include 'data_entry/includes/recommendation_mcmaster_panel.html' %}
-            </div>
-
-            <div class="col-md-6">
-                {% include 'data_entry/includes/recommendation_ccs_panel.html' %}
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 {% include 'data_entry/includes/dose_adjustment_table.html' %}
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 {% include 'data_entry/includes/submission_panel.html' %}
             </div>
         </div>
@@ -189,84 +185,63 @@
 
         $(".bootstrap-switch").bootstrapSwitch();
 
-        /*$('#no_pci').on('change', function(elem) {
-          var checked = $(this).is(':checked');
+        $('[name="agree_option"]').on('change', function(elem) {
+            $(this).parent().removeClass('btn-success');
+            $(this).parent().removeClass('btn-danger');
+            $(this).parent().addClass('btn-default');
+            
+            if( $(this).val() == 'yes' ) {
+                $(this).parent().removeClass('btn-default');
+                $(this).parent().addClass('btn-success');
 
-          if (checked) {
-            $('#bms_stent').prop('checked', false).prop('disabled', true);
-            $('#des_stent').prop('checked', false).prop('disabled', true);
-          } else {
-            $('#bms_stent').prop('disabled', false);
-            $('#des_stent').prop('disabled', false);
-          }
-        });*/
+                $('#submit-area')
+                .stop(true, true)
+                .hide('fast');
+            }else {
+                $(this).parent().removeClass('btn-default');
+                $(this).parent().addClass('btn-danger');
 
-        $('.therapy-option-button').on('click', function(elem) {
-          $('.therapy-option-button').removeClass('active').addClass('btn-info');
-          $(this).addClass('active').removeClass('btn-info').addClass('btn-primary');
-          $('#submit-area').slideDown(100);
+                $('#submit-area')
+                .stop(true, true)
+                .show('fast', function(){
+                    $(this).slideDown(100);
+                });
+            }
         });
 
-        // function clearFields(){
-        //     $('#identification').val('');
-        //     $('#first_name').val('');
-        //     $('#middle_name').val('');
-        //     $('#last_name').val('');
-        //     $('#age').val('');
-        //     $('[name="stent"]').prop('checked', false);
-        //     $('[name="no_pci"]').prop('checked', false);
-        //     $('#prev_anti_coagulation').val('0').trigger('change');
-        //     $('input[type="number"]').val('');
-        //     $('input[class="bootstrap-switch"]').bootstrapSwitch('state', false);
-        //     $('#reason').val('');
-        //     $('.therapy-option-button').removeClass('active').addClass('btn-info');
-        // }
-
         function submitPatient(){
-            // event.preventDefault();
             $('#patient_form button[type="submit"]').button('loading');
-
             var form = $('#patient_form')[0];
-
             var fd = new FormData(form);
-
             if ($('#bms_stent').is(':checked')){
                 fd.append('bms_stent', 'on');
             }
-
             if ($('#des_stent').is(':checked')){
                 fd.append('des_stent', 'on');
             }
-
             if ($('#poba').is(':checked')){
                 fd.append('poba', 'on');
             }
-
             if ($('#deb').is(':checked')){
                 fd.append('deb', 'on');
             }
-
             if ($('#drug_coated_stent').is(':checked')){
                 fd.append('drug_coated_stent', 'on');
             }
-
             if ($('#hxoa_anemia').is(':checked')){
                 fd.append('hxoa_anemia', 'on');
             }
             if ($('#hemoglobin_anemia').is(':checked')){
                 fd.append('hemoglobin_anemia', 'on');
             }
-
-
             // submit MacMaster therapy recommendation
             fd.append('mcm_therapy', JSON.stringify( determineMCMTherapy_2() ));
-
-            // submit CCS therapy recommendation
-            fd.append('ccs_therapy', JSON.stringify( determineCCSTherapy() ));
-
             // submit which therapy recommendation was chones
-            var chosenTherapy = $('.therapy-option-button.active').data('chosen-therapy') || 'other';
-            fd.append('chosen_therapy', chosenTherapy);
+            var agreeTherapy = $('[name="agree_option"]:checked').val() == 'yes' ? true : false;
+            if( agreeTherapy ) {
+                fd.set('reason', 'Yes, i agree');
+            }
+            fd.append('agree_therapy', agreeTherapy);
 
             Pace.track(function(){
               $('#signup-form-errors').removeClass('filled').html('');

@@ -6806,14 +6806,21 @@ body .bootstrap-datetimepicker-widget table td {
   font-size: 20px;
 }
 
-/*.therapy-option-button.active {*/
-  /*font-family: FontAwesome;
-  content: "\f00c"*/
-  /*text-decoration: underline;*/
-/*}*/
-
 .icon-img {
     width: 25px;
     height: 25px;
     border:2px solid #fff;
+}
+
+.agree-option-buttons {
+    width:100%;
+}
+
+.agree-option-buttons > label{
+    width:36%;
+    float:none!important;
+}
+
+.agree-option-buttons > .btn:first-child {
+    margin-right:20px;
 }

@@ -17,15 +17,17 @@ var patientFormValidator = $("form[name='patient_form']").validate({
   },
   errorElement: "small",
   errorPlacement: function(error, element){
-    error.appendTo(element.parents('.form-group').find('label').find('span'));
+    if( element.is(':radio') ) {
+      error.prependTo( element.parent().parent().parent() );
+    } else {
+      error.appendTo(element.parents('.form-group').find('label').find('span'));
+    }
   },
   highlight: function(element, errorClass, validClass) {
-    // $(element).addClass(errorClass).removeClass(validClass);
     $(element.form).find("label[for=" + element.id + "]").find('span')
       .addClass(errorClass);
   },
   unhighlight: function(element, errorClass, validClass) {
-    // $(element).removeClass(errorClass).addClass(validClass);
     $(element.form).find("label[for=" + element.id + "]").find('span')
       .removeClass(errorClass);
   },
@@ -44,14 +46,6 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     weight: {
       required: true
     },
-    /*hemoglobin_gL : {
-      //required: function(){return $('#hemoglobin_measure').val() === 'gL';},
-      min: 0
-    },
-    hemoglobin_mgdL : {
-      //required: function(){return $('#hemoglobin_measure').val() === 'mgdL';},
-      min: 0
-    },*/
     creatinine_mgdL : {
       required: function(){return $('#creatinine_measure').val() === 'mgdL';},
       min: 0
@@ -72,7 +66,12 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     },
     htn: "required",
     alcohol_abuse: "required",
-    reason: "required",
+    reason: {
+      required: function(){
+        return $('[name="agree_option"]:checked').val() == 'no'
+      }
+    },
+    agree_option: "required",
   },
   // Specify validation error messages
   messages: {
@@ -89,6 +88,7 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     // date_of_procedure: "This field is required",
     // indication: "This field is required",
     // balloons: "This field is required",
+    agree_option: "Please select yes or no."
   },
   // Make sure the form is submitted to the destination defined
   // in the "action" attribute of the form when valid

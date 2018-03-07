@@ -40,7 +40,6 @@ def patients_csv_headers():
         'AGE',
         'GENDER',
         'WEIGHT(kg)',
-        # PCI RISKs
         'PCI-LONG STENTED SEGMENT >30MM',
         'PCI-SMALL VESSEL DIAMETER <=2.5MM',
         'PCI-IN-STENT RESTENOSIS INTERVENTION',
@@ -50,52 +49,40 @@ def patients_csv_headers():
         'PCI-CHRONIC TOTAL OCCLUSION PCI',
         'PCI-IN THE OPINION OF THE INTERVENTIONAL CARDIOLOGIST',
         'PCI-GRAFT INTERVENTION',
-
         'INDICATION',
         'BMS STENT',
         'DES STENT',
         'POBA',
         'DEB',
         'DRUG COATED STENT',
-        
         'AF TYPE',
         'PREV ANTI COAGULATION',
         'WARFARIN INTOLERANCE',
         'INR INSTABILITY',
         'DOAC ALLERGY OR INTOLERANCE',
-        # bloodwork fields removed
         'CONGESTIVE HEART FAILURE',
         'HYPERTENSION',
         'DIABETES MELLITUS',
-
-        #'STROKE',
-        #'TIA',
         'TIA-STROKE-OR-SYSTEMIC EMBOLISM',
-
         'ANTI-INFLAMMATORY MEDICATIONS',
-
         'VASCULAR DISEASE',
         'RENAL DYSFUNCTION',
         'LIVER DYSFUNCTION',
         'HISTORY OF BLEEDING',
         'ALCOHOL ABUSE',
-
-        #'HEMOGLOBIN(g/L)',
-        #'HEMOGLOBIN(mg/dL)',
         'ANEMIA',
         'HISTORY OF ANEMIA',
         'HEMOGLOBIN <100 g/L or <10 g/dL',
-
         'CREATININE(mg/dL)',
         'CREATININE(umol/L)',
         'GFR(mL/min)',
-
         'DRUG ABUSE',
         'ASA ALLERGY',
         'CHADS SCORE',
         'CHA2DS2-VASC SCORE',
         'HASBLED SCORE',
-        'FOLLOWED RECOMMENDATION',
+        'AGREE RECOMMENDATION',
+        'REASON',
         'USER',
         'CREATED',
     ]) + '\n'
