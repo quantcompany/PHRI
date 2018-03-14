@@ -66,6 +66,8 @@ class Patient(models.Model):
     chf = models.BooleanField(default=False) # CHADS2
     htn = models.IntegerField(default=0, choices=HTN_CHOICES) # CHADS2
     diabetes_mellitus = models.BooleanField(default=False) # CHADS2
+
+    smoking_history = models.IntegerField(default=0, choices=SMOKING_HISTORY_CHOICES)
     
     tia_stroke_or_sysemb = models.BooleanField(default=False)
     aim = models.BooleanField(default=False)
@@ -260,6 +262,7 @@ class Patient(models.Model):
             self.field_csv(self.inr_instability, bool),
             self.field_csv(self.doac_allergy_or_intolerance, bool),
             self.field_csv(self.chf, bool),
+            self.field_csv(self.get_smoking_history_display(), str),
             self.field_csv(self.get_htn_display(), str),
             self.field_csv(self.diabetes_mellitus, bool),
             self.field_csv(self.tia_stroke_or_sysemb, bool),
