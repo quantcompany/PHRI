@@ -298,6 +298,14 @@
             </thead>
 
             <tbody>
+                    <tr>
+                        <th>Smoking History</th>
+                        <td>{{ patient.get_smoking_history_display }}</td>
+                        <td></td>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                    
                 <tr>
                     <th>Hypertension</th>
                     <td>{{ patient.get_htn_display }}</td>
@@ -306,14 +314,6 @@
 
                     <th>Vascular Disease</th>
                     <td>{{ patient.get_vascular_disease_display }}</td>
-                </tr>
-
-                <tr>
-                    <th>Smoking History</th>
-                    <td>{{ patient.get_smoking_history_display }}</td>
-                    <td></td>
-                    <th></th>
-                    <td></td>
                 </tr>
 
                 <tr>

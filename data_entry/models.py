@@ -90,6 +90,10 @@ class Patient(models.Model):
     hxoa_anemia = models.BooleanField(default=False)
     hemoglobin_anemia = models.BooleanField(default=False)
 
+    prior_acute_cs = models.BooleanField(default=False)
+    prior_stent_thrombosis = models.BooleanField(default=False)
+    frailty = models.BooleanField(default=False)
+
     gfr_mLmin = models.FloatField(null=True, blank=True)
 
     # Recommendation
@@ -98,6 +102,7 @@ class Patient(models.Model):
     # chosen_therapy = models.CharField(max_length=10, choices=CHOSEN_THERAPY_CHOICES)
     agree_therapy = models.BooleanField(default=True)
     reason = models.TextField()
+    
     # Meta Info
     user = models.ForeignKey('users.User', related_name='patients')
     created = models.DateTimeField(auto_now_add=True)
