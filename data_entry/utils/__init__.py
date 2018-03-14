@@ -59,6 +59,11 @@ def patients_csv_headers():
         'WARFARIN INTOLERANCE',
         'INR INSTABILITY',
         'DOAC ALLERGY OR INTOLERANCE',
+
+        'PRIOR ACUTE CORONARY SYNDROME (ACS)',
+        'PRIOR STENT THROMBOSIS',
+        'FRAILTY',
+        
         'CONGESTIVE HEART FAILURE',
         'SMOKING HISTORY',
         'HYPERTENSION',

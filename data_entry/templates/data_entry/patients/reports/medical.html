@@ -327,6 +327,26 @@
                 </tr>
 
                 <tr>
+                    <th>Prior Acute Coronary Syndrome (ACS)</th>
+                    <td>{{ patient.prior_acute_cs|yesno|capfirst }}</td>
+
+                    <td></td>
+
+                    <th>Prior stent thrombosis</th>
+                    <td>{{ patient.prior_stent_thrombosis|yesno|capfirst }}</td>
+                </tr>
+
+                <tr>
+                    <th>Frailty</th>
+                    <td>{{ patient.frailty|yesno|capfirst }}</td>
+
+                    <td></td>
+
+                    <th><th>
+                    <td></td>
+                </tr>
+
+                <tr>
                     <th>Congestive Heart Failure</th>
                     <td>{{ patient.chf|yesno|capfirst }}</td>
 

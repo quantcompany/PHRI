@@ -63,6 +63,9 @@ class Patient(models.Model):
     doac_allergy_or_intolerance = models.BooleanField(default=False)
 
     #Medical History
+    prior_acute_cs = models.BooleanField(default=False)
+    prior_stent_thrombosis = models.BooleanField(default=False)
+    frailty = models.BooleanField(default=False)
     chf = models.BooleanField(default=False) # CHADS2
     htn = models.IntegerField(default=0, choices=HTN_CHOICES) # CHADS2
     diabetes_mellitus = models.BooleanField(default=False) # CHADS2
@@ -89,10 +92,6 @@ class Patient(models.Model):
 
     hxoa_anemia = models.BooleanField(default=False)
     hemoglobin_anemia = models.BooleanField(default=False)
-
-    prior_acute_cs = models.BooleanField(default=False)
-    prior_stent_thrombosis = models.BooleanField(default=False)
-    frailty = models.BooleanField(default=False)
 
     gfr_mLmin = models.FloatField(null=True, blank=True)
 
@@ -266,6 +265,11 @@ class Patient(models.Model):
             self.field_csv(self.warfarin_intolerance, bool),
             self.field_csv(self.inr_instability, bool),
             self.field_csv(self.doac_allergy_or_intolerance, bool),
+
+            self.field_csv(self.prior_acute_cs, bool),
+            self.field_csv(self.prior_stent_thrombosis, bool),
+            self.field_csv(self.frailty, bool),
+
             self.field_csv(self.chf, bool),
             self.field_csv(self.get_smoking_history_display(), str),
             self.field_csv(self.get_htn_display(), str),
