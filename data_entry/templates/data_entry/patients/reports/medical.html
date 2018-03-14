@@ -230,21 +230,21 @@
                     <th>Bare-Metal Stent (BMS)</th>
                     <td>{{ patient.bms_stent | yesno | title }}</td>
                     <td></td>
-                    <th>Drug-Eluting Stent (DES)</th>
-                    <td>{{ patient.des_stent | yesno | title }}</td>
-                </tr>
-
-                <tr>
-                    <th>Bioabsorbable Vascular Scaffold (BVS)</th>
-                    <td>{{ patient.bvs | yesno | title }}</td>
-                    <td></td>
                     <th>Drug-Coated Stent (DCS)</th>
                     <td>{{ patient.drug_coated_stent | yesno | title }}</td>
                 </tr>
 
                 <tr>
+                    <th>Drug-Eluting Stent (DES)</th>
+                    <td>{{ patient.des_stent | yesno | title }}</td>
+                    <td></td>
                     <th>Plain Old Balloon Angioplasty (POBA)</th>
                     <td>{{ patient.poba | yesno | title }}</td>
+                </tr>
+
+                <tr>
+                    <th>Bioabsorbable Vascular Scaffold (BVS)</th>
+                    <td>{{ patient.bvs | yesno | title }}</td>
                     <td></td>
                     <th>Drug Eluting Balloon (DEB)</th>
                     <td>{{ patient.deb | yesno | title }}</td>
