@@ -154,7 +154,7 @@
             </tbody>
         </table>
 
-        <h3>PCI Risks</h3>
+        <h3>High-risk angiographic features</h3>
         <hr>
         <table class="table" style="width: 100%;border:none">
             <thead>
@@ -195,14 +195,6 @@
                 <tr>
                     <th>Chronic Total Occlusion PCI</th>
                     <td>{{ patient.high_risk_af_7 | yesno | title }}</td>
-                    <td></td>
-                    <th>Graft Intervention</th>
-                    <td>{{ patient.high_risk_af_9 | yesno | title }}</td>
-                </tr>
-
-                <tr>
-                    <th>In the Opinion of the Interventional<br>Cardiologist</th>
-                    <td>{{ patient.high_risk_af_8 | yesno | title }}</td>
                     <td></td>
                     <th></th>
                     <td></td>

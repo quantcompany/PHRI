@@ -29,16 +29,14 @@ class Patient(models.Model):
     weight = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
     '''
-    PCI Risk:
-        1 - Long Stented Segment >30mm
-        2 - Small Vessel Diameter <=2.5mm
-        3 - IN-Stent Restenosis Intervention
-        4 - Atherectomy
-        5 - Bifurcation PCI
-        6 - Left main PCI
-        7 - Chronic Total Occlusion PCI
-        8 - In the Opinion of the Interventional Cardiologist
-        9 - Graft Intervention
+    High-risk angiographic features:
+        1. Multi-vessel PCI
+        2. Multiple stents implanted (> 3 stents implanted, > 3 lesions stented)
+        3. Complex bifurcation lesion (treated with 2 stents)
+        4. Total stent length > 60 mm
+        5. Chronic Total Occlusion intervention
+        6. Bioabsorbable Vascular Scaffold (BVS) implantation
+        7. Left main or proximal LAD stenting
     '''
     high_risk_af_1 = models.BooleanField(default=False)
     high_risk_af_2 = models.BooleanField(default=False)
@@ -47,8 +45,6 @@ class Patient(models.Model):
     high_risk_af_5 = models.BooleanField(default=False)
     high_risk_af_6 = models.BooleanField(default=False)
     high_risk_af_7 = models.BooleanField(default=False)
-    high_risk_af_8 = models.BooleanField(default=False)
-    high_risk_af_9 = models.BooleanField(default=False)
 
     # Procedure Details
     indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
@@ -251,8 +247,6 @@ class Patient(models.Model):
             self.field_csv(self.high_risk_af_5, bool),
             self.field_csv(self.high_risk_af_6, bool),
             self.field_csv(self.high_risk_af_7, bool),
-            self.field_csv(self.high_risk_af_8, bool),
-            self.field_csv(self.high_risk_af_9, bool),
             self.field_csv(self.indication, str),
             self.field_csv(self.bms_stent, bool),
             self.field_csv(self.des_stent, bool),

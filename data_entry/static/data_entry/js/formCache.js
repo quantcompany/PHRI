@@ -22,7 +22,7 @@ function loadForm() {
 		element.val(value).trigger('change');
 	});
 
-	//load PCI-RISK checkboxes
+	//load HIGH-RISK-AF checkboxes
 	$('input[type="checkbox"][name^="high_risk_af_"]').each(function(){
 		var element = $(this);
 		var key = element.prop('id');
@@ -32,7 +32,6 @@ function loadForm() {
 	});
 
 	// load stent/intervention checkboxes
-	//$('#bms_stent,#des_stent,#no_pci').each(function() {
 	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent,#bvs').each(function() {
 		var element = $(this);
 		var key = element.prop('id');
@@ -74,7 +73,7 @@ function clearForm() {
 	// clear text inputs
 	$('input[type="text"],input[type="number"],textarea').val('').trigger('change');
 
-	//clear pci_risk checkboxes
+	//clear high_risk_af checkboxes
 	$('input[type="checkbox"][name^="high_risk_af_"]').prop('checked', false).trigger('change');
 
 	// clear stent/intervention checkboxes

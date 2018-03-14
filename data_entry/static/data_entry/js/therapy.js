@@ -223,7 +223,7 @@ function getBleedingRisk(){
   //return scores.hasbled <= 3 ? "low" : "high";
 //}
 
-function getPciRisk(){
+function getHighRiskAF(){
   /**
     Gets a list of 8 booleans, if any element is Selected/Checked
     Then returs "High" else "Low"
@@ -239,7 +239,7 @@ function getClinicalPresentation(){
 }
 
 function determineMCMTherapy_2(){
-  var pciRisk = getPciRisk();
+  var highRiskAFValue = getHighRiskAF();
   var bleedingRisk = getBleedingRisk();
   var clinicalP = getClinicalPresentation();
 
@@ -279,7 +279,7 @@ function determineMCMTherapy_2(){
         ]
       });
     }else if( scores.chads2 >=2 ){
-      if( pciRisk == 'low' ) {
+      if( highRiskAFValue == 'low' ) {
         therapy.choices.push({
           steps: [
             {option: options.mcm2.e, extra: '', extra2: _extra, },
@@ -287,7 +287,7 @@ function determineMCMTherapy_2(){
         });
       } else {
         /**
-          pciRisk is High
+          highRiskAF is High
         **/
         if( bleedingRisk == 'low' ) {
           therapy.choices.push({
@@ -346,88 +346,6 @@ function determineMCMTherapy_2(){
       console.log('No therapy found');
     }
   }
-
-  /**
-    Old Algortihm based on PDF May17
-  **/
-  /*
-  if (scores.chads2 == 0 ){
-    if( indication == 'SCAD' ) {
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.a, extra: '', extra2: ''},
-        ]
-      });
-    } else {
-      //it is STEMI, NSTEMI, UA (ACS)
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.b, extra: '', extra2: ''},
-        ]
-      });
-    }
-  }else if ( scores.chads2 == 1 ) {
-    if( indication == 'SCAD' ){
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.c, extra: '', extra2: _extra},
-        ]
-      });
-    }else {
-      //it is STEMI, NSTEMI, UA (ACS)
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.d, extra: '', extra2: ''},
-        ]
-      });
-    }
-  }else if ( scores.chads2 >= 2 ) {
-    if( indication == 'SCAD' ) {
-      if( pciRisk == 'low' ) {
-        therapy.choices.push({
-          steps: [
-            {option: options.mcm2.e, extra: '', extra2: _extra, },
-          ]
-        });
-      } else {
-        //pciRisk is High
-        if( bleedingRisk == 'low' ) {
-          therapy.choices.push({
-            steps: [
-              {option: options.mcm2.f, extra: '', extra2: _extra},
-            ]
-          });
-        }else {
-          //bleedingRisk is HIGH
-          therapy.choices.push({
-            steps: [
-              {option: options.mcm2.e, extra: '', extra2: _extra},
-            ]
-          });
-        }
-      }
-    }else {
-      //it is STEMI, NSTEMI, UA (ACS)
-      if( bleedingRisk == 'low' ) {
-        therapy.choices.push({
-          steps: [
-            {option: options.mcm2.f, extra: '', extra2: _extra},
-          ]
-        });
-      }else{
-        //bleedingRisk is HIGH
-        therapy.choices.push({
-          steps: [
-            {option: options.mcm2.e, extra: '', extra2: _extra},
-          ]
-        });
-      }
-    }
-  }else{
-    console.log('No therapy found');
-    //therapy = null;
-  }
-  */
 
   return therapy;
 }
@@ -950,7 +868,7 @@ function determineCCSTherapy(){
                 {option: options.ccs.b, extra: 'Alone, lifelong'}
               ]
             });
-          } else { // NO PCI
+          } else { // NO HIGH-RISK-AF
             // No existe esta opcion
             console.log('THERE IS NO CCS RECOMENDED THERAPY FOR THAT COMBINATION!');
           }
@@ -963,7 +881,7 @@ function determineCCSTherapy(){
                 {option: options.ccs.b, extra: 'Alone, lifelong'}
               ]
             });
-          } else { // NO PCI
+          } else { // NO HIGH-RISK-AF
             // E for 12 months and then B alone lifelong
             therapy.choices.push({
               steps: [
@@ -983,7 +901,7 @@ function determineCCSTherapy(){
                 {option: options.ccs.d, extra: 'Alone, lifelong'}
               ]
             });
-          } else { // NO PCI
+          } else { // NO HIGH-RISK-AF
             // No existe esta opcion
             console.log('THERE IS NO CCS RECOMENDED THERAPY FOR THAT COMBINATION!');
           }
@@ -997,7 +915,7 @@ function determineCCSTherapy(){
                 {option: options.ccs.d, extra: 'Alone, lifelong'}
               ]
             });
-          } else { // NO PCI
+          } else { // NO HIGH-RISK-AF
             // C for 12 months and then D alone lifelong
             therapy.choices.push({
               steps: [
@@ -1019,7 +937,7 @@ function determineCCSTherapy(){
               {option: options.ccs.d, extra: 'Alone, lifelong'}
             ]
           });
-        } else { // NO PCI
+        } else { // NO HIGH-RISK-AF
           // No existe esta opcion
           console.log('THERE IS NO CCS RECOMENDED THERAPY FOR THAT COMBINATION!');
         }
@@ -1033,7 +951,7 @@ function determineCCSTherapy(){
               {option: options.ccs.d, extra: 'Alone, lifelong'}
             ]
           });
-        } else { // NO PCI
+        } else { // NO HIGH-RISK-AF
           // C for 12 months and then D alone lifelong
           therapy.choices.push({
             steps: [
@@ -1053,7 +971,7 @@ function determineCCSTherapy(){
               {option: options.ccs.d, extra: 'Alone, lifelong'}
             ]
           });
-        } else { // NO PCI
+        } else { // NO HIGH-RISK-AF
           // No existe esta opcion
           console.log('THERE IS NO CCS RECOMENDED THERAPY FOR THAT COMBINATION!');
         }
@@ -1067,7 +985,7 @@ function determineCCSTherapy(){
               {option: options.ccs.d, extra: 'Alone, lifelong'}
             ]
           });
-        } else { // NO PCI
+        } else { // NO HIGH-RISK-AF
           // C for 12 months and then D alone lifelong
           therapy.choices.push({
             steps: [
