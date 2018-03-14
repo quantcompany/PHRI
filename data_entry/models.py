@@ -54,6 +54,7 @@ class Patient(models.Model):
     indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
     bms_stent = models.BooleanField(default=False)
     des_stent = models.BooleanField(default=False)
+    bvs = models.BooleanField(default=False)
     poba = models.BooleanField(default=False)
     deb = models.BooleanField(default=False)
     drug_coated_stent = models.BooleanField(default=False)
@@ -128,15 +129,18 @@ class Patient(models.Model):
 
         if self.des_stent:
             display_lst.append('DES')
+        
+        if self.bvs:
+            display_lst.append('BVS')
 
+        if self.drug_coated_stent:
+            display_lst.append('DRUG COATED STENT')
+        
         if self.poba:
             display_lst.append('POBA')
 
         if self.deb:
             display_lst.append('DEB')
-
-        if self.drug_coated_stent:
-            display_lst.append('DRUG COATED STENT')
 
         if len(display_lst) > 0:
             return ", ".join(display_lst)
@@ -252,9 +256,10 @@ class Patient(models.Model):
             self.field_csv(self.indication, str),
             self.field_csv(self.bms_stent, bool),
             self.field_csv(self.des_stent, bool),
+            self.field_csv(self.bvs, bool),
+            self.field_csv(self.drug_coated_stent, bool),
             self.field_csv(self.poba, bool),
             self.field_csv(self.deb, bool),
-            self.field_csv(self.drug_coated_stent, bool),
             self.field_csv(self.get_af_type_display(), str),
             self.field_csv(self.get_prev_anti_coagulation_display(), str),
             self.field_csv(self.warfarin_intolerance, bool),

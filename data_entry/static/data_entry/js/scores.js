@@ -283,13 +283,11 @@ function clasifyGFR(value){
 // so that the scores, plot, and recommended therapy get updated as the
 // form is filled out
 
-//$('#chf, #diabetes_mellitus, #tia, #stroke, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction').on('switchChange.bootstrapSwitch', function(event, state){
 $('#chf, #diabetes_mellitus, #tia_stroke_or_sysemb, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse, #aim').on('switchChange.bootstrapSwitch', function(event, state){
     updateEverything();
 });
 
-//$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #no_pci, #hx_of_bleeding, #indication, input[type="checkbox"][name^="pci_risk_"], #weight, [name^="creatinine_"]').on('change', function(event, state){
-$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #poba, #deb, #drug_coated_stent, #hx_of_bleeding, #indication, input[type="checkbox"][name^="pci_risk_"], #weight, [name^="creatinine_"], input[type="checkbox"][name="anemia"]').on('change', function(event, state){
+$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #poba, #deb, #drug_coated_stent, #bvs, #hx_of_bleeding, #indication, input[type="checkbox"][name^="pci_risk_"], #weight, [name^="creatinine_"], input[type="checkbox"][name="anemia"]').on('change', function(event, state){
     updateEverything();
 });
 

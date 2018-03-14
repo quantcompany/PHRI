@@ -227,27 +227,27 @@
             <tbody>
 
                 <tr>
-                    <th>Bare-Metal Stent</th>
+                    <th>Bare-Metal Stent (BMS)</th>
                     <td>{{ patient.bms_stent | yesno | title }}</td>
                     <td></td>
-                    <th>Drug-Eluting Stent</th>
+                    <th>Drug-Eluting Stent (DES)</th>
                     <td>{{ patient.des_stent | yesno | title }}</td>
                 </tr>
 
                 <tr>
-                    <th>POBA</th>
-                    <td>{{ patient.poba | yesno | title }}</td>
+                    <th>Bioabsorbable Vascular Scaffold (BVS)</th>
+                    <td>{{ patient.bvs | yesno | title }}</td>
                     <td></td>
-                    <th>DEB</th>
-                    <td>{{ patient.deb | yesno | title }}</td>
+                    <th>Drug-Coated Stent (DCS)</th>
+                    <td>{{ patient.drug_coated_stent | yesno | title }}</td>
                 </tr>
 
                 <tr>
-                    <th>Drug-Coated Stent</th>
-                    <td>{{ patient.drug_coated_stent | yesno | title }}</td>
+                    <th>Plain Old Balloon Angioplasty (POBA)</th>
+                    <td>{{ patient.poba | yesno | title }}</td>
                     <td></td>
-                    <th></th>
-                    <td></td>
+                    <th>Drug Eluting Balloon (DEB)</th>
+                    <td>{{ patient.deb | yesno | title }}</td>
                 </tr>
             </tbody>
         </table>

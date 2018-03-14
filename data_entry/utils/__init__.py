@@ -52,9 +52,11 @@ def patients_csv_headers():
         'INDICATION',
         'BMS STENT',
         'DES STENT',
+        'BVS',
+        'DRUG COATED STENT',
         'POBA',
         'DEB',
-        'DRUG COATED STENT',
+        
         'AF TYPE',
         'PREV ANTI COAGULATION',
         'WARFARIN INTOLERANCE',
