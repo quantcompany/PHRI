@@ -23,7 +23,7 @@ function loadForm() {
 	});
 
 	//load PCI-RISK checkboxes
-	$('input[type="checkbox"][name^="pci_risk_"]').each(function(){
+	$('input[type="checkbox"][name^="high_risk_af_"]').each(function(){
 		var element = $(this);
 		var key = element.prop('id');
 		var data = storage.getItem(key);
@@ -75,7 +75,7 @@ function clearForm() {
 	$('input[type="text"],input[type="number"],textarea').val('').trigger('change');
 
 	//clear pci_risk checkboxes
-	$('input[type="checkbox"][name^="pci_risk_"]').prop('checked', false).trigger('change');
+	$('input[type="checkbox"][name^="high_risk_af_"]').prop('checked', false).trigger('change');
 
 	// clear stent/intervention checkboxes
 	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent,#bvs').prop('checked', false).trigger('change');
@@ -111,7 +111,7 @@ function registerChangeListeners() {
 		storage.setItem('dirty', 'true');
 	};
 
-	$('input[type="checkbox"][name^="pci_risk_"]').on('change', function() {
+	$('input[type="checkbox"][name^="high_risk_af_"]').on('change', function() {
 		var element = $(this);
 		var key = element.prop('id');
 		var value = element.is(':checked');

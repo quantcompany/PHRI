@@ -40,15 +40,15 @@ class Patient(models.Model):
         8 - In the Opinion of the Interventional Cardiologist
         9 - Graft Intervention
     '''
-    pci_risk_1 = models.BooleanField(default=False)
-    pci_risk_2 = models.BooleanField(default=False)
-    pci_risk_3 = models.BooleanField(default=False)
-    pci_risk_4 = models.BooleanField(default=False)
-    pci_risk_5 = models.BooleanField(default=False)
-    pci_risk_6 = models.BooleanField(default=False)
-    pci_risk_7 = models.BooleanField(default=False)
-    pci_risk_8 = models.BooleanField(default=False)
-    pci_risk_9 = models.BooleanField(default=False)
+    high_risk_af_1 = models.BooleanField(default=False)
+    high_risk_af_2 = models.BooleanField(default=False)
+    high_risk_af_3 = models.BooleanField(default=False)
+    high_risk_af_4 = models.BooleanField(default=False)
+    high_risk_af_5 = models.BooleanField(default=False)
+    high_risk_af_6 = models.BooleanField(default=False)
+    high_risk_af_7 = models.BooleanField(default=False)
+    high_risk_af_8 = models.BooleanField(default=False)
+    high_risk_af_9 = models.BooleanField(default=False)
 
     # Procedure Details
     indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
@@ -244,15 +244,15 @@ class Patient(models.Model):
             self.field_csv(self.age, int),
             self.field_csv(self.get_gender_display(), str),
             self.field_csv(self.weight, float),
-            self.field_csv(self.pci_risk_1, bool),
-            self.field_csv(self.pci_risk_2, bool),
-            self.field_csv(self.pci_risk_3, bool),
-            self.field_csv(self.pci_risk_4, bool),
-            self.field_csv(self.pci_risk_5, bool),
-            self.field_csv(self.pci_risk_6, bool),
-            self.field_csv(self.pci_risk_7, bool),
-            self.field_csv(self.pci_risk_8, bool),
-            self.field_csv(self.pci_risk_9, bool),
+            self.field_csv(self.high_risk_af_1, bool),
+            self.field_csv(self.high_risk_af_2, bool),
+            self.field_csv(self.high_risk_af_3, bool),
+            self.field_csv(self.high_risk_af_4, bool),
+            self.field_csv(self.high_risk_af_5, bool),
+            self.field_csv(self.high_risk_af_6, bool),
+            self.field_csv(self.high_risk_af_7, bool),
+            self.field_csv(self.high_risk_af_8, bool),
+            self.field_csv(self.high_risk_af_9, bool),
             self.field_csv(self.indication, str),
             self.field_csv(self.bms_stent, bool),
             self.field_csv(self.des_stent, bool),

@@ -228,7 +228,7 @@ function getPciRisk(){
     Gets a list of 8 booleans, if any element is Selected/Checked
     Then returs "High" else "Low"
   **/
-  return $('[name^="pci_risk_"]:checked').length == 0 ? 'low' : 'high'; 
+  return $('[name^="high_risk_af_"]:checked').length == 0 ? 'low' : 'high'; 
 
 }
 
