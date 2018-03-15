@@ -23,7 +23,7 @@ function loadForm() {
 	});
 
 	//load HIGH-RISK-AF checkboxes
-	$('input[type="checkbox"][name^="high_risk_af_"], #diabetes_mellitus').each(function(){
+	$('input[type="checkbox"][name^="pci_risk_"], #diabetes_mellitus').each(function(){
 		var element = $(this);
 		var key = element.prop('id');
 		var data = storage.getItem(key);
@@ -73,8 +73,8 @@ function clearForm() {
 	// clear text inputs
 	$('input[type="text"],input[type="number"],textarea').val('').trigger('change');
 
-	//clear high_risk_af checkboxes
-	$('input[type="checkbox"][name^="high_risk_af_"], #diabetes_mellitus').prop('checked', false).trigger('change');
+	//clear high_risk_af (PCI Risk) checkboxes
+	$('input[type="checkbox"][name^="pci_risk_"], #diabetes_mellitus').prop('checked', false).trigger('change');
 
 	// clear stent/intervention checkboxes
 	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent,#bvs').prop('checked', false).trigger('change');
@@ -110,7 +110,7 @@ function registerChangeListeners() {
 		storage.setItem('dirty', 'true');
 	};
 
-	$('input[type="checkbox"][name^="high_risk_af_"], #diabetes_mellitus').on('change', function() {
+	$('input[type="checkbox"][name^="pci_risk_"], #diabetes_mellitus').on('change', function() {
 		var element = $(this);
 		var key = element.prop('id');
 		var value = element.is(':checked');
