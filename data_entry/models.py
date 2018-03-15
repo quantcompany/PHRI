@@ -29,7 +29,7 @@ class Patient(models.Model):
     weight = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
     '''
-    High-risk angiographic features:
+    High-risk angiographic features (PCI Risk):
         1. Multi-vessel PCI
         2. Multiple stents implanted (> 3 stents implanted, > 3 lesions stented)
         3. Complex bifurcation lesion (treated with 2 stents)
@@ -38,13 +38,13 @@ class Patient(models.Model):
         6. Bioabsorbable Vascular Scaffold (BVS) implantation
         7. Left main or proximal LAD stenting
     '''
-    high_risk_af_1 = models.BooleanField(default=False)
-    high_risk_af_2 = models.BooleanField(default=False)
-    high_risk_af_3 = models.BooleanField(default=False)
-    high_risk_af_4 = models.BooleanField(default=False)
-    high_risk_af_5 = models.BooleanField(default=False)
-    high_risk_af_6 = models.BooleanField(default=False)
-    high_risk_af_7 = models.BooleanField(default=False)
+    pci_risk_1 = models.BooleanField(default=False)
+    pci_risk_2 = models.BooleanField(default=False)
+    pci_risk_3 = models.BooleanField(default=False)
+    pci_risk_4 = models.BooleanField(default=False)
+    pci_risk_5 = models.BooleanField(default=False)
+    pci_risk_6 = models.BooleanField(default=False)
+    pci_risk_7 = models.BooleanField(default=False)
 
     # Procedure Details
     indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
@@ -246,13 +246,13 @@ class Patient(models.Model):
             self.field_csv(self.age, int),
             self.field_csv(self.get_gender_display(), str),
             self.field_csv(self.weight, float),
-            self.field_csv(self.high_risk_af_1, bool),
-            self.field_csv(self.high_risk_af_2, bool),
-            self.field_csv(self.high_risk_af_3, bool),
-            self.field_csv(self.high_risk_af_4, bool),
-            self.field_csv(self.high_risk_af_5, bool),
-            self.field_csv(self.high_risk_af_6, bool),
-            self.field_csv(self.high_risk_af_7, bool),
+            self.field_csv(self.pci_risk_1, bool),
+            self.field_csv(self.pci_risk_2, bool),
+            self.field_csv(self.pci_risk_3, bool),
+            self.field_csv(self.pci_risk_4, bool),
+            self.field_csv(self.pci_risk_5, bool),
+            self.field_csv(self.pci_risk_6, bool),
+            self.field_csv(self.pci_risk_7, bool),
             self.field_csv(self.indication, str),
             self.field_csv(self.bms_stent, bool),
             self.field_csv(self.des_stent, bool),
