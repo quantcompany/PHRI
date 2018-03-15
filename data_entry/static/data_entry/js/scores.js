@@ -61,7 +61,7 @@ function updateChads2Score(){
     var ageValue = age >= 75 ? 1:0;
 
     // calculate diabetes
-    var diabetesValue = $('#diabetes_mellitus').bootstrapSwitch('state') ? 1:0;
+    var diabetesValue = $('#diabetes_mellitus').is(':checked') ? 1 : 0;
 
     // calculate stroke
     //var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
@@ -107,7 +107,7 @@ function updateCha2Score(){
     }
 
     // calculate diabetes
-    var diabetesValue = $('#diabetes_mellitus').bootstrapSwitch('state') ? 1:0;
+    var diabetesValue = $('#diabetes_mellitus').is(':checked') ? 1 : 0;
 
     // calculate stroke
     //var strokeValue = $('#stroke').bootstrapSwitch('state') ? 1:0;
@@ -283,11 +283,11 @@ function clasifyGFR(value){
 // so that the scores, plot, and recommended therapy get updated as the
 // form is filled out
 
-$('#prior_acute_cs, #prior_stent_thrombosis, #frailty, #chf, #diabetes_mellitus, #tia_stroke_or_sysemb, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse, #aim').on('switchChange.bootstrapSwitch', function(event, state){
+$('#prior_acute_cs, #prior_stent_thrombosis, #frailty, #chf, #tia_stroke_or_sysemb, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse, #aim').on('switchChange.bootstrapSwitch', function(event, state){
     updateEverything();
 });
 
-$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #poba, #deb, #drug_coated_stent, #bvs, #hx_of_bleeding, #indication, input[type="checkbox"][name^="high_risk_af_"], #weight, [name^="creatinine_"], input[type="checkbox"][name="anemia"]').on('change', function(event, state){
+$('#htn, #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #poba, #deb, #drug_coated_stent, #bvs, #hx_of_bleeding, #indication, input[type="checkbox"][name^="high_risk_af_"], #weight, [name^="creatinine_"], input[type="checkbox"][name="anemia"], #diabetes_mellitus').on('change', function(event, state){
     updateEverything();
 });
 
