@@ -41,7 +41,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        {% include 'data_entry/includes/pci_risk_panel.html' %}
+                        {% include 'data_entry/includes/high_risk_af_panel.html' %}
                     </div>
                 </div>
             </div>
@@ -227,6 +227,9 @@
             }
             if ($('#drug_coated_stent').is(':checked')){
                 fd.append('drug_coated_stent', 'on');
+            }
+            if ($('#bvs').is(':checked')){
+                fd.append('bvs', 'on');
             }
             if ($('#hxoa_anemia').is(':checked')){
                 fd.append('hxoa_anemia', 'on');

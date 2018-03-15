@@ -22,8 +22,8 @@ function loadForm() {
 		element.val(value).trigger('change');
 	});
 
-	//load PCI-RISK checkboxes
-	$('input[type="checkbox"][name^="pci_risk_"]').each(function(){
+	//load HIGH-RISK-AF checkboxes
+	$('input[type="checkbox"][name^="high_risk_af_"]').each(function(){
 		var element = $(this);
 		var key = element.prop('id');
 		var data = storage.getItem(key);
@@ -32,8 +32,7 @@ function loadForm() {
 	});
 
 	// load stent/intervention checkboxes
-	//$('#bms_stent,#des_stent,#no_pci').each(function() {
-	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent').each(function() {
+	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent,#bvs').each(function() {
 		var element = $(this);
 		var key = element.prop('id');
 		var value = storage.getItem(key) ? true : false;
@@ -74,11 +73,11 @@ function clearForm() {
 	// clear text inputs
 	$('input[type="text"],input[type="number"],textarea').val('').trigger('change');
 
-	//clear pci_risk checkboxes
-	$('input[type="checkbox"][name^="pci_risk_"]').prop('checked', false).trigger('change');
+	//clear high_risk_af checkboxes
+	$('input[type="checkbox"][name^="high_risk_af_"]').prop('checked', false).trigger('change');
 
 	// clear stent/intervention checkboxes
-	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent').prop('checked', false).trigger('change');
+	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent,#bvs').prop('checked', false).trigger('change');
 
 	//  clear Anemia checkboxes
 	$('#hxoa_anemia,#hemoglobin_anemia').prop('checked', false).trigger('change');
@@ -111,7 +110,7 @@ function registerChangeListeners() {
 		storage.setItem('dirty', 'true');
 	};
 
-	$('input[type="checkbox"][name^="pci_risk_"]').on('change', function() {
+	$('input[type="checkbox"][name^="high_risk_af_"]').on('change', function() {
 		var element = $(this);
 		var key = element.prop('id');
 		var value = element.is(':checked');
@@ -127,13 +126,14 @@ function registerChangeListeners() {
 		makeDirty();
 	});
 
-	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent').on('change', function() {
+	$('#bms_stent,#des_stent,#poba,#deb,#drug_coated_stent,#bvs').on('change', function() {
 		var keys = [
 			'bms_stent',
 			'des_stent',
 			'poba',
 			'deb',
 			'drug_coated_stent',
+			'bvs'
 		];
 
 		for (var i = 0; i < keys.length; i++){

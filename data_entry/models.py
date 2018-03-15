@@ -29,31 +29,28 @@ class Patient(models.Model):
     weight = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
     '''
-    PCI Risk:
-        1 - Long Stented Segment >30mm
-        2 - Small Vessel Diameter <=2.5mm
-        3 - IN-Stent Restenosis Intervention
-        4 - Atherectomy
-        5 - Bifurcation PCI
-        6 - Left main PCI
-        7 - Chronic Total Occlusion PCI
-        8 - In the Opinion of the Interventional Cardiologist
-        9 - Graft Intervention
+    High-risk angiographic features:
+        1. Multi-vessel PCI
+        2. Multiple stents implanted (> 3 stents implanted, > 3 lesions stented)
+        3. Complex bifurcation lesion (treated with 2 stents)
+        4. Total stent length > 60 mm
+        5. Chronic Total Occlusion intervention
+        6. Bioabsorbable Vascular Scaffold (BVS) implantation
+        7. Left main or proximal LAD stenting
     '''
-    pci_risk_1 = models.BooleanField(default=False)
-    pci_risk_2 = models.BooleanField(default=False)
-    pci_risk_3 = models.BooleanField(default=False)
-    pci_risk_4 = models.BooleanField(default=False)
-    pci_risk_5 = models.BooleanField(default=False)
-    pci_risk_6 = models.BooleanField(default=False)
-    pci_risk_7 = models.BooleanField(default=False)
-    pci_risk_8 = models.BooleanField(default=False)
-    pci_risk_9 = models.BooleanField(default=False)
+    high_risk_af_1 = models.BooleanField(default=False)
+    high_risk_af_2 = models.BooleanField(default=False)
+    high_risk_af_3 = models.BooleanField(default=False)
+    high_risk_af_4 = models.BooleanField(default=False)
+    high_risk_af_5 = models.BooleanField(default=False)
+    high_risk_af_6 = models.BooleanField(default=False)
+    high_risk_af_7 = models.BooleanField(default=False)
 
     # Procedure Details
     indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
     bms_stent = models.BooleanField(default=False)
     des_stent = models.BooleanField(default=False)
+    bvs = models.BooleanField(default=False)
     poba = models.BooleanField(default=False)
     deb = models.BooleanField(default=False)
     drug_coated_stent = models.BooleanField(default=False)
@@ -128,15 +125,18 @@ class Patient(models.Model):
 
         if self.des_stent:
             display_lst.append('DES')
+        
+        if self.bvs:
+            display_lst.append('BVS')
 
+        if self.drug_coated_stent:
+            display_lst.append('DRUG COATED STENT')
+        
         if self.poba:
             display_lst.append('POBA')
 
         if self.deb:
             display_lst.append('DEB')
-
-        if self.drug_coated_stent:
-            display_lst.append('DRUG COATED STENT')
 
         if len(display_lst) > 0:
             return ", ".join(display_lst)
@@ -240,21 +240,20 @@ class Patient(models.Model):
             self.field_csv(self.age, int),
             self.field_csv(self.get_gender_display(), str),
             self.field_csv(self.weight, float),
-            self.field_csv(self.pci_risk_1, bool),
-            self.field_csv(self.pci_risk_2, bool),
-            self.field_csv(self.pci_risk_3, bool),
-            self.field_csv(self.pci_risk_4, bool),
-            self.field_csv(self.pci_risk_5, bool),
-            self.field_csv(self.pci_risk_6, bool),
-            self.field_csv(self.pci_risk_7, bool),
-            self.field_csv(self.pci_risk_8, bool),
-            self.field_csv(self.pci_risk_9, bool),
+            self.field_csv(self.high_risk_af_1, bool),
+            self.field_csv(self.high_risk_af_2, bool),
+            self.field_csv(self.high_risk_af_3, bool),
+            self.field_csv(self.high_risk_af_4, bool),
+            self.field_csv(self.high_risk_af_5, bool),
+            self.field_csv(self.high_risk_af_6, bool),
+            self.field_csv(self.high_risk_af_7, bool),
             self.field_csv(self.indication, str),
             self.field_csv(self.bms_stent, bool),
             self.field_csv(self.des_stent, bool),
+            self.field_csv(self.bvs, bool),
+            self.field_csv(self.drug_coated_stent, bool),
             self.field_csv(self.poba, bool),
             self.field_csv(self.deb, bool),
-            self.field_csv(self.drug_coated_stent, bool),
             self.field_csv(self.get_af_type_display(), str),
             self.field_csv(self.get_prev_anti_coagulation_display(), str),
             self.field_csv(self.warfarin_intolerance, bool),
