@@ -59,7 +59,13 @@ def patients_csv_headers():
         'WARFARIN INTOLERANCE',
         'INR INSTABILITY',
         'DOAC ALLERGY OR INTOLERANCE',
+
+        'PRIOR ACUTE CORONARY SYNDROME (ACS)',
+        'PRIOR STENT THROMBOSIS',
+        'FRAILTY',
+        
         'CONGESTIVE HEART FAILURE',
+        'SMOKING HISTORY',
         'HYPERTENSION',
         'DIABETES MELLITUS',
         'TIA-STROKE-OR-SYSTEMIC EMBOLISM',
@@ -71,7 +77,7 @@ def patients_csv_headers():
         'ALCOHOL ABUSE',
         'ANEMIA',
         'HISTORY OF ANEMIA',
-        'HEMOGLOBIN <100 g/L or <10 g/dL',
+        'HEMOGLOBIN <110 g/L or <11 g/dL',
         'CREATININE(mg/dL)',
         'CREATININE(umol/L)',
         'GFR(mL/min)',

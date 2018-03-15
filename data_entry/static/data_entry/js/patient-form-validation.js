@@ -65,6 +65,7 @@ var patientFormValidator = $("form[name='patient_form']").validate({
       max: 9
     },
     htn: "required",
+    smoking_history: "required",
     alcohol_abuse: "required",
     reason: {
       required: function(){

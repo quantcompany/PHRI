@@ -90,7 +90,6 @@ INDICATION_CHOICES = (
 )
 
 ANTI_COAGULATION_CHOICES = (
-#    (0, 'No'), I commented this one, because having both "None" and "No" was redundant
     (1, 'Warfarin'),
     (2, 'Rivaroxaban'),
     (3, 'Dabigatran'),
@@ -101,6 +100,7 @@ BLEEDING_CHOICES = (
     (0, 'No'),
     (1, 'Gastrointestinal'),
     (2, 'Intracerebral hemorrhage'),
+    (3, 'Hospitalization for bleeding within last year'),
 )
 
 MALIGNANCY_CHOICES = (
@@ -113,4 +113,10 @@ NON_CARDIATIC_SURGERY_CHOICES = (
     (0, 'No'),
     (1, 'Yes, < 6 months'),
     (2, 'Yes, >= 6 months'),
+)
+
+SMOKING_HISTORY_CHOICES = (
+    (0, 'Never smoker'),
+    (1, 'Former smoker'),
+    (2, 'Current smoker'),
 )

@@ -22,6 +22,7 @@ def form(request):
         'choices': {
             # bloodwork UM choices removed
             'GENDER_CHOICES': GENDER_CHOICES,
+            'SMOKING_HISTORY_CHOICES': SMOKING_HISTORY_CHOICES,
             'HTN_CHOICES': HTN_CHOICES,
             'ALCOHOL_ABUSE_CHOICES': ALCOHOL_ABUSE_CHOICES,
             'VASCULAR_DISEASE_CHOICES': VASCULAR_DISEASE_CHOICES,
@@ -163,6 +164,7 @@ def form_test(request):
         'choices': {
             # bloodwork um choices removed
             'GENDER_CHOICES': GENDER_CHOICES,
+            'SMOKING_HISTORY_CHOICES': SMOKING_HISTORY_CHOICES,
             'HTN_CHOICES': HTN_CHOICES,
             'ALCOHOL_ABUSE_CHOICES': ALCOHOL_ABUSE_CHOICES,
             'VASCULAR_DISEASE_CHOICES': VASCULAR_DISEASE_CHOICES,
