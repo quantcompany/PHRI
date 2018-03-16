@@ -189,11 +189,12 @@ function getAnemia(){
 function updateRecommendedTherapy(){
     //var mcmTherapy = determineMCMTherapy();
     //$('#mcm_recommendation').html(renderTherapy(mcmTherapy));
-    var mcmTherapy = determineMCMTherapy_2();
-    $('#mcm_recommendation').html(renderTherapyMcm(mcmTherapy, true));
+    
+    //var ccsTherapy = determineCCSTherapy();
+    //$('#ccs_recommendation').html(renderTherapy(ccsTherapy));
 
-    var ccsTherapy = determineCCSTherapy();
-    $('#ccs_recommendation').html(renderTherapy(ccsTherapy));
+    var mcmTherapy = determineMCMTherapy_3();
+    $('#mcm_recommendation').html(renderTherapyMcm(mcmTherapy, true));
 }
 
 function getHxOfBleeding(){
@@ -207,11 +208,17 @@ function getBleedingRisk(){
     Returns:
         High: hasbled_score >= 3 or has anemia or history of bleeding
         Low: not High
+
+      >> New Criteria <<
+      BLEEDING RISK:
+      1. LOW RISK if: HASBLED <= 3
+      2. HIGH RISK if: HASBLED >= 4
+
   **/
   var anemia = getAnemia();
   var hxOfBleeding = getHxOfBleeding();
 
-  return (scores.hasbled >= 3 || anemia || hxOfBleeding) ? "high" : "low";
+  return (scores.hasbled >= 4 || anemia || hxOfBleeding) ? "high" : "low";
 }
 
 //function getBleedingRiskOld(){
@@ -225,10 +232,19 @@ function getBleedingRisk(){
 
 function getHighRiskAF(){
   /**
-    Gets a list of 8 booleans, if any element is Selected/Checked
-    Then returs "High" else "Low"
+    PCI RISK: HIGH si cualquiera de las siguientes condiciones es verdadera:
+    1. Cualquier checkbox de la cajita “PCI RISK” esta activado
+    2. eGFR &lt; 60 mL/min
+    3. Prior Acute Coronary Syndrome (ACS)
+    4. Prior stent thrombosis
+    Then returns "High" else "Low"
   **/
-  return $('[name^="pci_risk_"]:checked').length == 0 ? 'low' : 'high'; 
+  var isGFRLower = computeGFR() < 60;
+  var checkboxesSelected = $('[name^="pci_risk_"]:checked').length != 0 
+  || $('#diabetes_mellitus').is(':checked')
+  || $('#prior_acute_cs').is(':checked')
+  || $('#prior_stent_thrombosis').is(':checked');
+  return  (checkboxesSelected || isGFRLower) ? 'high' : 'low'; 
 
 }
 
@@ -238,6 +254,7 @@ function getClinicalPresentation(){
   return indication === 'SCAD' ? 'ELECTIVE' : 'ACS';
 }
 
+/*
 function determineMCMTherapy_2(){
   var highRiskAFValue = getHighRiskAF();
   var bleedingRisk = getBleedingRisk();
@@ -286,9 +303,7 @@ function determineMCMTherapy_2(){
           ]
         });
       } else {
-        /**
-          highRiskAF is High
-        **/
+        //highRiskAF is High
         if( bleedingRisk == 'low' ) {
           therapy.choices.push({
             steps: [
@@ -296,9 +311,7 @@ function determineMCMTherapy_2(){
             ]
           });
         }else {
-          /**
-            bleedingRisk is HIGH
-          **/
+          //bleedingRisk is HIGH
           therapy.choices.push({
             steps: [
               {option: options.mcm2.e, extra: '', extra2: _extra},
@@ -310,9 +323,7 @@ function determineMCMTherapy_2(){
       console.log('No therapy found');
     }
   }else {
-    /**
-      Clinical Presentation is ACS
-    **/
+    //Clinical Presentation is ACS
     if( scores.chads2 == 0 ){
       therapy.choices.push({
         steps: [
@@ -333,9 +344,7 @@ function determineMCMTherapy_2(){
           ]
         });
       }else{
-        /**
-          bleedingRisk is HIGH
-        **/
+        //bleedingRisk is HIGH
         therapy.choices.push({
           steps: [
             {option: options.mcm2.e, extra: '', extra2: _extra},
@@ -348,6 +357,263 @@ function determineMCMTherapy_2(){
   }
 
   return therapy;
+}
+*/
+
+function determineMCMTherapy_3(){
+  var highRiskAFValue = getHighRiskAF();
+  var patientAge = getAge();
+  var chads2Score = scores.chads2;
+  var clinicalP = getClinicalPresentation();
+  var bleedingRisk = getBleedingRisk();
+  var therapy = {choices: []};
+
+  if( highRiskAFValue === 'low' ) {
+    //LOW PCI Risk
+    if( patientAge < 65 ) {
+      if( chads2Score == 0 ) {
+        if(bleedingRisk === 'low') {
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm3.a, extra: '', extra2: ''},
+            ]
+          });
+        }else {
+          //Bleeding Risk is HIGH
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm3.b, extra: '', extra2: ''},
+            ]
+          });
+        }
+      }else {
+        //chads2 is >=1
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm3.c, extra: '', extra2: ''},
+          ]
+        });
+      }
+    }else {
+      if( chads2Score == 0 ) {
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm3.c, extra: '', extra2: ''},
+          ]
+        });
+      }else {
+        //chads2 is >=1
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm3.c, extra: '', extra2: ''},
+          ]
+        });
+      }
+    }
+  }else {
+    //HIGH PCI Risk
+    if( patientAge < 65 ) {
+      if( chads2Score == 0 ) {
+        if(clinicalP === 'ACS') {
+          if(bleedingRisk === 'low') {
+            therapy.choices.push({
+              steps: [
+                {option: options.mcm3.d, extra: '', extra2: ''},
+              ]
+            });
+          }else {
+            //HIGH Bleeding Risk
+            therapy.choices.push({
+              steps: [
+                {option: options.mcm3.d, extra: '', extra2: ''},
+              ]
+            });
+          }
+        }else {
+          //ELECTIVE Clinical Presentation
+          if(bleedingRisk === 'low') {
+            therapy.choices.push({
+              steps: [
+                {option: options.mcm3.e, extra: '', extra2: ''},
+              ]
+            });
+          }else {
+            //HIGH Bleeding Risk
+            therapy.choices.push({
+              steps: [
+                {option: options.mcm3.e, extra: '', extra2: ''},
+              ]
+            });
+          }
+        }
+      }else if ( chads2Score == 1 ) {
+        if(bleedingRisk === 'low') {
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm3.d, extra: '', extra2: ''},
+            ]
+          });
+        }else {
+          //HIGH Bleeding Risk
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm3.d, extra: '', extra2: ''},
+            ]
+          });
+        }
+      } else if( chads2Score >= 2 ) {
+        if(bleedingRisk === 'low') {
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm3.f, extra: '', extra2: ''},
+            ]
+          });
+        }else {
+          //HIGH Bleeding Risk
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm3.f, extra: '', extra2: ''},
+            ]
+          });
+        }
+      }else {
+        console.log('no therapy found');
+      }
+    } else {
+      if( chads2Score == 0 ) {
+        if(bleedingRisk === 'low') {
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm3.f, extra: '', extra2: ''},
+            ]
+          });
+        }else {
+          //HIGH Bleeding Risk
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm3.f, extra: '', extra2: ''},
+            ]
+          });
+        }
+      }else {
+        //Chads2 Score >= 1
+        if(bleedingRisk === 'low') {
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm3.f, extra: '', extra2: ''},
+            ]
+          });
+        }else {
+          //HIGH Bleeding Risk
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm3.f, extra: '', extra2: ''},
+            ]
+          });
+        }
+      }
+    }
+  }
+
+  return therapy;
+
+  /*var therapy = {choices: []};
+  var _extra = '<div class="row pioneer-table-link">\
+                  <div class="col-md-6">\
+                      <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf" target="_blank">\
+                        <img src="'+static_url+'img/pioneer-af-pci-2.jpg" class="img-responsive"/>\
+                      </a><br>\
+                      <div class="alert bg-warning" style="text-decoration:none;margin:0;padding:0">\
+                        <p>Rivaroxaban 15 mg qd*</p>\
+                        <p style="margin-top:0;">Clopidogrel 75 mg qd✝</p>\
+                      </div>\
+                  </div>\
+                  <div class="col-md-6">\
+                      <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/nejmoa1708454.pdf" target="_blank">\
+                        <img src="'+static_url+'img/2734848_RE-DUAL-PCI.jpg" class="img-responsive"/>\
+                      </a><br>\
+                      <div class="alert bg-warning" style="text-decoration:none;margin:0;padding:0">\
+                        <p>Dabigatran 110/150 mg qd</p>\
+                        <p style="margin-top:0;">Clopidogrel 75 mg qd</p>\
+                      </div>\
+                  </div>\
+                </div>';
+
+  if( clinicalP === 'ELECTIVE') {
+    if( scores.chads2 == 0 ){
+      therapy.choices.push({
+        steps: [
+          {option: options.mcm2.a, extra: '', extra2: ''},
+        ]
+      });
+    }else if( scores.chads2 == 1 ){
+      therapy.choices.push({
+        steps: [
+          {option: options.mcm2.c, extra: '', extra2: _extra},
+        ]
+      });
+    }else if( scores.chads2 >=2 ){
+      if( highRiskAFValue == 'low' ) {
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm2.e, extra: '', extra2: _extra, },
+          ]
+        });
+      } else {
+        //highRiskAF is High
+        if( bleedingRisk == 'low' ) {
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm2.f, extra: '', extra2: _extra},
+            ]
+          });
+        }else {
+          //bleedingRisk is HIGH
+          therapy.choices.push({
+            steps: [
+              {option: options.mcm2.e, extra: '', extra2: _extra},
+            ]
+          });
+        }
+      }
+    }else{
+      console.log('No therapy found');
+    }
+  }else {
+    //Clinical Presentation is ACS
+    if( scores.chads2 == 0 ){
+      therapy.choices.push({
+        steps: [
+          {option: options.mcm2.b, extra: '', extra2: ''},
+        ]
+      });
+    }else if( scores.chads2 == 1 ){
+      therapy.choices.push({
+        steps: [
+          {option: options.mcm2.d, extra: '', extra2: ''},
+        ]
+      });
+    }else if( scores.chads2 >=2 ){
+      if( bleedingRisk == 'low' ) {
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm2.f, extra: '', extra2: _extra},
+          ]
+        });
+      }else{
+        //bleedingRisk is HIGH
+        therapy.choices.push({
+          steps: [
+            {option: options.mcm2.e, extra: '', extra2: _extra},
+          ]
+        });
+      }
+    }else{
+      console.log('No therapy found');
+    }
+  }
+
+  return therapy;*/
 }
 
 function determineMCMTherapy(){
@@ -851,6 +1117,7 @@ function determineMCMTherapy(){
   return therapy;
 }
 
+/*
 function determineCCSTherapy(){
   var age = getAge();
   var indication = getIndication();
@@ -1000,3 +1267,4 @@ function determineCCSTherapy(){
 
   return therapy;
 }
+*/

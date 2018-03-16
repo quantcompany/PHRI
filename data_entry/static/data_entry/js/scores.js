@@ -172,24 +172,8 @@ function updateHasbledScore(){
 
     // Drug abuse
     var drugAbuseValue = $('#drug_abuse').bootstrapSwitch('state') ? 1:0;
-
-    // calculate alcohol abuses value
-    // alcohol abuse has 3 possible choices (0, 1 and 2)
-    // if the choice is 0 or 1, the value should be 0
-    // if the choice is 2, the value should be 1
     var alcoholAbuseChoice = parseInt($('#alcohol_abuse').val()) || 0; // in case the selection is empty
     var alcoholAbuseValue = alcoholAbuseChoice == 2 ? 1:0;
-
-    // console.log('htnValue: ' + htnValue);
-    // console.log('renalDysfunctionValue: ' + renalDysfunctionValue);
-    // console.log('liverDysfunctionValue: ' + liverDysfunctionValue);
-    // console.log('strokeValue: ' + strokeValue);
-    // console.log('bleedingValue: ' + bleedingValue);
-    // console.log('inrValue: ' + inrValue);
-    // console.log('ageValue: ' + ageValue);
-    // console.log('drugAbuseValue: ' + drugAbuseValue);
-    // console.log('alcoholAbuseValue: ' + alcoholAbuseValue);
-
     scores.hasbled = htnValue + renalDysfunctionValue + liverDysfunctionValue + tia_stroke_or_sysemb_value +
     bleedingValue + inrValue + ageValue + (drugAbuseValue || alcoholAbuseValue) + aimValue;
 
