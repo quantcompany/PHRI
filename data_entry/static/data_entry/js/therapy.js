@@ -52,38 +52,29 @@ function renderTherapy(therapy){
   for (var i = 0; i < therapy.choices.length; i++) {
     var choice = therapy.choices[i];
 
-    //out += '<div class="row p-10 m-b-20">';
-    //out += '<div class="col-md-10 col-md-offset-1">';
-    out += '<div class="row">';
-    out += '<div class="col-md-12">';
-
-    //out += '<div class="note note-info m-b-0 p-5 text-center">';
-    //out += '<h1 class="m-5">Option ' + (i + 1) + '</h1>';
-    //out += '</div>';
-
-    for (var j = 0; j < choice.steps.length; j++) {
-      var step = choice.steps[j];
-      out += '<div class="therapy-option note note-default m-b-0 p-10 text-center">';
-      out += step.option;
-      if (step.extra) {
-        out += '<h4 class="m-0"><em><strong>(' + step.extra + ')</strong></em></h4>';
-      }
-      out += '</div>';
-
-      if (j !== choice.steps.length - 1) {
-        out += '<div class="note note-default m-b-0 p-5 text-center">';
-        out += '<h4 class="m-0"><em><strong>then</strong></em></h4>';
+    if( choice.steps.length ) {
+      for (var j = 0; j < choice.steps.length; j++) {
+        var step = choice.steps[j];
+        out += '<div class="row therapy-option text-center">';
+        out += '  <div class="col-md-6 m-0 p-0">';
+        out += '    <h4 class="m-0"><em><strong>OPTION UP TO 12 MONTHS</strong></em></h4><br>';
+        out += step.option;
+        out += '  </div>';
+        out += '  <div class="col-md-6 m-0 p-0">';
+        out += '    <h4 class="m-0"><em><strong>OPTION AFTER 12 MONTHS</strong></em></h4><br>';
+        out += step.extra ? step.extra : 'No option after 12 months';
+        out += '  </div>';
         out += '</div>';
       }
+    }else {
+      out += '<h4 class="m-0"><em><strong>No options</strong></em></h4>';
     }
-
-    out += '</div>';
-    out += '</div>';
   }
   return out;
 }
 
-function renderTherapyMcm(therapy, use_extra){
+/*
+function renderTherapyCcs(therapy, use_extra){
   if (therapy.choices.length == 0){
       console.log('NO CHOICES!');
       return '<div class="row"><div class="col-md-12 text-center"><h3 style="opacity: 0.3;">There is no recommended treatment</h3></div></div>';
@@ -118,7 +109,9 @@ function renderTherapyMcm(therapy, use_extra){
   }
   return out;
 }
+*/
 
+/*
 function renderTherapyImage(therapy){
 
   $('.hamilton_therapy_options').stop(true, true).hide(0, function(){
@@ -131,7 +124,7 @@ function renderTherapyImage(therapy){
   
   });
 }
-
+*/
 
 function getStent(){
     if ($('#des_stent').is(':checked')){
@@ -178,8 +171,8 @@ function getCreatinine_umolL() {
   return parseFloat( $('#creatinine_umolL').val(), 10 ) || 0;
 }
 
-function getIndication(){
-    return $('#indication').val();
+function getElectivePCI(){
+    return $('#elective_pci').val();
 }
 
 function getAnemia(){
@@ -187,14 +180,8 @@ function getAnemia(){
 }
 
 function updateRecommendedTherapy(){
-    //var mcmTherapy = determineMCMTherapy();
-    //$('#mcm_recommendation').html(renderTherapy(mcmTherapy));
-    
-    //var ccsTherapy = determineCCSTherapy();
-    //$('#ccs_recommendation').html(renderTherapy(ccsTherapy));
-
-    var mcmTherapy = determineMCMTherapy_3();
-    $('#mcm_recommendation').html(renderTherapyMcm(mcmTherapy, true));
+    var ccsTherapy = determineCCSTherapy();
+    $('#ccs_recommendation').html(renderTherapy(ccsTherapy));
 }
 
 function getHxOfBleeding(){
@@ -205,32 +192,33 @@ function getHxOfBleeding(){
 
 function getBleedingRisk(){
   /**
-    Returns:
-        High: hasbled_score >= 3 or has anemia or history of bleeding
-        Low: not High
-
-      >> New Criteria <<
-      BLEEDING RISK:
-      1. LOW RISK if: HASBLED <= 3
-      2. HIGH RISK if: HASBLED >= 4
+    new criteria bases on image
+    https://quantcompany.slack.com/files/U4JC2174M/F9QPTR8SU/bleeding-risk.png
 
   **/
-  var anemia = getAnemia();
-  var hxOfBleeding = getHxOfBleeding();
+  var patientAge = this.getAge() > 75;
+  var frailty = $('#frailty').is(':checked');
+  var hemoglobinAnemia = $('#hemoglobin_anemia').is(':checked');
+  var isGFRLower = computeGFR() < 40;
+  var patientWeight = this.getWeight() < 40;
+  //hxOfBleeding = "Intracerebral hemorrhage" OR "Hospitalization for bleeding within last year"
+  var hxOfBleeding = $('#hx_of_bleeding').val() == '2' || $('#hx_of_bleeding').val() == '3';
+  var tiaStroke = $('#tia_stroke_or_sysemb').is(':checked');
+  var aim = $('#aim').is(':checked');
 
-  return (scores.hasbled >= 4 || anemia || hxOfBleeding) ? "high" : "low";
+  return (
+    patientAge
+    || frailty
+    || hemoglobinAnemia
+    || isGFRLower
+    || patientWeight
+    || hxOfBleeding
+    || tiaStroke
+    || aim
+  ) ? "high" : "low";
 }
 
-//function getBleedingRiskOld(){
-  /**
-    Returns:
-        Low: hasbled_score <= 3
-        High: hasbled_score >=4
-  **/
-  //return scores.hasbled <= 3 ? "low" : "high";
-//}
-
-function getHighRiskAF(){
+function getHighRiskPCI(){
   /**
     PCI RISK: HIGH si cualquiera de las siguientes condiciones es verdadera:
     1. Cualquier checkbox de la cajita “PCI RISK” esta activado
@@ -243,146 +231,42 @@ function getHighRiskAF(){
   var checkboxesSelected = $('[name^="pci_risk_"]:checked').length != 0 
   || $('#diabetes_mellitus').is(':checked')
   || $('#prior_acute_cs').is(':checked')
-  || $('#prior_stent_thrombosis').is(':checked');
+  || $('#prior_stent_thrombosis').is(':checked')
+  //current smoker
+  || $('#smoking_history').val() == '2';
   return  (checkboxesSelected || isGFRLower) ? 'high' : 'low'; 
 
 }
 
-function getClinicalPresentation(){
+function getElectivePCIValue(){
   //returns ELECTIVE or ACS
-  var indication = getIndication();
-  return indication === 'SCAD' ? 'ELECTIVE' : 'ACS';
+  var elective_pci = getElectivePCI();
+  return elective_pci === 'SCAD' ? 'ELECTIVE' : 'ACS';
 }
 
-/*
-function determineMCMTherapy_2(){
-  var highRiskAFValue = getHighRiskAF();
-  var bleedingRisk = getBleedingRisk();
-  var clinicalP = getClinicalPresentation();
-
-  var therapy = {choices: []};
-  var _extra = '<div class="row pioneer-table-link">\
-                  <div class="col-md-6">\
-                      <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf" target="_blank">\
-                        <img src="'+static_url+'img/pioneer-af-pci-2.jpg" class="img-responsive"/>\
-                      </a><br>\
-                      <div class="alert bg-warning" style="text-decoration:none;margin:0;padding:0">\
-                        <p>Rivaroxaban 15 mg qd*</p>\
-                        <p style="margin-top:0;">Clopidogrel 75 mg qd✝</p>\
-                      </div>\
-                  </div>\
-                  <div class="col-md-6">\
-                      <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/nejmoa1708454.pdf" target="_blank">\
-                        <img src="'+static_url+'img/2734848_RE-DUAL-PCI.jpg" class="img-responsive"/>\
-                      </a><br>\
-                      <div class="alert bg-warning" style="text-decoration:none;margin:0;padding:0">\
-                        <p>Dabigatran 110/150 mg qd</p>\
-                        <p style="margin-top:0;">Clopidogrel 75 mg qd</p>\
-                      </div>\
-                  </div>\
-                </div>';
-
-  if( clinicalP === 'ELECTIVE') {
-    if( scores.chads2 == 0 ){
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.a, extra: '', extra2: ''},
-        ]
-      });
-    }else if( scores.chads2 == 1 ){
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.c, extra: '', extra2: _extra},
-        ]
-      });
-    }else if( scores.chads2 >=2 ){
-      if( highRiskAFValue == 'low' ) {
-        therapy.choices.push({
-          steps: [
-            {option: options.mcm2.e, extra: '', extra2: _extra, },
-          ]
-        });
-      } else {
-        //highRiskAF is High
-        if( bleedingRisk == 'low' ) {
-          therapy.choices.push({
-            steps: [
-              {option: options.mcm2.f, extra: '', extra2: _extra},
-            ]
-          });
-        }else {
-          //bleedingRisk is HIGH
-          therapy.choices.push({
-            steps: [
-              {option: options.mcm2.e, extra: '', extra2: _extra},
-            ]
-          });
-        }
-      }
-    }else{
-      console.log('No therapy found');
-    }
-  }else {
-    //Clinical Presentation is ACS
-    if( scores.chads2 == 0 ){
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.b, extra: '', extra2: ''},
-        ]
-      });
-    }else if( scores.chads2 == 1 ){
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.d, extra: '', extra2: ''},
-        ]
-      });
-    }else if( scores.chads2 >=2 ){
-      if( bleedingRisk == 'low' ) {
-        therapy.choices.push({
-          steps: [
-            {option: options.mcm2.f, extra: '', extra2: _extra},
-          ]
-        });
-      }else{
-        //bleedingRisk is HIGH
-        therapy.choices.push({
-          steps: [
-            {option: options.mcm2.e, extra: '', extra2: _extra},
-          ]
-        });
-      }
-    }else{
-      console.log('No therapy found');
-    }
-  }
-
-  return therapy;
-}
-*/
-
-function determineMCMTherapy_3(){
-  var highRiskAFValue = getHighRiskAF();
+function determineCCSTherapy(){
+  var highRiskPCIValue = getHighRiskPCI();
   var patientAge = getAge();
   var chads2Score = scores.chads2;
-  var clinicalP = getClinicalPresentation();
+  var electivePCIValue = getElectivePCIValue();
   var bleedingRisk = getBleedingRisk();
   var therapy = {choices: []};
 
-  if( highRiskAFValue === 'low' ) {
+  if( highRiskPCIValue === 'low' ) {
     //LOW PCI Risk
     if( patientAge < 65 ) {
       if( chads2Score == 0 ) {
         if(bleedingRisk === 'low') {
           therapy.choices.push({
             steps: [
-              {option: options.mcm3.a, extra: '', extra2: ''},
+              {option: options.ccs.up12.a, extra: options.ccs.after12.i},
             ]
           });
         }else {
           //Bleeding Risk is HIGH
           therapy.choices.push({
             steps: [
-              {option: options.mcm3.b, extra: '', extra2: ''},
+              {option: options.ccs.up12.b, extra: options.ccs.after12.i},
             ]
           });
         }
@@ -390,22 +274,23 @@ function determineMCMTherapy_3(){
         //chads2 is >=1
         therapy.choices.push({
           steps: [
-            {option: options.mcm3.c, extra: '', extra2: ''},
+            {option: options.ccs.up12.c, extra: options.ccs.after12.ii},
           ]
         });
       }
     }else {
+      //if age >= 65
       if( chads2Score == 0 ) {
         therapy.choices.push({
           steps: [
-            {option: options.mcm3.c, extra: '', extra2: ''},
+            {option: options.ccs.up12.c, extra: options.ccs.after12.ii},
           ]
         });
       }else {
         //chads2 is >=1
         therapy.choices.push({
           steps: [
-            {option: options.mcm3.c, extra: '', extra2: ''},
+            {option: options.ccs.up12.c, extra: options.ccs.after12.ii},
           ]
         });
       }
@@ -414,18 +299,18 @@ function determineMCMTherapy_3(){
     //HIGH PCI Risk
     if( patientAge < 65 ) {
       if( chads2Score == 0 ) {
-        if(clinicalP === 'ACS') {
+        if(electivePCIValue === 'ACS') {
           if(bleedingRisk === 'low') {
             therapy.choices.push({
               steps: [
-                {option: options.mcm3.d, extra: '', extra2: ''},
+                {option: options.ccs.up12.d, extra: options.ccs.after12.iii},
               ]
             });
           }else {
             //HIGH Bleeding Risk
             therapy.choices.push({
               steps: [
-                {option: options.mcm3.d, extra: '', extra2: ''},
+                {option: options.ccs.up12.d, extra: options.ccs.after12.i},
               ]
             });
           }
@@ -434,14 +319,14 @@ function determineMCMTherapy_3(){
           if(bleedingRisk === 'low') {
             therapy.choices.push({
               steps: [
-                {option: options.mcm3.e, extra: '', extra2: ''},
+                {option: options.ccs.up12.e, extra: options.ccs.after12.iii},
               ]
             });
           }else {
             //HIGH Bleeding Risk
             therapy.choices.push({
               steps: [
-                {option: options.mcm3.e, extra: '', extra2: ''},
+                {option: options.ccs.up12.e, extra: options.ccs.after12.i},
               ]
             });
           }
@@ -450,14 +335,14 @@ function determineMCMTherapy_3(){
         if(bleedingRisk === 'low') {
           therapy.choices.push({
             steps: [
-              {option: options.mcm3.d, extra: '', extra2: ''},
+              {option: options.ccs.up12.d, extra: options.ccs.after12.iv},
             ]
           });
         }else {
           //HIGH Bleeding Risk
           therapy.choices.push({
             steps: [
-              {option: options.mcm3.d, extra: '', extra2: ''},
+              {option: options.ccs.up12.d, extra: options.ccs.after12.ii},
             ]
           });
         }
@@ -465,14 +350,14 @@ function determineMCMTherapy_3(){
         if(bleedingRisk === 'low') {
           therapy.choices.push({
             steps: [
-              {option: options.mcm3.f, extra: '', extra2: ''},
+              {option: options.ccs.up12.f, extra: options.ccs.after12.iv},
             ]
           });
         }else {
           //HIGH Bleeding Risk
           therapy.choices.push({
             steps: [
-              {option: options.mcm3.f, extra: '', extra2: ''},
+              {option: options.ccs.up12.f, extra: options.ccs.after12.ii},
             ]
           });
         }
@@ -480,18 +365,19 @@ function determineMCMTherapy_3(){
         console.log('no therapy found');
       }
     } else {
+      //Age >= 65
       if( chads2Score == 0 ) {
         if(bleedingRisk === 'low') {
           therapy.choices.push({
             steps: [
-              {option: options.mcm3.f, extra: '', extra2: ''},
+              {option: options.ccs.up12.f, extra: options.ccs.after12.iv},
             ]
           });
         }else {
           //HIGH Bleeding Risk
           therapy.choices.push({
             steps: [
-              {option: options.mcm3.f, extra: '', extra2: ''},
+              {option: options.ccs.up12.f, extra: options.ccs.after12.ii},
             ]
           });
         }
@@ -500,764 +386,14 @@ function determineMCMTherapy_3(){
         if(bleedingRisk === 'low') {
           therapy.choices.push({
             steps: [
-              {option: options.mcm3.f, extra: '', extra2: ''},
+              {option: options.ccs.up12.f, extra: options.ccs.after12.iv},
             ]
           });
         }else {
           //HIGH Bleeding Risk
           therapy.choices.push({
             steps: [
-              {option: options.mcm3.f, extra: '', extra2: ''},
-            ]
-          });
-        }
-      }
-    }
-  }
-
-  return therapy;
-
-  /*var therapy = {choices: []};
-  var _extra = '<div class="row pioneer-table-link">\
-                  <div class="col-md-6">\
-                      <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf" target="_blank">\
-                        <img src="'+static_url+'img/pioneer-af-pci-2.jpg" class="img-responsive"/>\
-                      </a><br>\
-                      <div class="alert bg-warning" style="text-decoration:none;margin:0;padding:0">\
-                        <p>Rivaroxaban 15 mg qd*</p>\
-                        <p style="margin-top:0;">Clopidogrel 75 mg qd✝</p>\
-                      </div>\
-                  </div>\
-                  <div class="col-md-6">\
-                      <a href="'+static_url+'data_entry/References/Guidelines/OtherReferences/nejmoa1708454.pdf" target="_blank">\
-                        <img src="'+static_url+'img/2734848_RE-DUAL-PCI.jpg" class="img-responsive"/>\
-                      </a><br>\
-                      <div class="alert bg-warning" style="text-decoration:none;margin:0;padding:0">\
-                        <p>Dabigatran 110/150 mg qd</p>\
-                        <p style="margin-top:0;">Clopidogrel 75 mg qd</p>\
-                      </div>\
-                  </div>\
-                </div>';
-
-  if( clinicalP === 'ELECTIVE') {
-    if( scores.chads2 == 0 ){
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.a, extra: '', extra2: ''},
-        ]
-      });
-    }else if( scores.chads2 == 1 ){
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.c, extra: '', extra2: _extra},
-        ]
-      });
-    }else if( scores.chads2 >=2 ){
-      if( highRiskAFValue == 'low' ) {
-        therapy.choices.push({
-          steps: [
-            {option: options.mcm2.e, extra: '', extra2: _extra, },
-          ]
-        });
-      } else {
-        //highRiskAF is High
-        if( bleedingRisk == 'low' ) {
-          therapy.choices.push({
-            steps: [
-              {option: options.mcm2.f, extra: '', extra2: _extra},
-            ]
-          });
-        }else {
-          //bleedingRisk is HIGH
-          therapy.choices.push({
-            steps: [
-              {option: options.mcm2.e, extra: '', extra2: _extra},
-            ]
-          });
-        }
-      }
-    }else{
-      console.log('No therapy found');
-    }
-  }else {
-    //Clinical Presentation is ACS
-    if( scores.chads2 == 0 ){
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.b, extra: '', extra2: ''},
-        ]
-      });
-    }else if( scores.chads2 == 1 ){
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm2.d, extra: '', extra2: ''},
-        ]
-      });
-    }else if( scores.chads2 >=2 ){
-      if( bleedingRisk == 'low' ) {
-        therapy.choices.push({
-          steps: [
-            {option: options.mcm2.f, extra: '', extra2: _extra},
-          ]
-        });
-      }else{
-        //bleedingRisk is HIGH
-        therapy.choices.push({
-          steps: [
-            {option: options.mcm2.e, extra: '', extra2: _extra},
-          ]
-        });
-      }
-    }else{
-      console.log('No therapy found');
-    }
-  }
-
-  return therapy;*/
-}
-
-function determineMCMTherapy(){
-  // chads2: low <= 2 < high
-  // hasbled: low <= 3 < high
-
-  // A therapy consists of a list of choices
-  // These choices will be displayed separated by an "OR"
-
-  // Each choice has a list of steps.
-  // These steps will be separated by a "THEN"
-
-  // Each step has markdown text and extra text
-  var stent = getStent();
-  var warfarinIntolerance = getWarfarinIntolerance();
-  var inrInstability = getInrInstability();
-  var doacAllergy = getDoacAllergy()
-  var therapy = {choices: []};
-
-  if (scores.chads2 <= 2){
-      therapy.choices.push({
-        steps: [
-          {option: options.mcm.f, extra: ''},
-        ]
-      });
-
-      therapy.choices.push({
-        steps: [{option: options.mcm.g, extra: ''}]
-      });
-  } else {
-      if ( scores.hasbled <= 3 ){ // low bleeding risk
-        if (stent === 'bms') {
-          if (warfarinIntolerance == true) {
-            if (inrInstability == true) {
-              if (doacAllergy == true) {
-                // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong'}
-                  ]
-                });
-
-                // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 1 month and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 1 month'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            } else if (inrInstability == false) {
-              if (doacAllergy == true) {
-                // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong'}
-                  ]
-                });
-
-                // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 1 month and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 1 month'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            }
-          } else if (warfarinIntolerance == false) {
-            if (inrInstability == true) {
-              if (doacAllergy == true) {
-                // 1st option A for 1 month and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For 1 month'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-
-                // or 2do option E for the 1st year then Aspirin 81 mg po QD lifelong if the INR instability is severe and potentially harmful
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
-                  ]
-                });
-
-                // or 3er option E lifelong if the INR instability is severe and potentially harmful
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 1 month and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 1 month'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            } else if (inrInstability == false) {
-              if (doacAllergy == true) {
-                // A for 1 month and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For 1 month'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // 1st option A for 1 month and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For 1 month'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-
-                // or 2do option B for 1 month and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 1 month'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            }
-          }
-        } else if (stent == 'des') {
-          if (warfarinIntolerance == true) {
-            if (inrInstability == true) {
-              if (doacAllergy == true) {
-                // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong'}
-                  ]
-                });
-
-                // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 6 months and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 6 months'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            } else if (inrInstability == false) {
-              if (doacAllergy == true) {
-                // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong'}
-                  ]
-                });
-
-                // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 6 months and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 6 months'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            }
-          } else if (warfarinIntolerance == false) {
-            if (inrInstability == true) {
-              if (doacAllergy == true) {
-                // 1st option A for 6 months and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For 6 months'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-
-                // or 2do option E for the 1st year then Aspirin 81 mg po QD lifelong if the INR instability is severe and potentially harmful
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
-                  ]
-                });
-
-                // or 3er option E lifelong if the INR instability is severe and potentially harmful
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 6 months and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 6 months'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            } else if (inrInstability == false) {
-              if (doacAllergy == true) {
-                // A for 6 months and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For the 6 months'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // 1st option A for 6 months and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For 6 months'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-                // or 2do option B for 6 months and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 6 months'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            }
-          }
-        } else {
-          console.log('THERE IS NO MCM RECOMMENDED THERAPY FOR THAT COMBINATION!');
-        }
-      } else { // bleeding risk high
-        if (stent === 'bms') {
-          if (warfarinIntolerance == true) {
-            if (inrInstability == true) {
-              if (doacAllergy == true) {
-                // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong or consider E lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'}
-                  ]
-                });
-
-                // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'},
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 1 month and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 1 month'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            } else if (inrInstability == false) {
-              if (doacAllergy == true) {
-                // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong or consider E lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'}
-                  ]
-                });
-
-                // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'},
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 1 month and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 1 month'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            }
-          } else if (warfarinIntolerance == false) {
-            if (inrInstability == true) {
-              if (doacAllergy == true) {
-                // 1st option A for 1 month and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For 1 month'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-
-                // or 2do option E for the 1st year then Aspirin 81 mg po QD lifelong if the INR instability is severe and potentially harmful
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
-                  ]
-                });
-
-                // or 3er option E lifelong if the INR instability is severe and potentially harmful
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 1 month and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 1 month'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            } else if (inrInstability == false) {
-              if (doacAllergy == true) {
-                // A for 1 month and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For 1 month'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // 1st option A for 1 month and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For 1 month'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-
-                // or 2do option B for 1 month and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 1 month'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            }
-          }
-        } else if (stent == 'des') {
-          if (warfarinIntolerance == true) {
-            if (inrInstability == true) {
-              if (doacAllergy == true) {
-                // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong or consider E lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'}
-                  ]
-                });
-
-                // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulants'},
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 3-6 months and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 3-6 months'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            } else if (inrInstability == false) {
-              if (doacAllergy == true) {
-                // 1st option E for the 1st year then Aspirin 81 mg po QD lifelong
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong or consider E lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'}
-                  ]
-                });
-
-                // or consider E lifelong if the patient has allergy/intolerance to all OACs (oral anticoagulants)
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the patient has allergy/intolerance to all Oral Anticoagulant'},
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 3-6 months and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 3-6 month'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            }
-          } else if (warfarinIntolerance == false) {
-            if (inrInstability == true) {
-              if (doacAllergy == true) {
-                // 1st option A for 3-6 months and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For 3-6 month'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-
-                // or 2do option E for the 1st year then Aspirin 81 mg po QD lifelong if the INR instability is severe and potentially harmful
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'For the 1st year'},
-                    {option: options.mcm.h, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
-                  ]
-                });
-
-                // or 3er option E lifelong if the INR instability is severe and potentially harmful
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.e, extra: 'Lifelong if the INR instability is severe and potentially harmful'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // B for 3-6 months and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 3-6 month'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            } else if (inrInstability == false) {
-              if (doacAllergy == true) {
-                // A for 3-6 months and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For 3-6 month'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-              } else if (doacAllergy == false) {
-                // 1st option A for 3-6 months and then C up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.a, extra: 'For 3-6 month'},
-                    {option: options.mcm.c, extra: 'Up to the 1st year'}
-                  ]
-                });
-
-                // or 2do option B for 3-6 months and then D up to the 1st year
-                therapy.choices.push({
-                  steps: [
-                    {option: options.mcm.b, extra: 'For 3-6 month'},
-                    {option: options.mcm.d, extra: 'Up to the 1st year'}
-                  ]
-                });
-              }
-            }
-          }
-        } else {
-          console.log('THERE IS NO MCM RECOMENDED THERAPY FOR THAT COMBINATION!');
-        }
-      }
-  }
-
-  return therapy;
-}
-
-/*
-function determineCCSTherapy(){
-  var age = getAge();
-  var indication = getIndication();
-  var stent = getStent();
-  var therapy = {choices: []};
-
-  if (age < 65){
-      if (scores.chads2 == 0){
-        if (indication == 'SCAD'){
-          if (stent) {
-            // A for 12 months and then B alone lifelong
-            therapy.choices.push({
-              steps: [
-                {option: options.ccs.a, extra: 'For 12 months'},
-                {option: options.ccs.b, extra: 'Alone, lifelong'}
-              ]
-            });
-          } else { // NO HIGH-RISK-AF
-            // No existe esta opcion
-            console.log('THERE IS NO CCS RECOMENDED THERAPY FOR THAT COMBINATION!');
-          }
-        } else { //STEMI, NSTEMI, UA
-          if (stent) {
-            // F for 12 months and then B alone lifelong
-            therapy.choices.push({
-              steps: [
-                {option: options.ccs.f, extra: 'For 12 months'},
-                {option: options.ccs.b, extra: 'Alone, lifelong'}
-              ]
-            });
-          } else { // NO HIGH-RISK-AF
-            // E for 12 months and then B alone lifelong
-            therapy.choices.push({
-              steps: [
-                {option: options.ccs.e, extra: 'For 12 months'},
-                {option: options.ccs.b, extra: 'Alone, lifelong'}
-              ]
-            });
-          }
-        }
-      }else if (scores.chads2 >= 1){
-        if (indication == 'SCAD'){
-          if (stent) {
-            // C for 12 months and then D alone lifelong
-            therapy.choices.push({
-              steps: [
-                {option: options.ccs.c, extra: 'For 12 months'},
-                {option: options.ccs.d, extra: 'Alone, lifelong'}
-              ]
-            });
-          } else { // NO HIGH-RISK-AF
-            // No existe esta opcion
-            console.log('THERE IS NO CCS RECOMENDED THERAPY FOR THAT COMBINATION!');
-          }
-        } else { //STEMI, NSTEMI, UA
-          if (stent) {
-            // G for 3 to 6 months, then C through to the 12 months, then D alone lifelong
-            therapy.choices.push({
-              steps: [
-                {option: options.ccs.g, extra: 'For 3-6 months'},
-                {option: options.ccs.c, extra: 'Through to the 12 months'},
-                {option: options.ccs.d, extra: 'Alone, lifelong'}
-              ]
-            });
-          } else { // NO HIGH-RISK-AF
-            // C for 12 months and then D alone lifelong
-            therapy.choices.push({
-              steps: [
-                {option: options.ccs.c, extra: 'For 12 months'},
-                {option: options.ccs.d, extra: 'Alone, lifelong'}
-              ]
-            });
-          }
-        }
-      }
-  }else if (age >= 65){
-    if (scores.chads2 == 0){
-      if (indication == 'SCAD'){
-        if (stent) {
-          // C for 12 months and then D alone lifelong
-          therapy.choices.push({
-            steps: [
-              {option: options.ccs.c, extra: 'For 12 months'},
-              {option: options.ccs.d, extra: 'Alone, lifelong'}
-            ]
-          });
-        } else { // NO HIGH-RISK-AF
-          // No existe esta opcion
-          console.log('THERE IS NO CCS RECOMENDED THERAPY FOR THAT COMBINATION!');
-        }
-      } else { //STEMI, NSTEMI, UA
-        if (stent) {
-          // G for 3 to 6 months, then C through to the 12 months, then D alone lifelong
-          therapy.choices.push({
-            steps: [
-              {option: options.ccs.g, extra: 'For 3-6 months'},
-              {option: options.ccs.c, extra: 'Through to the 12 months'},
-              {option: options.ccs.d, extra: 'Alone, lifelong'}
-            ]
-          });
-        } else { // NO HIGH-RISK-AF
-          // C for 12 months and then D alone lifelong
-          therapy.choices.push({
-            steps: [
-              {option: options.ccs.c, extra: 'For 12 months'},
-              {option: options.ccs.d, extra: 'Alone, lifelong'}
-            ]
-          });
-        }
-      }
-    }else if (scores.chads2 >= 1){
-      if (indication == 'SCAD'){
-        if (stent) {
-          // C for 12 months and then D alone lifelong
-          therapy.choices.push({
-            steps: [
-              {option: options.ccs.c, extra: 'For 12 months'},
-              {option: options.ccs.d, extra: 'Alone, lifelong'}
-            ]
-          });
-        } else { // NO HIGH-RISK-AF
-          // No existe esta opcion
-          console.log('THERE IS NO CCS RECOMENDED THERAPY FOR THAT COMBINATION!');
-        }
-      } else { //STEMI, NSTEMI, UA
-        if (stent) {
-          // G for 3 to 6 months, then C through to the 12 months, then D alone lifelong
-          therapy.choices.push({
-            steps: [
-              {option: options.ccs.g, extra: 'For 3-6 months'},
-              {option: options.ccs.c, extra: 'Through to the 12 months'},
-              {option: options.ccs.d, extra: 'Alone, lifelong'}
-            ]
-          });
-        } else { // NO HIGH-RISK-AF
-          // C for 12 months and then D alone lifelong
-          therapy.choices.push({
-            steps: [
-              {option: options.ccs.c, extra: 'For 12 months'},
-              {option: options.ccs.d, extra: 'Alone, lifelong'}
+              {option: options.ccs.up12.f, extra: options.ccs.after12.ii},
             ]
           });
         }
@@ -1267,4 +403,3 @@ function determineCCSTherapy(){
 
   return therapy;
 }
-*/

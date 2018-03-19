@@ -1,0 +1,21 @@
+{% extends 'data_entry/panel_base.html' %}
+
+{% load static %}
+
+{% block panel_heading %}Hamilton AF-PCI Recommendation{% endblock %}
+
+{% block fa_icon %}fa fa-clipboard{% endblock %}
+{% block panel_body %}
+<center>
+   <h4><a href="{% static 'data_entry/References/Recommendations/AlgorithmDiagram_Version2_July17.pdf'%}" target="_blank">View the algorithm on which we based this recommendation</a></h4>
+</center>
+<div class="panel-body">
+  <div id="ccs_recommendation">
+      <div class="row hamilton_therapy_options initial">
+          <div class="col-md-12 text-center">
+             <h3 style="opacity: 0.3;">Please fill out the form to receive a recommendation</h3>
+          </div>
+       </div>
+  </div>
+</div>
+{% endblock %}

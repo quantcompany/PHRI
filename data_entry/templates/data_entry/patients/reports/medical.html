@@ -268,7 +268,7 @@
 
                 <tr>
                     <th>Indication</th>
-                    <td>{{ patient.get_indication_display }}</td>
+                    <td>{{ patient.get_elective_pci_display }}</td>
                     <td></td>
                     <th>INR Instability</th>
                     <td>{{ patient.inr_instability|yesno|capfirst }}</td>
@@ -520,7 +520,7 @@
         <table class="therapy-recommendations">
             <thead>
                 <tr>
-                    <th style="width:100%;"><h3>Hamilton AF-PCI recommendation</h3></th>
+                    <th style="width:100%;" colspan="2"><h3>Hamilton AF-PCI recommendation</h3></th>
                 </tr>
                 <tr>
                     <th colspan="2"><hr/></th>
@@ -528,34 +528,24 @@
             </thead>
 
             <tbody>
-                <tr>
-                    <td>
-                        {% for choice in patient.parse_mcm_therapy.choices %}
-                            {% comment %}<h2><b>Option {{ forloop.counter }}</b></h2> {% endcomment %}
-                            {% for step in choice.steps %}
-                                {{ step.option|safe }}
-                                {% if step.extra %}
-                                    {% if not forloop.last %}
-                                        <b><i>({{ step.extra }}, then...)</i></b>
-                                    {% else %}
-                                        <b><i>({{ step.extra }})</i></b>
-                                    {% endif %}
-                                {% else %}
-                                    {% if not forloop.last %}
-                                        <b><i>then...</i></b>
-                                    {% endif %}
-                                {% endif %}
-                                {% if step.extra2 %}
-                                {{ step.extra2|safe }}
-                                {% endif %}
-                                <br/>
-                                <br/>
-                            {% endfor %}
-                        {% empty %}
-                            <h2>Nothing here</h2>
-                        {% endfor %}
-                    </td>
-                </tr>
+                {% for choice in patient.parse_ccs_therapy.choices %}
+                    {% for step in choice.steps %}
+                    <tr>
+                        <td>
+                            <h3>OPTION UP TO 12 MONTHS</h3>
+                            {{ step.option|safe }}
+                        </td>
+                        <td>
+                            <h3>OPTION AFTER 12 MONTHS</h3>
+                            {% if step.extra %}
+                                {{ step.extra|safe }}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                    {% empty %}
+                        <td><h2>Nothing here</h2></td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
 

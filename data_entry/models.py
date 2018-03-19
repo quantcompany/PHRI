@@ -47,7 +47,7 @@ class Patient(models.Model):
     pci_risk_7 = models.BooleanField(default=False)
 
     # Procedure Details
-    indication = models.CharField(max_length=15, choices=INDICATION_CHOICES)
+    elective_pci = models.CharField(max_length=15, choices=ELECTIVE_PCI_CHOICES)
     bms_stent = models.BooleanField(default=False)
     des_stent = models.BooleanField(default=False)
     bvs = models.BooleanField(default=False)
@@ -96,9 +96,7 @@ class Patient(models.Model):
     gfr_mLmin = models.FloatField(null=True, blank=True)
 
     # Recommendation
-    mcm_therapy = models.TextField(blank=True)
-    # ccs_therapy = models.TextField(blank=True)
-    # chosen_therapy = models.CharField(max_length=10, choices=CHOSEN_THERAPY_CHOICES)
+    ccs_therapy = models.TextField(blank=True)
     agree_therapy = models.BooleanField(default=True)
     reason = models.TextField()
     
@@ -217,8 +215,8 @@ class Patient(models.Model):
     def hasbled_risk(self):
         return risks.hasbled[self.hasbled_score()]
 
-    def parse_mcm_therapy(self):
-        return json.loads(self.mcm_therapy)
+    def parse_ccs_therapy(self):
+        return json.loads(self.ccs_therapy)
 
 
     def field_csv(self, value, type):
@@ -253,7 +251,7 @@ class Patient(models.Model):
             self.field_csv(self.pci_risk_5, bool),
             self.field_csv(self.pci_risk_6, bool),
             self.field_csv(self.pci_risk_7, bool),
-            self.field_csv(self.indication, str),
+            self.field_csv(self.elective_pci, str),
             self.field_csv(self.bms_stent, bool),
             self.field_csv(self.des_stent, bool),
             self.field_csv(self.bvs, bool),
