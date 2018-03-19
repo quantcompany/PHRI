@@ -198,20 +198,30 @@ function getHxOfBleeding(){
 
 function getBleedingRisk(){
   /**
-    Returns:
-        High: hasbled_score >= 3 or has anemia or history of bleeding
-        Low: not High
-
-      >> New Criteria <<
-      BLEEDING RISK:
-      1. LOW RISK if: HASBLED <= 3
-      2. HIGH RISK if: HASBLED >= 4
+    new criteria bases on image
+    https://quantcompany.slack.com/files/U4JC2174M/F9QPTR8SU/bleeding-risk.png
 
   **/
-  var anemia = getAnemia();
-  var hxOfBleeding = getHxOfBleeding();
+  var patientAge = this.getAge() > 75;
+  var frailty = $('#frailty').is(':checked');
+  var hemoglobinAnemia = $('#hemoglobin_anemia').is(':checked');
+  var isGFRLower = computeGFR() < 40;
+  var patientWeight = this.getWeight() < 40;
+  //hxOfBleeding = "Intracerebral hemorrhage" OR "Hospitalization for bleeding within last year"
+  var hxOfBleeding = $('#hx_of_bleeding').val() == '2' || $('#hx_of_bleeding').val() == '3';
+  var tiaStroke = $('#tia_stroke_or_sysemb').is(':checked');
+  var aim = $('#aim').is(':checked');
 
-  return (scores.hasbled >= 4 || anemia || hxOfBleeding) ? "high" : "low";
+  return (
+    patientAge
+    || frailty
+    || hemoglobinAnemia
+    || isGFRLower
+    || patientWeight
+    || hxOfBleeding
+    || tiaStroke
+    || aim
+  ) ? "high" : "low";
 }
 
 function getHighRiskPCI(){
@@ -255,14 +265,14 @@ function determineCCSTherapy(){
         if(bleedingRisk === 'low') {
           therapy.choices.push({
             steps: [
-              {option: options.ccs.a, extra: '', extra2: ''},
+              {option: options.ccs.up12.a, extra: options.ccs.after12.i},
             ]
           });
         }else {
           //Bleeding Risk is HIGH
           therapy.choices.push({
             steps: [
-              {option: options.ccs.b, extra: '', extra2: ''},
+              {option: options.ccs.up12.b, extra: options.ccs.after12.i},
             ]
           });
         }
@@ -270,22 +280,23 @@ function determineCCSTherapy(){
         //chads2 is >=1
         therapy.choices.push({
           steps: [
-            {option: options.ccs.c, extra: '', extra2: ''},
+            {option: options.ccs.up12.c, extra: options.ccs.after12.ii},
           ]
         });
       }
     }else {
+      //if age >= 65
       if( chads2Score == 0 ) {
         therapy.choices.push({
           steps: [
-            {option: options.ccs.c, extra: '', extra2: ''},
+            {option: options.ccs.up12.c, extra: options.ccs.after12.ii},
           ]
         });
       }else {
         //chads2 is >=1
         therapy.choices.push({
           steps: [
-            {option: options.ccs.c, extra: '', extra2: ''},
+            {option: options.ccs.up12.c, extra: options.ccs.after12.ii},
           ]
         });
       }
@@ -298,14 +309,14 @@ function determineCCSTherapy(){
           if(bleedingRisk === 'low') {
             therapy.choices.push({
               steps: [
-                {option: options.ccs.d, extra: '', extra2: ''},
+                {option: options.ccs.up12.d, extra: options.ccs.after12.iii},
               ]
             });
           }else {
             //HIGH Bleeding Risk
             therapy.choices.push({
               steps: [
-                {option: options.ccs.d, extra: '', extra2: ''},
+                {option: options.ccs.up12.d, extra: options.ccs.after12.i},
               ]
             });
           }
@@ -314,14 +325,14 @@ function determineCCSTherapy(){
           if(bleedingRisk === 'low') {
             therapy.choices.push({
               steps: [
-                {option: options.ccs.e, extra: '', extra2: ''},
+                {option: options.ccs.up12.e, extra: options.ccs.after12.iii},
               ]
             });
           }else {
             //HIGH Bleeding Risk
             therapy.choices.push({
               steps: [
-                {option: options.ccs.e, extra: '', extra2: ''},
+                {option: options.ccs.up12.e, extra: options.ccs.after12.i},
               ]
             });
           }
@@ -330,14 +341,14 @@ function determineCCSTherapy(){
         if(bleedingRisk === 'low') {
           therapy.choices.push({
             steps: [
-              {option: options.ccs.d, extra: '', extra2: ''},
+              {option: options.ccs.up12.d, extra: options.ccs.after12.iv},
             ]
           });
         }else {
           //HIGH Bleeding Risk
           therapy.choices.push({
             steps: [
-              {option: options.ccs.d, extra: '', extra2: ''},
+              {option: options.ccs.up12.d, extra: options.ccs.after12.ii},
             ]
           });
         }
@@ -345,14 +356,14 @@ function determineCCSTherapy(){
         if(bleedingRisk === 'low') {
           therapy.choices.push({
             steps: [
-              {option: options.ccs.f, extra: '', extra2: ''},
+              {option: options.ccs.up12.f, extra: options.ccs.after12.iv},
             ]
           });
         }else {
           //HIGH Bleeding Risk
           therapy.choices.push({
             steps: [
-              {option: options.ccs.f, extra: '', extra2: ''},
+              {option: options.ccs.up12.f, extra: options.ccs.after12.ii},
             ]
           });
         }
@@ -360,18 +371,19 @@ function determineCCSTherapy(){
         console.log('no therapy found');
       }
     } else {
+      //Age >= 65
       if( chads2Score == 0 ) {
         if(bleedingRisk === 'low') {
           therapy.choices.push({
             steps: [
-              {option: options.ccs.f, extra: '', extra2: ''},
+              {option: options.ccs.up12.f, extra: options.ccs.after12.iv},
             ]
           });
         }else {
           //HIGH Bleeding Risk
           therapy.choices.push({
             steps: [
-              {option: options.ccs.f, extra: '', extra2: ''},
+              {option: options.ccs.up12.f, extra: options.ccs.after12.ii},
             ]
           });
         }
@@ -380,14 +392,14 @@ function determineCCSTherapy(){
         if(bleedingRisk === 'low') {
           therapy.choices.push({
             steps: [
-              {option: options.ccs.f, extra: '', extra2: ''},
+              {option: options.ccs.up12.f, extra: options.ccs.after12.iv},
             ]
           });
         }else {
           //HIGH Bleeding Risk
           therapy.choices.push({
             steps: [
-              {option: options.ccs.f, extra: '', extra2: ''},
+              {option: options.ccs.up12.f, extra: options.ccs.after12.ii},
             ]
           });
         }
