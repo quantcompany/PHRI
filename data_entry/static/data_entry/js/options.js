@@ -345,7 +345,6 @@ var options = {
               </tr>\
               <tr>\
                 <td>\
-                  <strong>Strong recommendation / High quality evidence</strong>\
                   <ul>\
                     <li>\
                         <p class="text-left">\
@@ -372,7 +371,6 @@ var options = {
                         <p class="text-left">\
                           Edoxaban 60 mg po QD*<br>\
                         </p>\
-                        \
                         <strong>or</strong>\
                     </li>\
                     <li>\
@@ -382,9 +380,11 @@ var options = {
                     </li>\
                   </ul>\
                   <p class="text-left">\
-                    <small>* <strong>*Dose adjustment</strong>\
+                    <small><strong>*Dose adjustment</strong></small>\
                   </p>\
                 </td>\
+              </tr>\
+              <tr>\
                 <td style="text-align:center;">\
                   <strong>Strong recommendation / High quality evidence</strong>\
                 </td>\
@@ -402,56 +402,58 @@ var options = {
                   </td>\
                 </tr>\
                 <tr>\
+                  <td>\
                     <table style="width:100%;">\
-                        <tbody>\
-                            <tr>\
-                              <td>\
-                                <strong>+</strong>\
-                                <p class="text-left">\
-                                  <strong>P<small>2</small>Y<small>12</small><small>(Strong recommendation/High quality evidence)</small></strong><br>\
-                                </p>\
-                                <ul>\
-                                  <li>\
-                                      <p class="text-left">\
-                                        <strong>Ticagrelor</strong> 60 mg po BID<br>\
-                                      </p>\
-                                      \
-                                      <strong>or</strong>\
-                                      \
-                                  </li>\
-                                  <li>\
-                                      <p class="text-left">\
-                                        <strong>Clopidogrel</strong> 75 mg po QD<br>\
-                                      </p>\
-                                  </li>\
-                                  <li>\
-                                      <p class="text-left">\
-                                        Duration:<br>\
-                                        Up to 3 years\
-                                      </p>\
-                                  </li>\
-                                </ul>\
-                              </td>\
-                              <td>\
-                                <strong>+</strong>\
-                                <p class="text-left">\
-                                  <strong>P<small>2</small>Y<small>12</small><small>(Weak recommendation/Moderate quality evidence)</small></strong><br>\
-                                </p>\
-                                <ul>\
-                                  <li>\
-                                      <p class="text-left">\
-                                        <strong>Prasugrel</strong> 10 mg po QD<br>\
-                                      </p>\
-                                  </li>\
-                                </ul>\
-                              </td>\
-                            </tr>\
-                        </tbody>\
+                      <tbody>\
+                          <tr>\
+                            <td>\
+                              <strong>+</strong>\
+                              <p class="text-left">\
+                                <strong>P<small>2</small>Y<small>12</small><small>(Strong recommendation/High quality evidence)</small></strong><br>\
+                              </p>\
+                              <ul>\
+                                <li>\
+                                    <p class="text-left">\
+                                      <strong>Ticagrelor</strong> 60 mg po BID<br>\
+                                    </p>\
+                                    \
+                                    <strong>or</strong>\
+                                    \
+                                </li>\
+                                <li>\
+                                    <p class="text-left">\
+                                      <strong>Clopidogrel</strong> 75 mg po QD<br>\
+                                    </p>\
+                                </li>\
+                                <li>\
+                                    <p class="text-left">\
+                                      Duration:<br>\
+                                      Up to 3 years\
+                                    </p>\
+                                </li>\
+                              </ul>\
+                            </td>\
+                            <td>\
+                              <strong>+</strong>\
+                              <p class="text-left">\
+                                <strong>P<small>2</small>Y<small>12</small><small>(Weak recommendation/Moderate quality evidence)</small></strong><br>\
+                              </p>\
+                              <ul>\
+                                <li>\
+                                    <p class="text-left">\
+                                      <strong>Prasugrel</strong> 10 mg po QD<br>\
+                                    </p>\
+                                </li>\
+                              </ul>\
+                            </td>\
+                          </tr>\
+                      </tbody>\
                     </table>\
+                  </td>\
                 </tr>\
               </tbody>\
             </table>',
-      iv: '<table id="ccs-iV" class="table table-bordered">\
+      iv: '<table id="ccs-iv" class="table table-bordered">\
             <tbody>\
               <tr>\
                 <td>\

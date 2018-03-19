@@ -55,12 +55,12 @@ function renderTherapy(therapy){
     if( choice.steps.length ) {
       for (var j = 0; j < choice.steps.length; j++) {
         var step = choice.steps[j];
-        out += '<div class="row therapy-option note note-default m-b-0 p-10 text-center">';
-        out += '  <div class="col-md-6">';
+        out += '<div class="row therapy-option text-center">';
+        out += '  <div class="col-md-6 m-0 p-0">';
         out += '    <h4 class="m-0"><em><strong>OPTION UP TO 12 MONTHS</strong></em></h4><br>';
         out += step.option;
         out += '  </div>';
-        out += '  <div class="col md-6">';
+        out += '  <div class="col-md-6 m-0 p-0">';
         out += '    <h4 class="m-0"><em><strong>OPTION AFTER 12 MONTHS</strong></em></h4><br>';
         out += step.extra ? step.extra : 'No option after 12 months';
         out += '  </div>';
