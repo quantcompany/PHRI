@@ -2,442 +2,183 @@ var options = {
   ccs: {
     up12 : {
         a: '<table id="ccs-A" class="table table-bordered">\
-              <thead>\
-                <tr>\
-                  <th class="text-center">First 6 - 12 Month</th>\
-                  <th class="text-center">After 6 - 12 Month</th>\
-                </tr>\
-              </thead>\
               <tbody>\
                 <tr>\
                   <td>\
                     <p class="text-left">\
                       <strong>Aspirin</strong> 81 mg po QD<br>\
                     </p>\
+                    \
                     <strong>+</strong>\
-                    <p class="text-left">\
-                      <strong>P2Y12:</strong>\
-                    </p>\
+                    \
                     <p class="text-left">\
                       <strong>&#8226; Clopidogrel</strong> 75 mg po QD\
                     </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      <strong>&#8226; Ticagrelor</strong> 90 mg po BID\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      <strong>&#8226; Prasugrel</strong> 10 mg po QD\
-                    </p>\
+                    \
+                    <ul>\
+                      <li>\
+                          <p class="text-left">\
+                            Duration:<br>\
+                            6 months and up to 12 months\
+                          </p>\
+                      </li>\
+                    </ul>\
                   </td>\
-                  <td class="text-left"><strong>Aspirin</strong> 81 mg po QD alone</td>\
+                </tr>\
+                <tr>\
+                  <td style="text-align:center;">\
+                    <strong>Strong recommendation / High quality evidence</strong>\
+                  </td>\
                 </tr>\
               </tbody>\
             </table>',
     
         b: '<table id="ccs-B" class="table table-bordered">\
-              <thead>\
-                <tr>\
-                  <th class="text-center">First 12 Months</th>\
-                  <th class="text-center">After 12 Months</th>\
-                </tr>\
-              </thead>\
               <tbody>\
                 <tr>\
                   <td>\
                     <p class="text-left">\
                       <strong>Aspirin</strong> 81 mg po QD<br>\
                     </p>\
+                    \
                     <strong>+</strong>\
-                    <p class="text-left">\
-                      <strong>P2Y12:</strong>\
-                    </p>\
+                    \
                     <p class="text-left">\
                       <strong>&#8226; Clopidogrel</strong> 75 mg po QD\
                     </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      <strong>&#8226; Ticagrelor</strong> 90 mg po BID\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      <strong>&#8226; Prasugrel</strong> 10 mg po QD\
-                    </p>\
+                    \
+                    <ul>\
+                      <li>\
+                          <p class="text-left">\
+                            Duration:<br>\
+                            At least 1 month for BMS<br>\
+                            At least 3 months for DES<br>\
+                            Up to 12 months<br>\
+                          </p>\
+                      </li>\
+                    </ul>\
                   </td>\
-                  <td class="text-center"><strong>Aspirin</strong> 81 mg po QD alone</td>\
+                </tr>\
+                <tr>\
+                  <td style="text-align:center;">\
+                    <strong>Strong recommendation / High quality evidence</strong>\
+                  </td>\
                 </tr>\
               </tbody>\
             </table>',
-    
-        c: '<table id="ccs-B" class="table table-bordered">\
-              <thead>\
-                <tr>\
-                  <th class="text-center">First 6 months</th>\
-                  <th class="text-center">After 6 months through to 12 months</th>\
-                  <th class="text-center">After 12 months</th>\
-                </tr>\
-              </thead>\
+
+        c: '<table id="ccs-C" class="table table-bordered">\
               <tbody>\
                 <tr>\
                   <td>\
                     <p class="text-left">\
-                      <strong>Aspirin</strong> 81 mg po QD<br>\
+                      <strong>Clopidogrel</strong> 75 mg po QD<br>\
                     </p>\
+                    \
                     <strong>+</strong>\
+                    \
                     <p class="text-left">\
-                      <strong>P2Y12:</strong>\
+                      <strong>OAC</strong>\
                     </p>\
-                    <p class="text-left">\
-                      <strong>&#8226; Clopidogrel</strong> 75 mg po QD\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      <strong>&#8226; Ticagrelor</strong> 90 mg po BID\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      <strong>&#8226; Prasugrel</strong> 10 mg po QD\
-                    </p>\
+                    <ul>\
+                      \
+                      <li>\
+                          <p class="text-left">\
+                            Rivaroxaban 15 mg po QD (Rivaroxaban 10 mg po QD if eGFR &lt;50 mL/min)<br>\
+                          </p>\
+                          \
+                          <strong>or</strong>\
+                          \
+                          <p class="text-left">\
+                          Dabigatran 150 mg po BID (Dabigatran 110 mg po BID if age &gt;80yo or eGFR &lt;50 mL/min<br>\
+                          </p>\
+                          \
+                          <strong>or</strong>\
+                          \
+                          <p class="text-left">\
+                          VKA (recommended INR target is 2.0-2.5)<br>\
+                          </p>\
+                          \
+                          <p class="text-left">\
+                            <small>* All patients should receive a loading dose of <strong>ASA</strong> 160 mg at the time of PCI (if previously ASA naïve). Thereafter, ASA can be discontinued as early as the day following the PCI</small>\
+                          </p>\
+                          \
+                      </li>\
+                      \
+                      <li>\
+                          <p class="text-left">\
+                            Duration:<br>\
+                            At least 1 month for BMS<br>\
+                            At least 3 months for DES<br>\
+                            Up to 12 months<br>\
+                          </p>\
+                          </p>\
+                      </li>\
+                    </ul>\
+                    \
                   </td>\
-                  \
-                  <td>\
-                    <p class="text-left">\
-                      <strong>Aspirin</strong> 81 mg po QD\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left bg-warning" style="padding:4px;">\
-                      <strong>\
-                        <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/>\
-                        <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/>\
-                        Clopidogrel\
-                      </strong> 75 mg po QD\
-                      <br>\
-                    </p>\
-                    <strong>+</strong>\
-                    <p class="text-left">\
-                      <strong>Reduced dose of DOAC</strong> or VKA:\
-                    </p>\
-                    <p class="text-left bg-warning" style="padding:4px;">\
-                      &#8226; <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/> Rivaroxaban 15 mg po QD\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left bg-warning" style="padding:4px;">\
-                      &#8226; <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/> Dabigatran 110 mg po BID\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Edoxaban 30 mg po QD\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; VKA\
-                    </p>\
-                  </td>\
-                  \
-                  <td>\
-                    <p class="text-left">\
-                      <strong>DOAC</strong>  or VKA alone:\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Rivaroxaban 20 mg po QD*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Dabigatran 150 mg po BID*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Apixaban 5 mg po BID*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Edoxaban 60 mg po QD*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; VKA\
-                    </p>\
-                    <p class="text-center">\
-                      <strong>* Dose adjustment</strong>\
-                    </p>\
+                </tr>\
+                <tr>\
+                  <td style="text-align:center;">\
+                    <strong>Weak recommendation / Moderate quality evidence</strong>\
                   </td>\
                 </tr>\
               </tbody>\
             </table>',
-    
+        
         d: '<table id="ccs-D" class="table table-bordered">\
-              <thead>\
-                <tr>\
-                  <th class="text-center">First 12 Months</th>\
-                  <th class="text-center">After 12 Months</th>\
-                </tr>\
-              </thead>\
               <tbody>\
                 <tr>\
                   <td>\
                     <p class="text-left">\
                       <strong>Aspirin</strong> 81 mg po QD<br>\
                     </p>\
-                    <strong>+</strong>\
+                    \
+                    <strong class="text-left">+</strong>\
+                    \
                     <p class="text-left">\
-                      <strong>P2Y12:</strong>\
+                      <strong>P<small>2</small>Y<small>12</small></strong>\
                     </p>\
-                    <p class="text-left">\
-                      <strong>&#8226; Clopidogrel</strong> 75 mg po QD\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      <strong>&#8226; Ticagrelor</strong> 90 mg po BID\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      <strong>&#8226; Prasugrel</strong> 10 mg po QD\
-                    </p>\
+                    \
+                    <ul>\
+                      <li>\
+                          <p class="text-left">\
+                            <strong>Ticagrelor</strong> 90 mg po BID<br>\
+                          </p>\
+                          \
+                          <strong>or</strong>\
+                          \
+                      </li>\
+                      <li>\
+                          <p class="text-left">\
+                            <strong>Prasugrel</strong> 10 mg po QD<br>\
+                          </p>\
+                      </li>\
+                      <li>\
+                          <p class="text-left">\
+                            Duration:<br>\
+                            6 months and up to 12 months\
+                          </p>\
+                      </li>\
+                    </ul>\
                   </td>\
-                  <td>\
-                    <p class="text-left">\
-                      <strong>DOAC</strong>  or VKA alone:\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Rivaroxaban 20 mg po QD*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Dabigatran 150 mg po BID*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Apixaban 5 mg po BID*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Edoxaban 60 mg po QD*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; VKA\
-                    </p>\
-                    <p class="text-center">\
-                      <strong>* Dose adjustment</strong>\
-                    </p>\
+                </tr>\
+                <tr>\
+                  <td style="text-align:center;">\
+                    <strong>Strong recommendation / High quality evidence</strong>\
                   </td>\
                 </tr>\
               </tbody>\
             </table>',
-    
-        e: '<table id="ccs-E" class="table table-bordered">\
-              <thead>\
-                <tr>\
-                  <th class="text-center">First 12 Months</th>\
-                  <th class="text-center">After 12 Months</th>\
-                </tr>\
-              </thead>\
-              <tbody>\
-                <tr>\
-                  <td>\
-                    <p class="text-left bg-warning" style="padding:4px;">\
-                      <strong>\
-                        <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/>\
-                        <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/>\
-                        Clopidogrel\
-                      </strong> 75 mg po QD\
-                      <br>\
-                    </p>\
-                    <strong>+</strong>\
-                    <p class="text-left">\
-                      <strong>Reduced dose of DOAC</strong> or VKA:\
-                    </p>\
-                    <p class="text-left bg-warning" style="padding:4px;">\
-                      &#8226; <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/> Rivaroxaban 15 mg po QD\
-                      <strong>or</strong>\
-                    </p>\
-                    <p class="text-left bg-warning" style="padding:4px;">\
-                      &#8226; <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/> Dabigatran 110 mg po BID\
-                      <strong>or</strong>\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Apixaban 2.5 mg po BID\
-                    <strong>or</strong>\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Edoxaban 30 mg po QD\
-                    <strong>or</strong>\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; VKA\
-                    </p>\
-                  </td>\
-                  <td>\
-                    <p class="text-left">\
-                      <strong>DOAC</strong> or VKA alone:\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Rivaroxaban 20 mg po QD*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Dabigatran 150 mg po BID*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Apixaban 5 mg po BID*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Edoxaban 60 mg po QD*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; VKA\
-                    </p>\
-                    <p class="text-center">\
-                      <strong>* Dose adjustment</strong>\
-                    </p>\
-                  </td>\
-                </tr>\
-              </tbody>\
-            </table>',
-    
-        f: '<table id="ccs-F" class="table table-bordered">\
-              <thead>\
-                <tr>\
-                  <th class="text-center">For 1 - 3 months</th>\
-                  <th class="text-center">After 1 - 3 months <br>through 12 months</th>\
-                  <th class="text-center">After 12 months</th>\
-                </tr>\
-              </thead>\
-              <tbody>\
-                <tr>\
-                  <td>\
-                    <p class="text-left">\
-                      <strong>Aspirin</strong> 81 mg po QD<br>\
-                    </p>\
-                    <strong>+</strong>\
-                    <p class="text-left">\
-                      <strong>Clopidogrel</strong> 75 mg po QD\
-                    </p>\
-                    <strong>+</strong>\
-                    <p class="text-left">\
-                      <strong>Reduced dose of DOAC</strong> or VKA:\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Rivaroxaban 15 mg po QD\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Dabigatran 110 mg po BID\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Apixaban 2.5 mg po BID\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Edoxaban 30 mg po QD\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; VKA\
-                    </p>\
-                  </td>\
-                  \
-                  <td>\
-                    <p class="text-left bg-warning" style="padding:4px;">\
-                      <strong>\
-                        <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/>\
-                        <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/>\
-                        Clopidogrel\
-                      </strong> 75 mg po QD\
-                    </p>\
-                    <strong>+</strong>\
-                    <p class="text-left">\
-                      <strong>Reduced dose of DOAC</strong> or VKA:\
-                    </p>\
-                    <p class="text-left bg-warning" style="padding:4px;">\
-                      &#8226; <img src="'+static_url+'img/pioneer-af-pci-icon.png" class="icon-img"/> Rivaroxaban 15 mg po QD\
-                      <strong>or</strong>\
-                    </p>\
-                    <p class="text-left bg-warning" style="padding:4px;">\
-                      &#8226; <img src="'+static_url+'img/2734848_RE-DUAL-PCI-icon.jpg" class="icon-img"/> Dabigatran 110 mg po BID\
-                      <strong>or</strong>\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Apixaban 2.5 mg po BID\
-                    <strong>or</strong>\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Edoxaban 30 mg po QD\
-                    <strong>or</strong>\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; VKA\
-                    </p>\
-                    <hr>\
-                    <strong>or</strong>\
-                    <hr>\
-                    <p class="text-left">\
-                      <strong>DOAC</strong>  or VKA:\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Rivaroxaban 20 mg po QD*\
-                    <strong>or</strong>\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Dabigatran 150 mg po BID*\
-                    <strong>or</strong>\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Apixaban 5 mg po BID*\
-                    <strong>or</strong>\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Edoxaban 60 mg po QD*\
-                    <strong>or</strong>\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; VKA\
-                    </p>\
-                    <p class="text-center">\
-                      <strong>* Dose adjustment</strong>\
-                    </p>\
-                  </td>\
-                  \
-                  <td>\
-                    <p class="text-left">\
-                      <strong>DOAC</strong> or VKA alone:\
-                    </p>\
-                    <p class="text-left">\
-                      &#8226; Rivaroxaban 20 mg po QD*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Dabigatran 150 mg po BID*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Apixaban 5 mg po BID*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; Edoxaban 60 mg po QD*\
-                    </p>\
-                    <strong>or</strong>\
-                    <p class="text-left">\
-                      &#8226; VKA\
-                    </p>\
-                    <p class="text-center">\
-                      <strong>* Dose adjustment</strong>\
-                    </p>\
-                  </td>\
-                </tr>\
-              </tbody>\
-            </table>',
+        e: ' OPTION E',
+
+        f: ' OPTION F',
     },
     after12: {
-      i: '1',
-      ii: '2',
-      iii: '3',
-      iv: '4',
+      i: 'AFTER 1',
+      ii: 'AFTER 2',
+      iii: 'AFTER 3',
+      iv: 'AFTER 4',
     }
   }
 }

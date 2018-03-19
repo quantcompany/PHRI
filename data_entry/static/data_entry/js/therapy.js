@@ -52,37 +52,28 @@ function renderTherapy(therapy){
   for (var i = 0; i < therapy.choices.length; i++) {
     var choice = therapy.choices[i];
 
-    //out += '<div class="row p-10 m-b-20">';
-    //out += '<div class="col-md-10 col-md-offset-1">';
-    out += '<div class="row">';
-    out += '<div class="col-md-12">';
-
-    //out += '<div class="note note-info m-b-0 p-5 text-center">';
-    //out += '<h1 class="m-5">Option ' + (i + 1) + '</h1>';
-    //out += '</div>';
-
-    for (var j = 0; j < choice.steps.length; j++) {
-      var step = choice.steps[j];
-      out += '<div class="therapy-option note note-default m-b-0 p-10 text-center">';
-      out += step.option;
-      if (step.extra) {
-        out += '<h4 class="m-0"><em><strong>(' + step.extra + ')</strong></em></h4>';
-      }
-      out += '</div>';
-
-      if (j !== choice.steps.length - 1) {
-        out += '<div class="note note-default m-b-0 p-5 text-center">';
-        out += '<h4 class="m-0"><em><strong>then</strong></em></h4>';
+    if( choice.steps.length ) {
+      for (var j = 0; j < choice.steps.length; j++) {
+        var step = choice.steps[j];
+        out += '<div class="row therapy-option note note-default m-b-0 p-10 text-center">';
+        out += '  <div class="col-md-6">';
+        out += '    <h4 class="m-0"><em><strong>OPTION UP TO 12 MONTHS</strong></em></h4><br>';
+        out += step.option;
+        out += '  </div>';
+        out += '  <div class="col md-6">';
+        out += '    <h4 class="m-0"><em><strong>OPTION AFTER 12 MONTHS</strong></em></h4><br>';
+        out += step.extra ? step.extra : 'No option after 12 months';
+        out += '  </div>';
         out += '</div>';
       }
+    }else {
+      out += '<h4 class="m-0"><em><strong>No options</strong></em></h4>';
     }
-
-    out += '</div>';
-    out += '</div>';
   }
   return out;
 }
 
+/*
 function renderTherapyCcs(therapy, use_extra){
   if (therapy.choices.length == 0){
       console.log('NO CHOICES!');
@@ -118,7 +109,9 @@ function renderTherapyCcs(therapy, use_extra){
   }
   return out;
 }
+*/
 
+/*
 function renderTherapyImage(therapy){
 
   $('.hamilton_therapy_options').stop(true, true).hide(0, function(){
@@ -131,6 +124,7 @@ function renderTherapyImage(therapy){
   
   });
 }
+*/
 
 function getStent(){
     if ($('#des_stent').is(':checked')){
