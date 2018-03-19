@@ -227,7 +227,8 @@ function getHighRiskPCI(){
   var checkboxesSelected = $('[name^="pci_risk_"]:checked').length != 0 
   || $('#diabetes_mellitus').is(':checked')
   || $('#prior_acute_cs').is(':checked')
-  || $('#prior_stent_thrombosis').is(':checked');
+  || $('#prior_stent_thrombosis').is(':checked')
+  || $('#smoking_history').val() == '2'//current smoker;
   return  (checkboxesSelected || isGFRLower) ? 'high' : 'low'; 
 
 }
