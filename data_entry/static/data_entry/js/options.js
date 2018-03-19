@@ -392,7 +392,65 @@ var options = {
             </tbody>\
           </table>',
 
-      iii: 'AFTER 3',
+      iii: '<table id="ccs-iii" class="table table-bordered">\
+              <tbody>\
+                <tr>\
+                  <td>\
+                    <p class="text-left">\
+                      <strong>Aspirin</strong> 81 mg po QD<br>\
+                    </p>\
+                  </td>\
+                </tr>\
+                <tr>\
+                    <table style="width:100%;">\
+                        <tbody>\
+                            <tr>\
+                              <td>\
+                                <strong>+</strong>\
+                                <p class="text-left">\
+                                  <strong>P<small>2</small>Y<small>12</small><small>(Strong recommendation/High quality evidence)</small></strong><br>\
+                                </p>\
+                                <ul>\
+                                  <li>\
+                                      <p class="text-left">\
+                                        <strong>Ticagrelor</strong> 60 mg po BID<br>\
+                                      </p>\
+                                      \
+                                      <strong>or</strong>\
+                                      \
+                                  </li>\
+                                  <li>\
+                                      <p class="text-left">\
+                                        <strong>Clopidogrel</strong> 75 mg po QD<br>\
+                                      </p>\
+                                  </li>\
+                                  <li>\
+                                      <p class="text-left">\
+                                        Duration:<br>\
+                                        Up to 3 years\
+                                      </p>\
+                                  </li>\
+                                </ul>\
+                              </td>\
+                              <td>\
+                                <strong>+</strong>\
+                                <p class="text-left">\
+                                  <strong>P<small>2</small>Y<small>12</small><small>(Weak recommendation/Moderate quality evidence)</small></strong><br>\
+                                </p>\
+                                <ul>\
+                                  <li>\
+                                      <p class="text-left">\
+                                        <strong>Prasugrel</strong> 10 mg po QD<br>\
+                                      </p>\
+                                  </li>\
+                                </ul>\
+                              </td>\
+                            </tr>\
+                        </tbody>\
+                    </table>\
+                </tr>\
+              </tbody>\
+            </table>',
       iv: '<table id="ccs-iV" class="table table-bordered">\
             <tbody>\
               <tr>\
@@ -407,12 +465,10 @@ var options = {
                   <p class="text-left">\
                     <strong>Aspirin</strong> 81 mg po QD<br>\
                   </p>\
-                  \
                   <strong>or</strong>\
                   <p class="text-left">\
                     <strong>Clopidogrel</strong> 75 mg po QD<br>\
                   </p>\
-                  \
                   <strong>+</strong>\
                   <p class="text-left">\
                     <strong>OAC (standard stroke prevention doses)</strong><br>\
