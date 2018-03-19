@@ -268,7 +268,7 @@
 
                 <tr>
                     <th>Indication</th>
-                    <td>{{ patient.get_indication_display }}</td>
+                    <td>{{ patient.get_elective_pci_display }}</td>
                     <td></td>
                     <th>INR Instability</th>
                     <td>{{ patient.inr_instability|yesno|capfirst }}</td>
@@ -530,7 +530,7 @@
             <tbody>
                 <tr>
                     <td>
-                        {% for choice in patient.parse_mcm_therapy.choices %}
+                        {% for choice in patient.parse_ccs_therapy.choices %}
                             {% comment %}<h2><b>Option {{ forloop.counter }}</b></h2> {% endcomment %}
                             {% for step in choice.steps %}
                                 {{ step.option|safe }}

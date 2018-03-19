@@ -4,12 +4,6 @@
 # If the choices include a NO or NONE option, then we use integers
 # and treat the NO/NONE/NULL choice as zero. Otherwise, we use strings.
 
-CHOSEN_THERAPY_CHOICES = (
-    ('mcm', 'Hamilton AF-PCI'),
-    ('ccs', 'CCS'),
-    ('other', 'Other'),
-)
-
 HB_UM_CHOICES = (
     ('g/L', 'g/L'),
     ('g/dL', 'g/dL'),
@@ -82,7 +76,7 @@ AF_TYPE_CHOICES = (
     (3, 'Permanent'),
 )
 
-INDICATION_CHOICES = (
+ELECTIVE_PCI_CHOICES = (
     ('STEMI', 'STEMI'),
     ('NSTEMI', 'NSTEMI'),
     ('UA', 'UA'),

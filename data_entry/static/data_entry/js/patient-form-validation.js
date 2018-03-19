@@ -55,9 +55,9 @@ var patientFormValidator = $("form[name='patient_form']").validate({
       min: 0
     },
     gender: "required",
-    indication: "required",
+    elective_pci: "required",
     stent: {
-      required: function(){return $('#indication').val() === 'SCAD';}
+      required: function(){return $('#elective_pci').val() === 'SCAD';}
     },
     balloons: {
       required: true,

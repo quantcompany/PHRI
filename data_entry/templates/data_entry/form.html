@@ -87,7 +87,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                {% include 'data_entry/includes/recommendation_mcmaster_panel.html' %}
+                {% include 'data_entry/includes/recommendation_ccs_panel.html' %}
             </div>
         </div>
 
@@ -238,7 +238,7 @@
                 fd.append('hemoglobin_anemia', 'on');
             }
             // submit MacMaster therapy recommendation
-            fd.append('mcm_therapy', JSON.stringify( determineMCMTherapy_2() ));
+            fd.append('ccs_therapy', JSON.stringify( determineCCSTherapy() ));
             // submit which therapy recommendation was chones
             var agreeTherapy = $('[name="agree_option"]:checked').val() == 'yes' ? true : false;
             if( agreeTherapy ) {

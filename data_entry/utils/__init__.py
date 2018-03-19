@@ -47,7 +47,7 @@ def patients_csv_headers():
         'PCI-RISK-TOTAL OCCLUSION INTERVATION',
         'PCI-RISK-BIOABSORBABLE VASCULAR SCAFFOLD (MVS) IMPLANTATION',
         'PCI-RISK-LEFT MAIN OR PROXIMAL LAD STENTING',
-        'INDICATION',
+        'ELECTIVE PCI',
         'BMS (Bare Metal Stent)',
         'DES (Drug Eluting Stent)',
         'BVS (Bioabsorbable Vascular Scaffold)',
