@@ -157,7 +157,7 @@ var options = {
                       <li>\
                           <p class="text-left">\
                             Duration:<br>\
-                            6 months and up to 12 months\
+                            Up to 12 months\
                           </p>\
                       </li>\
                     </ul>\
@@ -188,15 +188,7 @@ var options = {
                     <ul>\
                       <li>\
                           <p class="text-left">\
-                            <strong>Ticagrelor</strong> 90 mg po BID<br>\
-                          </p>\
-                          \
-                          <strong>or</strong>\
-                          \
-                      </li>\
-                      <li>\
-                          <p class="text-left">\
-                            <strong>Prasugrel</strong> 10 mg po QD<br>\
+                            <strong>Clopidogrel</strong> 75 mg po QD<br>\
                           </p>\
                       </li>\
                       <li>\
