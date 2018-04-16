@@ -229,7 +229,7 @@ function getHighRiskPCI(){
   **/
   var isGFRLower = computeGFR() < 60;
   var checkboxesSelected = $('[name^="pci_risk_"]:checked').length != 0 
-  || $('#diabetes_mellitus').is(':checked')
+  || parseInt($('#diabetes_mellitus').val()) == 1
   || $('#prior_acute_cs').is(':checked')
   || $('#prior_stent_thrombosis').is(':checked')
   //current smoker
