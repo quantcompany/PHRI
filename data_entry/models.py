@@ -68,7 +68,7 @@ class Patient(models.Model):
     frailty = models.BooleanField(default=False)
     chf = models.BooleanField(default=False) # CHADS2
     htn = models.IntegerField(default=0, choices=HTN_CHOICES) # CHADS2
-    diabetes_mellitus = models.BooleanField(default=False) # CHADS2
+    diabetes_mellitus = models.IntegerField(default=0, choices=DIABETES_MELLITUS_CHOICES)
 
     smoking_history = models.IntegerField(default=0, choices=SMOKING_HISTORY_CHOICES)
     
@@ -271,7 +271,7 @@ class Patient(models.Model):
             self.field_csv(self.chf, bool),
             self.field_csv(self.get_smoking_history_display(), str),
             self.field_csv(self.get_htn_display(), str),
-            self.field_csv(self.diabetes_mellitus, bool),
+            self.field_csv(self.get_diabetes_mellitus_display(), str),
             self.field_csv(self.tia_stroke_or_sysemb, bool),
             self.field_csv(self.aim, bool),
             self.field_csv(self.get_vascular_disease_display(), str),

@@ -57,6 +57,11 @@ HTN_CHOICES = (
     (2, 'Yes, Uncontrolled on medicaments SBP > 160 mmHg'),
 )
 
+DIABETES_MELLITUS_CHOICES = (
+    (0, 'No'),
+    (1, 'Yes'),
+)
+
 ALCOHOL_ABUSE_CHOICES = (
     (0, 'No'),
     (1, 'Yes, < 8 drinks a week'),

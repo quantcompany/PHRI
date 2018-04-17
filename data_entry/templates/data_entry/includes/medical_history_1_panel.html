@@ -32,6 +32,17 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-12 f-s-14" for="diabetes_mellitus">Diabetes Mellitus<br/><span></span></label>
+            <div class="col-sm-12 col-md-7">
+                <select id="diabetes_mellitus" name="diabetes_mellitus" class="form-control f-s-14 default-select">
+                    {% for choice in choices.DIABETES_MELLITUS_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
 
         <div class="form-group">
             <label class="control-label col-md-4 col-sm-12 f-s-14" for="vascular_disease">Vascular disease</label>
