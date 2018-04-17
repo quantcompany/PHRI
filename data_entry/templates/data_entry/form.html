@@ -185,21 +185,27 @@
 
         $(".bootstrap-switch").bootstrapSwitch();
 
-        $('[name="agree_option"]').on('change', function(elem) {
-            $(this).parent().removeClass('btn-success');
-            $(this).parent().removeClass('btn-danger');
-            $(this).parent().addClass('btn-default');
+        $('[name="agree_option"]').on('change', function() {
+            $elem = $(this);
+            console.log($elem);
+            $('#agree_option_yes').parent()
+            .removeClass('btn-success')
+            .addClass('btn-default');
+
+            $('#agree_option_no').parent()
+            .removeClass('btn-danger')
+            .addClass('btn-default');
             
-            if( $(this).val() == 'yes' ) {
-                $(this).parent().removeClass('btn-default');
-                $(this).parent().addClass('btn-success');
+            if( $elem.val() == 'yes' ) {
+                $elem.parent().removeClass('btn-default');
+                $elem.parent().addClass('btn-success');
 
                 $('#submit-area')
                 .stop(true, true)
                 .hide('fast');
             }else {
-                $(this).parent().removeClass('btn-default');
-                $(this).parent().addClass('btn-danger');
+                $elem.parent().removeClass('btn-default');
+                $elem.parent().addClass('btn-danger');
 
                 $('#submit-area')
                 .stop(true, true)
