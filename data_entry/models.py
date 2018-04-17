@@ -34,7 +34,7 @@ class Patient(models.Model):
         2. Multiple stents implanted (> 3 stents implanted, > 3 lesions stented)
         3. Complex bifurcation lesion (treated with 2 stents)
         4. Total stent length > 60 mm
-        5. Chronic Total Occlusion intervention
+        5. Chronic total Occlusion intervention
         6. Bioabsorbable Vascular Scaffold (BVS) implantation
         7. Left main or proximal LAD stenting
     '''
