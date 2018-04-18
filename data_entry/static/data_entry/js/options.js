@@ -201,10 +201,8 @@ var options = {
                       \
                       <li>\
                           <p class="text-left">\
-                            Rivaroxaban 2.5 mg po BID<br>\
+                            Rivaroxaban 2.5 mg po BID <strong class="or-plus">or</strong>\
                           </p>\
-                          \
-                          <strong>or</strong>\
                       </li>\
                       <li>\
                           <p class="text-left">\
@@ -221,7 +219,7 @@ var options = {
                 </tr>\
                 <tr>\
                     <td style="text-align:center;">\
-                      <strong class="badge" style="background-color:#7C943F;">Strong recommendation</span> <span class="badge" style="background-color:#526DB4;">Moderate quality evidence</span>\
+                      <span class="badge" style="background-color:#7C943F;">Strong recommendation</span> <span class="badge" style="background-color:#526DB4;">Moderate quality evidence</span>\
                     </td>\
                 </tr>\
                 <tr>\
@@ -412,9 +410,8 @@ var options = {
               <tr>\
                 <td>\
                   <p class="text-left">\
-                    <strong>Aspirin</strong> 81 mg po QD<br>\
+                    <strong>Aspirin</strong> 81 mg po QD <strong class="or-plus">or</strong>\
                   </p>\
-                  <strong>or</strong>\
                   <p class="text-left">\
                     <strong>Clopidogrel</strong> 75 mg po QD <strong class="or-plus">+</strong>\
                   </p>\
@@ -449,11 +446,11 @@ var options = {
                     </li>\
                   </ul>\
                   <p class="text-left">\
-                    <small>* <strong>*Dose adjustment</strong>\
+                    <small><strong>*Dose adjustment</strong>\
                   </p>\
                 </td>\
                 <td style="text-align:center;">\
-                  <span class="badge" style="background-color:#B3A2CF;>Weak recommendation</span> <span class="badge" style="background-color:#96A4D7;">Low quality evidence</span>\
+                  <span class="badge" style="background-color:#B3A2CF;">Weak recommendation</span> <span class="badge" style="background-color:#96A4D7;">Low quality evidence</span>\
                 </td>\
               </tr>\
             </tbody>\
