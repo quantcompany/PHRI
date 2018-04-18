@@ -6,11 +6,8 @@ var options = {
                 <tr>\
                   <td>\
                     <p class="text-left">\
-                      <strong>Aspirin</strong> 81 mg po QD<br>\
+                      <strong>Aspirin</strong> 81 mg po QD <strong class="or-plus">+</strong>\
                     </p>\
-                    \
-                    <strong>+</strong>\
-                    \
                     <p class="text-left">\
                       <strong>&#8226; Clopidogrel</strong> 75 mg po QD\
                     </p>\
@@ -38,11 +35,8 @@ var options = {
                 <tr>\
                   <td>\
                     <p class="text-left">\
-                      <strong>Aspirin</strong> 81 mg po QD<br>\
+                      <strong>Aspirin</strong> 81 mg po QD <strong class="or-plus">+</strong>\
                     </p>\
-                    \
-                    <strong>+</strong>\
-                    \
                     <p class="text-left">\
                       <strong>&#8226; Clopidogrel</strong> 75 mg po QD\
                     </p>\
@@ -72,11 +66,8 @@ var options = {
                 <tr>\
                   <td>\
                     <p class="text-left">\
-                      <strong>Clopidogrel</strong> 75 mg po QD<br>\
+                      <strong>Clopidogrel</strong> 75 mg po QD <strong class="or-plus">+</strong>\
                     </p>\
-                    \
-                    <strong>+</strong>\
-                    \
                     <p class="text-left">\
                       <strong>OAC</strong>\
                     </p>\
@@ -84,17 +75,11 @@ var options = {
                       \
                       <li>\
                           <p class="text-left">\
-                            Rivaroxaban 15 mg po QD (Rivaroxaban 10 mg po QD if eGFR &lt;50 mL/min)<br>\
+                            Rivaroxaban 15 mg po QD (Rivaroxaban 10 mg po QD if eGFR &lt;50 mL/min) <strong class="or-plus">+</strong>\
                           </p>\
-                          \
-                          <strong>or</strong>\
-                          \
                           <p class="text-left">\
-                          Dabigatran 150 mg po BID (Dabigatran 110 mg po BID if age &gt;80yo or eGFR &lt;50 mL/min<br>\
+                          Dabigatran 150 mg po BID (Dabigatran 110 mg po BID if age &gt;80yo or eGFR &lt;50 mL/min <strong class="or-plus">+</strong>\
                           </p>\
-                          \
-                          <strong>or</strong>\
-                          \
                           <p class="text-left">\
                           VKA (recommended INR target is 2.0-2.5)<br>\
                           </p>\
@@ -131,11 +116,8 @@ var options = {
                 <tr>\
                   <td>\
                     <p class="text-left">\
-                      <strong>Aspirin</strong> 81 mg po QD<br>\
+                      <strong>Aspirin</strong> 81 mg po QD <strong class="or-plus">+</strong>\
                     </p>\
-                    \
-                    <strong class="text-left">+</strong>\
-                    \
                     <p class="text-left">\
                       <strong>P<small>2</small>Y<small>12</small></strong>\
                     </p>\
@@ -143,11 +125,8 @@ var options = {
                     <ul>\
                       <li>\
                           <p class="text-left">\
-                            <strong>Ticagrelor</strong> 90 mg po BID<br>\
+                            <strong>Ticagrelor</strong> 90 mg po BID <strong class="or-plus">or</strong>\
                           </p>\
-                          \
-                          <strong>or</strong>\
-                          \
                       </li>\
                       <li>\
                           <p class="text-left">\
@@ -165,7 +144,7 @@ var options = {
                 </tr>\
                 <tr>\
                   <td style="text-align:center;">\
-                    <strong>Strong recommendation / High quality evidence</strong>\
+                    <span class="badge">Strong recommendation</span> / <span class="badge">High quality evidence</span>\
                   </td>\
                 </tr>\
               </tbody>\
@@ -176,11 +155,8 @@ var options = {
                 <tr>\
                   <td>\
                     <p class="text-left">\
-                      <strong>Aspirin</strong> 81 mg po QD<br>\
+                      <strong>Aspirin</strong> 81 mg po QD <strong class="or-plus">+</strong>\
                     </p>\
-                    \
-                    <strong class="text-left">+</strong>\
-                    \
                     <p class="text-left">\
                       <strong>P<small>2</small>Y<small>12</small></strong>\
                     </p>\
@@ -213,16 +189,11 @@ var options = {
                 <tr>\
                   <td>\
                     <p class="text-left">\
-                      <strong>Aspirin</strong> 81 mg po QD<br>\
+                      <strong>Aspirin</strong> 81 mg po QD <strong class="or-plus">+</strong>\
                     </p>\
-                    \
-                    <strong>+</strong>\
                     <p class="text-left">\
-                      <strong>Clopidogrel</strong> 75 mg po QD<br>\
+                      <strong>Clopidogrel</strong> 75 mg po QD <strong class="or-plus">+</strong>\
                     </p>\
-                    \
-                    <strong>+</strong>\
-                    \
                     <p class="text-left">\
                       <strong>Reduced OAC (only if triple therapy is considered)</strong>\
                     </p>\
@@ -260,11 +231,8 @@ var options = {
                     </p>\
                     \
                     <p class="text-left">\
-                      <strong>Clopidogrel</strong> 75 mg po QD<br>\
+                      <strong>Clopidogrel</strong> 75 mg po QD <strong class="or-plus">+</strong>\
                     </p>\
-                    \
-                    <strong>+</strong>\
-                    \
                     <p class="text-left">\
                       <strong>OAC</strong>\
                     </p>\
@@ -272,18 +240,13 @@ var options = {
                       \
                       <li>\
                           <p class="text-left">\
-                            Rivaroxaban 15 mg po QD (Rivaroxaban 10 mg po QD if eGFR &lt;50 mL/min)<br>\
+                            Rivaroxaban 15 mg po QD (Rivaroxaban 10 mg po QD if eGFR &lt;50 mL/min) <strong class="or-plus">or</strong>\
                           </p>\
-                          \
-                          <strong>or</strong>\
                       </li>\
                       <li>\
                           <p class="text-left">\
-                            Dabigatran 150 mg po BID (Dabigatran 110 mg po BID if age &gt;80yo or eGFR &lt;50 mL/min<br>\
+                            Dabigatran 150 mg po BID (Dabigatran 110 mg po BID if age &gt;80yo or eGFR &lt;50 mL/min <strong class="or-plus">or</strong>\
                           </p>\
-                          \
-                          <strong>or</strong>\
-                          \
                       </li>\
                       <li>\
                           <p class="text-left">\
@@ -340,30 +303,23 @@ var options = {
                   <ul>\
                     <li>\
                         <p class="text-left">\
-                          Rivaroxaban 20 mg po QD*<br>\
+                          Rivaroxaban 20 mg po QD* <strong class="or-plus">or</strong>\
                         </p>\
-                        \
-                        <strong>or</strong>\
                     </li>\
                     <li>\
                         <p class="text-left">\
-                          Dabigatran 150 mg po BID*<br>\
+                          Dabigatran 150 mg po BID* <strong class="or-plus">or</strong>\
                         </p>\
-                        \
-                        <strong>or</strong>\
                     </li>\
                     <li>\
                         <p class="text-left">\
-                          Apixaban 5 mg po BID*<br>\
+                          Apixaban 5 mg po BID* <strong class="or-plus">or</strong>\
                         </p>\
-                        \
-                        <strong>or</strong>\
                     </li>\
                     <li>\
                         <p class="text-left">\
-                          Edoxaban 60 mg po QD*<br>\
+                          Edoxaban 60 mg po QD* <strong class="or-plus">or</strong>\
                         </p>\
-                        <strong>or</strong>\
                     </li>\
                     <li>\
                         <p class="text-left">\
@@ -406,11 +362,8 @@ var options = {
                               <ul>\
                                 <li>\
                                     <p class="text-left">\
-                                      <strong>Ticagrelor</strong> 60 mg po BID<br>\
+                                      <strong>Ticagrelor</strong> 60 mg po BID<strong class="or-plus">or</strong>\
                                     </p>\
-                                    \
-                                    <strong>or</strong>\
-                                    \
                                 </li>\
                                 <li>\
                                     <p class="text-left">\
@@ -461,40 +414,31 @@ var options = {
                   </p>\
                   <strong>or</strong>\
                   <p class="text-left">\
-                    <strong>Clopidogrel</strong> 75 mg po QD<br>\
+                    <strong>Clopidogrel</strong> 75 mg po QD <strong class="or-plus">+</strong>\
                   </p>\
-                  <strong>+</strong>\
                   <p class="text-left">\
                     <strong>OAC (standard stroke prevention doses)</strong><br>\
                   </p>\
                   <ul>\
                     <li>\
                         <p class="text-left">\
-                          Rivaroxaban 20 mg po QD*<br>\
+                          Rivaroxaban 20 mg po QD* <strong class="or-plus">or</strong>\
                         </p>\
-                        \
-                        <strong>or</strong>\
                     </li>\
                     <li>\
                         <p class="text-left">\
-                          Dabigatran 150 mg po BID*<br>\
+                          Dabigatran 150 mg po BID* <strong class="or-plus">or</strong>\
                         </p>\
-                        \
-                        <strong>or</strong>\
                     </li>\
                     <li>\
                         <p class="text-left">\
-                          Apixaban 5 mg po BID*<br>\
+                          Apixaban 5 mg po BID* <strong class="or-plus">or</strong>\
                         </p>\
-                        \
-                        <strong>or</strong>\
                     </li>\
                     <li>\
                         <p class="text-left">\
-                          Edoxaban 60 mg po QD*<br>\
+                          Edoxaban 60 mg po QD* <strong class="or-plus">or</strong>\
                         </p>\
-                        \
-                        <strong>or</strong>\
                     </li>\
                     <li>\
                         <p class="text-left">\
