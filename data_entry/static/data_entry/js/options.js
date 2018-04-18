@@ -24,7 +24,7 @@ var options = {
                 </tr>\
                 <tr>\
                   <td style="text-align:center;">\
-                    <span class="badge" style="background-color:#7C943F;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;">High quality evidence</span>\
+                    <span class="badge" style="background-color:#7C943F;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">High quality evidence</span>\
                   </td>\
                 </tr>\
               </tbody>\
@@ -55,7 +55,7 @@ var options = {
                 </tr>\
                 <tr>\
                   <td style="text-align:center;">\
-                    <span class="badge" style="background-color:#7C943F;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;">High quality evidence</span>\
+                    <span class="badge" style="background-color:#7C943F;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">High quality evidence</span>\
                   </td>\
                 </tr>\
               </tbody>\
@@ -105,7 +105,7 @@ var options = {
                 </tr>\
                 <tr>\
                   <td style="text-align:center;">\
-                    <span class="badge" style="background-color:#B3A2CF;">Weak recommendation</span> <span class="badge" style="background-color:#526DB4;">Moderate quality evidence</span>\
+                    <span class="badge" style="background-color:#B3A2CF;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Weak recommendation</span> <span class="badge" style="background-color:#526DB4;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Moderate quality evidence</span>\
                   </td>\
                 </tr>\
               </tbody>\
@@ -144,7 +144,7 @@ var options = {
                 </tr>\
                 <tr>\
                   <td style="text-align:center;">\
-                    <span class="badge" style="background-color:#7C943F;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;">High quality evidence</span>\
+                    <span class="badge" style="background-color:#7C943F;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">High quality evidence</span>\
                   </td>\
                 </tr>\
               </tbody>\
@@ -178,7 +178,7 @@ var options = {
                 </tr>\
                 <tr>\
                   <td style="text-align:center;">\
-                    <span class="badge" style="background-color:#7C943F;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;">High quality evidence</span>\
+                    <span class="badge" style="background-color:#7C943F;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">High quality evidence</span>\
                   </td>\
                 </tr>\
               </tbody>\
@@ -219,7 +219,7 @@ var options = {
                 </tr>\
                 <tr>\
                     <td style="text-align:center;">\
-                      <span class="badge" style="background-color:#7C943F;">Strong recommendation</span> <span class="badge" style="background-color:#526DB4;">Moderate quality evidence</span>\
+                      <span class="badge" style="background-color:#7C943F;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Strong recommendation</span> <span class="badge" style="background-color:#526DB4;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Moderate quality evidence</span>\
                     </td>\
                 </tr>\
                 <tr>\
@@ -263,7 +263,7 @@ var options = {
                 </tr>\
                 <tr>\
                   <td style="text-align:center;">\
-                    <span class="badge" style="background-color:#B3A2CF;">Weak recommendation</span> <span class="badge" style="background-color:#526DB4;">Moderate quality evidence</span>\
+                    <span class="badge" style="background-color:#B3A2CF;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Weak recommendation</span> <span class="badge" style="background-color:#526DB4;margin-bottom: 7px;">Moderate quality evidence</span>\
                   </td>\
                 </tr>\
               </tbody>\
@@ -281,7 +281,7 @@ var options = {
               </tr>\
               <tr>\
                 <td style="text-align:center;">\
-                  <span class="badge" style="background-color:#7C943F;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;">High quality evidence</span>\
+                  <span class="badge" style="background-color:#7C943F;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">High quality evidence</span>\
                 </td>\
               </tr>\
             </tbody>\
@@ -332,7 +332,7 @@ var options = {
               </tr>\
               <tr>\
                 <td style="text-align:center;">\
-                  <span class="badge" style="background-color:#7C943F;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;">High quality evidence</span>\
+                  <span class="badge" style="background-color:#7C943F;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">High quality evidence</span>\
                 </td>\
               </tr>\
             </tbody>\
@@ -375,7 +375,7 @@ var options = {
                                     </p>\
                                 </li>\
                               </ul>\
-                              \<span class="badge" style="background-color:#7C943F;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;">High quality evidence</span>\
+                              \<span class="badge" style="background-color:#7C943F;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Strong recommendation</span> <span class="badge" style="background-color:#004EA9;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">High quality evidence</span>\
                             </td>\
                             <td style="padding-left: 20px;">\
                               <strong>+</strong>\
@@ -389,7 +389,7 @@ var options = {
                                     </p>\
                                 </li>\
                               </ul>\
-                              <span class="badge" style="background-color:#B3A2CF;>Weak recommendation</span> <span class="badge" style="background-color:#526DB4;">Moderate quality evidence</span>\
+                              <span class="badge" style="background-color:#B3A2CF;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Weak recommendation</span> <span class="badge" style="background-color:#526DB4;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Moderate quality evidence</span>\
                             </td>\
                           </tr>\
                       </tbody>\
@@ -450,7 +450,7 @@ var options = {
                   </p>\
                 </td>\
                 <td style="text-align:center;">\
-                  <span class="badge" style="background-color:#B3A2CF;">Weak recommendation</span> <span class="badge" style="background-color:#96A4D7;">Low quality evidence</span>\
+                  <span class="badge" style="background-color:#B3A2CF;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Weak recommendation</span> <span class="badge" style="background-color:#96A4D7;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Low quality evidence</span>\
                 </td>\
               </tr>\
             </tbody>\
