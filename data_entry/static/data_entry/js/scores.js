@@ -271,7 +271,7 @@ $('#prior_acute_cs, #prior_stent_thrombosis, #frailty, #chf, #tia_stroke_or_syse
     updateEverything();
 });
 
-$('#htn, #diabetes_mellitus #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #poba, #deb, #drug_coated_stent, #bvs, #hx_of_bleeding, #elective_pci, input[type="checkbox"][name^="pci_risk_"], #weight, [name^="creatinine_"], input[type="checkbox"][name="anemia"]').on('change', function(event, state){
+$('#htn, #diabetes_mellitus #age, #alcohol_abuse, #gender, #vascular_disease, #bms_stent, #des_stent, #poba, #deb, #drug_coated_stent, #bvs, #hx_of_bleeding, #elective_pci, input[type="checkbox"][name^="pci_risk_"], #age, #weight, [name^="creatinine_"], input[type="checkbox"][name="anemia"]').on('change', function(event, state){
     updateEverything();
 });
 
