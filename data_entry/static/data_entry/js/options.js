@@ -446,10 +446,12 @@ var options = {
                     </li>\
                   </ul>\
                   <p class="text-left">\
-                    <small><strong>*Dose adjustment</strong>\
+                    <strong>*Dose adjustment</strong>\
                   </p>\
                 </td>\
-                <td style="text-align:center;">\
+              </tr>\
+              <tr>\
+                <td>\
                   <span class="badge" style="background-color:#B3A2CF;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Weak recommendation</span> <span class="badge" style="background-color:#96A4D7;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Low quality evidence</span>\
                 </td>\
               </tr>\
