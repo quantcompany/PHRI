@@ -251,7 +251,7 @@ function determineCCSTherapy(){
   var electivePCIValue = getElectivePCIValue();
   var bleedingRisk = getBleedingRisk();
   var therapy = {choices: []};
-
+  
   if( highRiskPCIValue === 'low' ) {
     //LOW PCI Risk
     if( patientAge < 65 ) {
