@@ -263,7 +263,7 @@ var options = {
                 </tr>\
                 <tr>\
                   <td style="text-align:center;">\
-                    <span class="badge" style="background-color:#B3A2CF;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Weak recommendation</span> <span class="badge" style="background-color:#526DB4;margin-bottom: 7px;">Moderate quality evidence</span>\
+                    <span class="badge" style="background-color:#B3A2CF;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Weak recommendation</span> <span class="badge" style="background-color:#526DB4;text-shadow: 0 1px 0 #333;padding: 12px;margin-bottom: 7px;">Moderate quality evidence</span>\
                   </td>\
                 </tr>\
               </tbody>\
