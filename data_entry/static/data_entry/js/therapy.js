@@ -55,6 +55,7 @@ function renderTherapy(therapy){
     if( choice.steps.length ) {
       for (var j = 0; j < choice.steps.length; j++) {
         var step = choice.steps[j];
+        if( getAsaAllergy() == true ) out += '<h4 style="text-align:center;">Consider Aspirin Desensitization Protocol due to ASA allergy</h4>';
         out += '<div class="row therapy-option text-center">';
         out += '  <div class="col-md-6 m-0 p-0">';
         out += '    <h4 class="m-0"><em><strong>OPTION UP TO 12 MONTHS</strong></em></h4><br>';
@@ -146,6 +147,10 @@ function getInrInstability(){
 
 function getDoacAllergy(){
     return $('#doac_allergy_or_intolerance').bootstrapSwitch('state') ? true:false;
+}
+
+function getAsaAllergy(){
+    return $('#asa_allergy').bootstrapSwitch('state') ? true:false;
 }
 
 function getAge(){
@@ -251,7 +256,7 @@ function determineCCSTherapy(){
   var electivePCIValue = getElectivePCIValue();
   var bleedingRisk = getBleedingRisk();
   var therapy = {choices: []};
-  
+
   if( highRiskPCIValue === 'low' ) {
     //LOW PCI Risk
     if( patientAge < 65 ) {
