@@ -267,7 +267,7 @@ function clasifyGFR(value){
 // so that the scores, plot, and recommended therapy get updated as the
 // form is filled out
 
-$('#prior_acute_cs, #prior_stent_thrombosis, #frailty, #chf, #tia_stroke_or_sysemb, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse, #aim').on('switchChange.bootstrapSwitch', function(event, state){
+$('#prior_acute_cs, #prior_stent_thrombosis, #frailty, #asa_allergy, #chf, #tia_stroke_or_sysemb, #liver_dysfunction, #inr_instability, #warfarin_intolerance, #doac_allergy_or_intolerance, #renal_dysfunction, #drug_abuse, #aim').on('switchChange.bootstrapSwitch', function(event, state){
     updateEverything();
 });
 
