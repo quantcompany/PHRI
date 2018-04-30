@@ -55,7 +55,7 @@ function renderTherapy(therapy){
     if( choice.steps.length ) {
       for (var j = 0; j < choice.steps.length; j++) {
         var step = choice.steps[j];
-        if( getAsaAllergy() == true ) out += '<div class="alert alert-warning" role="alert" style="text-align:center;">Consider Aspirin Desensitization Protocol due to ASA allergy</div>';
+        if( getAsaAllergy() == true ) out += '<div class="alert alert-warning" role="alert" style="text-align:center; font-size: 1.5em;">Consider aspirin desensitization protocol due to ASA allergy</div>';
         out += '<div class="row therapy-option text-center">';
         out += '  <div class="col-md-6 m-0 p-0">';
         out += '    <h4 class="m-0"><em><strong>OPTION UP TO 12 MONTHS</strong></em></h4><br>';
