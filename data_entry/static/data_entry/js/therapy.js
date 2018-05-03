@@ -55,8 +55,7 @@ function renderTherapy(therapy){
     if( choice.steps.length ) {
       for (var j = 0; j < choice.steps.length; j++) {
         var step = choice.steps[j];
-        console.log('COMPUTE GFR VALUE PRODUCES: ' + computeGFR());
-        if( getAsaAllergy() == true ) out += '<div class="alert alert-warning" role="alert" style="text-align:center;">Consider Aspirin Desensitization Protocol due to ASA allergy</div>';
+        if( getAsaAllergy() == true ) out += '<div class="alert alert-warning" role="alert" style="text-align:center; font-size: 1.5em;">Consider aspirin desensitization protocol due to ASA allergy</div>';
         if( computeGFR() < 30 ) out += '<div class="alert alert-warning" role="alert" style="text-align:center;">Consider Warfarin due to eGFR levels ({{computeGFR()}} < 30 mL/min) since for these levels none of the DOACs are indicated</div>'
         out += '<div class="row therapy-option text-center">';
         out += '  <div class="col-md-6 m-0 p-0">';
