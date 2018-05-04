@@ -529,6 +529,9 @@
                         {% if patient.asa_allergy %}
                             <div class="alert alert-warning" role="alert" style="text-align:center; font-size: 1.5em;">Consider aspirin desensitization protocol due to ASA allergy</div>
                         {% endif %}
+                        {% if patient.gfr_mLmin < 30 %}
+                            <div class="alert alert-warning" role="alert" style="text-align:center; font-size: 1.5em;">Consider Warfarin due to eGFR levels ({{patient.gfr_mLmin|floatformat:2}} < 30 mL/min) since for these levels none of the DOACs are indicated</div>
+                        {% endif %}
                     <tr>
                         <td>
                             <h3>OPTION UP TO 12 MONTHS</h3>
