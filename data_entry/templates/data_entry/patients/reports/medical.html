@@ -559,8 +559,7 @@
         <hr />
 
         <p class="lead"><span class="big"><b>{{ patient.agree_therapy | yesno | title }}</b></span>.</p>
-
-        {% if patient.agree_therapy == 0 %}
+        {% if not patient.agree_therapy %}
         <p class="lead">Reason: <b>"{{ patient.reason }}"</b></p>
         {% endif %}
 
