@@ -117,7 +117,7 @@
         </div>
 
 
-        <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Patient Data</h2>
+        <h2 class="text-center" style="font-weight:500;">AF-PCI Report: Patient Data</h2>
 
         <h3>Personal Information</h3>
         <hr />
@@ -435,7 +435,7 @@
         <!-- *************************** PAGE BREAK ****************************** -->
         <div style="page-break-after: always;"></div>
 
-        <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Results</h2>
+        <h2 class="text-center" style="font-weight:500;">AF-PCI Report: Results</h2>
 
         <h3>Scores and Risks</h3>
         <hr />
@@ -511,12 +511,12 @@
         <!-- *************************** PAGE BREAK ****************************** -->
         <div style="page-break-after: always;"></div>
 
-        <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Therapy</h2>
+        <h2 class="text-center" style="font-weight:500;">AF-PCI Report: Therapy</h2>
 
         <table class="therapy-recommendations">
             <thead>
                 <tr>
-                    <th style="width:100%;" colspan="2"><h3>Hamilton AF-PCI recommendation</h3></th>
+                    <th style="width:100%;" colspan="2"><h3>2018 CCS/CAIC Guidelines</h3></th>
                 </tr>
                 <tr>
                     <th colspan="2"><hr/></th>
@@ -555,12 +555,13 @@
         <!-- *************************** PAGE BREAK ****************************** -->
         <div style="page-break-after: always;"></div>
 
-        <h3>Do you agree with the recommendation?</h3>
+        <h3>Are you planning to follow the CCS/CAIC Guidelines?</h3>
         <hr />
 
         <p class="lead"><span class="big"><b>{{ patient.agree_therapy | yesno | title }}</b></span>.</p>
-
+        {% if not patient.agree_therapy %}
         <p class="lead">Reason: <b>"{{ patient.reason }}"</b></p>
+        {% endif %}
 
         <p class="f-w-700" style="text-align:center;">Report generated on {% now "d/m/Y" %} by {{ user.guess_user_name }} ({{ user.email }})</p>
         <center style="font-weight:bolder">www.tripletherapy.net</center>
