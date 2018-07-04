@@ -53,8 +53,13 @@ GENDER_CHOICES = (
 
 HTN_CHOICES = (
     (0, 'No'),
-    (1, 'Yes, Controlled HTN on meds'),
-    (2, 'Yes, Uncontrolled HTN on meds SBP > 160 mmHg'),
+    (1, 'Yes, Controlled on medicaments'),
+    (2, 'Yes, Uncontrolled on medicaments SBP > 160 mmHg'),
+)
+
+DIABETES_MELLITUS_CHOICES = (
+    (0, 'No'),
+    (1, 'Yes'),
 )
 
 ALCOHOL_ABUSE_CHOICES = (
@@ -65,9 +70,9 @@ ALCOHOL_ABUSE_CHOICES = (
 
 VASCULAR_DISEASE_CHOICES = (
     (0, 'No'),
-    (1, 'Aortic'),
-    (2, 'Coronary'),
-    (3, 'Peripheral'),
+    (1, 'Peripheral vascular disease'),#(1, 'Aortic'),
+    (2, 'Myocardial infarction'),#(2, 'Coronary'),
+    (3, 'Aortic plaque'),#(3, 'Peripheral'),
 )
 
 AF_TYPE_CHOICES = (
@@ -76,17 +81,16 @@ AF_TYPE_CHOICES = (
     (3, 'Permanent'),
 )
 
-INDICATION_CHOICES = (
+ELECTIVE_PCI_CHOICES = (
     ('STEMI', 'STEMI'),
     ('NSTEMI', 'NSTEMI'),
     ('UA', 'UA'),
-    ('SCAD', 'SCAD'),
+    ('SCAD', 'Stable CAD'),
 )
 
 ANTI_COAGULATION_CHOICES = (
-    (0, 'No'),
     (1, 'Warfarin'),
-    (2, 'Ribaroxaban'),
+    (2, 'Rivaroxaban'),
     (3, 'Dabigatran'),
     (4, 'Apixiban'),
 )
@@ -95,6 +99,7 @@ BLEEDING_CHOICES = (
     (0, 'No'),
     (1, 'Gastrointestinal'),
     (2, 'Intracerebral hemorrhage'),
+    (3, 'Hospitalization for bleeding within last year'),
 )
 
 MALIGNANCY_CHOICES = (
@@ -107,4 +112,10 @@ NON_CARDIATIC_SURGERY_CHOICES = (
     (0, 'No'),
     (1, 'Yes, < 6 months'),
     (2, 'Yes, >= 6 months'),
+)
+
+SMOKING_HISTORY_CHOICES = (
+    (0, 'Never smoker'),
+    (1, 'Former smoker'),
+    (2, 'Current smoker'),
 )

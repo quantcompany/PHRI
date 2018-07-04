@@ -1,0 +1,71 @@
+{% extends 'data_entry/panel_base.html' %}
+
+{% block panel_heading %}Dose Adjustment{% endblock %}
+
+{% block fa_icon %}fa fa-table{% endblock %}
+{% load static %}
+
+{% block panel_body %}
+    <div class="panel-body">
+        <div class="row p-20 m-b-20">
+            <div class="col-sm-12 text-center">
+            	<table id="hamilton-app-table" class="table table-bordered table-condensed" style="font-size:16px;">
+			         <thead>
+			           <tr>
+			             <th class="text-center"></th>
+			             <th class="text-center">Dabigatran</th>
+			             <th class="text-center">Rivaroxaban</th>
+			             <th class="text-center">Apixaban</th>
+			             <th class="text-center">Edoxaban</th>
+			           </tr>
+			         </thead>
+			         <tbody>
+			           <tr>
+			             <th class="text-center">Dose</th>
+			             <td>150 mg twice daily</td>
+			             <td>20 mg once daily</td>
+			             <td>5 mg twice daily</td>
+			             <td>60 mg once daily</td>
+			           </tr>
+			           <tr>
+			             <th class="text-center">Dose Adjustment</th>
+			             <td>
+			               <p>110 mg twice daily if:</p>
+			               <ul style="padding-left:7px;">
+			                 <li>≥ 80 years</li>
+			                 <li>CrCl 30 - 49 mL/min</li>
+			               </ul>
+			             </td>
+			             <td>
+			              15 mg once daily if:
+			               <ul style="padding-left:7px;">
+			                 <li>CrCl 30 - 49 mL/min</li>
+			               </ul>
+			             </td>
+			             <td>
+			               <p>2.5 mg twice daily if:</p>
+			                <ul style="padding-left:7px;">
+			                  <li>Serum creatinine ≥ 1.5 mg/dL (133 µmol/L) +</li>
+			                  <li>Age ≥ 80 years or Weight ≤ 60 kg</li>
+			                </ul>
+			             </td>
+			             <td>30 mg once daily if:
+			               <ul style="padding-left:7px;">
+			                 <li>CrCl 30 - 49 mL/min</li>
+			               </ul>
+			             </td>
+			           </tr>
+			         </tbody>
+			         <tfoot>
+			           <tr>
+			             <th colspan="5" class="text-center">
+			               Not recommended if CrCl &lt; 30mL/min
+			             </th>
+			           </tr>
+			         </tfoot>
+			       </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

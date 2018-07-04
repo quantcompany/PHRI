@@ -8,6 +8,31 @@
     <link href="{% static 'plugins/select2/css/select2.css' %}" rel="stylesheet" />
     <link href="{% static 'plugins/switchery/switchery.min.css' %}" rel="stylesheet" />
     <link href="{% static 'plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet">
+    <link href="{% static 'plugins/lightbox/css/lightbox.css' %}" rel="stylesheet" />
+    <style type="text/css">
+        #hamilton-app-table th {
+            background-color: #f1f1f1;
+        }
+        .note-default {
+            border-left-color: #f1f1f1;
+        }
+        .therapy-option {
+            border-left-color: #f1f1f1;
+        }
+        .therapy-option table {
+            font-size:16px!important;
+        }
+        .therapy-option table tbody {
+            font-size:1.2em;
+        }
+        .therapy-option p .or-plus {
+            padding-left: 10px;
+        }
+        .therapy-option .badge {
+            font-weight:bold;
+            font-size:0.9em;
+        }
+    </style>
 {% endblock %}
 
 {% block page_title %}{% trans 'Patient Form' %}{% endblock %}
@@ -19,12 +44,22 @@
         {% csrf_token %}
         <div class="row">
             <div class="col-md-6">
-                {% include 'data_entry/includes/personal_info_panel.html' %}
+                <div class="row">
+                    <div class="col-md-12">
+                        {% include 'data_entry/includes/personal_info_panel.html' %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {% include 'data_entry/includes/pci_risk_panel.html' %}
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-6">
                 {% include 'data_entry/includes/procedure_details_atrial_fibrilation_panel.html' %}
             </div>
+
         </div>
 
         <div class="row">
@@ -36,6 +71,12 @@
                 {% include 'data_entry/includes/medical_history_2_panel.html' %}
             </div>
 
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                {% include 'data_entry/includes/GFR_panel.html' %}
+            </div>
         </div>
 
         <div class="row">
@@ -55,12 +96,20 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                {% include 'data_entry/includes/recommendation_mcmaster_panel.html' %}
-            </div>
-
-            <div class="col-md-6">
+            <div class="col-md-12">
                 {% include 'data_entry/includes/recommendation_ccs_panel.html' %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'data_entry/includes/dose_adjustment_table.html' %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'data_entry/includes/submission_panel.html' %}
             </div>
         </div>
 
@@ -125,6 +174,8 @@
     <script src="{% static 'data_entry/js/plots.js' %}"></script>
     <script src="{% static 'data_entry/js/gauges.js' %}"></script>
     <script src="{% static 'data_entry/js/options.js' %}"></script>
+    <script src="{% static 'data_entry/js/formCache.js' %}"></script>
+    <script src="{% static 'plugins/lightbox/js/lightbox-2.6.min.js' %}"></script>
 
     <script>
         $(".default-select2").select2({
@@ -142,61 +193,74 @@
 
         $(".multiple-select2").select2({ placeholder: "---------" });
 
-
         $(".bootstrap-switch").bootstrapSwitch();
 
-        $("#followed_recommendation").bootstrapSwitch({
-            onSwitchChange: function(event, state){
-                var ta = $('#reason_not_followed');
-                if (state === true){
-                    ta.stop().slideUp(100);
-                }else{
-                    ta.stop().slideDown(100);
-                }
+        $('[name="agree_option"]').on('change', function() {
+            $elem = $(this);
+            console.log($elem);
+            $('#agree_option_yes').parent()
+            .removeClass('btn-success')
+            .addClass('btn-default');
+
+            $('#agree_option_no').parent()
+            .removeClass('btn-danger')
+            .addClass('btn-default');
+            
+            if( $elem.val() == 'yes' ) {
+                $elem.parent().removeClass('btn-default');
+                $elem.parent().addClass('btn-success');
+
+                $('#submit-area')
+                .stop(true, true)
+                .hide('fast');
+            }else {
+                $elem.parent().removeClass('btn-default');
+                $elem.parent().addClass('btn-danger');
+
+                $('#submit-area')
+                .stop(true, true)
+                .show('fast', function(){
+                    $(this).slideDown(100);
+                });
             }
         });
 
-        $('#no_pci').on('change', function(elem) {
-          var checked = $(this).is(':checked');
-
-          if (checked) {
-            $('#bms_stent').prop('checked', false).prop('disabled', true);
-            $('#des_stent').prop('checked', false).prop('disabled', true);
-          } else {
-            $('#bms_stent').prop('disabled', false);
-            $('#des_stent').prop('disabled', false);
-          }
-        });
-
-        function clearFields(){
-            $('#identification').val('');
-            $('#first_name').val('');
-            $('#middle_name').val('');
-            $('#last_name').val('');
-            $('#age').val('');
-            $('[name="stent"]').prop('checked', false);
-            $('[name="no_pci"]').prop('checked', false);
-            $('#prev_anti_coagulation').val('0').trigger('change');
-            $('input[type="number"]').val('');
-            $('input[class="bootstrap-switch"]').bootstrapSwitch('state', false);
-            $('#followed_recommendation').bootstrapSwitch('state', true);
-            $('#reason_not_followed').val('');
-        }
-
         function submitPatient(){
-            event.preventDefault();
-
+            $('#patient_form button[type="submit"]').button('loading');
             var form = $('#patient_form')[0];
-
             var fd = new FormData(form);
-
             if ($('#bms_stent').is(':checked')){
                 fd.append('bms_stent', 'on');
             }
-
             if ($('#des_stent').is(':checked')){
                 fd.append('des_stent', 'on');
             }
+            if ($('#poba').is(':checked')){
+                fd.append('poba', 'on');
+            }
+            if ($('#deb').is(':checked')){
+                fd.append('deb', 'on');
+            }
+            if ($('#drug_coated_stent').is(':checked')){
+                fd.append('drug_coated_stent', 'on');
+            }
+            if ($('#bvs').is(':checked')){
+                fd.append('bvs', 'on');
+            }
+            if ($('#hxoa_anemia').is(':checked')){
+                fd.append('hxoa_anemia', 'on');
+            }
+            if ($('#hemoglobin_anemia').is(':checked')){
+                fd.append('hemoglobin_anemia', 'on');
+            }
+            // submit MacMaster therapy recommendation
+            fd.append('ccs_therapy', JSON.stringify( determineCCSTherapy() ));
+            // submit which therapy recommendation was chones
+            var agreeTherapy = $('[name="agree_option"]:checked').val() == 'yes' ? true : false;
+            if( agreeTherapy ) {
+                fd.set('reason', 'Yes, i agree');
+            }
+            fd.append('agree_therapy', agreeTherapy);
 
             Pace.track(function(){
               $('#signup-form-errors').removeClass('filled').html('');
@@ -209,18 +273,16 @@
                 });
 
                 request.done(function(data, textStatus, jqXHR) {
-                    console.log('Success');
-                    console.log(data);
+                    // console.log('Success');
+                    // console.log(data);
                     $('#medical_report_button').attr('href', data.medical_report_link);
                     $('#patient_report_button').attr('href', data.patient_report_link);
                     $('#submit-modal').modal('show');
-                    clearFields();
-                    // window.location.replace("{% url 'data_entry:form' %}");
+                    clearForm(); // this is in formCache.js
+                    $('#patient_form button[type="submit"]').button('reset');
                 });
 
                 request.fail(function(jqXHR, textStatus, errorThrown) {
-                    console.log('Fail');
-                    console.log(jqXHR);
                     $.gritter.add({
                         title: 'Validation Error',
                         text: 'Please fix the errors on the marked fields',
@@ -240,8 +302,6 @@
                     }
 
                     return false;
-                    // var errorMessage = jqXHR.responseJSON.error;
-                    // $('#signup-form-errors').addClass('filled').html(errorMessage)
                 });
             });
         }

@@ -50,6 +50,35 @@
                     display: none !important;
                 }
             }
+
+            .therapy-recommendations {
+                width: 100%;
+            }
+
+            .therapy-recommendations h2 {
+                font-size: 18px;
+            }
+
+            .therapy-recommendations h3 {
+                margin: 0px;
+                font-size: 16px;
+            }
+
+            .therapy-recommendations h4 {
+                margin: 0px;
+                font-size: 14px;
+            }
+
+            .therapy-recommendations td {
+                vertical-align: top;
+                text-align: center;
+            }
+
+             .therapy-recommendations th {
+                font-size: 16px;
+                vertical-align: top;
+                text-align: center;   
+             }
         </style>
     </head>
     <body style="padding:20px 300px;">
@@ -64,13 +93,14 @@
               <li>
                 <div id="email_results_input" class="input-group m-t-20" style="width:500px">
                     <!-- <input id="address" type="email" class="form-control" placeholder="Email Address"> -->
-                    <ul id="jquery-tagIt-default">
+                    <ul id="jquery-tagIt-default" name="fuck">
                     </ul>
 
                     <div class="input-group-btn">
                         <button id="send" type="button" class="btn btn-default btn-primary" data-loading-text="Sending...">Send</button>
                     </div>
                 </div>
+                <div id="email-message" style="display:none;"></div>
               </li>
             </ul>
           </div>
@@ -82,7 +112,7 @@
         <hr/>
 
         <table class="table" style="width:100%;border:none;">
-            <thead
+            <thead>
                 <tr>
                     <td style="width:30%"></td>
                     <td></td>
@@ -96,25 +126,22 @@
                 </tr>
 
                 <tr>
-                    <th>Your recommended therapy: </th>
-                    <td>{{ patient.recommended_therapy.0 }}</td>
+                    <th>Gender</th>
+                    <td>{{ patient.get_gender_display }}</td>
                 </tr>
 
                 <tr>
-                    <th>In addition, you should: </th>
-                    <td>{{ patient.recommended_therapy.1 }}</td>
+                    <th>Age</th>
+                    <td>{{ patient.age }}</td>
                 </tr>
             </tbody>
         </table>
 
-        <hr/>
-
-        <p>You have a condition known as Atrial Fibrillation (also called AFib or AF) it is basically an irregular heartbeat (arrhythmia). When this happens, blood does not flow properly through the heart and the rest of the body. That can lead to several health complications, most notably people with this condition have increased risks of strokes and major bleeding episodes. The following information explain the risks you have given your conditions.</p>
-
-        <center style="font-weight:bolder">http://tripletherapy.net</center>
-
-        <!-- *************************** PAGE BREAK ****************************** -->
-        <div style="page-break-after: always;"></div>
+        <h3>Condition</h3>
+        <hr />
+        <p>
+            You have a condition known as Atrial Fibrillation (also called AFib or AF) it is basically an irregular heartbeat (arrhythmia). When this happens, blood does not flow properly through the heart and the rest of the body. That can lead to several health complications, most notably people with this condition have increased risks of strokes and major bleeding episodes. The following information explain the risks you have given your conditions.
+        </p>
 
         <h3>Stroke Risk</h3>
         <hr/>
@@ -127,19 +154,39 @@
 
         <h4><b>What does a stroke risk of {{ patient.chads2_risk.percentage|floatformat:0 }}% mean?</b></h4>
 
-        <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ chads2_relative.sad|floatformat:0 }} of those people (sad red faces) will suffer a stroke, and {{ chads2_relative.happy|floatformat:0 }} will not suffer a stroke (smiley green faces)</p>
+        <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ chads2_relative.sad|floatformat:0 }} of those people (sad faces) will suffer a stroke, and {{ chads2_relative.happy|floatformat:0 }} will not suffer a stroke (smiley faces).</p>
 
-        {% for row in chads2_relative.rows %}
-            <div>
-                {% for face in row %}
-                    {% if face == 'H' %}
-                        <img width="15" height="15" src="{% static 'data_entry/img/happy.png' %}">
-                    {% else %}
-                        <img width="15" height="15" src="{% static 'data_entry/img/sad.png' %}">
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endfor %}
+        <table width="100%">
+            <tbody>
+                <tr>
+                    <td rowspan="2" style="text-align:center;">
+                        {% for row in chads2_relative.rows %}
+                            <div>
+                                {% for face in row %}
+                                    {% if face == 'H' %}
+                                        <img width="18" height="18" src="{% static 'data_entry/img/happy.png' %}">
+                                    {% else %}
+                                        <img width="18" height="18" src="{% static 'data_entry/img/sad.png' %}">
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </td>
+
+                    <td>
+                        <img src="{% static 'data_entry/img/sad.png' %}">
+                        <span class="lead">&nbsp;&nbsp;Will suffer a stroke</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <img src="{% static 'data_entry/img/happy.png' %}">
+                        <span class="lead">&nbsp;&nbsp;Will NOT suffer a stroke</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
         <center style="font-weight:bolder">http://tripletherapy.net</center>
         <!-- *************************** PAGE BREAK ****************************** -->
@@ -148,7 +195,7 @@
         <h3>Bleeding Risk</h3>
         <hr/>
 
-        <p>Here is some explanation of what a bleeding episode is and why the patient has a higher risk of having one. The <b>HAS-BLED</b> scores is a tool developed to assess 1-year risk of major bleeding in patients with Atrial Fibrillation. The higher the HAS-BLED score, the greater the risk of bleeding. The HAS-BLED score can go from 0 to 9. Scores of 0, 1, 2 or 3 are considered low and scores equal or greater than 4 are considered high.</p>
+        <p>The <b>HAS-BLED</b> score is a tool developed to assess 1-year risk of major bleeding in patients with Atrial Fibrillation. The higher the HAS-BLED score, the greater the risk of bleeding. The HAS-BLED score can go from 0 to 9. Scores of 0, 1, 2 or 3 are considered low and scores equal or greater than 4 are considered high.</p>
 
         <p class="lead">Your <b>HAS-BLED</sub></b> score is <span class="big">{{ patient.hasbled_score|floatformat:0 }}</span>, which is considered <span class="big">{{ patient.hasbled_score_interpretation }}</span>.</p>
 
@@ -156,29 +203,62 @@
 
         <h4><b>What does a bleeding risk of {{ patient.hasbled_risk.percentage|floatformat:0 }}% mean?</b></h4>
 
-        <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ hasbled_relative.sad|floatformat:0 }} of those people (sad red faces) will suffer a major bleeding episode, and {{ hasbled_relative.happy|floatformat:0 }} will not suffer a bleeding episode (smiley green faces)</p>
+        <p>It means that if there are 100 people with your same medical condition, over the course of 1 year on average: {{ hasbled_relative.sad|floatformat:0 }} of those people (sad faces) will suffer a major bleeding episode, and {{ hasbled_relative.happy|floatformat:0 }} will not suffer a bleeding episode (smiley faces).</p>
 
-        {% for row in hasbled_relative.rows %}
-            <div>
-                {% for face in row %}
-                    {% if face == 'H' %}
-                        <img width="15" height="15" src="{% static 'data_entry/img/happy.png' %}">
-                    {% else %}
-                        <img width="15" height="15" src="{% static 'data_entry/img/sad.png' %}">
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endfor %}
+        <table width="100%">
+            <tbody>
+                <tr>
+                    <td rowspan="2" style="text-align:center;">
+                        {% for row in hasbled_relative.rows %}
+                            <div>
+                                {% for face in row %}
+                                    {% if face == 'H' %}
+                                        <img width="18" height="18" src="{% static 'data_entry/img/happy.png' %}">
+                                    {% else %}
+                                        <img width="18" height="18" src="{% static 'data_entry/img/sad.png' %}">
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </td>
+
+                    <td>
+                        <img src="{% static 'data_entry/img/sad.png' %}">
+                        <span class="lead">&nbsp;&nbsp;Will suffer a bleeding episode</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <img src="{% static 'data_entry/img/happy.png' %}">
+                        <span class="lead">&nbsp;&nbsp;Will NOT suffer a bleeding episode</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
 
         <center style="font-weight:bolder">http://tripletherapy.net</center>
-
+        
         <script>
+            function showEmailSuccessMessage(){
+                $('#email-message').css('color', 'green').html('Email has been sent!').show();
+            }
+
+            function showEmailErrorMessage(){
+                $('#email-message').css('color', 'red').html('Error sending email!').show();
+            }
+
+            function clearEmailMessage(){
+                $('#email-message').hide().html('');
+            }
+
             $('#jquery-tagIt-default').tagit();
 
-            $('#address').on('keyup', function(e){
+            $('#jquery-tagIt-default').find('input').on('keyup', function(e){
                 $(this).parent().removeClass('has-error');
                 $(this).parent().removeClass('has-success');
+                clearEmailMessage();
             });
 
             // stop the dropdown from closing when you click on it
@@ -213,6 +293,7 @@
                     console.log(data);
                     sendButton.button('reset');
                     tagitInput.parent().addClass('has-success');
+                    showEmailSuccessMessage();
                 });
 
                 request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -220,6 +301,7 @@
                     console.log(jqXHR);
                     sendButton.button('reset');
                     tagitInput.parent().addClass('has-error');
+                    showEmailErrorMessage();
                 });
 
             });

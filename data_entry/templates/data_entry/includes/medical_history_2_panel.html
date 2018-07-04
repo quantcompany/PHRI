@@ -6,46 +6,35 @@
 
 {% block panel_body %}
     <div class="form-horizontal form-bordered">
+
         <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 f-s-14" for="chf">CHF</label>
+            <label class="control-label col-md-3 col-sm-3 f-s-14" for="prior_acute_cs">Prior Acute Coronary Syndrome (ACS)</label>
+            <div class="col-md-3 col-sm-3">
+                <input id="prior_acute_cs" type="checkbox" name="prior_acute_cs" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
+            </div>
+
+            <label class="control-label col-md-3 col-sm-3 f-s-14" for="prior_stent_thrombosis">Prior stent thrombosis</label>
+            <div class="col-md-3 col-sm-3">
+                <input id="prior_stent_thrombosis" type="checkbox" name="prior_stent_thrombosis" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
+            </div>
+        </div>
+    
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 f-s-14" for="frailty">Frailty</label>
+            <div class="col-md-3 col-sm-3">
+                <input id="frailty" type="checkbox" name="frailty" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
+            </div>
+            
+            <label class="control-label col-md-3 col-sm-3 f-s-14" for="chf">Congestive Heart Failure</label>
             <div class="col-md-3 col-sm-3">
                 <input id="chf" type="checkbox" name="chf" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
             </div>
-
-            <label class="control-label col-md-3 col-sm-3 f-s-14" for="diabetes_mellitus">Diabetes Mellitus</label>
-            <div class="col-md-3 col-sm-3">
-                <input id="diabetes_mellitus" type="checkbox" name="diabetes_mellitus" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
-            </div>
         </div>
 
 
         <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 f-s-14" for="stroke">Stroke</label>
-            <div class="col-md-3 col-sm-3">
-                <input id="stroke" type="checkbox" name="stroke" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
-            </div>
 
-            <label class="control-label col-md-3 col-sm-3 f-s-14" for="tia">TIA</label>
-            <div class="col-md-3 col-sm-3">
-                <input id="tia" type="checkbox" name="tia" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 f-s-14" for="renal_dysfunction">Renal dysfunction</label>
-            <div class="col-md-3 col-sm-3">
-                <input id="renal_dysfunction" type="checkbox" name="renal_dysfunction" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
-            </div>
-
-            <label class="control-label col-md-3 col-sm-3 f-s-14" for="liver_dysfunction">Liver dysfunction</label>
-            <div class="col-md-3 col-sm-3">
-                <input id="liver_dysfunction" type="checkbox" name="liver_dysfunction" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
-            </div>
-        </div>
-
-
-        <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 f-s-14" for="drug_abuse">Drug abuse</label>
             <div class="col-md-3 col-sm-3">
                 <input id="drug_abuse" type="checkbox" name="drug_abuse" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
@@ -55,6 +44,37 @@
             <div class="col-md-3 col-sm-3">
               <input id="asa_allergy" type="checkbox" name="asa_allergy" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
             </div>
+
         </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 f-s-14" for="tia_stroke_or_sysemb">TIA, Stroke, or Systemic Embolism</label>
+            <div class="col-md-3 col-sm-3">
+                <input id="tia_stroke_or_sysemb" type="checkbox" name="tia_stroke_or_sysemb" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
+            </div>
+            <label class="control-label col-md-3 col-sm-3 f-s-14" for="aim">Use of antiplatelet agents, NSAIDs, steroids or other anti-inflammatory medicaments</label>
+            <div class="col-md-3 col-sm-3">
+                <input id="aim" type="checkbox" name="aim" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 f-s-14" for="renal_dysfunction">
+                Renal dysfunction<br>
+                <small class="text-muted">Dialysys, transplant, Cr >2.12mg/dL or >200 𝝻mol/L</small>
+            </label>
+            <div class="col-md-3 col-sm-3">
+                <input id="renal_dysfunction" type="checkbox" name="renal_dysfunction" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
+            </div>
+
+            <label class="control-label col-md-3 col-sm-3 f-s-14" for="liver_dysfunction">
+                Liver dysfunction<br>
+                <small class="text-muted">Cirrhosis or bilirubin >2x normal with AST/ALT/AP >3x normal</small>
+            </label>
+            <div class="col-md-3 col-sm-3">
+                <input id="liver_dysfunction" type="checkbox" name="liver_dysfunction" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-handle-width="50" data-label-width="10" />
+            </div>
+        </div>
+
     </div>
 {% endblock %}

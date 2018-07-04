@@ -7,6 +7,7 @@
         <link href="{% static 'plugins/jquery-ui/themes/base/minified/jquery-ui.min.css' %}" rel="stylesheet" />
         <link href="{% static '/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css' %}" rel="stylesheet" />
         <link href="{% static 'plugins/jquery-tag-it/css/jquery.tagit.css' %}" rel="stylesheet" />
+        <link href="{% static 'plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" />
         <script src="{% static 'plugins/jquery/jquery-1.9.1.min.js' %}"></script>
         <script src="{% static 'plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
         <script src="{% static 'plugins/jquery-ui/ui/minified/jquery-ui.min.js' %}"></script>
@@ -43,6 +44,52 @@
                     display: none !important;
                 }
             }
+
+            .therapy-recommendations {
+                width: 100%;
+            }
+
+            .therapy-recommendations table tbody tr td {
+                padding: 7px!important;
+            }
+
+            .therapy-recommendations h2 {
+                font-size: 18px;
+            }
+
+            .therapy-recommendations h3 {
+                margin: 0px;
+                font-size: 16px;
+            }
+
+            .therapy-recommendations h4 {
+                margin: 0px;
+                font-size: 14px;
+            }
+
+            .therapy-recommendations td {
+                vertical-align: top;
+                text-align: center;
+            }
+
+            .therapy-recommendations th h3 {
+                font-size: 24px;
+                font-weight: 500;
+                vertical-align: top;
+                text-align: center;
+                margin: 0px;
+                padding: 0px;   
+             }
+            .icon-img {
+                width: 25px;
+                height: 25px;
+                border:2px solid #fff;
+            }
+             @media print {
+                a[href]:after {
+                    content: none !important;
+                }
+            }
         </style>
     </head>
     <body style="padding:20px 300px;">
@@ -56,7 +103,6 @@
             <ul class="dropdown-menu" style="padding:5px">
               <li>
                 <div id="email_results_input" class="input-group m-t-20" style="width:500px">
-                    <!-- <input id="address" type="email" class="form-control" placeholder="Email Address"> -->
                     <ul id="jquery-tagIt-default">
                     </ul>
 
@@ -64,24 +110,25 @@
                         <button id="send" type="button" class="btn btn-default btn-primary" data-loading-text="Sending...">Send</button>
                     </div>
                 </div>
+                <div id="email-message" style="display:none;"></div>
               </li>
             </ul>
           </div>
         </div>
 
 
-        <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Patient Data</h2>
+        <h2 class="text-center" style="font-weight:500;">AF-PCI Report: Patient Data</h2>
 
         <h3>Personal Information</h3>
         <hr />
         <table class="table" style="width:100%;border:none;">
-            <thead
+            <thead>
                 <tr>
-                    <td style="width:32%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:14%"></td>
                     <td style="width:30%"></td>
+                    <td style="width:16%"></td>
+                    <td style="width:4%"></td>
+                    <td style="width:28%"></td>
+                    <td style="width:22%"></td>
                 </tr>
             </thead>
 
@@ -101,14 +148,62 @@
                     <th>Age</th>
                     <td>{{ patient.age }}</td>
                 </tr>
-
                 <tr>
-                    <th>Age</th>
-                    <td>{{ patient.age }}</td>
+                    <th>Weight</th>
+                    <td>{{ patient.weight }} kg</td>
                     <td></td>
-                    <td></td>
+                    <th></th>
                     <td></td>
                 </tr>
+            </tbody>
+        </table>
+
+        <h3>High-risk angiographic features</h3>
+        <hr>
+        <table class="table" style="width: 100%;border:none">
+            <thead>
+                <tr>
+                    <td style="width:40%"></td>
+                    <td style="width:8%"></td>
+
+                    <td style="width:4%"></td>
+
+                    <td style="width:40%"></td>
+                    <td style="width:8%"></td>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <th>Multi-vessel PCI</th>
+                    <td>{{ patient.pci_risk_1 | yesno | title }}</td>
+                    <td></td>
+                    <th>Multiple stents implanted (&gt;3 stents implanted, &lt;3 lesions stented)</th>
+                    <td>{{ patient.pci_risk_2 | yesno | title }}</td>
+                </tr>
+                <tr>
+                    <th>Complex bifurcation lesion (treated with 2 stents)</th>
+                    <td>{{ patient.pci_risk_3 | yesno | title }}</td>
+                    <td></td>
+                    <th>Total stent length &gt; 60mm</th>
+                    <td>{{ patient.pci_risk_4 | yesno | title }}</td>
+                </tr>
+                <tr>
+                    <th>Total Occlusion intervation</th>
+                    <td>{{ patient.pci_risk_5 | yesno | title }}</td>
+                    <td></td>
+                    <th>Bioabsorbable Vascular Scaffold (MVS) implantation</th>
+                    <td>{{ patient.pci_risk_6 | yesno | title }}</td>
+                </tr>
+                <tr>
+                    <th>Left main or proximal LAD stenting</th>
+                    <td>{{ patient.pci_risk_7 | yesno | title }}</td>
+                    <td></td>
+                    <th></th>
+                    <td></td>
+                </tr>
+
             </tbody>
         </table>
 
@@ -117,101 +212,118 @@
         <table class="table" style="width:100%;border:none;">
             <thead>
                 <tr>
-                    <td style="width:32%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:32%"></td>
-                    <td style="width:12%"></td>
+                    <td style="width:30%"></td>
+                    <td style="width:16%"></td>
+                    <td style="width:4%"></td>
+                    <td style="width:28%"></td>
+                    <td style="width:22%"></td>
                 </tr>
             </thead>
 
             <tbody>
-                <!-- <tr>
-                    <th>Date</th>
-                    <td>{{ patient.date_of_procedure|date:"d/m/Y" }}</td>
-                    <td></td>
-                    <th>Indication</th>
-                    <td>{{ patient.indication }}</td>
-                </tr> -->
 
                 <tr>
-                    <th>Vessels PCI</th>
-                    <td>FIELD REMOVED</td>
+                    <th>Bare-Metal Stent (BMS)</th>
+                    <td>{{ patient.bms_stent | yesno | title }}</td>
                     <td></td>
-                    <th>Stents</th>
-                    <td>{{ patient.stents_display }}</td>
+                    <th>Drug-Coated Stent (DCS)</th>
+                    <td>{{ patient.drug_coated_stent | yesno | title }}</td>
+                </tr>
+
+                <tr>
+                    <th>Drug-Eluting Stent (DES)</th>
+                    <td>{{ patient.des_stent | yesno | title }}</td>
+                    <td></td>
+                    <th>Plain Old Balloon Angioplasty (POBA)</th>
+                    <td>{{ patient.poba | yesno | title }}</td>
+                </tr>
+
+                <tr>
+                    <th>Bioabsorbable Vascular Scaffold (BVS)</th>
+                    <td>{{ patient.bvs | yesno | title }}</td>
+                    <td></td>
+                    <th>Drug Eluting Balloon (DEB)</th>
+                    <td>{{ patient.deb | yesno | title }}</td>
                 </tr>
             </tbody>
         </table>
 
-        <h3>Atrial Fibrilation</h3>
+        <h3>Atrial Fibrillation</h3>
         <hr/>
         <table class="table" style="width:100%;border:none;">
             <thead>
                 <tr>
-                    <td style="width:32%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:12%"></td>
-                    <td style="width:32%"></td>
-                    <td style="width:12%"></td>
+                    <td style="width:30%"></td>
+                    <td style="width:16%"></td>
+                    <td style="width:4%"></td>
+                    <td style="width:28%"></td>
+                    <td style="width:22%"></td>
                 </tr>
             </thead>
 
             <tbody>
                 <tr>
-                    <th>Indication</th>
-                    <td>{{ patient.get_indication_display }}</td>
+                    <th>Type of Atrial Fibrillation</th>
+                    <td>{{ patient.get_af_type_display }}</td>
                     <td></td>
-                    <th>Previous Anti-Coagulation</th>
+                    <th>Previous Anticoagulation</th>
                     <td>{{ patient.get_prev_anti_coagulation_display }}</td>
                 </tr>
 
                 <tr>
-                    <th>Warfarin Intolerance</th>
-                    <td>{{ patient.warfarin_intolerance|yesno|capfirst }}</td>
+                    <th>Indication</th>
+                    <td>{{ patient.get_elective_pci_display }}</td>
                     <td></td>
                     <th>INR Instability</th>
                     <td>{{ patient.inr_instability|yesno|capfirst }}</td>
                 </tr>
 
                 <tr>
-                    <th>NOAC Allergy Or Intollerance</th>
-                    <td>{{ patient.noac_allergy_or_intolerance|yesno|capfirst }}</td>
+                    <th>Warfarin Intolerance</th>
+                    <td>{{ patient.warfarin_intolerance|yesno|capfirst }}</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <th>DOAC Allergy Or Intolerance</th>
+                    <td>{{ patient.doac_allergy_or_intolerance|yesno|capfirst }}</td>
                 </tr>
             </tbody>
         </table>
-
-        <!-- Bloodwork table removed -->
 
         <h3>Medical History</h3>
         <hr/>
         <table class="table" style="width:100%;border:none;">
             <thead>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td style="width:30%"></td>
+                    <td style="width:18%"></td>
+                    <td style="width:4%"></td>
+                    <td style="width:30%"></td>
+                    <td style="width:18%"></td>
                 </tr>
             </thead>
 
             <tbody>
                 <tr>
-                    <th>HTN</th>
-                    <td>{{ patient.get_htn_display }}</td>
+                    <th>Smoking History</th>
+                    <td colspan="3">{{ patient.get_smoking_history_display }}</td>
+                </tr>
+                    
+                <tr>
+                    <th>Hypertension</th>
+                    <td colspan="3">{{ patient.get_htn_display }}</td>
+                </tr>
 
+                <tr>
+                    <th>Diabetes Mellitus</th>
+                    <td>{{ patient.get_diabetes_mellitus_display }}</td>
+                    
                     <td></td>
-
+                    
                     <th>Vascular Disease</th>
                     <td>{{ patient.get_vascular_disease_display }}</td>
                 </tr>
 
                 <tr>
-                    <th>Hx Of Bleeding</th>
+                    <th>History Of Bleeding</th>
                     <td>{{ patient.get_hx_of_bleeding_display }}</td>
 
                     <td></td>
@@ -221,47 +333,109 @@
                 </tr>
 
                 <tr>
-                    <th>CHF</th>
+                    <th>Prior Acute Coronary Syndrome (ACS)</th>
+                    <td>{{ patient.prior_acute_cs|yesno|capfirst }}</td>
+                    
+                    <td></td>
+                    
+                    <th>Prior stent thrombosis</th>
+                    <td>{{ patient.prior_stent_thrombosis|yesno|capfirst }}</td>
+                </tr>
+
+                <tr>
+                    <th>Frailty</th>
+                    <td>{{ patient.frailty|yesno|capfirst }}</td>
+                    
+                    <td></td>
+                    
+                    <th>Congestive Heart Failure</th>
                     <td>{{ patient.chf|yesno|capfirst }}</td>
-
-                    <td></td>
-
-                    <th>Diabetes Mellitus</th>
-                    <td>{{ patient.diabetes_mellitus|yesno|capfirst }}</td>
-                </tr>
-
-                <tr>
-                    <th>Stroke</th>
-                    <td>{{ patient.stroke|yesno|capfirst }}</td>
-
-                    <td></td>
-
-                    <th>TIA</th>
-                    <td>{{ patient.tia|yesno|capfirst }}</td>
-                </tr>
-
-                <tr>
-                    <th>Renal Dysfunction</th>
-                    <td>{{ patient.renal_dysfunction|yesno|capfirst }}</td>
-
-                    <td></td>
-
-                    <th>Drug Abuse</th>
-                    <td>{{ patient.drug_abuse|yesno|capfirst }}</td>
                 </tr>
 
                 <tr>
                     <th>ASA Allergy</th>
                     <td>{{ patient.asa_allergy|yesno|capfirst }}</td>
+                    
+                    <td></td>
+                    
+                    <th>TIA, Stroke, or Systemic Embolism</th>
+                    <td>{{ patient.tia_stroke_or_sysemb|yesno|capfirst }}</td>
+                </tr>
+
+                <tr>
+                    <th>Renal Dysfunction</th>
+                    <td>{{ patient.renal_dysfunction|yesno|capfirst }}</td>
+                    
+                    <td></td>
+
+                    <th>Drug Abuse</th>
+                    <td>{{ patient.drug_abuse|yesno|capfirst }}</td>
+                </tr>
+                <tr>
+                    <th>Liver Dysfunction</th>
+                    <td>{{ patient.liver_dysfunction|yesno|capfirst }}</td>
+
+                    <td></td>
+
+                    <th>Use of antiplatelet agents, <br>NSAIDs, or other anti-inflammatory meds</th>
+                    <td>{{ patient.aim|yesno|capfirst }}</td>
+                </tr>
+
+                <tr>
+                    <th>History Of Anemia</th>
+                    <td>{{ patient.hxoa_anemia|yesno|capfirst }}</td>
+
+                    <td></td>
+
+                    <th>Hemoglobin &lt;110 g/L or &lt;11 g/dL</th>
+                    <td>{{ patient.hemoglobin_anemia|yesno|capfirst }}</td>
+                </tr>
+
+                <tr>
+                    <th>Anemia</th>
+                    <td>{{ patient.anemia|yesno|capfirst }}</td>
+
+                    <td></td>
+
+                    <th>Creatinine</th>
+                    {% if patient.creatinine_mgdL != None %}
+                    <td>
+                        {{ patient.creatinine_mgdL }} mg/dL<br>
+                        <i>({{patient.creatinine_umolL}} μmol/L)</i>
+                    </td>
+                    {% else %}
+                    <td>N/A</td>
+                    {% endif %}
+                </tr>
+
+            </tbody>
+        </table>
+        <hr>
+        <table class="table" style="width: 100%;border:none;">
+            <thead>
+                <tr>
+                    <td style="width:30%"></td>
+                    <td style="width:70%"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th class="text-center">
+                        <h3>eGFR</h3>
+                    </th>
+                    <th class="text-center">
+                        <h3>{{ patient.gfr_mLmin|floatformat:2 }} <small>mL/min</small></h3>
+                    </th>
                 </tr>
             </tbody>
         </table>
+        <hr>
 
         <center style="font-weight:bolder">www.tripletherapy.net</center>
         <!-- *************************** PAGE BREAK ****************************** -->
         <div style="page-break-after: always;"></div>
 
-        <h2 class="text-center" style="font-weight:500;">TRIPLE THERAPY REPORT: Results</h2>
+        <h2 class="text-center" style="font-weight:500;">AF-PCI Report: Results</h2>
 
         <h3>Scores and Risks</h3>
         <hr />
@@ -333,34 +507,84 @@
             </tbody>
         </table>
 
-        <br/>
+        <center style="font-weight:bolder">www.tripletherapy.net</center>
+        <!-- *************************** PAGE BREAK ****************************** -->
+        <div style="page-break-after: always;"></div>
 
-        <h3>Recommended Therapy</h3>
+        <h2 class="text-center" style="font-weight:500;">AF-PCI Report: Therapy</h2>
+
+        <table class="therapy-recommendations">
+            <thead>
+                <tr>
+                    <th style="width:100%;" colspan="2"><h3>2018 CCS/CAIC Guidelines</h3></th>
+                </tr>
+                <tr>
+                    <th colspan="2"><hr/></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for choice in patient.parse_ccs_therapy.choices %}
+                    {% for step in choice.steps %}
+                        {% if patient.asa_allergy %}
+                            <div class="alert alert-warning" role="alert" style="text-align:center; font-size: 1.5em;">Consider aspirin desensitization protocol due to ASA allergy</div>
+                        {% endif %}
+                        {% if patient.gfr_mLmin < 30 %}
+                            <div class="alert alert-warning" role="alert" style="text-align:center; font-size: 1.5em;">Consider Warfarin due to eGFR levels ({{patient.gfr_mLmin|floatformat:2}} < 30 mL/min) since for these levels none of the DOACs are indicated</div>
+                        {% endif %}
+                    <tr>
+                        <td>
+                            <h3>OPTION UP TO 12 MONTHS</h3>
+                            {{ step.option|safe }}
+                        </td>
+                        <td>
+                            <h3>OPTION AFTER 12 MONTHS</h3>
+                            {% if step.extra %}
+                                {{ step.extra|safe }}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                    {% empty %}
+                        <td><h2>Nothing here</h2></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <center style="font-weight:bolder">www.tripletherapy.net</center>
+        <!-- *************************** PAGE BREAK ****************************** -->
+        <div style="page-break-after: always;"></div>
+
+        <h3>Are you planning to follow the CCS/CAIC Guidelines?</h3>
         <hr />
-        <p style="font-size:18px;">{{ patient.recommended_therapy.0 }} {{ patient.recommended_therapy.1 }}<p>
 
-        {% if patient.followed_recommendation %}
-            <p style="font-size:14px;">The therapy recommendation is being followed.<p>
-        {% else %}
-            <p style="font-size:14px;">The therapy recommendation is <strong>not</strong> being followed.<p>
-
-            <blockquote>
-                <p><i>"{{ patient.reason_not_followed }}"</i></p>
-                <footer>{{ patient.user.guess_user_name }} ({{ user.email }})</footer>
-            </blockquote>
+        <p class="lead"><span class="big"><b>{{ patient.agree_therapy | yesno | title }}</b></span>.</p>
+        {% if not patient.agree_therapy %}
+        <p class="lead">Reason: <b>"{{ patient.reason }}"</b></p>
         {% endif %}
 
-
-        <p class="f-w-700">Report generated on {% now "d/m/Y" %} by {{ user.guess_user_name }} ({{ user.email }})</p>
-
+        <p class="f-w-700" style="text-align:center;">Report generated on {% now "d/m/Y" %} by {{ user.guess_user_name }} ({{ user.email }})</p>
         <center style="font-weight:bolder">www.tripletherapy.net</center>
 
         <script>
+            function showEmailSuccessMessage(){
+                $('#email-message').css('color', 'green').html('Email has been sent!').show();
+            }
+
+            function showEmailErrorMessage(){
+                $('#email-message').css('color', 'red').html('Error sending email!').show();
+            }
+
+            function clearEmailMessage(){
+                $('#email-message').hide().html('');
+            }
+
             $('#jquery-tagIt-default').tagit();
 
-            $('#address').on('keyup', function(e){
+            $('#jquery-tagIt-default').find('input').on('keyup', function(e){
                 $(this).parent().removeClass('has-error');
                 $(this).parent().removeClass('has-success');
+                clearEmailMessage();
             });
 
             // stop the dropdown from closing when you click on it
@@ -395,6 +619,7 @@
                     console.log(data);
                     sendButton.button('reset');
                     tagitInput.parent().addClass('has-success');
+                    showEmailSuccessMessage();
                 });
 
                 request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -402,6 +627,7 @@
                     console.log(jqXHR);
                     sendButton.button('reset');
                     tagitInput.parent().addClass('has-error');
+                    showEmailErrorMessage();
                 });
 
             });

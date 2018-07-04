@@ -7,10 +7,10 @@
 {% block panel_body %}
     <div class="form-horizontal form-bordered">
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="indication">Indication *<br/><span></span></label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="elective_pci">Indication<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
-                <select id="indication" name="indication" class="form-control f-s-14 default-select2" >
-                    {% for choice in choices.INDICATION_CHOICES %}
+                <select id="elective_pci" name="elective_pci" class="form-control f-s-14 default-select" >
+                    {% for choice in choices.ELECTIVE_PCI_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
                 </select>
@@ -20,20 +20,33 @@
 
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="stent">Stent *<br/><span></span></label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="stent">Intervention *<br/><span></span></label>
             <div class="col-md-6 col-sm-6 f-s-14" >
                 <div class="row">
                     <div class="col-md-12">
-                        <input id="bms_stent" type="checkbox" name="stent" value="bms_stent" style="cursor:pointer;"/> <label for="bms_stent" style="cursor:pointer;">Bare-Metal Stent</label>
+                        <input id="bms_stent" type="checkbox" name="stent" value="bms_stent" style="cursor:pointer;"/> <label for="bms_stent" style="cursor:pointer;">Bare Metal Stent (BMS)</label>
                     </div>
 
                     <div class="col-md-12">
-                        <input id="des_stent" type="checkbox" name="stent" value="des_stent" style="cursor:pointer;"/> <label for="des_stent" style="cursor:pointer;">Drug-Eluting Stent</label>
+                        <input id="des_stent" type="checkbox" name="stent" value="des_stent" style="cursor:pointer;"/> <label for="des_stent" style="cursor:pointer;">Drug Eluting Stent (DES)</label>
                     </div>
 
                     <div class="col-md-12">
-                        <input id="no_pci" type="checkbox" name="no_pci" value="no_pci" style="cursor:pointer;"/> <label for="no_pci" style="cursor:pointer;">No PCI</label>
+                        <input id="bvs" type="checkbox" name="stent" value="bvs" style="cursor:pointer"/> <label for="bvs" style="cursor:pointer;">Bioabsorbable Vascular Scaffold (BVS)</label>
                     </div>
+
+                    <div class="col-md-12">
+                        <input id="drug_coated_stent" type="checkbox" name="stent" value="drug_coated_stent" style="cursor:pointer;"/> <label for="drug_coated_stent" style="cursor:pointer;">Drug Coated Stent (DCS)</label>
+                    </div>
+ 
+                    <div class="col-md-12">
+                        <input id="poba" type="checkbox" name="stent" value="poba" style="cursor:pointer;"/> <label for="poba" style="cursor:pointer;">Plain Old Balloon Angioplasty (POBA)</label>
+                    </div>
+
+                    <div class="col-md-12">
+                        <input id="deb" type="checkbox" name="stent" value="deb" style="cursor:pointer;"/> <label for="deb" style="cursor:pointer;">Drug Eluting Balloon (DEB)</label>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -41,9 +54,9 @@
 
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="af_type">Type<br/><span></span></label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="af_type">Type of Atrial Fibrillation<br/><span></span></label>
             <div class="col-md-6 col-sm-6">
-                <select id="af_type" name="af_type" class="form-control f-s-14 nullable-select2">
+                <select id="af_type" name="af_type" class="form-control f-s-14 nullable-select">
                     <option value="">None</option>
                     {% for choice in choices.AF_TYPE_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
@@ -55,9 +68,9 @@
 
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="prev_anti_coagulation">Previous anti-coagulation</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="prev_anti_coagulation">Previous anticoagulation</label>
             <div class="col-md-6 col-sm-6">
-                <select id="prev_anti_coagulation" name="prev_anti_coagulation" class="form-control f-s-14 nullable-select2">
+                <select id="prev_anti_coagulation" name="prev_anti_coagulation" class="form-control f-s-14 nullable-select">
                     <option value="">None</option>
                     {% for choice in choices.ANTI_COAGULATION_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
@@ -78,7 +91,10 @@
 
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="inr_instability">INR instability</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="inr_instability">
+                INR instability
+                <small class="text-muted">Unstable/high INRs, time in therapeutic range < 60%</small>
+            </label>
             <div class="col-md-6 col-sm-6">
                 <input id="inr_instability" type="checkbox" name="inr_instability" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-size="normal" data-handle-width="50" data-label-width="10" />
             </div>
@@ -87,10 +103,11 @@
 
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="noac_allergy_or_intolerance">NOAC allergy or intollerance</label>
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="doac_allergy_or_intolerance">DOAC allergy or intolerance</label>
             <div class="col-md-6 col-sm-6">
-                <input id="noac_allergy_or_intolerance" type="checkbox" name="noac_allergy_or_intolerance" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-size="normal" data-handle-width="50" data-label-width="10" />
+                <input id="doac_allergy_or_intolerance" type="checkbox" name="doac_allergy_or_intolerance" class="bootstrap-switch" data-on-text="Yes" data-off-text="No" data-size="normal" data-handle-width="50" data-label-width="10" />
             </div>
         </div>
+        
     </div>
 {% endblock %}

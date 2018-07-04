@@ -1,0 +1,66 @@
+{% extends 'data_entry/panel_base.html' %}
+
+{% block panel_heading %}Therapy choice{% endblock %}
+
+{% block fa_icon %}fa fa-check-square-o{% endblock %}
+{% load static %}
+
+{% block panel_body %}
+    <div class="panel-body">
+        <div class="row m-b-20">
+            <div class="col-md-12 text-center">
+              <h2>Are you planning to follow the CCS/CAIC recommendation?</h2>
+            </div>
+            <div class="col-md-8 col-md-offset-2 p-20 text-center">
+              <div class="btn-group agree-option-buttons" data-toggle="buttons">
+                <label class="btn btn-default btn-lg">
+                  <input type="radio" name="agree_option" id="agree_option_yes" autocomplete="off" value="yes"> Yes
+                </label>
+                <label class="btn btn-default btn-lg">
+                  <input type="radio" name="agree_option" id="agree_option_no" autocomplete="off" value="no"> No
+                </label>
+              </div>
+            </div>
+        </div>
+
+        <div id="submit-area" class="row p-10 m-b-20 form-group" style="display:none;">
+            <div class="col-md-12 text-center">
+              <h3>Please let us know the reason(s) and the therapy that was prescribed</h3>
+            </div>
+
+            <div class="col-md-6 col-md-offset-3 text-center f-s-14">
+              <textarea id="reason" name="reason" class="form-control f-s-14" rows="6" style="width:100%; height:100%; box-sizing: border-box;"></textarea>
+              <label form="reason"><span></span></label>
+            </div>
+        </div>
+
+        <div class="row p-10 m-b-20 form-group">
+            <div class="col-md-6 col-md-offset-3">
+              <button id="submit-patient-form" type="submit" class="btn btn-primary btn-block btn-lg" data-loading-text="Working...">Save record</button>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h4 class="bg-warning" style="padding:8px;">
+              <i class="fa fa-exclamation-triangle fa-2x text-warning" aria-hidden="true"></i><br>
+              Safety recommendations for high risk bleeding patients
+            </h4>
+          </div>
+          <div class="col-md-6 text-center">
+            <a href="{% static 'data_entry/References/Guidelines/OtherReferences/2016_PIONEER_AF-PCI_NEJM.pdf'%}" target="_blank">
+              <img style="margin:0 auto;" src="{% static 'img/pioneer-af-pci-2.jpg' %}" class="img-responsive" alt="PIONEER LOGO">
+                <h5>Rivaroxaban 15 mg qd*</h5>
+                <h5>Clopidogrel 75 mg qd&#10013;</h5>
+            </a>
+          </div>
+          <div class="col-md-6 text-center">
+            <a href="{% static 'data_entry/References/Guidelines/OtherReferences/nejmoa1708454.pdf'%}" target="_blank">
+              <img style="margin:0 auto;" src="{% static 'img/2734848_RE-DUAL-PCI.jpg' %}" class="img-responsive" alt="RE DUAL PCI">
+                <h5>Dabigatran 110/150 mg qd</h5>
+                <h5>Clopidogrel 75 mg qd</h5>
+            </a>
+          </div>
+        </div>
+    </div>
+{% endblock %}

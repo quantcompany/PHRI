@@ -1,4 +1,6 @@
 {% extends 'data_entry/panel_base.html' %}
+{% load static %}
+
 
 {% block panel_heading %}Medical History{% endblock %}
 
@@ -6,11 +8,35 @@
 
 {% block panel_body %}
     <div class="form-horizontal form-bordered">
+
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="htn">HTN *<br/><span></span></label>
-            <div class="col-md-6 col-sm-6">
-                <select id="htn" name="htn" class="form-control f-s-14 default-select2">
+            <label class="control-label col-md-4 col-sm-12 f-s-14" for="smoking_history">Smoking history<br/><span></span></label>
+            <div class="col-sm-12 col-md-7">
+                <select id="smoking_history" name="smoking_history" class="form-control f-s-14 default-select">
+                    <!--option value="">None</option-->
+                    {% for choice in choices.SMOKING_HISTORY_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-12 f-s-14" for="htn">Hypertension<br/><span></span></label>
+            <div class="col-sm-12 col-md-7">
+                <select id="htn" name="htn" class="form-control f-s-14 default-select">
                     {% for choice in choices.HTN_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-12 f-s-14" for="diabetes_mellitus">Diabetes Mellitus<br/><span></span></label>
+            <div class="col-sm-12 col-md-7">
+                <select id="diabetes_mellitus" name="diabetes_mellitus" class="form-control f-s-14 default-select">
+                    {% for choice in choices.DIABETES_MELLITUS_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
                 </select>
@@ -19,9 +45,9 @@
 
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="vascular_disease">Vascular disease</label>
-            <div class="col-md-6 col-sm-6">
-                <select id="vascular_disease" name="vascular_disease" class="form-control f-s-14 default-select2">
+            <label class="control-label col-md-4 col-sm-12 f-s-14" for="vascular_disease">Vascular disease</label>
+            <div class="col-sm-12 col-md-7">
+                <select id="vascular_disease" name="vascular_disease" class="form-control f-s-14 default-select">
                     {% for choice in choices.VASCULAR_DISEASE_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
@@ -31,9 +57,9 @@
 
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="hx_of_bleeding">Hx of bleeding</label>
-            <div class="col-md-6 col-sm-6">
-                <select id="hx_of_bleeding" name="hx_of_bleeding" class="form-control f-s-14 default-select2">
+            <label class="control-label col-md-4 col-sm-12 f-s-14" for="hx_of_bleeding">History of bleeding</label>
+            <div class="col-sm-12 col-md-7">
+                <select id="hx_of_bleeding" name="hx_of_bleeding" class="form-control f-s-14 default-select">
                     {% for choice in choices.BLEEDING_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
@@ -43,14 +69,68 @@
 
 
         <div class="form-group">
-            <label class="control-label col-md-4 col-sm-4 f-s-14" for="alcohol_abuse">Alcohol abuse *<br/><span></span></label>
-            <div class="col-md-6 col-sm-6">
-                <select id="alcohol_abuse" name="alcohol_abuse" class="form-control f-s-14 default-select2">
+            <label class="control-label col-md-4 col-sm-12 f-s-14" for="alcohol_abuse">Alcohol abuse<br/><span></span></label>
+            <div class="col-sm-12 col-md-7">
+                <select id="alcohol_abuse" name="alcohol_abuse" class="form-control f-s-14 default-select">
                     {% for choice in choices.ALCOHOL_ABUSE_CHOICES %}
                     <option value="{{ choice.0 }}">{{ choice.1 }}</option>
                     {% endfor %}
                 </select>
             </div>
+        </div>
+
+        {% comment %}
+        <!-- PENDING MULTI_LANG SUPPORT -->
+        <!--div class="form-group row">
+            <label class="control-label col-md-4 col-sm-12 f-s-14" for="hemoglobin_gL">Hemoglobin<br/><span></span></label>
+            <label class="control-label col-md-4 col-sm-12 f-s-14" for="hemoglobin_mgdL" style="display: none;">Hemoglobin<br/><span></span></label>
+            <div class="col-sm-6 col-md-4">
+                <input id="hemoglobin_gL" type="number" name="hemoglobin_gL" class="form-control f-s-14 text-right" placeholder="g/L" min="0">
+                <input id="hemoglobin_mgdL" type="number" name="hemoglobin_mgdL" class="form-control f-s-14 text-right" style="display: none;" placeholder="mg/dL" min="0">
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <select id="hemoglobin_measure" class="form-control f-s-14 default-select">
+                    <option value="gL">g/L</option>
+                    <option value="mgdL">mg/dL</option>
+                </select>
+
+            </div>
+
+        </div-->
+        {% endcomment %}
+
+        <div class="form-group">
+            <label class="control-label col-md-4 col-sm-4 f-s-14" for="anemia">Anemia<br/><span></span></label>
+            <div class="col-md-6 col-sm-6 f-s-14" >
+                <div class="row">
+                    <div class="col-md-12">
+                        <input id="hxoa_anemia" type="checkbox" name="anemia" value="hxoa_anemia" style="cursor:pointer;"/> <label for="hxoa_anemia" style="cursor:pointer;">History of Anemia</label>
+                    </div>
+
+                    <div class="col-md-12">
+                        <input id="hemoglobin_anemia" type="checkbox" name="anemia" value="hemoglobin_anemia" style="cursor:pointer;"/> <label for="hemoglobin_anemia" style="cursor:pointer;">Hemoglobin &lt;110 g/L or &lt;11 g/dL</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <!-- PENDING MULTI_LANG SUPPORT -->
+            <label class="control-label col-md-4 col-sm-12 f-s-14" for="creatinine_mgdL">Creatinine *<br/><span></span></label>
+            <label class="control-label col-md-4 col-sm-12 f-s-14" for="creatinine_umolL" style="display:none;">Creatinine *<br/><span></span></label>
+            <div class="col-sm-6 col-md-4">
+                <input id="creatinine_umolL" type="number" name="creatinine_umolL" class="form-control f-s-14 text-right" placeholder="μmol/L" min="0">                
+                <input id="creatinine_mgdL" type="number" name="creatinine_mgdL" class="form-control f-s-14 text-right" style="display: none;" placeholder="mg/dL" min="0">
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <select id="creatinine_measure" class="form-control f-s-14 default-select">
+                    <option value="umolL">μmol/L</option>
+                    <option value="mgdL">mg/dL</option>
+                </select>
+            </div>
+
         </div>
     </div>
 {% endblock %}

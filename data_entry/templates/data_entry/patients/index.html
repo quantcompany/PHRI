@@ -23,7 +23,7 @@
                 <thead>
                     <tr>
                         <th data-orderable="false">I.D.</th>
-                        <th>Name</th>
+                        <th>Initials</th>
                         <th>Gender</th>
                         <th>Age</th>
                         <th>Creation Date</th>
@@ -34,10 +34,10 @@
                     {% for patient in patients %}
                         <tr>
                             <td>{{ patient.identification }}</td>
-                            <td>{{ patient.full_name }}</td>
+                            <td>{{ patient.initials }}</td>
                             <td>{{ patient.get_gender_display }}</td>
                             <td>{{ patient.age }}</td>
-                            <td>{{ patient.created|date:"d/m/Y" }}</td>
+                            <td>{{ patient.created|date:"Y/m/d" }}</td>
                             <td>
                                 <a type="button" class="btn btn-sm btn-success" href="{% url 'data_entry:patients:medical_report' patient.key %}" target="_blank"><i class="fa fa-user-md"></i> Medical Report</a>
                                 <a type="button" class="btn btn-sm btn-warning" href="{% url 'data_entry:patients:patient_report' patient.key %}" target="_blank"><i class="fa fa-user"></i> Patient Report</a>
