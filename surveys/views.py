@@ -14,6 +14,17 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 
+@require_http_methods(['POST'])
+@login_required
+def agreed_external_survey(request):
+    request.user.external_survey_agree = True
+    request.user.save()
+    return(JsonResponse({ 'external_survey_agree' : request.user.external_survey_agree}, status=200))
+
+@require_http_methods(['GET'])
+@login_required
+def apply_external_survey(request):
+    return(JsonResponse({ 'external_survey_agree' : request.user.external_survey_agree}, status=200))
 
 @require_http_methods(['GET'])
 @login_required

@@ -10,7 +10,7 @@ class UserAdmin(EmailUserAdmin):
 
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Profile', {'fields': ('user_name', 'first_name', 'last_name', 'institution', 'researcher','apply_survey')}),
+        ('Profile', {'fields': ('user_name', 'first_name', 'last_name', 'institution', 'researcher','apply_survey','external_survey_agree')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),

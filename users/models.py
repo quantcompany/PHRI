@@ -34,6 +34,8 @@ class User(AbstractEmailUser):
     country = models.CharField(max_length=100, blank=True, choices=COUNTRY_CHOICES) # Add country list
     researcher = models.BooleanField(default=False)
     apply_survey = models.BooleanField(default=True)
+    external_survey_agree = models.BooleanField(default=False)
+
     def guess_user_name(self):
         if not self.user_name:
             if self.first_name or self.last_name:

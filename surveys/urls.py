@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^$', views.display_survey, name='dynamic_survey'),
     url(r'^save/$', views.ajax_save_survey, name='save_survey'),
     url(r'^iapply/$', views.apply_survey, name='iapply'),
+    url(r'^extiapply/$', views.apply_external_survey, name='extiapply'),
+    url(r'^external_survey/agreed$', views.agreed_external_survey, name='extsurveyagreed'),
 ]

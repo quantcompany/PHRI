@@ -77,6 +77,33 @@
           </div>
         </div>
 
+        <div id="external-survey-confirmation-agreement" class="modal fade">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Survey Agreement</h3>
+                </div>
+                <div class="modal-body">
+                    <p style="font-size: 1.3em">
+                        Before accessing the application, we would appreciate if you agree to complete a Survey that will collect information on your current practice and management of patients with atrial fibrillation and coronary artery disease. We also want you to be aware that the information collected after using the application will be used for operational and monitoring purposes.
+                    </p>
+    
+                    <p style="font-size: 1.3em">
+                        No personal identifiers such as your name, your e-mail address or affiliations will be disclosed to any other third parties.
+                    </p>
+    
+                    <p style="font-size: 1.3em">
+                        Do you agree to complete the Survey and consent to use the information collected in the Survey and Application for research purposes?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-lg">I Agree</button>
+                    <button type="button" class="btn btn-link text-danger">I Don't Agree</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
         <!-- ================== BEGIN BASE JS ================== -->
         <script src="{% static 'plugins/jquery/jquery-1.9.1.min.js' %}"></script>
         <script src="{% static 'plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
@@ -122,7 +149,7 @@
             });
         </script>
         <script type="text/javascript">
-            $.get("{% url 'surveys:iapply'  %}", function( data ) {
+            /*$.get("{% url 'surveys:iapply'  %}", function( data ) {
                 if( data.apply_survey ) {
                     switch( window.location.pathname.toString() ) {
                         case '{% url "surveys:dynamic_survey" %}':
@@ -137,13 +164,39 @@
                             break;
                     }
                 }
-            });
+            });*/
 
-            $('#survey-confirmation-agreement button.btn-primary').on('click', function(){
+            /*$('#survey-confirmation-agreement button.btn-primary').on('click', function(){
                 window.location = "{% url 'surveys:dynamic_survey'%}";
             });
 
             $('#survey-confirmation-agreement button.btn-link').on('click', function(){
+                window.location = "{% url 'users:logout' %}";
+            });*/
+            $.get("{% url 'surveys:extiapply'  %}", function( data ) {
+                if( !data.external_survey_agree ) {
+                    var options = {
+                        keyboard: false,
+                        backdrop: 'static'
+                    };
+                    $('#external-survey-confirmation-agreement').modal(options);
+                    $('#external-survey-confirmation-agreement').modal('show');
+                }
+            });
+            $('#external-survey-confirmation-agreement button.btn-primary').on('click', function(){
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    }
+                });
+                $.post("{% url 'surveys:extsurveyagreed'  %}", function( data ) {
+                    window.open("https://redc.phri.ca/redcap/surveys/?s=KFJL3JF87X", "_blank");
+                    window.location.reload();
+                });
+            });
+
+            
+            $('#external-survey-confirmation-agreement button.btn-link').on('click', function(){
                 window.location = "{% url 'users:logout' %}";
             });
         </script>
