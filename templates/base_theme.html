@@ -174,7 +174,17 @@
                 window.location = "{% url 'users:logout' %}";
             });*/
             $.get("{% url 'surveys:extiapply'  %}", function( data ) {
-                if( !data.external_survey_agree ) {
+                var currentUrl = window.location.pathname.toString();
+                var excludeUrls = [
+                    "{% url 'users:exists' %}",
+                    "{% url 'users:login' %}",
+                    "{% url 'users:logout' %}",
+                    "{% url 'users:me' %}",
+                    "{% url 'users:register' %}",
+                    "{% url 'users:verification_sent' %}",
+                    "{% url 'password_reset_recover' %}",
+                ];
+                if( !data.external_survey_agree && excludeUrls.indexOf(currentUrl) == -1) {
                     var options = {
                         keyboard: false,
                         backdrop: 'static'
@@ -183,6 +193,7 @@
                     $('#external-survey-confirmation-agreement').modal('show');
                 }
             });
+            
             $('#external-survey-confirmation-agreement button.btn-primary').on('click', function(){
                 $.ajaxSetup({
                     beforeSend: function(xhr, settings) {
