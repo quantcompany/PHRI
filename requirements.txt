@@ -1,4 +1,4 @@
-Django==1.10
+Django==1.11.28
 django-custom-user==0.6
 django-environ==0.4.1
 django-pandas==0.4.1
