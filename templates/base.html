@@ -22,10 +22,10 @@
                     </button>
                 </div>
                 <!-- end mobile sidebar expand / collapse button -->
-                
+
                 <!-- begin navbar-collapse -->
-                <div class="collapse navbar-collapse pull-left" id="top-navbar">
-                    <ul class="nav navbar-nav">
+                <div class="collapse navbar-collapse pull-left" style="width:100%;" id="top-navbar">
+                    <ul class="nav navbar-nav" style="width:100%">
                         <li class="{% block menu1 %}{% endblock %}">
                             <a href="{% url 'data_entry:form' %}">
                                 <i class="fa fa-pencil-square-o"></i>
@@ -34,19 +34,21 @@
                         </li>
                         <li class="{% block menu2 %}{% endblock %}">
                             <a href="{% url 'data_entry:patients:index' %}">
-                                <i class="fa fa-users"></i> 
+                                <i class="fa fa-users"></i>
                                 <span>{% trans 'My Patients' %}</span>
                             </a>
                         </li>
+                        {% if user.researcher %}
                         <li class="{% block menu3 %}{% endblock %}">
                             <a href="{% url 'database:index' %}">
-                                <i class="fa fa-database"></i> 
+                                <i class="fa fa-database"></i>
                                 <span>{% trans 'Database' %}</span>
                             </a>
                         </li>
+                        {% endif %}
                         <li class="{% block menu4 %}{% endblock %}">
                             <a href="{% url 'data_entry:guidelines' %}">
-                                <i class="fa fa-book"></i> 
+                                <i class="fa fa-book"></i>
                                 <span>{% trans 'Guidelines' %}</span>
                             </a>
                         </li>
@@ -56,30 +58,51 @@
                                 <span>{% trans 'Recommendations' %}</span>
                             </a>
                         </li>
+                        <li class="{% block menu6 %}{% endblock %}">
+                            <a href="{% url 'about' %}">
+                                <i class="fa fa-info-circle"></i>
+                                <span>{% trans 'About' %}</span>
+                            </a>
+                        </li>
+                        <li class="dropdown navbar-user pull-right">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user"></i>
+                                <span class="">{{ user.user_name|default:"Anonymous" }}</span> <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInLeft f-s-14">
+                                <li><a href="{% url 'users:me' %}">{% trans 'Edit Profile' %}</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'users:logout' %}">{% trans 'Log Out' %}</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
+
+                <!-- <div class="collapse navbar-collapse pull-right">
+                    <ul class="nav navbar-nav navbar-right f-s-14">
+                        <li class="dropdown navbar-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user"></i>
+                                <span class="">{{ user.user_name|default:"Anonymouse" }}</span> <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInLeft f-s-14">
+                                <li><a href="{% url 'users:me' %}">{% trans 'Edit Profile' %}</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'users:logout' %}">{% trans 'Log Out' %}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div> -->
                 <!-- end navbar-collapse -->
-                
+                <!-- Aqui iba el menu de usuario -->
                 <!-- begin header navigation right -->
-                <ul class="nav navbar-nav navbar-right f-s-16">
-                    <li class="dropdown navbar-user">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-user"></i>
-                            <span class="">{{ user.user_name|default:"Anonymouse" }}</span> <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu animated fadeInLeft f-s-14">
-                            <li><a href="{% url 'users:me' %}">{% trans 'Edit Profile' %}</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url 'users:logout' %}">{% trans 'Log Out' %}</a></li>
-                        </ul>
-                    </li>
-                </ul>
+
                 <!-- end header navigation right -->
             </div>
             <!-- end container-fluid -->
         </div>
 
-        
+
         <!-- begin #logos -->
         <div id="logos" class="logos row bg-white vertical-align">
             <div class="col-xs-12 col-sm-4 text-center">
@@ -119,7 +142,7 @@
             {% endblock %}
         </div>
         <!-- end #content -->
-        
+
         <!-- begin scroll to top btn -->
         <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
         <!-- end scroll to top btn -->

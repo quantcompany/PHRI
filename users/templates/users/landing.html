@@ -66,9 +66,9 @@
                     <img src="{% static 'img/login-bg/doctor-hands-working-with-small-2.jpg' %}" alt="" />
                 </div>
                 <div class="news-caption">
-                    <h4 class="caption-title"> <i class="fa fa-heartbeat text-success"></i> {% trans 'Triple Therapy Aid' %}</h4>
+                    <h4 class="caption-title"> <i class="fa fa-heartbeat text-success"></i> {% trans 'AF-PCI Therapy Aid' %}</h4>
                     <p class="f-s-20 f-w-400">
-                        {% trans 'HIU Antiplatelet/Anticuagulant Physician Decision Aid for Patients with Atrial Fibrillation and CAD undergoing PCI' %}
+                        {% trans 'Antiplatelet/Anticoagulant Physician Decision Aid for Patients with Atrial Fibrillation and CAD undergoing PCI' %}
                     </p>
                 </div>
             </div>
@@ -77,7 +77,7 @@
             <div class="right-content">
                 <div class="hidden-sm hidden-md hidden-lg">
                     <div class="bg-blue text-center"> 
-                        <h2 class="text-white" style="margin:0px;padding: 10px 0px 10px 0px;"><i class="fa fa-heartbeat text-white"></i> {% trans 'Triple Therapy Aid' %}</h2>
+                        <h2 class="text-white" style="margin:0px;padding: 10px 0px 10px 0px;"><i class="fa fa-heartbeat text-white"></i> {% trans 'AF-PCI Therapy Aid' %}</h2>
                     </div>
 
                     <div class="row vertical-align">
@@ -121,7 +121,7 @@
                         <div id="signin-form-errors" class="row text-center parsley-errors-list">
                         </div>
 
-                        <div class="m-t-10">{% trans 'Forgot your password?' %}<a href="{% url 'password_reset_recover' %}">{% trans 'Click here' %}</a>.
+                        <div class="m-t-10">{% trans 'Forgot your password? ' %}<a href="{% url 'password_reset_recover' %}">{% trans 'Click here' %}</a>.
                         </div>
                     </form>
                 </div>
@@ -156,7 +156,7 @@
 
                         <div class="checkbox m-b-15">
                             <label>
-                                <input type="checkbox" required/> {% trans 'By clicking Sign Up, you agree to our' %} <a href="#">{% trans 'Terms' %}</a> {% trans 'and that you have read our' %} <a href="#">{% trans 'Data Policy' %}</a>, {% trans 'including our' %} <a href="#">{% trans 'Cookie Use' %}</a>.
+                                <input type="checkbox" name="terms" data-parsley-required="true"/> {% trans 'By clicking Sign Up, you acknowledge that you have read and agreed to our ' %} <a href="{% url 'terms' %}" target='_blank'>{% trans 'Terms and Conditions' %}</a>.
                             </label>
                         </div>
 
@@ -225,8 +225,22 @@
                     });
                      
                     request.fail(function(jqXHR, textStatus, errorThrown) {
-                        var errorMessage = jqXHR.responseJSON.error; 
-                        $('#signup-form-errors').addClass('filled').html(errorMessage)
+                        try {
+                            var errorDict = JSON.parse(jqXHR.responseText);
+                            var errorMessages = [];
+
+                            for (var key in errorDict) {
+                                if (errorDict.hasOwnProperty(key)) {
+                                    errorMessages.push(errorDict[key]);
+                                }
+                            }
+                        } catch(e) {
+                            var errorMessages = ['Something went wrong, please try again'];
+                        }
+
+                        var errorMessageHTML = errorMessages.join('<br/>');
+
+                        $('#signup-form-errors').addClass('filled').html(errorMessageHTML);
                     });
                 });
             });
@@ -253,8 +267,15 @@
                     });
                      
                     request.fail(function(jqXHR, textStatus, errorThrown) {
-                        var errorMessage = JSON.parse(jqXHR.responseText).error; 
-                        $('#signin-form-errors').addClass('filled').html(errorMessage)
+                        try {
+                            var errorMessages = [JSON.parse(jqXHR.responseText).error];
+                        } catch(e) {
+                            var errorMessages = ['Something went wrong, please try again'];
+                        }
+
+                        var errorMessageHTML = errorMessages.join('<br/>');
+                         
+                        $('#signin-form-errors').addClass('filled').html(errorMessageHTML)
                     });
                 });
             });

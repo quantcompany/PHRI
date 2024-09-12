@@ -28,6 +28,9 @@ def login_view(request):
 
     if user is not None:
         login(request, user)
+        #if(user.apply_survey and not user.survey_completed() ):
+            #return redirect('dynamic_survey')
+            #return JsonResponse({'goto':'survey'})
         return JsonResponse({})
     else:
         return JsonResponse({'error': 'Invalid email and/or password'}, status=401)
@@ -99,10 +102,13 @@ def me(request):
         else:
             return JsonResponse(form.errors, status=400) # validation errors
 
-# @login_required
-# def profile(request, user_id):
-#     context = {'countries': COUNTRY_CHOICES}
-#     return render(request, 'users/profile.html', context)
+
+def terms(request):
+    return render(request, 'terms.html')
+
+
+def about(request):
+    return render(request, 'about.html')
 
 
 def exists(request):
@@ -122,6 +128,7 @@ def verify(request, code):
         return render(request, 'email_verification/verified.html')
     except EmailVerification.DoesNotExist:
         return render(request, 'email_verification/error.html')
+
 
 def verification_sent(request):
     return render(request, 'email_verification/sent.html')

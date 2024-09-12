@@ -3,15 +3,20 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#MAC files
+.DS_Store
+
 # C extensions
 *.so
 
 # Distribution / packaging
 .Python
 env/
+phrienv/
+venv_phri/
 build/
 develop-eggs/
-dist/
+# dist/
 downloads/
 eggs/
 .eggs/
@@ -88,3 +93,4 @@ ENV/
 # SQL-Lite
 *.sqlite3
 
+.vscode/

@@ -29,7 +29,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ADMINS = [('Armando', 'mando.alvarado.jose@gmail.com'), ('Alvaro', 'director.qc@gmail.com')]
+ADMINS = [('Armando', 'mando.alvarado.jose@gmail.com'), ('Alvaro', 'director.qc@gmail.com'), ('Wil', 'wilfredo@codes.hn')]
 
 ALLOWED_HOSTS = ['tripletherapy.net', '159.203.61.7']
 
@@ -53,10 +53,12 @@ INSTALLED_APPS = [
     # Local apps
     'users',
     'data_entry',
-    'database'
+    'database',
+    'surveys',
+    
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'utils.middleware.UserMiddleware',
 ]
 
 ROOT_URLCONF = 'PHRI.urls'

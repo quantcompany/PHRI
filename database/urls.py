@@ -21,5 +21,6 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^dump$', views.dump, name='dump'),
+    url(r'^survey/(?P<survey_id>\d+)/dump$', views.get_survey_csv, name='get_survey_csv'),
     url(r'^filter$', views.filter, name='filter'),
 ]

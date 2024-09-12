@@ -1,17 +1,33 @@
 // Initialize form validation on the registration form.
 // It has the name attribute "registration"
 var patientFormValidator = $("form[name='patient_form']").validate({
+  focusInvalid: false,
+  invalidHandler: function(form, validator) {
+
+      if (!validator.numberOfInvalids())
+          return;
+
+      $('html, body').animate({
+          scrollTop: $(validator.errorList[0].element).offset().top - 70
+      }, 1000, function() {
+        $(validator.errorList[0].element).focus();
+        $(validator.errorList[0].element).addClass('animated shake');
+      });
+
+  },
   errorElement: "small",
   errorPlacement: function(error, element){
-    error.appendTo(element.parents('.form-group').find('label').find('span'));
+    if( element.is(':radio') ) {
+      error.prependTo( element.parent().parent().parent() );
+    } else {
+      error.appendTo(element.parents('.form-group').find('label').find('span'));
+    }
   },
   highlight: function(element, errorClass, validClass) {
-    // $(element).addClass(errorClass).removeClass(validClass);
     $(element.form).find("label[for=" + element.id + "]").find('span')
       .addClass(errorClass);
   },
   unhighlight: function(element, errorClass, validClass) {
-    // $(element).removeClass(errorClass).addClass(validClass);
     $(element.form).find("label[for=" + element.id + "]").find('span')
       .removeClass(errorClass);
   },
@@ -21,28 +37,27 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     // The key name on the left side is the name attribute
     // of an input field. Validation rules are defined
     // on the right side
-    // firstname: "required",
-    // lastname: "required",
-    // email: {
-    //   required: true,
-    //   // Specify that email should be validated
-    //   // by the built-in "email" rule
-    //   email: true
-    // },
-    // password: {
-    //   required: true,
-    //   minlength: 5
-    // }
     identification: {
       required: true
     },
     age: {
       required: true
     },
+    weight: {
+      required: true
+    },
+    creatinine_mgdL : {
+      required: function(){return $('#creatinine_measure').val() === 'mgdL';},
+      min: 0
+    },
+    creatinine_umolL : {
+      required: function(){return $('#creatinine_measure').val() === 'umolL';},
+      min: 0
+    },
     gender: "required",
-    indication: "required",
+    elective_pci: "required",
     stent: {
-      required: function(){return $('#indication').val() === 'SCAD';}
+      required: function(){return $('#elective_pci').val() === 'SCAD';}
     },
     balloons: {
       required: true,
@@ -50,10 +65,14 @@ var patientFormValidator = $("form[name='patient_form']").validate({
       max: 9
     },
     htn: "required",
+    smoking_history: "required",
     alcohol_abuse: "required",
-    reason_not_followed: {
-      required: function(){return !$('#followed_recommendation').bootstrapSwitch('state');}
-    }
+    reason: {
+      required: function(){
+        return $('[name="agree_option"]:checked').val() == 'no'
+      }
+    },
+    agree_option: "required",
   },
   // Specify validation error messages
   messages: {
@@ -70,6 +89,7 @@ var patientFormValidator = $("form[name='patient_form']").validate({
     // date_of_procedure: "This field is required",
     // indication: "This field is required",
     // balloons: "This field is required",
+    agree_option: "Please select yes or no."
   },
   // Make sure the form is submitted to the destination defined
   // in the "action" attribute of the form when valid

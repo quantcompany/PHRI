@@ -1,0 +1,76 @@
+{% extends 'data_entry/panel_base.html' %}
+
+{% block panel_heading %}PCI Risk{% endblock %}
+
+{% block fa_icon %}fa fa-hospital-o{% endblock %}
+
+{% block panel_body %}
+    <style type="text/css">
+        input[name^="pci_risk_"] {
+            position: absolute;
+        }
+        label[for^="pci_risk_"] {
+            margin-left:25px;
+        }
+    </style>
+    <div class="form-horizontal form-bordered">
+        <div class="form-group">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input id="pci_risk_1" type="checkbox" name="pci_risk_1" style="cursor:pointer;"/>
+                        <label for="pci_risk_1" style="cursor:pointer;" class="f-s-14">
+                            Multi-vessel PCI
+                        </label>
+                    </div>
+
+                    <div class="col-md-12">
+                        <input id="pci_risk_2" type="checkbox" name="pci_risk_2" style="cursor:pointer;"/>
+                        <label for="pci_risk_2" style="cursor:pointer;" class="f-s-14">
+                            Multiple stents implanted (&ge;3 stents implanted, &ge;3 lesions stented)
+                        </label>
+                    </div>
+
+                    <div class="col-md-12">
+                        <input id="pci_risk_3" type="checkbox" name="pci_risk_3" style="cursor:pointer;"/>
+                        <label for="pci_risk_3" style="cursor:pointer;" class="f-s-14">
+                            Complex bifurcation lesion (treated with 2 stents)
+                        </label>
+                    </div>
+
+                    <div class="col-md-12">
+                        <input id="pci_risk_4" type="checkbox" name="pci_risk_4" style="cursor:pointer;"/>
+                        <label for="pci_risk_4" style="cursor:pointer;" class="f-s-14">
+                            Total stent length &gt; 60mm
+                        </label>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input id="pci_risk_5" type="checkbox" name="pci_risk_5" style="cursor:pointer;"/>
+                        <label for="pci_risk_5" style="cursor:pointer;" class="f-s-14">
+                            Chronic total occlusion intervention
+                        </label>
+                    </div>
+
+                    <div class="col-md-12">
+                        <input id="pci_risk_6" type="checkbox" name="pci_risk_6" style="cursor:pointer;"/>
+                        <label for="pci_risk_6" style="cursor:pointer;" class="f-s-14">
+                            Bioabsorbable Vascular Scaffold (BVS) implantation
+                        </label>
+                    </div>
+
+                    <div class="col-md-12">
+                        <input id="pci_risk_7" type="checkbox" name="pci_risk_7" style="cursor:pointer;"/>
+                        <label for="pci_risk_7" style="cursor:pointer;" class="f-s-14">
+                            Left main or proximal LAD stenting
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

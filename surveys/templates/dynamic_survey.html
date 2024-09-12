@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_css %}
+{% endblock %}
+
+{% block page_title %}{{page_title}}{% endblock %}
+
+{% block content %}
+<div class="container" id="content">
+    <!-- The main page content -->
+<div class="row">
+	<div class = "col-md-12">
+		<div class="panel panel-default">
+			<div class="my-panel-heading bg-blue">
+				<div class="row">
+					<div class="col-xs-11">
+						{% if Message %}
+							<h1>{{Message}}</h1>
+						{% else %}
+						<div>
+							<h2 style="color:#FFFFFF;">{{survey.title}}</h2>
+						</div>
+						<h4 style="color:#FFFFFF;">{{survey.description}}</h4>
+						{% endif %}
+					</div>
+					<div class="col-xs-1 text-right m-t-20">
+						<i class="fa fa-pencil-square-o"></i>
+					</div>
+				</div>
+			</div>
+			<form method="POST" id="survey_form" action="#">
+			<div class="panel-body panel-form">
+				<div class = "row">
+					<div class="col-md-12">
+							<!-- List of questions -->
+							{% for question in questions %}
+								<div class="row m-t-20 m-b-20 m-l-10">
+									<div class="col-md-12">
+										<div id="question_{{question.id}}" class="question {% if question.is_required %}required{% endif %}" question-type="{{question.type}}">
+											<h3>
+												{{ forloop.counter }}. {{question.title}} <br/> 
+												{% if question.important_text %}
+													<small>
+														<strong>
+															<i class="fa fa-info-circle"></i> {{question.important_text}}
+														</strong>
+													</small> <br/> 
+												{% endif %}
+												{% if question.help_text %}
+													<small><em>{{question.help_text}}</em></small>
+												{% endif %}
+											</h3>
+											<small class="question_error" style='display:none;'></small>
+											{% if question.type == 'multiplechoice' %}
+												<div class="row">
+													<div class="col-md-8 m-t-10 choices">
+														{% for choice in question.multiplechoicequestion.choices.all %}
+															
+															{% if choice.free_text %}
+																<p style="font-size: 1.3em">
+																	<input type="radio" class="free_text" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" style="display:inline-block;" />
+																	<input type="text" class="form-control"  placeholder="{{choice.label}}" style="display:inline-block; width:90%;">
+																</p>
+															{%else%}
+																<p style="font-size: 1.3em">
+																	<label><input type="radio" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" /> {{choice.label}}</label>
+																</p>
+															{% endif %}
+														{% endfor %}
+													</div>
+												</div>
+											{% elif question.type == 'checkbox' %}
+												<div class="row">
+													<div class="col-md-8 m-t-10 choices" min="{{question.checkboxquestion.min_checked}}" max="{{question.checkboxquestion.max_checked}}">
+														{% for choice in question.checkboxquestion.choices.all %}
+															{% if choice.free_text %}
+																<p style="font-size: 1.3em">
+																	<input type="checkbox" class="free_text" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" style="display:inline-block;" />
+																	<input type="text" class="form-control"  placeholder="{{choice.label}}" style="display:inline-block; width:90%;">
+																</p>
+															{%else%}
+																<p style="font-size: 1.3em"><label><input type="checkbox" name="question_{{question.id}}" id="question_choice_{{choice.id}}" value="{{choice.label}}" /> {{choice.label}}</label></p>
+															{% endif %}
+														{% endfor %}
+													</div>
+												</div>
+											{% elif question.type == 'numeric' %}
+												<div class="row">
+													<div class="col-md-8 m-t-10">
+													 	<input type="number" name="quantity" id="question_number_{{choice}}" min="{{question.numericquestion.min_value}}" max="{{question.numericquestion.max_value}}">
+													</div>
+												</div>
+											{% elif question.type == 'paragraph' %}
+												<div class="row">
+													<div class="col-md-8 m-t-10" question="question_number">
+														<textarea rows="4" cols="50" maxlength="{{question.paragraphquestion.max_no_characters}}"></textarea>
+													</div>
+												</div>
+											{%else%}
+												<div class="row">
+													<div class="col-md-8 m-t-10" maxlength="{{question.textquestion.max_no_characters}}" question="question_text">
+														<input type="text">
+													</div>
+												</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+								{% if not forloop.last %}
+									<div class="row">
+										<div class="col-md-12">
+											<hr/>
+										</div>
+									</div>
+								{% endif %}
+							{% endfor %}
+						</div>
+				</div>
+			</div>
+			<div class="panel-footer m-t-25">
+				<div class="row">
+					<div class="col-md-12 text-right m-t-20 m-b-20">
+						<button class="btn btn-info btn-block btn-lg bg-blue" type="button" onclick="processSurvey(this)" data-loading-text="Wait a moment..." value="submit">Submit</button>
+					</div>
+				</div>
+				
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="survey-completed-modal" class="modal fade">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title">Survey completed!</h3>
+			</div>
+			<div class="modal-body">
+				<p style="font-size: 1.3em">
+					Your data was saved succesfully. Thank you for your time, now you'll be redirected to the form.
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Continue</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block tail_js %}
+	<script src="{% static 'js/survey_data.js' %}"></script>
+	<script type="text/javascript">
+		$('#survey-completed-modal').on('hidden.bs.modal', function (e) {
+			window.location = "{% url 'data_entry:form' %}";
+		});
+
+		function processSurvey(btn)
+		{
+			$(btn).button('loading');
+			var questions = $('.question.required');
+			var data_result = validate_survey(questions);
+			if(!$('.question_error').is(':visible'))
+			{
+				$.ajax({
+					url : "{% url 'surveys:save_survey' %}",
+					type: "POST",
+					data : {
+						survey_data : JSON.stringify(data_result),
+						survey_id : {{survey.id}}
+					},
+					dataType:'json',
+					error: function(jqXHR, textStatus, errorThrown){
+						console.log("ERROR");
+						console.log(jqXHR);
+						console.log(textStatus);
+						console.log(errorThrown);
+						alert('An error has occured, please contact the systema administrator.');
+						$(btn).button('reset');
+					},
+					success: function(resp) {
+						$(btn).button('reset');
+						console.log('guardado completado');
+						var options = {
+							keyboard: false,
+							backdrop: 'static'
+						};
+						$('#survey-completed-modal').modal(options);
+						$('#survey-completed-modal').modal('show');
+
+					}
+				});
+			}
+			else
+			{
+				$(btn).button('reset');
+				$('html, body').animate({
+        			scrollTop: $('.question_error:visible').first().offset().top - 120
+    			}, 700);
+			}
+		}
+	</script>
+{% endblock %}

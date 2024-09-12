@@ -106,12 +106,12 @@ msgstr "Por favor haga click en el siguiente enlace para ver el reporte:"
 
 #: .\users\templates\users\landing.html:69
 #: .\users\templates\users\landing.html:80
-msgid "Triple Therapy Aid"
-msgstr "Triple Therapy Aid"
+msgid "AF-PCI Therapy Aid"
+msgstr "AF-PCI Therapy Aid"
 
 #: .\users\templates\users\landing.html:71
 msgid ""
-"HIU Antiplatelet/Anticuagulant Physician Decision Aid for Patients with "
+"Antiplatelet/Anticuagulant Physician Decision Aid for Patients with "
 "Atrial Fibrillation and CAD undergoing PCI"
 msgstr ""
 
